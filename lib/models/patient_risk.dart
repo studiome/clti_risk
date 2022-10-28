@@ -1,11 +1,14 @@
+// ignore_for_file: avoid_print
+
 import 'dart:math';
 
 import 'package:clti_risk/models/patient_data.dart';
+import 'package:flutter/foundation.dart';
 
 class PatientRisk {
   final PatientData patientData;
   late double gnri; // geriatric nutritional risk index
-  late GNRIRisk gnriRisk;
+  GNRIRisk? gnriRisk;
   late double predictedOS; //2yr OS;
   late double predictedAFS; //2yr AFS;
   late OSRisk osRisk;
@@ -19,11 +22,18 @@ class PatientRisk {
   }
 
   double _calcGNRI() {
-    return 14.89 * patientData.alb +
-        41.7 * patientData.weight / (22 * pow(patientData.height, 2));
+    try {
+      double v = 14.89 * patientData.alb +
+          41.7 * patientData.weight / (22 * pow(patientData.height, 2));
+      return v;
+    } catch (e) {
+      if (kDebugMode) print(e);
+      return double.nan;
+    }
   }
 
-  GNRIRisk _classifyGNRIRisk(double gnri) {
+  GNRIRisk? _classifyGNRIRisk(double gnri) {
+    if (gnri == double.nan) return null;
     if (gnri >= 98) {
       return GNRIRisk.noRisk;
     } else if (gnri >= 92) {
