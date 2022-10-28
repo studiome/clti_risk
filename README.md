@@ -13,7 +13,7 @@
 
 ## License
 
-This project is under [MIT license](https://en.wikipedia.org/wiki/MIT_License).
+This project is under MIT license.
 
 ## Author 
 
