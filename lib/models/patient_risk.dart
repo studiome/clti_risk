@@ -3,23 +3,55 @@ import 'dart:math';
 import 'package:clti_risk/models/patient_data.dart';
 
 class PatientRisk {
-  PatientData patientData;
-  PatientRisk({required this.patientData});
+  final PatientData patientData;
+  late double gnri; // geriatric nutritional risk index
+  late GNRIRisk gnriRisk;
+  late double predictedOS; //2yr OS;
+  late double predictedAFS; //2yr AFS;
+  late OSRisk osRisk;
 
-  double predictedOS = 0.0; //2yr OS;
-  double predictedAFS = 0.0; //2yr AFS;
-  double _gnri = 100.0; // geriatric nutritional risk index
-
-  GNRIRisk gnriRisk = GNRIRisk.low; //GNRI Risk
-  OSRisk osRisk = OSRisk.low; // 2Yr OS risk
-
-  double _calcGNRI() {
-    _gnri = 14.89 * patientData.alb +
-        41.7 * patientData.weight / (22 * pow(patientData.height, 2));
-    return _gnri;
+  PatientRisk({required this.patientData}) {
+    gnri = _calcGNRI();
+    gnriRisk = _classifyGNRIRisk(gnri);
+    predictedOS = _calcOS();
+    predictedAFS = _calsAFS();
+    osRisk = _classifyOSRisk(predictedOS);
   }
 
-  double get gnri => _calcGNRI();
+  double _calcGNRI() {
+    return 14.89 * patientData.alb +
+        41.7 * patientData.weight / (22 * pow(patientData.height, 2));
+  }
+
+  GNRIRisk _classifyGNRIRisk(double gnri) {
+    if (gnri >= 98) {
+      return GNRIRisk.noRisk;
+    } else if (gnri >= 92) {
+      return GNRIRisk.low;
+    } else if (gnri >= 82) {
+      return GNRIRisk.moderate;
+    } else {
+      return GNRIRisk.major;
+    }
+  }
+
+  double _calcOS() {
+    return 0.0;
+  }
+
+  double _calsAFS() {
+    return 0.0;
+  }
+
+  OSRisk _classifyOSRisk(double overallSuvival) {
+    if (overallSuvival >= 70.0) {
+      return OSRisk.low;
+    } else if (overallSuvival >= 50.0) {
+      return OSRisk.medium;
+    } else {
+      return OSRisk.low;
+    }
+  }
 }
 
 enum OSRisk {
@@ -31,5 +63,6 @@ enum OSRisk {
 enum GNRIRisk {
   major, // gnri < 82
   moderate, // 82<= gnri < 92
-  low, // 98<= gnri
+  low, // 92<= gnri < 98
+  noRisk, // 98 <= gnri
 }
