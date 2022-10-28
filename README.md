@@ -17,4 +17,4 @@ This project is under [MIT license](https://en.wikipedia.org/wiki/MIT_License).
 
 ## Author 
 
-Kazuhiro Miyahara (Department of Vascular Surgery, The University of Tokyo)
+[Kazuhiro Miyahara](<mailto:miyahara@g.j-ca.org>) (Department of Vascular Surgery, The University of Tokyo)
