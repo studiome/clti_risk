@@ -72,6 +72,7 @@ void main() {
         alb: 4.0,
         activity: Activity.ambulatory)
       ..hasCHF = false
+      ..hasCVD = true
       ..ckd = CKD.g3
       ..mn = MalignantNeoplasm.no
       ..occlusiveLesion = OcclusiveLesion.fpWithoutAI
@@ -81,7 +82,7 @@ void main() {
       ..hasLocalInfection = true;
     final pr = PatientRisk(patientData: pd);
     expect((pr.predictedOS * 100.0).round(), 91);
-    expect((pr.predictedAFS * 100).round(), 66);
+    expect((pr.predictedAFS * 100).round(), 64);
     expect(pr.osRisk, OSRisk.low);
   });
 }

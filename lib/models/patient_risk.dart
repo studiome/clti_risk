@@ -84,6 +84,9 @@ class PatientRisk {
     //CHF
     if (data.hasCHF) _sigma += coeff[Covariants.hasCHF.index];
 
+    //CVD
+    if (data.hasCVD) _sigma += coeff[Covariants.hasCVD.index];
+
     //CKD
     switch (data.ckd) {
       case CKD.g3:
@@ -190,6 +193,7 @@ enum Covariants {
   age75to84,
   ageOver85,
   hasCHF,
+  hasCVD,
   hasCKDG3,
   hasCKDG4,
   hasCKDG5,
@@ -216,6 +220,7 @@ const OS_Beta_Coeff = [
   0.76,
   1.04,
   0.50,
+  0.0,
   0.27,
   0.61,
   0.76,
@@ -240,6 +245,7 @@ const AFS_Beta_Coeff = [
   0.19,
   0.42,
   0.62,
+  0.41,
   0.10,
   0.16,
   0.36,

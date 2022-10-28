@@ -9,6 +9,7 @@ class PatientData {
 
   //clinical info
   bool hasCHF = false; // congestive heart failure
+  bool hasCVD = false; //cerebral vasuclar disease
   CKD ckd = CKD.normal; //chroic kidney disease classification
   MalignantNeoplasm mn = MalignantNeoplasm.no; // Malignant neoplasm
   OcclusiveLesion occlusiveLesion = OcclusiveLesion.ai;
