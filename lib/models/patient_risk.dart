@@ -16,7 +16,7 @@ class PatientRisk {
   PatientRisk({required this.patientData}) {
     gnri = _calcGNRI();
     gnriRisk = _classifyGNRIRisk(gnri);
-    predictedOS = _calcOS();
+    predictedOS = _calcPredictedOS(patientData);
     predictedAFS = _calsAFS();
     osRisk = _classifyOSRisk(predictedOS);
   }
@@ -46,10 +46,6 @@ class PatientRisk {
     }
   }
 
-  double _calcOS() {
-    return 0.0;
-  }
-
   double _calsAFS() {
     return 0.0;
   }
@@ -62,6 +58,93 @@ class PatientRisk {
     } else {
       return OSRisk.low;
     }
+  }
+
+  double _calcPredictedOS(PatientData data) {
+    double _sigma = 0.0;
+    //sex
+    if (data.sex == Sex.female)
+      _sigma += OS_Beta_Coeff[Covariants.isFemale.index];
+
+    //age
+    if (data.age >= 85) {
+      _sigma += OS_Beta_Coeff[Covariants.ageOver85.index];
+    } else if (data.age >= 75) {
+      _sigma += OS_Beta_Coeff[Covariants.age75to84.index];
+    } else if (data.age >= 65) {
+      _sigma += OS_Beta_Coeff[Covariants.age65to74.index];
+    }
+
+    //CHF
+    if (data.hasCHF) _sigma += OS_Beta_Coeff[Covariants.hasCHF.index];
+
+    //CKD
+    switch (data.ckd) {
+      case CKD.g3:
+        _sigma += OS_Beta_Coeff[Covariants.hasCKDG3.index];
+        break;
+      case CKD.g4:
+        _sigma += OS_Beta_Coeff[Covariants.hasCKDG4.index];
+        break;
+      case CKD.g5:
+        _sigma += OS_Beta_Coeff[Covariants.hasCKDG5.index];
+        break;
+      case CKD.g5D:
+        _sigma += OS_Beta_Coeff[Covariants.hasCKDG5D.index];
+        break;
+      default:
+        break;
+    }
+
+    //GNRI
+    switch (gnriRisk) {
+      case GNRIRisk.moderate:
+        _sigma += OS_Beta_Coeff[Covariants.gnriModerate.index];
+        break;
+      case GNRIRisk.major:
+        _sigma += OS_Beta_Coeff[Covariants.gnriMajor.index];
+        break;
+      default:
+        break;
+    }
+
+    //Activity
+    switch (data.activity) {
+      case Activity.wheelchair:
+        _sigma += OS_Beta_Coeff[Covariants.activityWheelChair.index];
+        break;
+      case Activity.immobile:
+        _sigma += OS_Beta_Coeff[Covariants.activityImmobile.index];
+        break;
+      default:
+        break;
+    }
+
+    //Malignancy
+    switch (data.mn) {
+      case MalignantNeoplasm.pastHistory:
+        _sigma += OS_Beta_Coeff[Covariants.pastMalignancy.index];
+        break;
+      case MalignantNeoplasm.uderTreatment:
+        _sigma += OS_Beta_Coeff[Covariants.treatingMalignancy.index];
+        break;
+      default:
+        break;
+    }
+
+    //occlusive lesion
+    switch (data.occlusiveLesion) {
+      case OcclusiveLesion.fpWithoutAI:
+        _sigma += OS_Beta_Coeff[Covariants.lesionFP.index];
+        break;
+      case OcclusiveLesion.belowIP:
+        _sigma += OS_Beta_Coeff[Covariants.lesionBelowIP.index];
+        break;
+      default:
+        break;
+    }
+
+    return pow(OS_H0_Coeff, exp(_sigma)).toDouble();
   }
 }
 
@@ -89,8 +172,8 @@ enum Covariants {
   hasCHF,
   hasCKDG3,
   hasCKDG4,
-  hasCDKg5,
-  hasCKDg5d,
+  hasCKDG5,
+  hasCKDG5D,
   gnriModerate,
   gnriMajor,
   activityWheelChair,

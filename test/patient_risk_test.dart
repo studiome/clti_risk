@@ -63,4 +63,23 @@ void main() {
     expect(pr.gnri.toStringAsFixed(1), '101.3');
     expect(pr.gnriRisk, GNRIRisk.noRisk);
   });
+  test("OS case1", () {
+    final pd = PatientData(
+        sex: Sex.male,
+        age: 50,
+        height: 1.65,
+        weight: 60.0,
+        alb: 4.0,
+        activity: Activity.ambulatory)
+      ..hasCHF = false
+      ..ckd = CKD.g3
+      ..mn = MalignantNeoplasm.no
+      ..occlusiveLesion = OcclusiveLesion.fpWithoutAI
+      ..isUrgent = true
+      ..hasFeverUp = true
+      ..hasLeukocytosis = true
+      ..hasLocalInfection = true;
+    final pr = PatientRisk(patientData: pd);
+    expect((pr.predictedOS * 100.0).round(), 91);
+  });
 }
