@@ -81,5 +81,7 @@ void main() {
       ..hasLocalInfection = true;
     final pr = PatientRisk(patientData: pd);
     expect((pr.predictedOS * 100.0).round(), 91);
+    expect((pr.predictedAFS * 100).round(), 66);
+    expect(pr.osRisk, OSRisk.low);
   });
 }

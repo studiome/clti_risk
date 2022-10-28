@@ -17,7 +17,7 @@ class PatientRisk {
     gnri = _calcGNRI();
     gnriRisk = _classifyGNRIRisk(gnri);
     predictedOS = _calcPredictedOS(patientData);
-    predictedAFS = _calsAFS();
+    predictedAFS = _calcPredictedAFS(patientData);
     osRisk = _classifyOSRisk(predictedOS);
   }
 
@@ -46,8 +46,15 @@ class PatientRisk {
     }
   }
 
-  double _calsAFS() {
-    return 0.0;
+  double _calcPredictedOS(PatientData data) {
+    double sigma = _calcSigma(data, OS_Beta_Coeff);
+
+    return pow(OS_H0_Coeff, exp(sigma)).toDouble();
+  }
+
+  double _calcPredictedAFS(PatientData data) {
+    double sigma = _calcSigma(data, AFS_Beta_Coeff);
+    return pow(AFS_H0_Coeff, exp(sigma)).toDouble();
   }
 
   OSRisk _classifyOSRisk(double overallSuvival) {
@@ -60,37 +67,36 @@ class PatientRisk {
     }
   }
 
-  double _calcPredictedOS(PatientData data) {
+  double _calcSigma(PatientData data, List<double> coeff) {
     double _sigma = 0.0;
     //sex
-    if (data.sex == Sex.female)
-      _sigma += OS_Beta_Coeff[Covariants.isFemale.index];
+    if (data.sex == Sex.female) _sigma += coeff[Covariants.isFemale.index];
 
     //age
     if (data.age >= 85) {
-      _sigma += OS_Beta_Coeff[Covariants.ageOver85.index];
+      _sigma += coeff[Covariants.ageOver85.index];
     } else if (data.age >= 75) {
-      _sigma += OS_Beta_Coeff[Covariants.age75to84.index];
+      _sigma += coeff[Covariants.age75to84.index];
     } else if (data.age >= 65) {
-      _sigma += OS_Beta_Coeff[Covariants.age65to74.index];
+      _sigma += coeff[Covariants.age65to74.index];
     }
 
     //CHF
-    if (data.hasCHF) _sigma += OS_Beta_Coeff[Covariants.hasCHF.index];
+    if (data.hasCHF) _sigma += coeff[Covariants.hasCHF.index];
 
     //CKD
     switch (data.ckd) {
       case CKD.g3:
-        _sigma += OS_Beta_Coeff[Covariants.hasCKDG3.index];
+        _sigma += coeff[Covariants.hasCKDG3.index];
         break;
       case CKD.g4:
-        _sigma += OS_Beta_Coeff[Covariants.hasCKDG4.index];
+        _sigma += coeff[Covariants.hasCKDG4.index];
         break;
       case CKD.g5:
-        _sigma += OS_Beta_Coeff[Covariants.hasCKDG5.index];
+        _sigma += coeff[Covariants.hasCKDG5.index];
         break;
       case CKD.g5D:
-        _sigma += OS_Beta_Coeff[Covariants.hasCKDG5D.index];
+        _sigma += coeff[Covariants.hasCKDG5D.index];
         break;
       default:
         break;
@@ -99,10 +105,10 @@ class PatientRisk {
     //GNRI
     switch (gnriRisk) {
       case GNRIRisk.moderate:
-        _sigma += OS_Beta_Coeff[Covariants.gnriModerate.index];
+        _sigma += coeff[Covariants.gnriModerate.index];
         break;
       case GNRIRisk.major:
-        _sigma += OS_Beta_Coeff[Covariants.gnriMajor.index];
+        _sigma += coeff[Covariants.gnriMajor.index];
         break;
       default:
         break;
@@ -111,10 +117,10 @@ class PatientRisk {
     //Activity
     switch (data.activity) {
       case Activity.wheelchair:
-        _sigma += OS_Beta_Coeff[Covariants.activityWheelChair.index];
+        _sigma += coeff[Covariants.activityWheelChair.index];
         break;
       case Activity.immobile:
-        _sigma += OS_Beta_Coeff[Covariants.activityImmobile.index];
+        _sigma += coeff[Covariants.activityImmobile.index];
         break;
       default:
         break;
@@ -123,10 +129,10 @@ class PatientRisk {
     //Malignancy
     switch (data.mn) {
       case MalignantNeoplasm.pastHistory:
-        _sigma += OS_Beta_Coeff[Covariants.pastMalignancy.index];
+        _sigma += coeff[Covariants.pastMalignancy.index];
         break;
       case MalignantNeoplasm.uderTreatment:
-        _sigma += OS_Beta_Coeff[Covariants.treatingMalignancy.index];
+        _sigma += coeff[Covariants.treatingMalignancy.index];
         break;
       default:
         break;
@@ -135,16 +141,30 @@ class PatientRisk {
     //occlusive lesion
     switch (data.occlusiveLesion) {
       case OcclusiveLesion.fpWithoutAI:
-        _sigma += OS_Beta_Coeff[Covariants.lesionFP.index];
+        _sigma += coeff[Covariants.lesionFP.index];
         break;
       case OcclusiveLesion.belowIP:
-        _sigma += OS_Beta_Coeff[Covariants.lesionBelowIP.index];
+        _sigma += coeff[Covariants.lesionBelowIP.index];
         break;
       default:
         break;
     }
 
-    return pow(OS_H0_Coeff, exp(_sigma)).toDouble();
+    //Urgent
+    if (data.isUrgent) _sigma += coeff[Covariants.isUrgent.index];
+
+    //Fever
+    if (data.hasFeverUp) _sigma += coeff[Covariants.feverUp.index];
+
+    //WBC
+    if (data.hasLeukocytosis) _sigma += coeff[Covariants.leukocytosis.index];
+
+    //Local Infection
+    if (data.hasLocalInfection) {
+      _sigma += coeff[Covariants.localInfection.index];
+    }
+
+    return _sigma;
   }
 }
 
@@ -231,10 +251,10 @@ const AFS_Beta_Coeff = [
   0.78,
   0.15,
   0.39,
+  -0.07,
+  0.15,
   0.34,
   0.36,
   0.19,
-  0.15,
-  -0.07,
   0.15,
 ];
