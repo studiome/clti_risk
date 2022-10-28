@@ -17,12 +17,6 @@ class PatientData {
   bool hasFeverUp = false; // BT over 38 deg celsius
   bool hasLeukocytosis = false; //WBC over 8000/ul
   bool hasLocalInfection = false;
-  double predictedOS = 0.0; //2yr OS;
-  double predictedAFS = 0.0; //2yr AFS;
-  double gnri = 100.0; // geriatric nutritional risk index
-
-  GNRIRisk gnriRisk = GNRIRisk.low; //GNRI Risk
-  OSRisk osRisk = OSRisk.low; // 2Yr OS risk
 
   PatientData(
       {required this.sex,
@@ -56,16 +50,4 @@ enum CKD {
   g4, // 15<= eGFR <  30
   g5, // <15
   g5D, // < 15 HD
-}
-
-enum OSRisk {
-  high, // risk < 50%
-  medium, // 50% <= risk < 70%
-  low, // 70% <= risk
-}
-
-enum GNRIRisk {
-  major, // gnri < 82
-  moderate, // 82<= gnri < 92
-  low, // 98<= gnri
 }
