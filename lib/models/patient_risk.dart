@@ -22,6 +22,7 @@ class PatientRisk {
   }
 
   double _calcGNRI() {
+    if (patientData.height == 0.0) return double.nan;
     try {
       double v = 14.89 * patientData.alb +
           41.7 * patientData.weight / (22 * pow(patientData.height, 2));
@@ -33,7 +34,7 @@ class PatientRisk {
   }
 
   GNRIRisk? _classifyGNRIRisk(double gnri) {
-    if (gnri == double.nan) return null;
+    if (gnri.isNaN) return null;
     if (gnri >= 98) {
       return GNRIRisk.noRisk;
     } else if (gnri >= 92) {
