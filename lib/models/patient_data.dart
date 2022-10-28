@@ -8,7 +8,6 @@ class PatientData {
   Activity activity;
 
   //clinical info
-  bool hasCAD = false; // coronary artery disease
   bool hasCHF = false; // congestive heart failure
   CKD ckd = CKD.normal; //chroic kidney disease classification
   MalignantNeoplasm mn = MalignantNeoplasm.no; // Malignant neoplasm
