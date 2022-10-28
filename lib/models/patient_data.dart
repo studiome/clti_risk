@@ -11,7 +11,7 @@ class PatientData {
   bool hasCAD = false; // coronary artery disease
   bool hasCHF = false; // congestive heart failure
   CKD ckd = CKD.normal; //chroic kidney disease classification
-  bool hasMN = false; // Malignant neoplasm
+  MalignantNeoplasm mn = MalignantNeoplasm.no; // Malignant neoplasm
   OcclusiveLesion occlusiveLesion = OcclusiveLesion.ai;
   bool isUrgent = false; //urgent procedure
   bool hasFeverUp = false; // BT over 38 deg celsius
@@ -50,4 +50,10 @@ enum CKD {
   g4, // 15<= eGFR <  30
   g5, // <15
   g5D, // < 15 HD
+}
+
+enum MalignantNeoplasm {
+  no, //having no MN
+  pastHistory, //having past history
+  uderTreatment, //under treatment
 }
