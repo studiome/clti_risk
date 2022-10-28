@@ -4,6 +4,8 @@ void main() {
   runApp(const MyApp());
 }
 
+const Color jcaRed = Color(0xFF70200D);
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -11,10 +13,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'CLTI RISK',
-      theme: ThemeData(
+      theme: ThemeData(useMaterial3: true, colorSchemeSeed: jcaRed),
+      darkTheme: ThemeData(
         useMaterial3: true,
-        primarySwatch: Colors.blue,
+        brightness: Brightness.dark,
+        colorSchemeSeed: jcaRed,
       ),
+      themeMode: ThemeMode.system,
       home: const MyHomePage(title: 'CLTI Risk Calculator'),
     );
   }
