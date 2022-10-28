@@ -1,20 +1,21 @@
 class PatientData {
+  //basic info
   Sex sex;
   int age; //years
   double weight; //kg
   double height; //m
   double alb; //albumin g/dl
   Activity activity;
+
+  //clinical info
   bool hasCAD = false; // coronary artery disease
   bool hasCHF = false; // congestive heart failure
-  CKD ckd = CKD.normal;
-  bool hasCKD = false;
+  CKD ckd = CKD.normal; //chroic kidney disease classification
   bool hasMN = false; // Malignant neoplasm
   OcclusiveLesion occlusiveLesion = OcclusiveLesion.ai;
   bool isUrgent = false; //urgent procedure
   bool hasFeverUp = false; // BT over 38 deg celsius
   bool hasLeukocytosis = false; //WBC over 8000/ul
-  double whiteBloodCell = 6000.0; //WBC
   bool hasLocalInfection = false;
   double predictedOS = 0.0; //2yr OS;
   double predictedAFS = 0.0; //2yr AFS;
