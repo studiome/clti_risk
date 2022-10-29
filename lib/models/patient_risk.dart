@@ -57,9 +57,9 @@ class PatientRisk {
 
   OSRisk? _classifyOSRisk(double overallSuvival) {
     if (overallSuvival.isNaN) return null;
-    if (overallSuvival >= 70.0) {
+    if (overallSuvival >= 0.70) {
       return OSRisk.low;
-    } else if (overallSuvival >= 50.0) {
+    } else if (overallSuvival >= 0.50) {
       return OSRisk.medium;
     } else {
       return OSRisk.low;

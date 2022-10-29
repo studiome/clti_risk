@@ -49,6 +49,33 @@ void main() {
 
     _testCase(pd, want);
   });
+  test('medium Risk Case', () {
+    final pd = PatientData(
+        sex: Sex.female,
+        age: 70,
+        height: 1.55,
+        weight: 45.5,
+        alb: 3.5,
+        activity: Activity.wheelchair)
+      ..hasCHF = true
+      ..hasCVD = true
+      ..ckd = CKD.g4
+      ..mn = MalignantNeoplasm.pastHistory
+      ..occlusiveLesion = OcclusiveLesion.fpWithoutAI
+      ..isUrgent = true
+      ..hasFeverUp = true
+      ..hasLeukocytosis = true
+      ..hasLocalInfection = true;
+
+    const want = _WantData(
+        gnri: '88.0',
+        gnriRisk: GNRIRisk.moderate,
+        predictedOS: '0.64',
+        predictedAFS: '0.22',
+        osRisk: OSRisk.medium);
+
+    _testCase(pd, want);
+  });
 }
 
 //expected data struct
