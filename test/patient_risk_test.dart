@@ -2,7 +2,33 @@ import 'package:clti_risk/models/patient_data.dart';
 import 'package:clti_risk/models/patient_risk.dart';
 import 'package:test/test.dart';
 
+//expected data struct
+class _WantData {
+  final double gnri;
+  final GNRIRisk? gnriRisk;
+  final int predictedOS;
+  final int predictedAFS;
+  final OSRisk? osRisk;
+
+  const _WantData(
+      {required this.gnri,
+      required this.gnriRisk,
+      required this.predictedOS,
+      required this.predictedAFS,
+      required this.osRisk});
+}
+
+void _testCase(PatientData pd, _WantData want) {
+  final pr = PatientRisk(patientData: pd);
+  expect(pr.gnri.toStringAsFixed(1), want.gnri.toString());
+  expect(pr.gnriRisk, want.gnriRisk);
+  expect((pr.predictedOS * 100).floor(), want.predictedOS);
+  expect((pr.predictedAFS * 100).floor(), want.predictedAFS);
+  expect(pr.osRisk, want.osRisk);
+}
+
 void main() {
+  //Test Cases, dummy data
   test('GNRI NaN', () {
     final pd = PatientData(
         sex: Sex.male,
