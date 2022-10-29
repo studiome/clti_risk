@@ -22,8 +22,9 @@ class PatientRisk {
   double _calcGNRI() {
     if (patientData.height == 0.0) return double.nan;
     try {
-      double v = 14.89 * patientData.alb +
-          41.7 * patientData.weight / (22 * pow(patientData.height, 2));
+      double wi = patientData.weight / (22.0 * pow(patientData.height, 2));
+      if (wi >= 1.0) wi = 1.0;
+      double v = 14.89 * patientData.alb + 41.7 * wi;
       return v;
     } catch (e) {
       if (kDebugMode) print(e);
@@ -62,7 +63,7 @@ class PatientRisk {
     } else if (overallSuvival >= 0.50) {
       return OSRisk.medium;
     } else {
-      return OSRisk.low;
+      return OSRisk.high;
     }
   }
 

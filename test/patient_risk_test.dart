@@ -49,12 +49,13 @@ void main() {
 
     _testCase(pd, want);
   });
+
   test('medium Risk Case', () {
     final pd = PatientData(
         sex: Sex.female,
         age: 70,
-        height: 1.55,
-        weight: 45.5,
+        height: 1.53,
+        weight: 55.0,
         alb: 3.5,
         activity: Activity.wheelchair)
       ..hasCHF = true
@@ -68,11 +69,67 @@ void main() {
       ..hasLocalInfection = true;
 
     const want = _WantData(
-        gnri: '88.0',
-        gnriRisk: GNRIRisk.moderate,
-        predictedOS: '0.64',
-        predictedAFS: '0.22',
+        gnri: '93.8',
+        gnriRisk: GNRIRisk.low,
+        predictedOS: '0.67',
+        predictedAFS: '0.25',
         osRisk: OSRisk.medium);
+
+    _testCase(pd, want);
+  });
+
+  test('high Risk Case', () {
+    final pd = PatientData(
+        sex: Sex.male,
+        age: 85,
+        height: 1.75,
+        weight: 55.1,
+        alb: 3.5,
+        activity: Activity.immobile)
+      ..hasCHF = false
+      ..hasCVD = false
+      ..ckd = CKD.g5
+      ..mn = MalignantNeoplasm.uderTreatment
+      ..occlusiveLesion = OcclusiveLesion.belowIP
+      ..isUrgent = true
+      ..hasFeverUp = false
+      ..hasLeukocytosis = true
+      ..hasLocalInfection = false;
+
+    const want = _WantData(
+        gnri: '86.2',
+        gnriRisk: GNRIRisk.moderate,
+        predictedOS: '0.08',
+        predictedAFS: '0.03',
+        osRisk: OSRisk.high);
+
+    _testCase(pd, want);
+  });
+
+  test('high Risk Case 2', () {
+    final pd = PatientData(
+        sex: Sex.female,
+        age: 90,
+        height: 1.45,
+        weight: 45.0,
+        alb: 3.2,
+        activity: Activity.immobile)
+      ..hasCHF = true
+      ..hasCVD = true
+      ..ckd = CKD.g5D
+      ..mn = MalignantNeoplasm.uderTreatment
+      ..occlusiveLesion = OcclusiveLesion.belowIP
+      ..isUrgent = true
+      ..hasFeverUp = true
+      ..hasLeukocytosis = true
+      ..hasLocalInfection = true;
+
+    const want = _WantData(
+        gnri: '88.2',
+        gnriRisk: GNRIRisk.moderate,
+        predictedOS: '0.02',
+        predictedAFS: '0.00',
+        osRisk: OSRisk.high);
 
     _testCase(pd, want);
   });
