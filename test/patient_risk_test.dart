@@ -4,6 +4,19 @@ import 'package:test/test.dart';
 
 void main() {
   //Test Cases, dummy data
+  test('Default Case', () {
+    final pd = PatientData();
+
+    const want = _Want(
+        gnri: '101.3',
+        gnriRisk: GNRIRisk.noRisk,
+        predictedOS: '0.92',
+        predictedAFS: '0.88',
+        osRisk: OSRisk.low);
+
+    _testCase(pd, want);
+  });
+
   test('Error Case', () {
     final pd = PatientData()
       ..sex = Sex.male
@@ -12,7 +25,7 @@ void main() {
       ..weight = 50.0
       ..alb = 3.0
       ..activity = Activity.wheelchair;
-    const want = _WantData(
+    const want = _Want(
         gnri: 'NaN',
         gnriRisk: null,
         predictedOS: 'NaN',
@@ -40,7 +53,7 @@ void main() {
       ..hasLeukocytosis = true
       ..hasLocalInfection = true;
 
-    const want = _WantData(
+    const want = _Want(
         gnri: '101.3',
         gnriRisk: GNRIRisk.noRisk,
         predictedOS: '0.91',
@@ -68,7 +81,7 @@ void main() {
       ..hasLeukocytosis = true
       ..hasLocalInfection = true;
 
-    const want = _WantData(
+    const want = _Want(
         gnri: '93.8',
         gnriRisk: GNRIRisk.low,
         predictedOS: '0.67',
@@ -96,7 +109,7 @@ void main() {
       ..hasLeukocytosis = true
       ..hasLocalInfection = false;
 
-    const want = _WantData(
+    const want = _Want(
         gnri: '86.2',
         gnriRisk: GNRIRisk.moderate,
         predictedOS: '0.08',
@@ -124,7 +137,7 @@ void main() {
       ..hasLeukocytosis = true
       ..hasLocalInfection = true;
 
-    const want = _WantData(
+    const want = _Want(
         gnri: '71.3',
         gnriRisk: GNRIRisk.major,
         predictedOS: '0.00',
@@ -136,14 +149,14 @@ void main() {
 }
 
 //expected data struct
-class _WantData {
+class _Want {
   final String gnri;
   final GNRIRisk? gnriRisk;
   final String predictedOS;
   final String predictedAFS;
   final OSRisk? osRisk;
 
-  const _WantData(
+  const _Want(
       {required this.gnri,
       required this.gnriRisk,
       required this.predictedOS,
@@ -151,7 +164,7 @@ class _WantData {
       required this.osRisk});
 }
 
-void _testCase(PatientData pd, _WantData want) {
+void _testCase(PatientData pd, _Want want) {
   final pr = PatientRisk(patientData: pd);
   expect(pr.gnri.toStringAsFixed(1), want.gnri.toString());
   expect(pr.gnriRisk, want.gnriRisk);

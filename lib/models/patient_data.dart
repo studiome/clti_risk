@@ -5,7 +5,7 @@ class PatientData {
   double weight = 50.0; //kg
   double height = 1.50; //m
   double alb = 4.0; //albumin g/dl
-  Activity activity = Activity.wheelchair;
+  Activity activity = Activity.ambulatory;
 
   //clinical info
   bool hasCHF = false; // congestive heart failure
