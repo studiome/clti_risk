@@ -4,7 +4,7 @@ void main() {
   runApp(const MyApp());
 }
 
-const Color jcaRed = Color(0xFF70200D);
+const Color jsvsColor = Color(0xFF2D6A7B);
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -13,11 +13,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'CLTI RISK',
-      theme: ThemeData(useMaterial3: true, colorSchemeSeed: jcaRed),
+      theme: ThemeData(useMaterial3: true, colorSchemeSeed: jsvsColor),
       darkTheme: ThemeData(
         useMaterial3: true,
         brightness: Brightness.dark,
-        colorSchemeSeed: jcaRed,
+        colorSchemeSeed: jsvsColor,
       ),
       themeMode: ThemeMode.system,
       home: const MyHomePage(title: 'CLTI Risk Calculator'),
@@ -54,6 +54,9 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            FloatingActionButton(
+                foregroundColor: Theme.of(context).colorScheme.primary,
+                onPressed: () {}),
           ],
         ),
       ),
