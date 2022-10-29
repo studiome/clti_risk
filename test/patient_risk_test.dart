@@ -5,13 +5,13 @@ import 'package:test/test.dart';
 void main() {
   //Test Cases, dummy data
   test('Error Case', () {
-    final pd = PatientData(
-        sex: Sex.male,
-        age: 70,
-        height: 0.0,
-        weight: 50.0,
-        alb: 3.0,
-        activity: Activity.wheelchair);
+    final pd = PatientData()
+      ..sex = Sex.male
+      ..age = 70
+      ..height = 0.0
+      ..weight = 50.0
+      ..alb = 3.0
+      ..activity = Activity.wheelchair;
     const want = _WantData(
         gnri: 'NaN',
         gnriRisk: null,
@@ -23,13 +23,13 @@ void main() {
   });
 
   test('Low Risk Case', () {
-    final pd = PatientData(
-        sex: Sex.male,
-        age: 50,
-        height: 1.65,
-        weight: 60.0,
-        alb: 4.0,
-        activity: Activity.ambulatory)
+    final pd = PatientData()
+      ..sex = Sex.male
+      ..age = 50
+      ..height = 1.65
+      ..weight = 60.0
+      ..alb = 4.0
+      ..activity = Activity.ambulatory
       ..hasCHF = false
       ..hasCVD = true
       ..ckd = CKD.g3
@@ -51,13 +51,13 @@ void main() {
   });
 
   test('medium Risk Case', () {
-    final pd = PatientData(
-        sex: Sex.female,
-        age: 70,
-        height: 1.53,
-        weight: 55.0,
-        alb: 3.5,
-        activity: Activity.wheelchair)
+    final pd = PatientData()
+      ..sex = Sex.female
+      ..age = 70
+      ..height = 1.53
+      ..weight = 55.0
+      ..alb = 3.5
+      ..activity = Activity.wheelchair
       ..hasCHF = true
       ..hasCVD = true
       ..ckd = CKD.g4
@@ -79,13 +79,13 @@ void main() {
   });
 
   test('high Risk Case', () {
-    final pd = PatientData(
-        sex: Sex.male,
-        age: 85,
-        height: 1.75,
-        weight: 55.1,
-        alb: 3.5,
-        activity: Activity.immobile)
+    final pd = PatientData()
+      ..sex = Sex.male
+      ..age = 85
+      ..height = 1.75
+      ..weight = 55.1
+      ..alb = 3.5
+      ..activity = Activity.immobile
       ..hasCHF = false
       ..hasCVD = false
       ..ckd = CKD.g5
@@ -107,13 +107,13 @@ void main() {
   });
 
   test('high Risk Case 2', () {
-    final pd = PatientData(
-        sex: Sex.female,
-        age: 90,
-        height: 1.55,
-        weight: 30.0,
-        alb: 3.2,
-        activity: Activity.immobile)
+    final pd = PatientData()
+      ..sex = Sex.female
+      ..age = 90
+      ..height = 1.55
+      ..weight = 30.0
+      ..alb = 3.2
+      ..activity = Activity.immobile
       ..hasCHF = true
       ..hasCVD = true
       ..ckd = CKD.g5D
