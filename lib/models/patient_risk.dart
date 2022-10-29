@@ -9,7 +9,7 @@ class PatientRisk {
   GNRIRisk? gnriRisk;
   late double predictedOS; //2yr OS;
   late double predictedAFS; //2yr AFS;
-  late OSRisk osRisk;
+  late OSRisk? osRisk;
 
   PatientRisk({required this.patientData}) {
     gnri = _calcGNRI();
@@ -55,7 +55,8 @@ class PatientRisk {
     return pow(afsH0Coeff, exp(sigma)).toDouble();
   }
 
-  OSRisk _classifyOSRisk(double overallSuvival) {
+  OSRisk? _classifyOSRisk(double overallSuvival) {
+    if (overallSuvival.isNaN) return null;
     if (overallSuvival >= 70.0) {
       return OSRisk.low;
     } else if (overallSuvival >= 50.0) {
@@ -104,6 +105,9 @@ class PatientRisk {
     }
 
     //GNRI
+    // if GNRI is not caliculated, return NaN
+    if (gnriRisk == null) return double.nan;
+
     switch (gnriRisk) {
       case GNRIRisk.moderate:
         sigma += coeff[Covariants.gnriModerate.index];
