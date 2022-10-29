@@ -25,6 +25,7 @@ void main() {
       ..weight = 50.0
       ..alb = 3.0
       ..activity = Activity.wheelchair;
+
     const want = _Want(
         gnri: 'NaN',
         gnriRisk: null,
