@@ -2,31 +2,6 @@ import 'package:clti_risk/models/patient_data.dart';
 import 'package:clti_risk/models/patient_risk.dart';
 import 'package:test/test.dart';
 
-//expected data struct
-class _WantData {
-  final String gnri;
-  final GNRIRisk? gnriRisk;
-  final String predictedOS;
-  final String predictedAFS;
-  final OSRisk? osRisk;
-
-  const _WantData(
-      {required this.gnri,
-      required this.gnriRisk,
-      required this.predictedOS,
-      required this.predictedAFS,
-      required this.osRisk});
-}
-
-void _testCase(PatientData pd, _WantData want) {
-  final pr = PatientRisk(patientData: pd);
-  expect(pr.gnri.toStringAsFixed(1), want.gnri.toString());
-  expect(pr.gnriRisk, want.gnriRisk);
-  expect(pr.predictedOS.toStringAsFixed(2), equals(want.predictedOS));
-  expect(pr.predictedAFS.toStringAsFixed(2), equals(want.predictedAFS));
-  expect(pr.osRisk, want.osRisk);
-}
-
 void main() {
   //Test Cases, dummy data
   test('Error Case', () {
@@ -116,4 +91,29 @@ void main() {
     expect((pr.predictedAFS * 100).round(), 64);
     expect(pr.osRisk, OSRisk.low);
   });
+}
+
+//expected data struct
+class _WantData {
+  final String gnri;
+  final GNRIRisk? gnriRisk;
+  final String predictedOS;
+  final String predictedAFS;
+  final OSRisk? osRisk;
+
+  const _WantData(
+      {required this.gnri,
+      required this.gnriRisk,
+      required this.predictedOS,
+      required this.predictedAFS,
+      required this.osRisk});
+}
+
+void _testCase(PatientData pd, _WantData want) {
+  final pr = PatientRisk(patientData: pd);
+  expect(pr.gnri.toStringAsFixed(1), want.gnri.toString());
+  expect(pr.gnriRisk, want.gnriRisk);
+  expect(pr.predictedOS.toStringAsFixed(2), equals(want.predictedOS));
+  expect(pr.predictedAFS.toStringAsFixed(2), equals(want.predictedAFS));
+  expect(pr.osRisk, want.osRisk);
 }
