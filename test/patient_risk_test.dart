@@ -4,10 +4,10 @@ import 'package:test/test.dart';
 
 //expected data struct
 class _WantData {
-  final double gnri;
+  final String gnri;
   final GNRIRisk? gnriRisk;
-  final int predictedOS;
-  final int predictedAFS;
+  final String predictedOS;
+  final String predictedAFS;
   final OSRisk? osRisk;
 
   const _WantData(
@@ -22,14 +22,14 @@ void _testCase(PatientData pd, _WantData want) {
   final pr = PatientRisk(patientData: pd);
   expect(pr.gnri.toStringAsFixed(1), want.gnri.toString());
   expect(pr.gnriRisk, want.gnriRisk);
-  expect((pr.predictedOS * 100).floor(), want.predictedOS);
-  expect((pr.predictedAFS * 100).floor(), want.predictedAFS);
+  expect(pr.predictedOS.toStringAsFixed(2), equals(want.predictedOS));
+  expect(pr.predictedAFS.toStringAsFixed(2), equals(want.predictedAFS));
   expect(pr.osRisk, want.osRisk);
 }
 
 void main() {
   //Test Cases, dummy data
-  test('GNRI NaN', () {
+  test('Error Case', () {
     final pd = PatientData(
         sex: Sex.male,
         age: 70,
@@ -37,9 +37,14 @@ void main() {
         weight: 50.0,
         alb: 3.0,
         activity: Activity.wheelchair);
-    final pr = PatientRisk(patientData: pd);
-    expect(pr.gnri.toStringAsFixed(1), 'NaN');
-    expect(pr.gnriRisk, null);
+    const want = _WantData(
+        gnri: 'NaN',
+        gnriRisk: null,
+        predictedOS: 'NaN',
+        predictedAFS: 'NaN',
+        osRisk: null);
+
+    _testCase(pd, want);
   });
   test('GNRI major', () {
     final pd = PatientData(
