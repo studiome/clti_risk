@@ -41,10 +41,39 @@ class _PatientDataFormState extends State<PatientDataForm> {
                   });
                 },
                 steps: [
-                  const Step(
-                    title: Text('Sex'),
-                    subtitle: Text('male of female'),
-                    content: Text('Sex'),
+                  Step(
+                    title: const Text('Sex'),
+                    content: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 150,
+                          child: RadioListTile<Sex>(
+                              title: const Text('male'),
+                              value: Sex.male,
+                              groupValue: patientData.sex,
+                              onChanged: (v) {
+                                if (v == null) return;
+                                setState(() {
+                                  patientData.sex = v;
+                                });
+                              }),
+                        ),
+                        SizedBox(
+                          width: 150,
+                          child: RadioListTile<Sex>(
+                              title: const Text('female'),
+                              value: Sex.female,
+                              groupValue: patientData.sex,
+                              onChanged: (v) {
+                                if (v == null) return;
+                                setState(() {
+                                  patientData.sex = v;
+                                });
+                              }),
+                        ),
+                      ],
+                    ),
                   ),
                   Step(
                     title: const Text('Age'),
