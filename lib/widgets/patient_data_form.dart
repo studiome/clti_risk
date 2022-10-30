@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../models/patient_data.dart';
 
@@ -13,6 +15,10 @@ class _PatientDataFormState extends State<PatientDataForm> {
   PatientData patientData = PatientData();
   int _stepIndex = 0;
   final int inputMaxNumber = 15;
+  TextEditingController ageFormController = TextEditingController();
+  TextEditingController heightFormController = TextEditingController();
+  TextEditingController weightFormController = TextEditingController();
+  TextEditingController albFormController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -78,29 +84,152 @@ class _PatientDataFormState extends State<PatientDataForm> {
                   Step(
                     title: const Text('Age'),
                     subtitle: const Text('[years]'),
-                    content: TextFormField(
-                      onFieldSubmitted: (String value) {},
+                    content: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        alignment: Alignment.centerLeft,
+                        child: SizedBox(
+                          width: 180,
+                          child: TextFormField(
+                            controller: ageFormController,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: 'Enter Age',
+                              labelText: 'Age [yrs]',
+                            ),
+                            textInputAction: TextInputAction.done,
+                            keyboardType: const TextInputType.numberWithOptions(
+                              signed: false,
+                              decimal: false,
+                            ),
+                            inputFormatters: <TextInputFormatter>[
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
+                            onFieldSubmitted: (String value) {
+                              try {
+                                patientData.age = int.parse(value);
+                              } catch (e) {
+                                //DO Nothing
+                                if (kDebugMode) print(e);
+                              }
+                            },
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                   Step(
                     title: const Text('Height'),
                     subtitle: const Text('[m]'),
-                    content: TextFormField(
-                      onFieldSubmitted: (String value) {},
+                    content: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        alignment: Alignment.centerLeft,
+                        child: SizedBox(
+                          width: 180,
+                          child: TextFormField(
+                            controller: heightFormController,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: 'Enter Height',
+                              labelText: 'Height [m]',
+                            ),
+                            textInputAction: TextInputAction.done,
+                            keyboardType: const TextInputType.numberWithOptions(
+                              signed: false,
+                              decimal: true,
+                            ),
+                            inputFormatters: <TextInputFormatter>[
+                              FilteringTextInputFormatter.allow(
+                                  RegExp(r'^\d{1}\.?\d{0,2}')),
+                            ],
+                            onFieldSubmitted: (String value) {
+                              try {
+                                patientData.height = double.parse(value);
+                              } catch (e) {
+                                //DO Nothing
+                                if (kDebugMode) print(e);
+                              }
+                            },
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                   Step(
                     title: const Text('Body weight'),
                     subtitle: const Text('[kg]'),
-                    content: TextFormField(
-                      onFieldSubmitted: (String value) {},
+                    content: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        alignment: Alignment.centerLeft,
+                        child: SizedBox(
+                          width: 180,
+                          child: TextFormField(
+                            controller: weightFormController,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: 'Enter Body Weight',
+                              labelText: 'Weight [kg]',
+                            ),
+                            textInputAction: TextInputAction.done,
+                            keyboardType: const TextInputType.numberWithOptions(
+                              signed: false,
+                              decimal: true,
+                            ),
+                            inputFormatters: <TextInputFormatter>[
+                              FilteringTextInputFormatter.allow(
+                                  RegExp(r'^\d{1,3}\.?\d{0,1}')),
+                            ],
+                            onFieldSubmitted: (String value) {
+                              try {
+                                patientData.weight = double.parse(value);
+                              } catch (e) {
+                                //DO Nothing
+                                if (kDebugMode) print(e);
+                              }
+                            },
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                   Step(
                     title: const Text('Albumin'),
                     subtitle: const Text('[g/dl]'),
-                    content: TextFormField(
-                      onFieldSubmitted: (String value) {},
+                    content: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        alignment: Alignment.centerLeft,
+                        child: SizedBox(
+                          width: 180,
+                          child: TextFormField(
+                            controller: albFormController,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: 'Enter Albumin',
+                              labelText: 'Albumin [g/dl]',
+                            ),
+                            textInputAction: TextInputAction.done,
+                            keyboardType: const TextInputType.numberWithOptions(
+                              signed: false,
+                              decimal: true,
+                            ),
+                            inputFormatters: <TextInputFormatter>[
+                              FilteringTextInputFormatter.allow(
+                                  RegExp(r'^\d{1}\.?\d{0,1}')),
+                            ],
+                            onFieldSubmitted: (String value) {
+                              try {
+                                patientData.alb = double.parse(value);
+                              } catch (e) {
+                                //DO Nothing
+                                if (kDebugMode) print(e);
+                              }
+                            },
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                   Step(
