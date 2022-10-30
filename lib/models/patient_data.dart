@@ -50,5 +50,5 @@ enum CKD {
 enum MalignantNeoplasm {
   no, //having no MN
   pastHistory, //having past history
-  uderTreatment, //under treatment
+  underTreatment, //under treatment
 }

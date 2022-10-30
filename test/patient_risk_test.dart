@@ -103,7 +103,7 @@ void main() {
       ..hasCHF = false
       ..hasCVD = false
       ..ckd = CKD.g5
-      ..mn = MalignantNeoplasm.uderTreatment
+      ..mn = MalignantNeoplasm.underTreatment
       ..occlusiveLesion = OcclusiveLesion.belowIP
       ..isUrgent = true
       ..hasFever = false
@@ -131,7 +131,7 @@ void main() {
       ..hasCHF = true
       ..hasCVD = true
       ..ckd = CKD.g5D
-      ..mn = MalignantNeoplasm.uderTreatment
+      ..mn = MalignantNeoplasm.underTreatment
       ..occlusiveLesion = OcclusiveLesion.belowIP
       ..isUrgent = true
       ..hasFever = true

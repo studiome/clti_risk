@@ -137,7 +137,7 @@ class PatientRisk {
       case MalignantNeoplasm.pastHistory:
         sigma += coeff[Covariants.pastMalignancy.index];
         break;
-      case MalignantNeoplasm.uderTreatment:
+      case MalignantNeoplasm.underTreatment:
         sigma += coeff[Covariants.treatingMalignancy.index];
         break;
       default:

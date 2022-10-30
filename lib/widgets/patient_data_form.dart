@@ -20,7 +20,7 @@ class _PatientDataFormState extends State<PatientDataForm> {
       child: Column(
         children: [
           SizedBox(
-            height: 640,
+            height: 720,
             child: Stepper(
                 currentStep: _stepIndex,
                 onStepCancel: () {
@@ -103,11 +103,54 @@ class _PatientDataFormState extends State<PatientDataForm> {
                       onFieldSubmitted: (String value) {},
                     ),
                   ),
-                  const Step(
-                    title: Text('Actvity'),
-                    subtitle: Text(
+                  Step(
+                    title: const Text('Actvity'),
+                    subtitle: const Text(
                         'ambulatory: able to walk, wheelchair: unable to walk but could stand on their own legs during bed to wheelchair transfer, immobile: full assistance was indispensable'),
-                    content: Text('activity'),
+                    content: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 180,
+                          child: RadioListTile<Activity>(
+                              title: const Text('Ambulatory'),
+                              value: Activity.ambulatory,
+                              groupValue: patientData.activity,
+                              onChanged: (v) {
+                                if (v == null) return;
+                                setState(() {
+                                  patientData.activity = v;
+                                });
+                              }),
+                        ),
+                        SizedBox(
+                          width: 180,
+                          child: RadioListTile<Activity>(
+                              title: const Text('Wheelchair'),
+                              value: Activity.wheelchair,
+                              groupValue: patientData.activity,
+                              onChanged: (v) {
+                                if (v == null) return;
+                                setState(() {
+                                  patientData.activity = v;
+                                });
+                              }),
+                        ),
+                        SizedBox(
+                          width: 180,
+                          child: RadioListTile<Activity>(
+                              title: const Text('Immobile'),
+                              value: Activity.immobile,
+                              groupValue: patientData.activity,
+                              onChanged: (v) {
+                                if (v == null) return;
+                                setState(() {
+                                  patientData.activity = v;
+                                });
+                              }),
+                        ),
+                      ],
+                    ),
                   ),
                   Step(
                     title: const Text('Congestive heart failure'),
@@ -181,23 +224,179 @@ class _PatientDataFormState extends State<PatientDataForm> {
                       ],
                     ),
                   ),
-                  const Step(
-                    title: Text('Chronic kidney disease'),
-                    subtitle: Text(
+                  Step(
+                    title: const Text('Chronic kidney disease'),
+                    subtitle: const Text(
                         'absent, G3, G4, G5, or G5D; renal dysfunction was absent when the estimated glomerular filtration rate [eGFR] was 60 ml/min/1.73 m2 or higher, and it was graded as G3, G4, and G5 when eGFR was 30 e 59, 15 e 29, and below 15, respectively. eGFR below 15 in haemodialysis patients was graded as G5D'),
-                    content: Text('grade'),
+                    content: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 120,
+                          child: RadioListTile<CKD>(
+                              title: const Text('No'),
+                              value: CKD.normal,
+                              groupValue: patientData.ckd,
+                              onChanged: (v) {
+                                if (v == null) return;
+                                setState(() {
+                                  patientData.ckd = v;
+                                });
+                              }),
+                        ),
+                        SizedBox(
+                          width: 120,
+                          child: RadioListTile<CKD>(
+                              title: const Text('G3'),
+                              value: CKD.g3,
+                              groupValue: patientData.ckd,
+                              onChanged: (v) {
+                                if (v == null) return;
+                                setState(() {
+                                  patientData.ckd = v;
+                                });
+                              }),
+                        ),
+                        SizedBox(
+                          width: 120,
+                          child: RadioListTile<CKD>(
+                              title: const Text('G4'),
+                              value: CKD.g4,
+                              groupValue: patientData.ckd,
+                              onChanged: (v) {
+                                if (v == null) return;
+                                setState(() {
+                                  patientData.ckd = v;
+                                });
+                              }),
+                        ),
+                        SizedBox(
+                          width: 120,
+                          child: RadioListTile<CKD>(
+                              title: const Text('G5'),
+                              value: CKD.g5,
+                              groupValue: patientData.ckd,
+                              onChanged: (v) {
+                                if (v == null) return;
+                                setState(() {
+                                  patientData.ckd = v;
+                                });
+                              }),
+                        ),
+                        SizedBox(
+                          width: 120,
+                          child: RadioListTile<CKD>(
+                              title: const Text('G5D'),
+                              value: CKD.g5D,
+                              groupValue: patientData.ckd,
+                              onChanged: (v) {
+                                if (v == null) return;
+                                setState(() {
+                                  patientData.ckd = v;
+                                });
+                              }),
+                        ),
+                      ],
+                    ),
                   ),
-                  const Step(
-                    title: Text('Malignant neoplasm'),
-                    subtitle: Text(
+                  Step(
+                    title: const Text('Malignant neoplasm'),
+                    subtitle: const Text(
                         'absent, past history of malignant neoplasm, or present under treatment'),
-                    content: Text('cancer'),
+                    content: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 120,
+                          child: RadioListTile<MalignantNeoplasm>(
+                              title: const Text('No'),
+                              value: MalignantNeoplasm.no,
+                              groupValue: patientData.mn,
+                              onChanged: (v) {
+                                if (v == null) return;
+                                setState(() {
+                                  patientData.mn = v;
+                                });
+                              }),
+                        ),
+                        SizedBox(
+                          width: 180,
+                          child: RadioListTile<MalignantNeoplasm>(
+                              title: const Text('Past History'),
+                              value: MalignantNeoplasm.pastHistory,
+                              groupValue: patientData.mn,
+                              onChanged: (v) {
+                                if (v == null) return;
+                                setState(() {
+                                  patientData.mn = v;
+                                });
+                              }),
+                        ),
+                        SizedBox(
+                          width: 240,
+                          child: RadioListTile<MalignantNeoplasm>(
+                              title: const Text('Under treatment'),
+                              value: MalignantNeoplasm.underTreatment,
+                              groupValue: patientData.mn,
+                              onChanged: (v) {
+                                if (v == null) return;
+                                setState(() {
+                                  patientData.mn = v;
+                                });
+                              }),
+                        ),
+                      ],
+                    ),
                   ),
-                  const Step(
-                    title: Text('Sites of Occlusive Lesions'),
-                    subtitle: Text(
+                  Step(
+                    title: const Text('Sites of Occlusive Lesions'),
+                    subtitle: const Text(
                         'aorto-iliac present, aorto-iliac absent and femoropopliteal present, or aorto-iliac and femoropopliteal absent and infrapopliteal present'),
-                    content: Text('occlusive'),
+                    content: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 180,
+                          child: RadioListTile<OcclusiveLesion>(
+                              title: const Text('Aorto-iliac'),
+                              value: OcclusiveLesion.ai,
+                              groupValue: patientData.occlusiveLesion,
+                              onChanged: (v) {
+                                if (v == null) return;
+                                setState(() {
+                                  patientData.occlusiveLesion = v;
+                                });
+                              }),
+                        ),
+                        SizedBox(
+                          width: 240,
+                          child: RadioListTile<OcclusiveLesion>(
+                              title: const Text(
+                                  'Femoropopliteal without Aorto-iliac'),
+                              value: OcclusiveLesion.fpWithoutAI,
+                              groupValue: patientData.occlusiveLesion,
+                              onChanged: (v) {
+                                if (v == null) return;
+                                setState(() {
+                                  patientData.occlusiveLesion = v;
+                                });
+                              }),
+                        ),
+                        SizedBox(
+                          width: 240,
+                          child: RadioListTile<OcclusiveLesion>(
+                              title: const Text('Infrapopliteal'),
+                              value: OcclusiveLesion.belowIP,
+                              groupValue: patientData.occlusiveLesion,
+                              onChanged: (v) {
+                                if (v == null) return;
+                                setState(() {
+                                  patientData.occlusiveLesion = v;
+                                });
+                              }),
+                        ),
+                      ],
+                    ),
                   ),
                   Step(
                     title: const Text('Urgent revascularisation procedures'),
