@@ -614,7 +614,7 @@ class _PatientDataFormState extends State<PatientDataForm> {
                               onChanged: (v) {
                                 if (v == null) return;
                                 setState(() {
-                                  patientData.hasCHF = v;
+                                  patientData.hasLeukocytosis = v;
                                 });
                               }),
                         ),
@@ -627,7 +627,7 @@ class _PatientDataFormState extends State<PatientDataForm> {
                               onChanged: (v) {
                                 if (v == null) return;
                                 setState(() {
-                                  patientData.hasCHF = v;
+                                  patientData.hasLeukocytosis = v;
                                 });
                               }),
                         ),
