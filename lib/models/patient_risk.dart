@@ -160,7 +160,7 @@ class PatientRisk {
     if (data.isUrgent) sigma += coeff[Covariants.isUrgent.index];
 
     //Fever
-    if (data.hasFeverUp) sigma += coeff[Covariants.feverUp.index];
+    if (data.hasFever) sigma += coeff[Covariants.fever.index];
 
     //WBC
     if (data.hasLeukocytosis) sigma += coeff[Covariants.leukocytosis.index];
@@ -210,7 +210,7 @@ enum Covariants {
   lesionFP,
   lesionBelowIP,
   isUrgent,
-  feverUp,
+  fever,
   leukocytosis,
   localInfection,
 }

@@ -14,7 +14,7 @@ class PatientData {
   MalignantNeoplasm mn = MalignantNeoplasm.no; // Malignant neoplasm
   OcclusiveLesion occlusiveLesion = OcclusiveLesion.ai;
   bool isUrgent = false; //urgent procedure
-  bool hasFeverUp = false; // BT over 38 deg celsius
+  bool hasFever = false; // BT over 38 deg celsius
   bool hasLeukocytosis = false; //WBC over 8000/ul
   bool hasLocalInfection = false;
 

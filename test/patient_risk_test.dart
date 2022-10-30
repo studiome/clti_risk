@@ -50,7 +50,7 @@ void main() {
       ..mn = MalignantNeoplasm.no
       ..occlusiveLesion = OcclusiveLesion.fpWithoutAI
       ..isUrgent = true
-      ..hasFeverUp = true
+      ..hasFever = true
       ..hasLeukocytosis = true
       ..hasLocalInfection = true;
 
@@ -78,7 +78,7 @@ void main() {
       ..mn = MalignantNeoplasm.pastHistory
       ..occlusiveLesion = OcclusiveLesion.fpWithoutAI
       ..isUrgent = true
-      ..hasFeverUp = true
+      ..hasFever = true
       ..hasLeukocytosis = true
       ..hasLocalInfection = true;
 
@@ -106,7 +106,7 @@ void main() {
       ..mn = MalignantNeoplasm.uderTreatment
       ..occlusiveLesion = OcclusiveLesion.belowIP
       ..isUrgent = true
-      ..hasFeverUp = false
+      ..hasFever = false
       ..hasLeukocytosis = true
       ..hasLocalInfection = false;
 
@@ -134,7 +134,7 @@ void main() {
       ..mn = MalignantNeoplasm.uderTreatment
       ..occlusiveLesion = OcclusiveLesion.belowIP
       ..isUrgent = true
-      ..hasFeverUp = true
+      ..hasFever = true
       ..hasLeukocytosis = true
       ..hasLocalInfection = true;
 
