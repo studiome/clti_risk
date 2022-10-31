@@ -12,11 +12,7 @@ class PatientDataForm extends StatefulWidget {
 }
 
 enum _InputItem {
-  sex,
-  age,
-  height,
-  weight,
-  alb,
+  profile,
   activity,
   chf,
   cvd,
@@ -32,7 +28,7 @@ enum _InputItem {
 class _PatientDataFormState extends State<PatientDataForm> {
   PatientData patientData = PatientData();
   int _stepIndex = 0;
-  final int inputMaxNumber = 15;
+  final int inputMaxNumber = _InputItem.values.length;
   TextEditingController ageFormController = TextEditingController();
   TextEditingController heightFormController = TextEditingController();
   TextEditingController weightFormController = TextEditingController();
@@ -61,220 +57,187 @@ class _PatientDataFormState extends State<PatientDataForm> {
         },
         steps: [
           Step(
-            title: const Text('Sex'),
-            content: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: 150,
-                    child: RadioListTile<Sex>(
-                        title: const Text('Male'),
-                        value: Sex.male,
-                        groupValue: patientData.sex,
-                        onChanged: (v) {
-                          if (v == null) return;
-                          setState(() {
-                            patientData.sex = v;
-                          });
-                        }),
+            title: const Text('Patient Profile'),
+            subtitle: const Text(
+                'Sex, Age[yeats], Height[m], BodyWeight[kg], Albumin[g/dl]'),
+            content: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const Text('Sex'),
+                      SizedBox(
+                        width: 150,
+                        child: RadioListTile<Sex>(
+                            title: const Text('Male'),
+                            value: Sex.male,
+                            groupValue: patientData.sex,
+                            onChanged: (v) {
+                              if (v == null) return;
+                              setState(() {
+                                patientData.sex = v;
+                              });
+                            }),
+                      ),
+                      SizedBox(
+                        width: 150,
+                        child: RadioListTile<Sex>(
+                            title: const Text('Female'),
+                            value: Sex.female,
+                            groupValue: patientData.sex,
+                            onChanged: (v) {
+                              if (v == null) return;
+                              setState(() {
+                                patientData.sex = v;
+                              });
+                            }),
+                      ),
+                    ],
                   ),
-                  SizedBox(
-                    width: 150,
-                    child: RadioListTile<Sex>(
-                        title: const Text('Female'),
-                        value: Sex.female,
-                        groupValue: patientData.sex,
-                        onChanged: (v) {
-                          if (v == null) return;
-                          setState(() {
-                            patientData.sex = v;
-                          });
-                        }),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    alignment: Alignment.centerLeft,
+                    child: SizedBox(
+                      width: 180,
+                      child: TextFormField(
+                        controller: ageFormController,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: 'Enter Age',
+                          labelText: 'Age [yrs]',
+                        ),
+                        textInputAction: TextInputAction.done,
+                        keyboardType: const TextInputType.numberWithOptions(
+                          signed: false,
+                          decimal: false,
+                        ),
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
+                        onFieldSubmitted: (String value) {
+                          try {
+                            patientData.age = int.parse(value);
+                          } catch (e) {
+                            //DO Nothing
+                            if (kDebugMode) print(e);
+                          }
+                        },
+                      ),
+                    ),
                   ),
-                ],
-              ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    alignment: Alignment.centerLeft,
+                    child: SizedBox(
+                      width: 180,
+                      child: TextFormField(
+                        controller: heightFormController,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: 'Enter Height',
+                          labelText: 'Height [m]',
+                        ),
+                        textInputAction: TextInputAction.done,
+                        keyboardType: const TextInputType.numberWithOptions(
+                          signed: false,
+                          decimal: true,
+                        ),
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(
+                              RegExp(r'^\d{1}\.?\d{0,2}')),
+                        ],
+                        onFieldSubmitted: (String value) {
+                          try {
+                            patientData.height = double.parse(value);
+                          } catch (e) {
+                            //DO Nothing
+                            if (kDebugMode) print(e);
+                          }
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    alignment: Alignment.centerLeft,
+                    child: SizedBox(
+                      width: 180,
+                      child: TextFormField(
+                        controller: weightFormController,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: 'Enter Body Weight',
+                          labelText: 'Body Weight [kg]',
+                        ),
+                        textInputAction: TextInputAction.done,
+                        keyboardType: const TextInputType.numberWithOptions(
+                          signed: false,
+                          decimal: true,
+                        ),
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(
+                              RegExp(r'^\d{1,3}\.?\d{0,1}')),
+                        ],
+                        onFieldSubmitted: (String value) {
+                          try {
+                            patientData.weight = double.parse(value);
+                          } catch (e) {
+                            //DO Nothing
+                            if (kDebugMode) print(e);
+                          }
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    alignment: Alignment.centerLeft,
+                    child: SizedBox(
+                      width: 180,
+                      child: TextFormField(
+                        controller: albFormController,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: 'Enter Albumin',
+                          labelText: 'Albumin [g/dl]',
+                        ),
+                        textInputAction: TextInputAction.done,
+                        keyboardType: const TextInputType.numberWithOptions(
+                          signed: false,
+                          decimal: true,
+                        ),
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(
+                              RegExp(r'^\d{1}\.?\d{0,1}')),
+                        ],
+                        onFieldSubmitted: (String value) {
+                          try {
+                            patientData.alb = double.parse(value);
+                          } catch (e) {
+                            //DO Nothing
+                            if (kDebugMode) print(e);
+                          }
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-            isActive: _stepIndex == _InputItem.sex.index,
-            state: _stepIndex == _InputItem.sex.index
+            isActive: _stepIndex == _InputItem.profile.index,
+            state: _stepIndex == _InputItem.profile.index
                 ? StepState.editing
                 : StepState.complete,
-          ),
-          Step(
-            title: const Text('Age'),
-            subtitle: const Text('[years]'),
-            content: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                alignment: Alignment.centerLeft,
-                child: SizedBox(
-                  width: 180,
-                  child: TextFormField(
-                    controller: ageFormController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Enter Age',
-                      labelText: 'Age [yrs]',
-                    ),
-                    textInputAction: TextInputAction.done,
-                    keyboardType: const TextInputType.numberWithOptions(
-                      signed: false,
-                      decimal: false,
-                    ),
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.digitsOnly
-                    ],
-                    onFieldSubmitted: (String value) {
-                      try {
-                        patientData.age = int.parse(value);
-                      } catch (e) {
-                        //DO Nothing
-                        if (kDebugMode) print(e);
-                      }
-                    },
-                  ),
-                ),
-              ),
-            ),
-            isActive: _stepIndex == _InputItem.age.index,
-            state: _stepIndex == _InputItem.age.index
-                ? StepState.editing
-                : _stepIndex < _InputItem.age.index
-                    ? StepState.indexed
-                    : StepState.complete,
-          ),
-          Step(
-            title: const Text('Height'),
-            subtitle: const Text('[m]'),
-            content: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                alignment: Alignment.centerLeft,
-                child: SizedBox(
-                  width: 180,
-                  child: TextFormField(
-                    controller: heightFormController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Enter Height',
-                      labelText: 'Height [m]',
-                    ),
-                    textInputAction: TextInputAction.done,
-                    keyboardType: const TextInputType.numberWithOptions(
-                      signed: false,
-                      decimal: true,
-                    ),
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.allow(
-                          RegExp(r'^\d{1}\.?\d{0,2}')),
-                    ],
-                    onFieldSubmitted: (String value) {
-                      try {
-                        patientData.height = double.parse(value);
-                      } catch (e) {
-                        //DO Nothing
-                        if (kDebugMode) print(e);
-                      }
-                    },
-                  ),
-                ),
-              ),
-            ),
-            isActive: _stepIndex == _InputItem.height.index,
-            state: _stepIndex == _InputItem.height.index
-                ? StepState.editing
-                : _stepIndex < _InputItem.height.index
-                    ? StepState.indexed
-                    : StepState.complete,
-          ),
-          Step(
-            title: const Text('Body weight'),
-            subtitle: const Text('[kg]'),
-            content: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                alignment: Alignment.centerLeft,
-                child: SizedBox(
-                  width: 180,
-                  child: TextFormField(
-                    controller: weightFormController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Enter Body Weight',
-                      labelText: 'Weight [kg]',
-                    ),
-                    textInputAction: TextInputAction.done,
-                    keyboardType: const TextInputType.numberWithOptions(
-                      signed: false,
-                      decimal: true,
-                    ),
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.allow(
-                          RegExp(r'^\d{1,3}\.?\d{0,1}')),
-                    ],
-                    onFieldSubmitted: (String value) {
-                      try {
-                        patientData.weight = double.parse(value);
-                      } catch (e) {
-                        //DO Nothing
-                        if (kDebugMode) print(e);
-                      }
-                    },
-                  ),
-                ),
-              ),
-            ),
-            isActive: _stepIndex == _InputItem.weight.index,
-            state: _stepIndex == _InputItem.weight.index
-                ? StepState.editing
-                : _stepIndex < _InputItem.weight.index
-                    ? StepState.indexed
-                    : StepState.complete,
-          ),
-          Step(
-            title: const Text('Albumin'),
-            subtitle: const Text('[g/dl]'),
-            content: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                alignment: Alignment.centerLeft,
-                child: SizedBox(
-                  width: 180,
-                  child: TextFormField(
-                    controller: albFormController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Enter Albumin',
-                      labelText: 'Albumin [g/dl]',
-                    ),
-                    textInputAction: TextInputAction.done,
-                    keyboardType: const TextInputType.numberWithOptions(
-                      signed: false,
-                      decimal: true,
-                    ),
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.allow(
-                          RegExp(r'^\d{1}\.?\d{0,1}')),
-                    ],
-                    onFieldSubmitted: (String value) {
-                      try {
-                        patientData.alb = double.parse(value);
-                      } catch (e) {
-                        //DO Nothing
-                        if (kDebugMode) print(e);
-                      }
-                    },
-                  ),
-                ),
-              ),
-            ),
-            isActive: _stepIndex == _InputItem.alb.index,
-            state: _stepIndex == _InputItem.alb.index
-                ? StepState.editing
-                : _stepIndex < _InputItem.alb.index
-                    ? StepState.indexed
-                    : StepState.complete,
           ),
           Step(
             title: const Text('Actvity'),
