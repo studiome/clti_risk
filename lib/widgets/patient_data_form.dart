@@ -11,6 +11,24 @@ class PatientDataForm extends StatefulWidget {
   State<PatientDataForm> createState() => _PatientDataFormState();
 }
 
+enum _InputItem {
+  sex,
+  age,
+  height,
+  weight,
+  alb,
+  activity,
+  chf,
+  cvd,
+  ckd,
+  malignant,
+  lesion,
+  urgent,
+  fever,
+  leukocytosis,
+  infection,
+}
+
 class _PatientDataFormState extends State<PatientDataForm> {
   PatientData patientData = PatientData();
   int _stepIndex = 0;
@@ -44,37 +62,44 @@ class _PatientDataFormState extends State<PatientDataForm> {
         steps: [
           Step(
             title: const Text('Sex'),
-            content: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: 150,
-                  child: RadioListTile<Sex>(
-                      title: const Text('Male'),
-                      value: Sex.male,
-                      groupValue: patientData.sex,
-                      onChanged: (v) {
-                        if (v == null) return;
-                        setState(() {
-                          patientData.sex = v;
-                        });
-                      }),
-                ),
-                SizedBox(
-                  width: 150,
-                  child: RadioListTile<Sex>(
-                      title: const Text('Female'),
-                      value: Sex.female,
-                      groupValue: patientData.sex,
-                      onChanged: (v) {
-                        if (v == null) return;
-                        setState(() {
-                          patientData.sex = v;
-                        });
-                      }),
-                ),
-              ],
+            content: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 150,
+                    child: RadioListTile<Sex>(
+                        title: const Text('Male'),
+                        value: Sex.male,
+                        groupValue: patientData.sex,
+                        onChanged: (v) {
+                          if (v == null) return;
+                          setState(() {
+                            patientData.sex = v;
+                          });
+                        }),
+                  ),
+                  SizedBox(
+                    width: 150,
+                    child: RadioListTile<Sex>(
+                        title: const Text('Female'),
+                        value: Sex.female,
+                        groupValue: patientData.sex,
+                        onChanged: (v) {
+                          if (v == null) return;
+                          setState(() {
+                            patientData.sex = v;
+                          });
+                        }),
+                  ),
+                ],
+              ),
             ),
+            isActive: _stepIndex == _InputItem.sex.index,
+            state: _stepIndex == _InputItem.sex.index
+                ? StepState.editing
+                : StepState.complete,
           ),
           Step(
             title: const Text('Age'),
@@ -112,6 +137,12 @@ class _PatientDataFormState extends State<PatientDataForm> {
                 ),
               ),
             ),
+            isActive: _stepIndex == _InputItem.age.index,
+            state: _stepIndex == _InputItem.age.index
+                ? StepState.editing
+                : _stepIndex < _InputItem.age.index
+                    ? StepState.indexed
+                    : StepState.complete,
           ),
           Step(
             title: const Text('Height'),
@@ -150,6 +181,12 @@ class _PatientDataFormState extends State<PatientDataForm> {
                 ),
               ),
             ),
+            isActive: _stepIndex == _InputItem.height.index,
+            state: _stepIndex == _InputItem.height.index
+                ? StepState.editing
+                : _stepIndex < _InputItem.height.index
+                    ? StepState.indexed
+                    : StepState.complete,
           ),
           Step(
             title: const Text('Body weight'),
@@ -188,6 +225,12 @@ class _PatientDataFormState extends State<PatientDataForm> {
                 ),
               ),
             ),
+            isActive: _stepIndex == _InputItem.weight.index,
+            state: _stepIndex == _InputItem.weight.index
+                ? StepState.editing
+                : _stepIndex < _InputItem.weight.index
+                    ? StepState.indexed
+                    : StepState.complete,
           ),
           Step(
             title: const Text('Albumin'),
@@ -226,6 +269,12 @@ class _PatientDataFormState extends State<PatientDataForm> {
                 ),
               ),
             ),
+            isActive: _stepIndex == _InputItem.alb.index,
+            state: _stepIndex == _InputItem.alb.index
+                ? StepState.editing
+                : _stepIndex < _InputItem.alb.index
+                    ? StepState.indexed
+                    : StepState.complete,
           ),
           Step(
             title: const Text('Actvity'),
@@ -275,6 +324,12 @@ class _PatientDataFormState extends State<PatientDataForm> {
                 ),
               ],
             ),
+            isActive: _stepIndex == _InputItem.activity.index,
+            state: _stepIndex == _InputItem.activity.index
+                ? StepState.editing
+                : _stepIndex < _InputItem.activity.index
+                    ? StepState.indexed
+                    : StepState.complete,
           ),
           Step(
             title: const Text('Congestive heart failure'),
@@ -311,6 +366,12 @@ class _PatientDataFormState extends State<PatientDataForm> {
                 ),
               ],
             ),
+            isActive: _stepIndex == _InputItem.chf.index,
+            state: _stepIndex == _InputItem.chf.index
+                ? StepState.editing
+                : _stepIndex < _InputItem.chf.index
+                    ? StepState.indexed
+                    : StepState.complete,
           ),
           Step(
             title: const Text('Cerebral vascular disease'),
@@ -347,6 +408,12 @@ class _PatientDataFormState extends State<PatientDataForm> {
                 ),
               ],
             ),
+            isActive: _stepIndex == _InputItem.cvd.index,
+            state: _stepIndex == _InputItem.cvd.index
+                ? StepState.editing
+                : _stepIndex < _InputItem.cvd.index
+                    ? StepState.indexed
+                    : StepState.complete,
           ),
           Step(
             title: const Text('Chronic kidney disease'),
@@ -422,6 +489,12 @@ class _PatientDataFormState extends State<PatientDataForm> {
                 ),
               ],
             ),
+            isActive: _stepIndex == _InputItem.ckd.index,
+            state: _stepIndex == _InputItem.ckd.index
+                ? StepState.editing
+                : _stepIndex < _InputItem.ckd.index
+                    ? StepState.indexed
+                    : StepState.complete,
           ),
           Step(
             title: const Text('Malignant neoplasm'),
@@ -471,6 +544,12 @@ class _PatientDataFormState extends State<PatientDataForm> {
                 ),
               ],
             ),
+            isActive: _stepIndex == _InputItem.malignant.index,
+            state: _stepIndex == _InputItem.malignant.index
+                ? StepState.editing
+                : _stepIndex < _InputItem.malignant.index
+                    ? StepState.indexed
+                    : StepState.complete,
           ),
           Step(
             title: const Text('Sites of Occlusive Lesions'),
@@ -520,6 +599,12 @@ class _PatientDataFormState extends State<PatientDataForm> {
                 ),
               ],
             ),
+            isActive: _stepIndex == _InputItem.lesion.index,
+            state: _stepIndex == _InputItem.lesion.index
+                ? StepState.editing
+                : _stepIndex < _InputItem.lesion.index
+                    ? StepState.indexed
+                    : StepState.complete,
           ),
           Step(
             title: const Text('Urgent revascularisation procedures'),
@@ -555,6 +640,12 @@ class _PatientDataFormState extends State<PatientDataForm> {
                 ),
               ],
             ),
+            isActive: _stepIndex == _InputItem.urgent.index,
+            state: _stepIndex == _InputItem.urgent.index
+                ? StepState.editing
+                : _stepIndex < _InputItem.urgent.index
+                    ? StepState.indexed
+                    : StepState.complete,
           ),
           Step(
             title: const Text('Fever'),
@@ -591,6 +682,12 @@ class _PatientDataFormState extends State<PatientDataForm> {
                 ),
               ],
             ),
+            isActive: _stepIndex == _InputItem.fever.index,
+            state: _stepIndex == _InputItem.fever.index
+                ? StepState.editing
+                : _stepIndex < _InputItem.fever.index
+                    ? StepState.indexed
+                    : StepState.complete,
           ),
           Step(
             title: const Text('Leukocyctosis'),
@@ -627,6 +724,12 @@ class _PatientDataFormState extends State<PatientDataForm> {
                 ),
               ],
             ),
+            isActive: _stepIndex == _InputItem.leukocytosis.index,
+            state: _stepIndex == _InputItem.leukocytosis.index
+                ? StepState.editing
+                : _stepIndex < _InputItem.lesion.index
+                    ? StepState.indexed
+                    : StepState.complete,
           ),
           Step(
             title: const Text('Local Infection'),
@@ -663,6 +766,12 @@ class _PatientDataFormState extends State<PatientDataForm> {
                 ),
               ],
             ),
+            isActive: _stepIndex == _InputItem.infection.index,
+            state: _stepIndex == _InputItem.infection.index
+                ? StepState.editing
+                : _stepIndex < _InputItem.infection.index
+                    ? StepState.indexed
+                    : StepState.complete,
           ),
         ]);
   }
