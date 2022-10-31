@@ -788,7 +788,7 @@ class _PatientDataFormState extends State<PatientDataForm>
                 icon: const Icon(Icons.analytics_outlined),
                 label: const Text('Predict Risks'),
                 onPressed: () {
-                  if (formKey.currentState == null ||
+                  if (formKey.currentState != null &&
                       !formKey.currentState!.validate()) {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: const Text('Error! Missing some data.'),
