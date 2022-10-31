@@ -26,8 +26,7 @@ enum _InputItem {
   infection,
 }
 
-class _PatientDataFormState extends State<PatientDataForm>
-    with AutomaticKeepAliveClientMixin {
+class _PatientDataFormState extends State<PatientDataForm> {
   PatientData patientData = PatientData();
   int _stepIndex = 0;
   final int inputMaxNumber = _InputItem.values.length;
@@ -799,12 +798,27 @@ class _PatientDataFormState extends State<PatientDataForm>
                             ScaffoldMessenger.of(context).hideCurrentSnackBar();
                           }),
                     ));
+                    return;
                   }
-                  patientData
-                    ..age = int.parse(ageFormController.text)
-                    ..height = double.parse(heightFormController.text)
-                    ..weight = double.parse(weightFormController.text)
-                    ..alb = double.parse(albFormController.text);
+                  try {
+                    patientData
+                      ..age = int.parse(ageFormController.text)
+                      ..height = double.parse(heightFormController.text)
+                      ..weight = double.parse(weightFormController.text)
+                      ..alb = double.parse(albFormController.text);
+                  } catch (e) {
+                    if (kDebugMode) print(e);
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: const Text('Error! Missing some data.'),
+                      action: SnackBarAction(
+                          textColor: Theme.of(context).colorScheme.onSecondary,
+                          label: 'OK',
+                          onPressed: () {
+                            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                          }),
+                    ));
+                    return;
+                  }
                   final PatientRisk pr = PatientRisk(patientData: patientData);
                   showDialog(
                       context: context,
