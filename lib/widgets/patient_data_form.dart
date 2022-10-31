@@ -787,7 +787,7 @@ class _PatientDataFormState extends State<PatientDataForm> {
                 icon: const Icon(Icons.analytics_outlined),
                 label: const Text('Predict Risks'),
                 onPressed: () {
-                  if (formKey.currentState == null ||
+                  if (formKey.currentState != null &&
                       !formKey.currentState!.validate()) {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: const Text('Error! Missing some data.'),
@@ -826,14 +826,35 @@ class _PatientDataFormState extends State<PatientDataForm> {
                         return SimpleDialog(
                           title: const Text('Risk'),
                           children: [
-                            SelectableText(
-                                'GNRI: ${pr.gnri.toStringAsFixed(1)}'),
-                            SelectableText('GNRI Risk: ${pr.gnriRisk}'),
-                            SelectableText(
-                                '2yr Overall Survival: ${pr.predictedOS.toStringAsFixed(2)}'),
-                            SelectableText('2y OS Risk: ${pr.osRisk}'),
-                            SelectableText(
-                                '2yr Amputation Free Risk: ${pr.predictedAFS.toStringAsFixed(2)}'),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 16.0, vertical: 8.0),
+                              child: SelectableText(
+                                  'GNRI: ${pr.gnri.toStringAsFixed(1)}'),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 16.0, vertical: 8.0),
+                              child:
+                                  SelectableText('GNRI Risk: ${pr.gnriRisk}'),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 16.0, vertical: 8.0),
+                              child: SelectableText(
+                                  '2yr OS ${pr.predictedOS.toStringAsFixed(2)}'),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 16.0, vertical: 8.0),
+                              child: SelectableText('2y OS Risk: ${pr.osRisk}'),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 16.0, vertical: 8.0),
+                              child: SelectableText(
+                                  '2yr Amputation Free Risk: ${pr.predictedAFS.toStringAsFixed(2)}'),
+                            ),
                           ],
                         );
                       });
