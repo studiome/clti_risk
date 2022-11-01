@@ -307,36 +307,19 @@ class _PatientDataFormState extends State<PatientDataForm> {
                 title: const Text('Congestive heart failure'),
                 subtitle: const Text(
                     'absent or present: a history of admission due to CHF or clinical symptoms of CHF confirmed on echo- cardiography or absence of clinical symptoms but clearly reduced cardiac function on echocardiography'),
-                content: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 120,
-                      child: RadioListTile<bool>(
-                          title: const Text('Yes'),
-                          value: true,
-                          groupValue: patientData.hasCHF,
-                          onChanged: (v) {
-                            if (v == null) return;
-                            setState(() {
-                              patientData.hasCHF = v;
-                            });
-                          }),
-                    ),
-                    SizedBox(
-                      width: 120,
-                      child: RadioListTile<bool>(
-                          title: const Text('No'),
-                          value: false,
-                          groupValue: patientData.hasCHF,
-                          onChanged: (v) {
-                            if (v == null) return;
-                            setState(() {
-                              patientData.hasCHF = v;
-                            });
-                          }),
-                    ),
-                  ],
+                content: Container(
+                  alignment: Alignment.centerLeft,
+                  child: StepContentWithBoolean(
+                    item: patientData.hasCHF,
+                    itemWidth: 120,
+                    itemHeight: 40,
+                    onChanged: (v) {
+                      if (v == null) return;
+                      setState(() {
+                        patientData.hasCHF = v;
+                      });
+                    },
+                  ),
                 ),
                 isActive: _stepIndex == _InputItem.chf.index,
                 state: _stepIndex == _InputItem.chf.index
@@ -349,36 +332,19 @@ class _PatientDataFormState extends State<PatientDataForm> {
                 title: const Text('Cerebral vascular disease'),
                 subtitle: const Text(
                     'absent or present: stroke and/or transient ischaemic attacks'),
-                content: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 120,
-                      child: RadioListTile<bool>(
-                          title: const Text('Yes'),
-                          value: true,
-                          groupValue: patientData.hasCVD,
-                          onChanged: (v) {
-                            if (v == null) return;
-                            setState(() {
-                              patientData.hasCVD = v;
-                            });
-                          }),
-                    ),
-                    SizedBox(
-                      width: 120,
-                      child: RadioListTile<bool>(
-                          title: const Text('No'),
-                          value: false,
-                          groupValue: patientData.hasCVD,
-                          onChanged: (v) {
-                            if (v == null) return;
-                            setState(() {
-                              patientData.hasCVD = v;
-                            });
-                          }),
-                    ),
-                  ],
+                content: Container(
+                  alignment: Alignment.centerLeft,
+                  child: StepContentWithBoolean(
+                    item: patientData.hasCVD,
+                    itemWidth: 120,
+                    itemHeight: 40,
+                    onChanged: (v) {
+                      if (v == null) return;
+                      setState(() {
+                        patientData.hasCVD = v;
+                      });
+                    },
+                  ),
                 ),
                 isActive: _stepIndex == _InputItem.cvd.index,
                 state: _stepIndex == _InputItem.cvd.index
@@ -448,7 +414,7 @@ class _PatientDataFormState extends State<PatientDataForm> {
                   child: StepContentWithEnum<OcclusiveLesion>(
                     values: OcclusiveLesion.values,
                     item: patientData.occlusiveLesion,
-                    itemWidth: 180,
+                    itemWidth: 200,
                     itemHeight: 40,
                     onChanged: (v) {
                       if (v == null) return;
@@ -468,36 +434,19 @@ class _PatientDataFormState extends State<PatientDataForm> {
               Step(
                 title: const Text('Urgent revascularisation procedures'),
                 subtitle: const Text('no: elective, or yes'),
-                content: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 120,
-                      child: RadioListTile<bool>(
-                          title: const Text('Yes'),
-                          value: true,
-                          groupValue: patientData.isUrgent,
-                          onChanged: (v) {
-                            if (v == null) return;
-                            setState(() {
-                              patientData.isUrgent = v;
-                            });
-                          }),
-                    ),
-                    SizedBox(
-                      width: 120,
-                      child: RadioListTile<bool>(
-                          title: const Text('No'),
-                          value: false,
-                          groupValue: patientData.isUrgent,
-                          onChanged: (v) {
-                            if (v == null) return;
-                            setState(() {
-                              patientData.isUrgent = v;
-                            });
-                          }),
-                    ),
-                  ],
+                content: Container(
+                  alignment: Alignment.centerLeft,
+                  child: StepContentWithBoolean(
+                    item: patientData.isUrgent,
+                    itemWidth: 120,
+                    itemHeight: 40,
+                    onChanged: (v) {
+                      if (v == null) return;
+                      setState(() {
+                        patientData.isUrgent = v;
+                      });
+                    },
+                  ),
                 ),
                 isActive: _stepIndex == _InputItem.urgent.index,
                 state: _stepIndex == _InputItem.urgent.index
@@ -510,36 +459,19 @@ class _PatientDataFormState extends State<PatientDataForm> {
                 title: const Text('Fever'),
                 subtitle: const Text(
                     'body temperature is higher than 38°C, absent or not'),
-                content: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 120,
-                      child: RadioListTile<bool>(
-                          title: const Text('Yes'),
-                          value: true,
-                          groupValue: patientData.hasFever,
-                          onChanged: (v) {
-                            if (v == null) return;
-                            setState(() {
-                              patientData.hasFever = v;
-                            });
-                          }),
-                    ),
-                    SizedBox(
-                      width: 120,
-                      child: RadioListTile<bool>(
-                          title: const Text('No'),
-                          value: false,
-                          groupValue: patientData.hasFever,
-                          onChanged: (v) {
-                            if (v == null) return;
-                            setState(() {
-                              patientData.hasFever = v;
-                            });
-                          }),
-                    ),
-                  ],
+                content: Container(
+                  alignment: Alignment.centerLeft,
+                  child: StepContentWithBoolean(
+                    item: patientData.hasFever,
+                    itemWidth: 120,
+                    itemHeight: 40,
+                    onChanged: (v) {
+                      if (v == null) return;
+                      setState(() {
+                        patientData.hasFever = v;
+                      });
+                    },
+                  ),
                 ),
                 isActive: _stepIndex == _InputItem.fever.index,
                 state: _stepIndex == _InputItem.fever.index
@@ -552,36 +484,19 @@ class _PatientDataFormState extends State<PatientDataForm> {
                 title: const Text('Leukocyctosis'),
                 subtitle: const Text(
                     'white blood cell count is higher than 8000/ul, absent or not'),
-                content: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 120,
-                      child: RadioListTile<bool>(
-                          title: const Text('Yes'),
-                          value: true,
-                          groupValue: patientData.hasLeukocytosis,
-                          onChanged: (v) {
-                            if (v == null) return;
-                            setState(() {
-                              patientData.hasLeukocytosis = v;
-                            });
-                          }),
-                    ),
-                    SizedBox(
-                      width: 120,
-                      child: RadioListTile<bool>(
-                          title: const Text('No'),
-                          value: false,
-                          groupValue: patientData.hasLeukocytosis,
-                          onChanged: (v) {
-                            if (v == null) return;
-                            setState(() {
-                              patientData.hasLeukocytosis = v;
-                            });
-                          }),
-                    ),
-                  ],
+                content: Container(
+                  alignment: Alignment.centerLeft,
+                  child: StepContentWithBoolean(
+                    item: patientData.hasLeukocytosis,
+                    itemWidth: 120,
+                    itemHeight: 40,
+                    onChanged: (v) {
+                      if (v == null) return;
+                      setState(() {
+                        patientData.hasLeukocytosis = v;
+                      });
+                    },
+                  ),
                 ),
                 isActive: _stepIndex == _InputItem.leukocytosis.index,
                 state: _stepIndex == _InputItem.leukocytosis.index
@@ -594,36 +509,19 @@ class _PatientDataFormState extends State<PatientDataForm> {
                 title: const Text('Local Infection'),
                 subtitle: const Text(
                     'absent or present: the wound was suppurative or showed at least two of the following findings: heat, erythema, lymphangitis, lymph node swelling, oedema, and pain'),
-                content: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 120,
-                      child: RadioListTile<bool>(
-                          title: const Text('Yes'),
-                          value: true,
-                          groupValue: patientData.hasLocalInfection,
-                          onChanged: (v) {
-                            if (v == null) return;
-                            setState(() {
-                              patientData.hasLocalInfection = v;
-                            });
-                          }),
-                    ),
-                    SizedBox(
-                      width: 120,
-                      child: RadioListTile<bool>(
-                          title: const Text('No'),
-                          value: false,
-                          groupValue: patientData.hasLocalInfection,
-                          onChanged: (v) {
-                            if (v == null) return;
-                            setState(() {
-                              patientData.hasLocalInfection = v;
-                            });
-                          }),
-                    ),
-                  ],
+                content: Container(
+                  alignment: Alignment.centerLeft,
+                  child: StepContentWithBoolean(
+                    item: patientData.hasLocalInfection,
+                    itemWidth: 120,
+                    itemHeight: 40,
+                    onChanged: (v) {
+                      if (v == null) return;
+                      setState(() {
+                        patientData.hasLocalInfection = v;
+                      });
+                    },
+                  ),
                 ),
                 isActive: _stepIndex == _InputItem.infection.index,
                 state: _stepIndex == _InputItem.infection.index

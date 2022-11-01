@@ -52,3 +52,61 @@ class StepContentWithEnum<T extends Enum> extends StatelessWidget {
     });
   }
 }
+
+class StepContentWithBoolean extends StatelessWidget {
+  final bool item;
+  final double itemWidth;
+  final double itemHeight;
+  final void Function(bool?)? onChanged;
+  final List<Widget> choices = [];
+  StepContentWithBoolean(
+      {super.key,
+      required this.item,
+      required this.itemWidth,
+      required this.itemHeight,
+      required this.onChanged});
+
+  @override
+  Widget build(BuildContext context) {
+    choices.add(SizedBox(
+      width: itemWidth,
+      height: itemHeight,
+      child: RadioListTile<bool>(
+          title: const Text('Yes'),
+          value: true,
+          groupValue: item,
+          onChanged: onChanged),
+    ));
+    choices.add(SizedBox(
+      width: itemWidth,
+      height: itemHeight,
+      child: RadioListTile<bool>(
+          title: const Text('No'),
+          value: false,
+          groupValue: item,
+          onChanged: onChanged),
+    ));
+
+    return LayoutBuilder(builder: (context, constrains) {
+      if (constrains.maxWidth < 600) {
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: choices,
+          ),
+        );
+      } else {
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: choices,
+          ),
+        );
+      }
+    });
+  }
+}
