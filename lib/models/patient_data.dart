@@ -23,32 +23,62 @@ class PatientData {
 }
 
 enum Sex {
-  male,
-  female,
+  male('Male'),
+  female('Female');
+
+  final String name;
+  const Sex(this.name);
+
+  @override
+  String toString() => name;
 }
 
 enum Activity {
-  ambulatory,
-  wheelchair,
-  immobile,
+  ambulatory('Ambulatory'),
+  wheelchair('Wheelchair'),
+  immobile('Immobile');
+
+  const Activity(this.name);
+  final String name;
+
+  @override
+  String toString() => name;
 }
 
 enum OcclusiveLesion {
-  ai, //aoroiliac lesion
-  fpWithoutAI, //FP: femoropopliteal
-  belowIP, //only below infra-popliteal
+  ai('Aorto-Iliac'),
+  fpWithoutAI('Femoropopliteal without Aorto-Iliac'),
+  belowIP('InfraPopliteal');
+
+  const OcclusiveLesion(this.name);
+  final String name;
+
+  @override
+  String toString() => name;
 }
 
 enum CKD {
-  normal, //eGFR over 60ml/min.1.73m2
-  g3, // 30 <= eGFR < 60
-  g4, // 15<= eGFR <  30
-  g5, // <15
-  g5D, // < 15 HD
+  normal('No'), //eGFR over 60ml/min.1.73m2
+  g3('G3'), // 30 <= eGFR < 60
+  g4('G4'), // 15<= eGFR <  30
+  g5('G5'), // <15
+  g5D('G5D'); // < 15 HD
+
+  const CKD(this.name);
+  final String name;
+
+  @override
+  String toString() => name;
 }
 
 enum MalignantNeoplasm {
-  no, //having no MN
-  pastHistory, //having past history
-  underTreatment, //under treatment
+  no('No'),
+  pastHistory('Past History'),
+  underTreatment('Under Treatment');
+
+  const MalignantNeoplasm(this.name);
+  final String name;
+
+  @override
+  String toString() => name;
 }

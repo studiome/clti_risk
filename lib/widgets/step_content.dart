@@ -23,7 +23,7 @@ class StepContentWithEnum<T extends Enum> extends StatelessWidget {
         width: itemWidth,
         height: itemHeight,
         child: RadioListTile<T>(
-            title: Text(values[i].name),
+            title: Text(values[i].toString()),
             value: values[i],
             groupValue: item,
             onChanged: onChanged),

@@ -280,7 +280,7 @@ class _PatientDataFormState extends State<PatientDataForm> {
               Step(
                 title: const Text('Actvity'),
                 subtitle: const Text(
-                    'ambulatory: able to walk, wheelchair: unable to walk but could stand on their own legs during bed to wheelchair transfer, immobile: full assistance was indispensable'),
+                    'Ambulatory: able to walk, Wheelchair: unable to walk but could stand on their own legs during bed to wheelchair transfer, Immobile: full assistance was indispensable'),
                 content: Container(
                   alignment: Alignment.centerLeft,
                   child: StepContentWithEnum<Activity>(
@@ -457,8 +457,7 @@ class _PatientDataFormState extends State<PatientDataForm> {
               ),
               Step(
                 title: const Text('Fever'),
-                subtitle: const Text(
-                    'body temperature is higher than 38°C, absent or not'),
+                subtitle: const Text('body temperature is higher than 38°C'),
                 content: Container(
                   alignment: Alignment.centerLeft,
                   child: StepContentWithBoolean(
@@ -482,8 +481,8 @@ class _PatientDataFormState extends State<PatientDataForm> {
               ),
               Step(
                 title: const Text('Leukocyctosis'),
-                subtitle: const Text(
-                    'white blood cell count is higher than 8000/ul, absent or not'),
+                subtitle:
+                    const Text('white blood cell count is higher than 8000/ul'),
                 content: Container(
                   alignment: Alignment.centerLeft,
                   child: StepContentWithBoolean(
