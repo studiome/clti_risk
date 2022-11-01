@@ -1,35 +1,32 @@
 import 'package:flutter/material.dart';
 
-class StepContentWithEnum<T extends Enum> extends StatefulWidget {
-  final List<T> items;
+class StepContentWithEnum<T extends Enum> extends StatelessWidget {
+  final List<T> values;
   final T item;
   final double itemWidth;
+  final double itemHeight;
   final void Function(T?)? onChanged;
-  const StepContentWithEnum(
+  final List<Widget> choices = [];
+  StepContentWithEnum(
       {super.key,
-      required this.items,
+      required this.values,
       required this.item,
       required this.itemWidth,
+      required this.itemHeight,
       required this.onChanged});
 
   @override
-  State<StepContentWithEnum<T>> createState() => _StepContentWithEnumState<T>();
-}
-
-class _StepContentWithEnumState<T extends Enum>
-    extends State<StepContentWithEnum<T>> {
-  List<Widget> choices = [];
-
-  @override
   Widget build(BuildContext context) {
-    int itemsLength = widget.items.length;
+    int itemsLength = values.length;
     for (int i = 0; i < itemsLength; i++) {
       choices.add(SizedBox(
-        width: widget.itemWidth,
+        width: itemWidth,
+        height: itemHeight,
         child: RadioListTile<T>(
-            value: widget.items[i],
-            groupValue: widget.item,
-            onChanged: widget.onChanged),
+            title: Text(values[i].name),
+            value: values[i],
+            groupValue: item,
+            onChanged: onChanged),
       ));
     }
     return LayoutBuilder(builder: (context, constrains) {
@@ -37,6 +34,8 @@ class _StepContentWithEnumState<T extends Enum>
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: choices,
           ),
         );
@@ -44,6 +43,8 @@ class _StepContentWithEnumState<T extends Enum>
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: choices,
           ),
         );

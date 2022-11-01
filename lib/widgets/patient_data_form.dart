@@ -1,9 +1,10 @@
-import 'package:clti_risk/models/patient_risk.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../models/patient_data.dart';
+import '../models/patient_risk.dart';
+import '../widgets/step_content.dart';
 
 class PatientDataForm extends StatefulWidget {
   const PatientDataForm({super.key});
@@ -65,42 +66,30 @@ class _PatientDataFormState extends State<PatientDataForm> {
                 subtitle: const Text(
                     'Sex, Age[yeats], Height[m], BodyWeight[kg], Albumin[g/dl]'),
                 content: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text('Sex'),
-                          SizedBox(
-                            width: 150,
-                            child: RadioListTile<Sex>(
-                                title: const Text('Male'),
-                                value: Sex.male,
-                                groupValue: patientData.sex,
-                                onChanged: (v) {
-                                  if (v == null) return;
-                                  setState(() {
-                                    patientData.sex = v;
-                                  });
-                                }),
-                          ),
-                          SizedBox(
-                            width: 150,
-                            child: RadioListTile<Sex>(
-                                title: const Text('Female'),
-                                value: Sex.female,
-                                groupValue: patientData.sex,
-                                onChanged: (v) {
-                                  if (v == null) return;
-                                  setState(() {
-                                    patientData.sex = v;
-                                  });
-                                }),
-                          ),
+                          StepContentWithEnum<Sex>(
+                              values: Sex.values,
+                              item: patientData.sex,
+                              itemWidth: 150,
+                              itemHeight: 40,
+                              onChanged: (v) {
+                                if (v == null) return;
+                                setState(() {
+                                  patientData.sex = v;
+                                });
+                              }),
                         ],
                       ),
                     ),
+                    const Text('Fill in the following box below'),
                     Form(
                       child: Column(
                         children: [
@@ -109,7 +98,8 @@ class _PatientDataFormState extends State<PatientDataForm> {
                             child: Container(
                               alignment: Alignment.centerLeft,
                               child: SizedBox(
-                                width: 180,
+                                width: 160,
+                                height: 80,
                                 child: TextFormField(
                                   controller: ageFormController,
                                   decoration: const InputDecoration(
@@ -150,7 +140,8 @@ class _PatientDataFormState extends State<PatientDataForm> {
                             child: Container(
                               alignment: Alignment.centerLeft,
                               child: SizedBox(
-                                width: 180,
+                                width: 160,
+                                height: 80,
                                 child: TextFormField(
                                   controller: heightFormController,
                                   decoration: const InputDecoration(
@@ -192,7 +183,8 @@ class _PatientDataFormState extends State<PatientDataForm> {
                             child: Container(
                               alignment: Alignment.centerLeft,
                               child: SizedBox(
-                                width: 180,
+                                width: 160,
+                                height: 80,
                                 child: TextFormField(
                                   controller: weightFormController,
                                   decoration: const InputDecoration(
@@ -230,47 +222,50 @@ class _PatientDataFormState extends State<PatientDataForm> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              alignment: Alignment.centerLeft,
-                              child: SizedBox(
-                                width: 180,
-                                child: TextFormField(
-                                  controller: albFormController,
-                                  decoration: const InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    hintText: 'Fill Albumin',
-                                    labelText: 'Albumin [g/dl]',
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                alignment: Alignment.centerLeft,
+                                child: SizedBox(
+                                  width: 160,
+                                  height: 80,
+                                  child: Container(
+                                    alignment: Alignment.centerLeft,
+                                    child: TextFormField(
+                                      controller: albFormController,
+                                      decoration: const InputDecoration(
+                                        border: OutlineInputBorder(),
+                                        hintText: 'Fill Albumin',
+                                        labelText: 'Albumin [g/dl]',
+                                      ),
+                                      textInputAction: TextInputAction.done,
+                                      keyboardType:
+                                          const TextInputType.numberWithOptions(
+                                        signed: false,
+                                        decimal: true,
+                                      ),
+                                      inputFormatters: <TextInputFormatter>[
+                                        FilteringTextInputFormatter.allow(
+                                            RegExp(r'^\d{1}\.?\d{0,1}')),
+                                      ],
+                                      autovalidateMode: AutovalidateMode.always,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Fill Albumin';
+                                        }
+                                        return null;
+                                      },
+                                      onFieldSubmitted: (String value) {
+                                        try {
+                                          patientData.alb = double.parse(value);
+                                        } catch (e) {
+                                          //DO Nothing
+                                          if (kDebugMode) print(e);
+                                        }
+                                      },
+                                    ),
                                   ),
-                                  textInputAction: TextInputAction.done,
-                                  keyboardType:
-                                      const TextInputType.numberWithOptions(
-                                    signed: false,
-                                    decimal: true,
-                                  ),
-                                  inputFormatters: <TextInputFormatter>[
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp(r'^\d{1}\.?\d{0,1}')),
-                                  ],
-                                  autovalidateMode: AutovalidateMode.always,
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Fill Albumin';
-                                    }
-                                    return null;
-                                  },
-                                  onFieldSubmitted: (String value) {
-                                    try {
-                                      patientData.alb = double.parse(value);
-                                    } catch (e) {
-                                      //DO Nothing
-                                      if (kDebugMode) print(e);
-                                    }
-                                  },
                                 ),
-                              ),
-                            ),
-                          )
+                              ))
                         ],
                       ),
                     ),
@@ -285,49 +280,20 @@ class _PatientDataFormState extends State<PatientDataForm> {
                 title: const Text('Actvity'),
                 subtitle: const Text(
                     'ambulatory: able to walk, wheelchair: unable to walk but could stand on their own legs during bed to wheelchair transfer, immobile: full assistance was indispensable'),
-                content: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 180,
-                      child: RadioListTile<Activity>(
-                          title: const Text('Ambulatory'),
-                          value: Activity.ambulatory,
-                          groupValue: patientData.activity,
-                          onChanged: (v) {
-                            if (v == null) return;
-                            setState(() {
-                              patientData.activity = v;
-                            });
-                          }),
-                    ),
-                    SizedBox(
-                      width: 180,
-                      child: RadioListTile<Activity>(
-                          title: const Text('Wheelchair'),
-                          value: Activity.wheelchair,
-                          groupValue: patientData.activity,
-                          onChanged: (v) {
-                            if (v == null) return;
-                            setState(() {
-                              patientData.activity = v;
-                            });
-                          }),
-                    ),
-                    SizedBox(
-                      width: 180,
-                      child: RadioListTile<Activity>(
-                          title: const Text('Immobile'),
-                          value: Activity.immobile,
-                          groupValue: patientData.activity,
-                          onChanged: (v) {
-                            if (v == null) return;
-                            setState(() {
-                              patientData.activity = v;
-                            });
-                          }),
-                    ),
-                  ],
+                content: Container(
+                  alignment: Alignment.centerLeft,
+                  child: StepContentWithEnum<Activity>(
+                    values: Activity.values,
+                    item: patientData.activity,
+                    itemWidth: 180,
+                    itemHeight: 40,
+                    onChanged: (v) {
+                      if (v == null) return;
+                      setState(() {
+                        patientData.activity = v;
+                      });
+                    },
+                  ),
                 ),
                 isActive: _stepIndex == _InputItem.activity.index,
                 state: _stepIndex == _InputItem.activity.index
@@ -424,75 +390,20 @@ class _PatientDataFormState extends State<PatientDataForm> {
                 title: const Text('Chronic kidney disease'),
                 subtitle: const Text(
                     'absent, G3, G4, G5, or G5D; renal dysfunction was absent when the estimated glomerular filtration rate [eGFR] was 60 ml/min/1.73 m2 or higher, and it was graded as G3, G4, and G5 when eGFR was 30 e 59, 15 e 29, and below 15, respectively. eGFR below 15 in haemodialysis patients was graded as G5D'),
-                content: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 120,
-                      child: RadioListTile<CKD>(
-                          title: const Text('No'),
-                          value: CKD.normal,
-                          groupValue: patientData.ckd,
-                          onChanged: (v) {
-                            if (v == null) return;
-                            setState(() {
-                              patientData.ckd = v;
-                            });
-                          }),
-                    ),
-                    SizedBox(
-                      width: 120,
-                      child: RadioListTile<CKD>(
-                          title: const Text('G3'),
-                          value: CKD.g3,
-                          groupValue: patientData.ckd,
-                          onChanged: (v) {
-                            if (v == null) return;
-                            setState(() {
-                              patientData.ckd = v;
-                            });
-                          }),
-                    ),
-                    SizedBox(
-                      width: 120,
-                      child: RadioListTile<CKD>(
-                          title: const Text('G4'),
-                          value: CKD.g4,
-                          groupValue: patientData.ckd,
-                          onChanged: (v) {
-                            if (v == null) return;
-                            setState(() {
-                              patientData.ckd = v;
-                            });
-                          }),
-                    ),
-                    SizedBox(
-                      width: 120,
-                      child: RadioListTile<CKD>(
-                          title: const Text('G5'),
-                          value: CKD.g5,
-                          groupValue: patientData.ckd,
-                          onChanged: (v) {
-                            if (v == null) return;
-                            setState(() {
-                              patientData.ckd = v;
-                            });
-                          }),
-                    ),
-                    SizedBox(
-                      width: 120,
-                      child: RadioListTile<CKD>(
-                          title: const Text('G5D'),
-                          value: CKD.g5D,
-                          groupValue: patientData.ckd,
-                          onChanged: (v) {
-                            if (v == null) return;
-                            setState(() {
-                              patientData.ckd = v;
-                            });
-                          }),
-                    ),
-                  ],
+                content: Container(
+                  alignment: Alignment.centerLeft,
+                  child: StepContentWithEnum<CKD>(
+                    values: CKD.values,
+                    item: patientData.ckd,
+                    itemWidth: 180,
+                    itemHeight: 40,
+                    onChanged: (v) {
+                      if (v == null) return;
+                      setState(() {
+                        patientData.ckd = v;
+                      });
+                    },
+                  ),
                 ),
                 isActive: _stepIndex == _InputItem.ckd.index,
                 state: _stepIndex == _InputItem.ckd.index
@@ -505,49 +416,20 @@ class _PatientDataFormState extends State<PatientDataForm> {
                 title: const Text('Malignant neoplasm'),
                 subtitle: const Text(
                     'absent, past history of malignant neoplasm, or present under treatment'),
-                content: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 120,
-                      child: RadioListTile<MalignantNeoplasm>(
-                          title: const Text('No'),
-                          value: MalignantNeoplasm.no,
-                          groupValue: patientData.mn,
-                          onChanged: (v) {
-                            if (v == null) return;
-                            setState(() {
-                              patientData.mn = v;
-                            });
-                          }),
-                    ),
-                    SizedBox(
-                      width: 180,
-                      child: RadioListTile<MalignantNeoplasm>(
-                          title: const Text('Past History'),
-                          value: MalignantNeoplasm.pastHistory,
-                          groupValue: patientData.mn,
-                          onChanged: (v) {
-                            if (v == null) return;
-                            setState(() {
-                              patientData.mn = v;
-                            });
-                          }),
-                    ),
-                    SizedBox(
-                      width: 240,
-                      child: RadioListTile<MalignantNeoplasm>(
-                          title: const Text('Under treatment'),
-                          value: MalignantNeoplasm.underTreatment,
-                          groupValue: patientData.mn,
-                          onChanged: (v) {
-                            if (v == null) return;
-                            setState(() {
-                              patientData.mn = v;
-                            });
-                          }),
-                    ),
-                  ],
+                content: Container(
+                  alignment: Alignment.centerLeft,
+                  child: StepContentWithEnum<MalignantNeoplasm>(
+                    values: MalignantNeoplasm.values,
+                    item: patientData.mn,
+                    itemWidth: 240,
+                    itemHeight: 40,
+                    onChanged: (v) {
+                      if (v == null) return;
+                      setState(() {
+                        patientData.mn = v;
+                      });
+                    },
+                  ),
                 ),
                 isActive: _stepIndex == _InputItem.malignant.index,
                 state: _stepIndex == _InputItem.malignant.index
@@ -560,50 +442,20 @@ class _PatientDataFormState extends State<PatientDataForm> {
                 title: const Text('Sites of Occlusive Lesions'),
                 subtitle: const Text(
                     'aorto-iliac present, aorto-iliac absent and femoropopliteal present, or aorto-iliac and femoropopliteal absent and infrapopliteal present'),
-                content: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 180,
-                      child: RadioListTile<OcclusiveLesion>(
-                          title: const Text('Aorto-iliac'),
-                          value: OcclusiveLesion.ai,
-                          groupValue: patientData.occlusiveLesion,
-                          onChanged: (v) {
-                            if (v == null) return;
-                            setState(() {
-                              patientData.occlusiveLesion = v;
-                            });
-                          }),
-                    ),
-                    SizedBox(
-                      width: 240,
-                      child: RadioListTile<OcclusiveLesion>(
-                          title:
-                              const Text('Femoropopliteal without Aorto-iliac'),
-                          value: OcclusiveLesion.fpWithoutAI,
-                          groupValue: patientData.occlusiveLesion,
-                          onChanged: (v) {
-                            if (v == null) return;
-                            setState(() {
-                              patientData.occlusiveLesion = v;
-                            });
-                          }),
-                    ),
-                    SizedBox(
-                      width: 240,
-                      child: RadioListTile<OcclusiveLesion>(
-                          title: const Text('Infrapopliteal'),
-                          value: OcclusiveLesion.belowIP,
-                          groupValue: patientData.occlusiveLesion,
-                          onChanged: (v) {
-                            if (v == null) return;
-                            setState(() {
-                              patientData.occlusiveLesion = v;
-                            });
-                          }),
-                    ),
-                  ],
+                content: Container(
+                  alignment: Alignment.centerLeft,
+                  child: StepContentWithEnum<OcclusiveLesion>(
+                    values: OcclusiveLesion.values,
+                    item: patientData.occlusiveLesion,
+                    itemWidth: 180,
+                    itemHeight: 40,
+                    onChanged: (v) {
+                      if (v == null) return;
+                      setState(() {
+                        patientData.occlusiveLesion = v;
+                      });
+                    },
+                  ),
                 ),
                 isActive: _stepIndex == _InputItem.lesion.index,
                 state: _stepIndex == _InputItem.lesion.index
