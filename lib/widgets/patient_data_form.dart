@@ -60,6 +60,7 @@ class _PatientDataFormState extends State<PatientDataForm> {
                 _stepIndex = i;
               });
             },
+            physics: const ClampingScrollPhysics(),
             steps: [
               Step(
                 title: const Text('Patient Profile'),
