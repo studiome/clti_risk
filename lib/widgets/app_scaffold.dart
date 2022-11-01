@@ -11,9 +11,11 @@ class AppScaffold extends StatelessWidget {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            SliverAppBar(
-              floating: true,
-              title: Text(title),
+            SliverSafeArea(
+              sliver: SliverAppBar(
+                floating: true,
+                title: Text(title),
+              ),
             ),
             SliverList(
               delegate: SliverChildBuilderDelegate(

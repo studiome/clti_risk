@@ -42,6 +42,7 @@ class _PatientDataFormState extends State<PatientDataForm> {
     return Column(
       children: [
         Stepper(
+            physics: const NeverScrollableScrollPhysics(),
             currentStep: _stepIndex,
             onStepCancel: () {
               if (_stepIndex == 0) return;
@@ -60,7 +61,6 @@ class _PatientDataFormState extends State<PatientDataForm> {
                 _stepIndex = i;
               });
             },
-            physics: const ClampingScrollPhysics(),
             steps: [
               Step(
                 title: const Text('Patient Profile'),
