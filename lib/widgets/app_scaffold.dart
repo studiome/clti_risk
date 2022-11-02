@@ -8,22 +8,8 @@ class AppScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            SliverSafeArea(
-              sliver: SliverAppBar(
-                floating: true,
-                title: Text(title),
-              ),
-            ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                  childCount: 1, (context, index) => child),
-            ),
-          ],
-        ),
-      ),
+      appBar: AppBar(title: Text(title)),
+      body: SafeArea(bottom: false, child: child),
     );
   }
 }
