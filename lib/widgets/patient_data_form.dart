@@ -560,7 +560,6 @@ class _PatientDataFormState extends State<PatientDataForm> {
                           ));
                           return;
                         }
-                        ;
                         try {
                           patientData
                             ..age = int.parse(ageFormController.text)
