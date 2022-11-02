@@ -414,8 +414,8 @@ class _PatientDataFormState extends State<PatientDataForm> {
                   child: StepContentWithEnum<OcclusiveLesion>(
                     values: OcclusiveLesion.values,
                     item: patientData.occlusiveLesion,
-                    itemWidth: 200,
-                    itemHeight: 40,
+                    itemWidth: 240,
+                    itemHeight: 60,
                     onChanged: (v) {
                       if (v == null) return;
                       setState(() {
