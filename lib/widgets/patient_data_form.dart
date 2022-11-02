@@ -36,13 +36,14 @@ class _PatientDataFormState extends State<PatientDataForm> {
   TextEditingController weightFormController = TextEditingController();
   TextEditingController albFormController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  bool canCalculate = false;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Stepper(
-            physics: const NeverScrollableScrollPhysics(),
+            physics: const ClampingScrollPhysics(),
             currentStep: _stepIndex,
             onStepCancel: () {
               if (_stepIndex == 0) return;
@@ -51,10 +52,15 @@ class _PatientDataFormState extends State<PatientDataForm> {
               });
             },
             onStepContinue: () {
-              if (_stepIndex == inputMaxNumber - 1) return;
-              setState(() {
-                _stepIndex += 1;
-              });
+              if (_stepIndex == inputMaxNumber - 1) {
+                setState(() {
+                  canCalculate = true;
+                });
+              } else {
+                setState(() {
+                  _stepIndex += 1;
+                });
+              }
             },
             onStepTapped: (int i) {
               setState(() {
@@ -536,79 +542,88 @@ class _PatientDataFormState extends State<PatientDataForm> {
             child: ElevatedButton.icon(
                 icon: const Icon(Icons.analytics_outlined),
                 label: const Text('Predict Risks'),
-                onPressed: () {
-                  if (formKey.currentState != null &&
-                      !formKey.currentState!.validate()) {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: const Text('Error! Missing some data.'),
-                      action: SnackBarAction(
-                          textColor: Theme.of(context).colorScheme.onSecondary,
-                          label: 'OK',
-                          onPressed: () {
-                            ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                          }),
-                    ));
-                    return;
-                  }
-                  try {
-                    patientData
-                      ..age = int.parse(ageFormController.text)
-                      ..height = double.parse(heightFormController.text)
-                      ..weight = double.parse(weightFormController.text)
-                      ..alb = double.parse(albFormController.text);
-                  } catch (e) {
-                    if (kDebugMode) print(e);
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: const Text('Error! Missing some data.'),
-                      action: SnackBarAction(
-                          textColor: Theme.of(context).colorScheme.onSecondary,
-                          label: 'OK',
-                          onPressed: () {
-                            ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                          }),
-                    ));
-                    return;
-                  }
-                  final PatientRisk pr = PatientRisk(patientData: patientData);
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return SimpleDialog(
-                          title: const Text('Risk'),
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 16.0, vertical: 8.0),
-                              child: SelectableText(
-                                  'GNRI: ${pr.gnri.toStringAsFixed(1)}'),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 16.0, vertical: 8.0),
-                              child:
-                                  SelectableText('GNRI Risk: ${pr.gnriRisk}'),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 16.0, vertical: 8.0),
-                              child: SelectableText(
-                                  '2yr OS ${pr.predictedOS.toStringAsFixed(2)}'),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 16.0, vertical: 8.0),
-                              child: SelectableText('2y OS Risk: ${pr.osRisk}'),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 16.0, vertical: 8.0),
-                              child: SelectableText(
-                                  '2yr Amputation Free Risk: ${pr.predictedAFS.toStringAsFixed(2)}'),
-                            ),
-                          ],
-                        );
-                      });
-                })),
+                onPressed: !canCalculate
+                    ? null
+                    : () {
+                        if (formKey.currentState != null &&
+                            !formKey.currentState!.validate()) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: const Text('Error! Missing some data.'),
+                            action: SnackBarAction(
+                                textColor:
+                                    Theme.of(context).colorScheme.onSecondary,
+                                label: 'OK',
+                                onPressed: () {
+                                  ScaffoldMessenger.of(context)
+                                      .hideCurrentSnackBar();
+                                }),
+                          ));
+                          return;
+                        }
+                        ;
+                        try {
+                          patientData
+                            ..age = int.parse(ageFormController.text)
+                            ..height = double.parse(heightFormController.text)
+                            ..weight = double.parse(weightFormController.text)
+                            ..alb = double.parse(albFormController.text);
+                        } catch (e) {
+                          if (kDebugMode) print(e);
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: const Text('Error! Missing some data.'),
+                            action: SnackBarAction(
+                                textColor:
+                                    Theme.of(context).colorScheme.onSecondary,
+                                label: 'OK',
+                                onPressed: () {
+                                  ScaffoldMessenger.of(context)
+                                      .hideCurrentSnackBar();
+                                }),
+                          ));
+                          return;
+                        }
+                        final PatientRisk pr =
+                            PatientRisk(patientData: patientData);
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return SimpleDialog(
+                                title: const Text('Risk'),
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16.0, vertical: 8.0),
+                                    child: SelectableText(
+                                        'GNRI: ${pr.gnri.toStringAsFixed(1)}'),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16.0, vertical: 8.0),
+                                    child: SelectableText(
+                                        'GNRI Risk: ${pr.gnriRisk}'),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16.0, vertical: 8.0),
+                                    child: SelectableText(
+                                        '2yr OS ${pr.predictedOS.toStringAsFixed(2)}'),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16.0, vertical: 8.0),
+                                    child: SelectableText(
+                                        '2y OS Risk: ${pr.osRisk}'),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16.0, vertical: 8.0),
+                                    child: SelectableText(
+                                        '2yr Amputation Free Risk: ${pr.predictedAFS.toStringAsFixed(2)}'),
+                                  ),
+                                ],
+                              );
+                            });
+                      })),
       ],
     );
   }
