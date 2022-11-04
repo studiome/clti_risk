@@ -9,11 +9,11 @@ class AppScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(title)),
-      body: SingleChildScrollView(child: SafeArea(child: child)),
+      body: child,
       floatingActionButton: FloatingActionButton.extended(
           onPressed: () {},
           icon: const Icon(Icons.analytics),
-          label: const Text("Calculate")),
+          label: const Text('Calculate')),
     );
   }
 }
