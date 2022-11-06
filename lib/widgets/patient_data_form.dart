@@ -73,7 +73,7 @@ class _PatientDataFormState extends State<PatientDataForm> {
                   Step(
                     title: const Text('Patient Profile'),
                     subtitle: const Text(
-                        'Sex, Age[yeats], Height[m], BodyWeight[kg], Albumin[g/dl]'),
+                        'Sex, Age[years], Height[m], BodyWeight[kg], Albumin[g/dl]'),
                     content: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
