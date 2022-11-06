@@ -44,7 +44,7 @@ class _PatientDataFormState extends State<PatientDataForm> {
       return Column(
         children: [
           SizedBox(
-            height: constraint.maxHeight - (40 + 16),
+            height: constraint.maxHeight - (40 + 24),
             child: Stepper(
                 currentStep: _stepIndex,
                 onStepCancel: () {
@@ -546,7 +546,7 @@ class _PatientDataFormState extends State<PatientDataForm> {
                 ]),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(12.0),
             child: SizedBox(
                 height: 40,
                 width: 180,
