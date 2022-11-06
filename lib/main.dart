@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import './widgets/app_scaffold.dart';
-import './widgets/patient_data_form.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,7 +23,7 @@ class MyApp extends StatelessWidget {
         colorSchemeSeed: jsvsColor,
       ),
       themeMode: ThemeMode.system,
-      home: AppScaffold(title: title, child: const PatientDataForm()),
+      home: AppScaffold(title: title),
     );
   }
 }

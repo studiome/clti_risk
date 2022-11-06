@@ -6,7 +6,11 @@ import '../models/patient_data.dart';
 import '../widgets/step_content.dart';
 
 class PatientDataForm extends StatefulWidget {
-  const PatientDataForm({super.key});
+  final PatientData patientData;
+  PatientDataForm({
+    super.key,
+    required this.patientData,
+  });
 
   @override
   State<PatientDataForm> createState() => _PatientDataFormState();
@@ -27,7 +31,6 @@ enum _InputItem {
 }
 
 class _PatientDataFormState extends State<PatientDataForm> {
-  PatientData patientData = PatientData();
   int _stepIndex = 0;
   final int inputMaxNumber = _InputItem.values.length;
   TextEditingController ageFormController = TextEditingController();
@@ -35,12 +38,13 @@ class _PatientDataFormState extends State<PatientDataForm> {
   TextEditingController weightFormController = TextEditingController();
   TextEditingController albFormController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  bool canCalculate = false;
 
   @override
   Widget build(BuildContext context) {
+    PatientData patientData = widget.patientData;
     return LayoutBuilder(builder: (context, constraint) {
       return Stepper(
+          physics: const ClampingScrollPhysics(),
           currentStep: _stepIndex,
           onStepCancel: () {
             if (_stepIndex == 0) return;
@@ -50,9 +54,13 @@ class _PatientDataFormState extends State<PatientDataForm> {
           },
           onStepContinue: () {
             if (_stepIndex == inputMaxNumber - 1) {
-              setState(() {
-                canCalculate = true;
-              });
+              if (formKey.currentState == null ||
+                  !formKey.currentState!.validate()) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Error! Missing Some Data')),
+                );
+                return;
+              }
             } else {
               setState(() {
                 _stepIndex += 1;
