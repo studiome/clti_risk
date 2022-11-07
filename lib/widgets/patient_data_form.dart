@@ -61,6 +61,7 @@ class _PatientDataFormState extends State<PatientDataForm> {
                   } else {
                     setState(() {
                       _stepIndex += 1;
+                      formKey.currentState!.save();
                     });
                   }
                 },
@@ -100,6 +101,7 @@ class _PatientDataFormState extends State<PatientDataForm> {
                         ),
                         const Text('Fill in the following box below'),
                         Form(
+                          key: formKey,
                           child: Column(
                             children: [
                               Padding(
@@ -286,9 +288,12 @@ class _PatientDataFormState extends State<PatientDataForm> {
                       ],
                     ),
                     isActive: _stepIndex == _InputItem.profile.index,
-                    state: _stepIndex == _InputItem.profile.index
-                        ? StepState.editing
-                        : StepState.complete,
+                    state: (formKey.currentState == null ||
+                            !formKey.currentState!.validate())
+                        ? StepState.error
+                        : _stepIndex == _InputItem.profile.index
+                            ? StepState.editing
+                            : StepState.complete,
                   ),
                   Step(
                     title: const Text('Actvity'),
@@ -556,24 +561,6 @@ class _PatientDataFormState extends State<PatientDataForm> {
                     onPressed: !canCalculate
                         ? null
                         : () {
-                            if (formKey.currentState != null &&
-                                !formKey.currentState!.validate()) {
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(SnackBar(
-                                content:
-                                    const Text('Error! Missing some data.'),
-                                action: SnackBarAction(
-                                    textColor: Theme.of(context)
-                                        .colorScheme
-                                        .onSecondary,
-                                    label: 'OK',
-                                    onPressed: () {
-                                      ScaffoldMessenger.of(context)
-                                          .hideCurrentSnackBar();
-                                    }),
-                              ));
-                              return;
-                            }
                             try {
                               patientData
                                 ..age = int.parse(ageFormController.text)
