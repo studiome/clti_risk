@@ -46,6 +46,8 @@ class _PatientDataFormState extends State<PatientDataForm> {
           SizedBox(
             height: constraint.maxHeight - (40 + 24),
             child: Stepper(
+                type: StepperType.horizontal,
+                physics: const ClampingScrollPhysics(),
                 currentStep: _stepIndex,
                 onStepCancel: () {
                   if (_stepIndex == 0) return;
@@ -73,8 +75,8 @@ class _PatientDataFormState extends State<PatientDataForm> {
                 steps: [
                   Step(
                     title: const Text('Patient Profile'),
-                    subtitle: const Text(
-                        'Sex, Age[years], Height[m], BodyWeight[kg], Albumin[g/dl]'),
+                    //subtitle: const Text(
+                    //    'Sex, Age[years], Height[m], BodyWeight[kg], Albumin[g/dl]'),
                     content: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -297,8 +299,8 @@ class _PatientDataFormState extends State<PatientDataForm> {
                   ),
                   Step(
                     title: const Text('Actvity'),
-                    subtitle: const Text(
-                        'Ambulatory: able to walk, Wheelchair: unable to walk but could stand on their own legs during bed to wheelchair transfer, Immobile: full assistance was indispensable'),
+                    //subtitle: const Text(
+                    //    'Ambulatory: able to walk, Wheelchair: unable to walk but could stand on their own legs during bed to wheelchair transfer, Immobile: full assistance was indispensable'),
                     content: Container(
                       alignment: Alignment.centerLeft,
                       child: StepContentWithEnum<Activity>(
@@ -323,8 +325,8 @@ class _PatientDataFormState extends State<PatientDataForm> {
                   ),
                   Step(
                     title: const Text('Congestive heart failure'),
-                    subtitle: const Text(
-                        'absent or present: a history of admission due to CHF or clinical symptoms of CHF confirmed on echo- cardiography or absence of clinical symptoms but clearly reduced cardiac function on echocardiography'),
+                    //subtitle: const Text(
+                    //    'absent or present: a history of admission due to CHF or clinical symptoms of CHF confirmed on echo- cardiography or absence of clinical symptoms but clearly reduced cardiac function on echocardiography'),
                     content: Container(
                       alignment: Alignment.centerLeft,
                       child: StepContentWithBoolean(
@@ -348,8 +350,8 @@ class _PatientDataFormState extends State<PatientDataForm> {
                   ),
                   Step(
                     title: const Text('Cerebral vascular disease'),
-                    subtitle: const Text(
-                        'absent or present: stroke and/or transient ischaemic attacks'),
+                    //subtitle: const Text(
+                    //    'absent or present: stroke and/or transient ischaemic attacks'),
                     content: Container(
                       alignment: Alignment.centerLeft,
                       child: StepContentWithBoolean(
@@ -373,8 +375,8 @@ class _PatientDataFormState extends State<PatientDataForm> {
                   ),
                   Step(
                     title: const Text('Chronic kidney disease'),
-                    subtitle: const Text(
-                        'absent, G3, G4, G5, or G5D; renal dysfunction was absent when the estimated glomerular filtration rate [eGFR] was 60 ml/min/1.73 m2 or higher, and it was graded as G3, G4, and G5 when eGFR was 30 e 59, 15 e 29, and below 15, respectively. eGFR below 15 in haemodialysis patients was graded as G5D'),
+                    //subtitle: const Text(
+                    //    'absent, G3, G4, G5, or G5D; renal dysfunction was absent when the estimated glomerular filtration rate [eGFR] was 60 ml/min/1.73 m2 or higher, and it was graded as G3, G4, and G5 when eGFR was 30 e 59, 15 e 29, and below 15, respectively. eGFR below 15 in haemodialysis patients was graded as G5D'),
                     content: Container(
                       alignment: Alignment.centerLeft,
                       child: StepContentWithEnum<CKD>(
@@ -399,8 +401,8 @@ class _PatientDataFormState extends State<PatientDataForm> {
                   ),
                   Step(
                     title: const Text('Malignant neoplasm'),
-                    subtitle: const Text(
-                        'absent, past history of malignant neoplasm, or present under treatment'),
+                    //subtitle: const Text(
+                    //    'absent, past history of malignant neoplasm, or present under treatment'),
                     content: Container(
                       alignment: Alignment.centerLeft,
                       child: StepContentWithEnum<MalignantNeoplasm>(
@@ -425,8 +427,8 @@ class _PatientDataFormState extends State<PatientDataForm> {
                   ),
                   Step(
                     title: const Text('Sites of Occlusive Lesions'),
-                    subtitle: const Text(
-                        'aorto-iliac present, aorto-iliac absent and femoropopliteal present, or aorto-iliac and femoropopliteal absent and infrapopliteal present'),
+                    //subtitle: const Text(
+                    //    'aorto-iliac present, aorto-iliac absent and femoropopliteal present, or aorto-iliac and femoropopliteal absent and infrapopliteal present'),
                     content: Container(
                       alignment: Alignment.centerLeft,
                       child: StepContentWithEnum<OcclusiveLesion>(
@@ -451,7 +453,7 @@ class _PatientDataFormState extends State<PatientDataForm> {
                   ),
                   Step(
                     title: const Text('Urgent revascularisation procedures'),
-                    subtitle: const Text('no: elective, or yes'),
+                    //subtitle: const Text('no: elective, or yes'),
                     content: Container(
                       alignment: Alignment.centerLeft,
                       child: StepContentWithBoolean(
@@ -475,8 +477,8 @@ class _PatientDataFormState extends State<PatientDataForm> {
                   ),
                   Step(
                     title: const Text('Fever'),
-                    subtitle:
-                        const Text('body temperature is higher than 38°C'),
+                    //subtitle:
+                    //    const Text('body temperature is higher than 38°C'),
                     content: Container(
                       alignment: Alignment.centerLeft,
                       child: StepContentWithBoolean(
@@ -500,8 +502,8 @@ class _PatientDataFormState extends State<PatientDataForm> {
                   ),
                   Step(
                     title: const Text('Leukocyctosis'),
-                    subtitle: const Text(
-                        'white blood cell count is higher than 8000/ul'),
+                    //subtitle: const Text(
+                    //   'white blood cell count is higher than 8000/ul'),
                     content: Container(
                       alignment: Alignment.centerLeft,
                       child: StepContentWithBoolean(
@@ -525,8 +527,8 @@ class _PatientDataFormState extends State<PatientDataForm> {
                   ),
                   Step(
                     title: const Text('Local Infection'),
-                    subtitle: const Text(
-                        'absent or present: the wound was suppurative or showed at least two of the following findings: heat, erythema, lymphangitis, lymph node swelling, oedema, and pain'),
+                    //subtitle: const Text(
+                    //    'absent or present: the wound was suppurative or showed at least two of the following findings: heat, erythema, lymphangitis, lymph node swelling, oedema, and pain'),
                     content: Container(
                       alignment: Alignment.centerLeft,
                       child: StepContentWithBoolean(

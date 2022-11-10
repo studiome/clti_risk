@@ -8,19 +8,7 @@ class AppScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: NestedScrollView(
-            headerSliverBuilder: ((context, innerBoxIsScrolled) {
-              return [
-                SliverAppBar(
-                  title: Text(title),
-                  forceElevated: innerBoxIsScrolled,
-                ),
-              ];
-            }),
-            body: SafeArea(
-              bottom: false,
-              maintainBottomViewPadding: true,
-              child: child,
-            )));
+        body: SafeArea(
+            bottom: false, maintainBottomViewPadding: true, child: child));
   }
 }
