@@ -10,6 +10,8 @@ class PatientRisk {
   late double predictedOS; //2yr OS;
   late double predictedAFS; //2yr AFS;
   late OSRisk? osRisk;
+  late double predicted30DDeathOrAmputation;
+  late double predicted30DMALE;
 
   PatientRisk({required this.patientData}) {
     gnri = _calcGNRI();
@@ -17,6 +19,8 @@ class PatientRisk {
     predictedOS = _calcPredictedOS(patientData);
     predictedAFS = _calcPredictedAFS(patientData);
     osRisk = _classifyOSRisk(predictedOS);
+    predicted30DDeathOrAmputation = _calc30DDorA(patientData);
+    predicted30DMALE = _calc30DMALE(patientData);
   }
 
   double _calcGNRI() {
@@ -65,6 +69,14 @@ class PatientRisk {
     } else {
       return OSRisk.high;
     }
+  }
+
+  double _calc30DDorA(PatientData data) {
+    return 0.0;
+  }
+
+  double _calc30DMALE(PatientData data) {
+    return 0.0;
   }
 
   double _calcSigma(PatientData data, List<double> coeff) {
