@@ -8,15 +8,51 @@ class PatientData {
   Activity activity = Activity.ambulatory;
 
   //clinical info
-  bool hasCHF = false; // congestive heart failure
-  bool hasCVD = false; //cerebral vasuclar disease
-  CKD ckd = CKD.normal; //chroic kidney disease classification
-  MalignantNeoplasm mn = MalignantNeoplasm.no; // Malignant neoplasm
+
+  // congestive heart failure
+  bool hasCHF = false;
+
+  // cerebral vasuclar disease
+  bool hasCVD = false;
+
+  // chroic kidney disease classification
+  CKD ckd = CKD.normal;
+
+  // malignant neoplasm
+  MalignantNeoplasm mn = MalignantNeoplasm.no;
+
+  // arterial occlusive lesion: AorotIliac, FP, below Pop
   OcclusiveLesion occlusiveLesion = OcclusiveLesion.ai;
-  bool isUrgent = false; //urgent procedure
-  bool hasFever = false; // BT over 38 deg celsius
-  bool hasLeukocytosis = false; //WBC over 8000/ul
+
+  // urgent procedure
+  bool isUrgent = false;
+
+  // BT over 38 deg celsius
+  bool hasFever = false;
+
+  // WBC over 8000/ul
+  bool hasLeukocytosis = false;
+
+  // infection
   bool hasLocalInfection = false;
+
+  // high LDL-C or TG
+  bool hasDislipidemia = false;
+
+  // smoking status
+  bool isSmoking = false;
+
+  // coronary artery disease
+  bool hasCAD = false;
+
+  // contraLateral limb arterial lesions
+  bool hasContraLateralLesion = false;
+
+  // other vascular lesions except contralateral limb
+  bool hasOtherVD = false;
+
+  //Rutherford Classification 4, 5,6
+  RutherfordClassification rutherford = RutherfordClassification.class4;
 
 //constructor with dummy data
   PatientData();
@@ -77,6 +113,18 @@ enum MalignantNeoplasm {
   underTreatment('Under Treatment');
 
   const MalignantNeoplasm(this.name);
+  final String name;
+
+  @override
+  String toString() => name;
+}
+
+enum RutherfordClassification {
+  class4('Class 4'),
+  class5('Class 5'),
+  class6('Class 6');
+
+  const RutherfordClassification(this.name);
   final String name;
 
   @override
