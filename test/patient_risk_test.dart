@@ -56,7 +56,13 @@ void main() {
       ..isUrgent = true
       ..hasFever = true
       ..hasLeukocytosis = true
-      ..hasLocalInfection = true;
+      ..hasLocalInfection = true
+      ..hasCAD = true
+      ..hasDislipidemia = false
+      ..isSmoking = true
+      ..hasContraLateralLesion = false
+      ..hasOtherVD = true
+      ..rutherford = RutherfordClassification.class4;
 
     const want = _Want(
         gnri: '101.3',
@@ -64,8 +70,8 @@ void main() {
         predictedOS: '0.91',
         predictedAFS: '0.64',
         osRisk: OSRisk.low,
-        predicted30DDorA: '',
-        predicted30DMALE: '');
+        predicted30DDorA: '0.088',
+        predicted30DMALE: '0.152');
 
     _testCase(pd, want);
   });
@@ -86,7 +92,13 @@ void main() {
       ..isUrgent = true
       ..hasFever = true
       ..hasLeukocytosis = true
-      ..hasLocalInfection = true;
+      ..hasLocalInfection = true
+      ..hasCAD = false
+      ..hasDislipidemia = true
+      ..isSmoking = false
+      ..hasContraLateralLesion = true
+      ..hasOtherVD = false
+      ..rutherford = RutherfordClassification.class5;
 
     const want = _Want(
         gnri: '93.8',
@@ -94,8 +106,8 @@ void main() {
         predictedOS: '0.67',
         predictedAFS: '0.25',
         osRisk: OSRisk.medium,
-        predicted30DDorA: '',
-        predicted30DMALE: '');
+        predicted30DDorA: '0.170',
+        predicted30DMALE: '0.193');
 
     _testCase(pd, want);
   });
@@ -116,7 +128,13 @@ void main() {
       ..isUrgent = true
       ..hasFever = false
       ..hasLeukocytosis = true
-      ..hasLocalInfection = false;
+      ..hasLocalInfection = false
+      ..hasCAD = true
+      ..hasDislipidemia = true
+      ..isSmoking = true
+      ..hasContraLateralLesion = true
+      ..hasOtherVD = false
+      ..rutherford = RutherfordClassification.class5;
 
     const want = _Want(
         gnri: '86.2',
@@ -124,8 +142,8 @@ void main() {
         predictedOS: '0.08',
         predictedAFS: '0.03',
         osRisk: OSRisk.high,
-        predicted30DDorA: '',
-        predicted30DMALE: '');
+        predicted30DDorA: '0.100',
+        predicted30DMALE: '0.043');
 
     _testCase(pd, want);
   });
@@ -146,7 +164,13 @@ void main() {
       ..isUrgent = true
       ..hasFever = true
       ..hasLeukocytosis = true
-      ..hasLocalInfection = true;
+      ..hasLocalInfection = true
+      ..hasCAD = true
+      ..hasDislipidemia = true
+      ..isSmoking = true
+      ..hasContraLateralLesion = true
+      ..hasOtherVD = true
+      ..rutherford = RutherfordClassification.class4;
 
     const want = _Want(
         gnri: '71.3',
@@ -154,8 +178,8 @@ void main() {
         predictedOS: '0.00',
         predictedAFS: '0.00',
         osRisk: OSRisk.high,
-        predicted30DDorA: '',
-        predicted30DMALE: '');
+        predicted30DDorA: '0.341',
+        predicted30DMALE: '0.100');
 
     _testCase(pd, want);
   });
