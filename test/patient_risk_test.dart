@@ -12,7 +12,9 @@ void main() {
         gnriRisk: GNRIRisk.noRisk,
         predictedOS: '0.92',
         predictedAFS: '0.88',
-        osRisk: OSRisk.low);
+        osRisk: OSRisk.low,
+        predicted30DDorA: '0.013',
+        predicted30DMALE: '0.044');
 
     _testCase(pd, want);
   });
@@ -31,7 +33,9 @@ void main() {
         gnriRisk: null,
         predictedOS: 'NaN',
         predictedAFS: 'NaN',
-        osRisk: null);
+        osRisk: null,
+        predicted30DDorA: 'NaN',
+        predicted30DMALE: 'NaN');
 
     _testCase(pd, want);
   });
@@ -59,7 +63,9 @@ void main() {
         gnriRisk: GNRIRisk.noRisk,
         predictedOS: '0.91',
         predictedAFS: '0.64',
-        osRisk: OSRisk.low);
+        osRisk: OSRisk.low,
+        predicted30DDorA: '',
+        predicted30DMALE: '');
 
     _testCase(pd, want);
   });
@@ -87,7 +93,9 @@ void main() {
         gnriRisk: GNRIRisk.low,
         predictedOS: '0.67',
         predictedAFS: '0.25',
-        osRisk: OSRisk.medium);
+        osRisk: OSRisk.medium,
+        predicted30DDorA: '',
+        predicted30DMALE: '');
 
     _testCase(pd, want);
   });
@@ -115,7 +123,9 @@ void main() {
         gnriRisk: GNRIRisk.moderate,
         predictedOS: '0.08',
         predictedAFS: '0.03',
-        osRisk: OSRisk.high);
+        osRisk: OSRisk.high,
+        predicted30DDorA: '',
+        predicted30DMALE: '');
 
     _testCase(pd, want);
   });
@@ -143,7 +153,9 @@ void main() {
         gnriRisk: GNRIRisk.major,
         predictedOS: '0.00',
         predictedAFS: '0.00',
-        osRisk: OSRisk.high);
+        osRisk: OSRisk.high,
+        predicted30DDorA: '',
+        predicted30DMALE: '');
 
     _testCase(pd, want);
   });
@@ -156,13 +168,17 @@ class _Want {
   final String predictedOS;
   final String predictedAFS;
   final OSRisk? osRisk;
+  final String predicted30DDorA;
+  final String predicted30DMALE;
 
   const _Want(
       {required this.gnri,
       required this.gnriRisk,
       required this.predictedOS,
       required this.predictedAFS,
-      required this.osRisk});
+      required this.osRisk,
+      required this.predicted30DDorA,
+      required this.predicted30DMALE});
 }
 
 void _testCase(PatientData pd, _Want want) {
@@ -172,4 +188,7 @@ void _testCase(PatientData pd, _Want want) {
   expect(pr.predictedOS.toStringAsFixed(2), equals(want.predictedOS));
   expect(pr.predictedAFS.toStringAsFixed(2), equals(want.predictedAFS));
   expect(pr.osRisk, want.osRisk);
+  expect(pr.predicted30DDeathOrAmputation.toStringAsFixed(3),
+      equals(want.predicted30DDorA));
+  expect(pr.predicted30DMALE.toStringAsFixed(3), equals(want.predicted30DMALE));
 }
