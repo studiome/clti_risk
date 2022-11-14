@@ -4,7 +4,7 @@
  Risk Calculator for  two year overall survival (OS) and amputation free survival (AFS) after revascularisation in patients with chronic limb threatening ischaemia
 
 
-## Prediction model
+# Prediction model
 - This project is based below 2 papers.
 - [Miyata T. et al, Risk prediction model for early outcomes of revascularization for chronic limb-threatening ischaemia. Br J Surg. 2022 Oct 14;109(11):1123](https://doi.org/10.1093/bjs/znac323).
     - This paper revealed 30 days prediction model after revascularization in CLTI patients.
@@ -15,10 +15,10 @@
 - You get these risks if you enter the patient's value as indicated.
 
 
-## License
+# License
 
 This project is under MIT license.
 
-## Author 
+# Author 
 
 [Kazuhiro Miyahara](<mailto:miyahara@g.j-ca.org>) (Department of Vascular Surgery, The University of Tokyo)
