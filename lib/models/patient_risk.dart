@@ -72,11 +72,13 @@ class PatientRisk {
   }
 
   double _calc30DDorA(PatientData data) {
-    return 0.0;
+    double sigma = _calcSigma(data, shortDorACoeff);
+    return 1.0 / (1.0 + exp(sigma));
   }
 
   double _calc30DMALE(PatientData data) {
-    return 0.0;
+    double sigma = _calcSigma(data, shortMALECoeff);
+    return 1.0 / (1.0 + exp(sigma));
   }
 
   double _calcSigma(PatientData data, List<double> coeff) {
@@ -112,6 +114,8 @@ class PatientRisk {
         break;
       case CKD.g5D:
         sigma += coeff[Covariants.hasCKDG5D.index];
+        // 30 days predictor
+        sigma += coeff[Covariants.onDialysis.index];
         break;
       default:
         break;
@@ -164,6 +168,8 @@ class PatientRisk {
       case OcclusiveLesion.belowIP:
         sigma += coeff[Covariants.lesionBelowIP.index];
         break;
+      case OcclusiveLesion.ai:
+        break;
       default:
         break;
     }
@@ -181,6 +187,42 @@ class PatientRisk {
     if (data.hasLocalInfection) {
       sigma += coeff[Covariants.localInfection.index];
     }
+
+    //coronary
+    if (data.hasCAD) {
+      sigma += coeff[Covariants.hasCAD.index];
+    }
+
+    // smoking
+    if (data.isSmoking) {
+      sigma += coeff[Covariants.isSmoking.index];
+    }
+
+    // contralateral
+    if (data.hasContraLateralLesion) {
+      sigma += coeff[Covariants.hasContralateral.index];
+    }
+
+    //  other vascular disease
+    if (data.hasOtherVD) {
+      sigma += coeff[Covariants.hasOther.index];
+    }
+
+    // Rutherford class
+    switch (data.rutherford) {
+      case RutherfordClassification.class4:
+        sigma += coeff[Covariants.rutherford4.index];
+        break;
+      case RutherfordClassification.class5:
+        sigma += coeff[Covariants.rutherford5.index];
+        break;
+      case RutherfordClassification.class6:
+        sigma += coeff[Covariants.rutherford6.index];
+        break;
+    }
+
+    //TODO: implementation for occulive lestion, GNRI no or low risk
+    sigma += coeff[Covariants.intercept.index];
 
     return sigma;
   }
@@ -211,6 +253,7 @@ enum GNRIRisk {
   String toString() => name;
 }
 
+//TODO: GNRI no or low risk, occlusive lestion
 //Covariants Index of 2Yr OS and AFS
 // age less than 65, without CKD, ambulatory(activity),
 // no malignancy are setted to reference.
@@ -237,6 +280,17 @@ enum Covariants {
   fever,
   leukocytosis,
   localInfection,
+  hasCAD,
+  isSmoking,
+  onDialysis,
+  hasNoAIlesion,
+  hasNoFPlesion,
+  hasContralateral,
+  hasOther,
+  rutherford4,
+  rutherford5,
+  rutherford6,
+  intercept,
 }
 
 const osH0Coeff = 0.922;
@@ -260,6 +314,17 @@ const osBetaCoeff = [
   0.56,
   -0.07,
   0.16,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
   0.0,
   0.0,
   0.0,
@@ -290,4 +355,87 @@ const afsBetaCoeff = [
   0.36,
   0.19,
   0.15,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+];
+
+const shortDorACoeff = [
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  -0.39,
+  -0.05,
+  0.0,
+  -0.60,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  -0.65,
+  -0.39,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  -0.34,
+  -0.144,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  2.86452,
+];
+
+const shortMALECoeff = [
+  -0.21,
+  0.19,
+  0.42,
+  0.62,
+  0.41,
+  0.10,
+  0.16,
+  0.36,
+  0.73,
+  0.81,
+  0.09,
+  0.45,
+  0.37,
+  0.78,
+  0.15,
+  0.39,
+  -0.07,
+  0.15,
+  0.34,
+  0.36,
+  0.19,
+  0.15,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
 ];
