@@ -51,13 +51,13 @@ class PatientRisk {
   }
 
   double _calcPredictedOS(PatientData data) {
-    double sigma = _calcSigma(data, osBetaCoeff);
+    double sigma = _calcSigma(data, osCoeff);
 
     return pow(osH0Coeff, exp(sigma)).toDouble();
   }
 
   double _calcPredictedAFS(PatientData data) {
-    double sigma = _calcSigma(data, afsBetaCoeff);
+    double sigma = _calcSigma(data, afsCoeff);
     return pow(afsH0Coeff, exp(sigma)).toDouble();
   }
 
@@ -73,7 +73,7 @@ class PatientRisk {
   }
 
   double _calc30DDorA(PatientData data) {
-    double sigma = _calcSigma(data, shortDorACoeff);
+    double sigma = _calcSigma(data, shortDeadOrAmputationCoeff);
     return 1.0 / (1.0 + exp(sigma));
   }
 
@@ -82,41 +82,41 @@ class PatientRisk {
     return 1.0 / (1.0 + exp(sigma));
   }
 
-  double _calcSigma(PatientData data, List<double> coeff) {
+  double _calcSigma(PatientData data, Map<Covariants, double> coeff) {
     double sigma = 0.0;
+
+    //coeff returns non null
     //sex
-    if (data.sex == Sex.female) sigma += coeff[Covariants.isFemale.index];
+    if (data.sex == Sex.female) sigma += coeff[Covariants.isFemale]!;
 
     //age
     if (data.age >= 85) {
-      sigma += coeff[Covariants.ageOver85.index];
+      sigma += coeff[Covariants.ageOver85]!;
     } else if (data.age >= 75) {
-      sigma += coeff[Covariants.age75to84.index];
+      sigma += coeff[Covariants.age75to84]!;
     } else if (data.age >= 65) {
-      sigma += coeff[Covariants.age65to74.index];
+      sigma += coeff[Covariants.age65to74]!;
     }
 
     //CHF
-    if (data.hasCHF) sigma += coeff[Covariants.hasCHF.index];
+    if (data.hasCHF) sigma += coeff[Covariants.hasCHF]!;
 
     //CVD
-    if (data.hasCVD) sigma += coeff[Covariants.hasCVD.index];
+    if (data.hasCVD) sigma += coeff[Covariants.hasCVD]!;
 
     //CKD
     switch (data.ckd) {
       case CKD.g3:
-        sigma += coeff[Covariants.hasCKDG3.index];
+        sigma += coeff[Covariants.hasCKDG3]!;
         break;
       case CKD.g4:
-        sigma += coeff[Covariants.hasCKDG4.index];
+        sigma += coeff[Covariants.hasCKDG4]!;
         break;
       case CKD.g5:
-        sigma += coeff[Covariants.hasCKDG5.index];
+        sigma += coeff[Covariants.hasCKDG5]!;
         break;
       case CKD.g5D:
-        sigma += coeff[Covariants.hasCKDG5D.index];
-        // 30 days predictor
-        sigma += coeff[Covariants.onDialysis.index];
+        sigma += coeff[Covariants.hasCKDG5D]!;
         break;
       default:
         break;
@@ -127,11 +127,15 @@ class PatientRisk {
     if (gnriRisk == null) return double.nan;
 
     switch (gnriRisk) {
+      case GNRIRisk.noRisk:
+      case GNRIRisk.low:
+        sigma += coeff[Covariants.gnriNoOrLow]!;
+        break;
       case GNRIRisk.moderate:
-        sigma += coeff[Covariants.gnriModerate.index];
+        sigma += coeff[Covariants.gnriModerate]!;
         break;
       case GNRIRisk.major:
-        sigma += coeff[Covariants.gnriMajor.index];
+        sigma += coeff[Covariants.gnriMajor]!;
         break;
       default:
         break;
@@ -140,10 +144,10 @@ class PatientRisk {
     //Activity
     switch (data.activity) {
       case Activity.wheelchair:
-        sigma += coeff[Covariants.activityWheelChair.index];
+        sigma += coeff[Covariants.activityWheelChair]!;
         break;
       case Activity.immobile:
-        sigma += coeff[Covariants.activityImmobile.index];
+        sigma += coeff[Covariants.activityImmobile]!;
         break;
       default:
         break;
@@ -152,10 +156,10 @@ class PatientRisk {
     //Malignancy
     switch (data.mn) {
       case MalignantNeoplasm.pastHistory:
-        sigma += coeff[Covariants.pastMalignancy.index];
+        sigma += coeff[Covariants.pastMalignancy]!;
         break;
       case MalignantNeoplasm.underTreatment:
-        sigma += coeff[Covariants.treatingMalignancy.index];
+        sigma += coeff[Covariants.treatingMalignancy]!;
         break;
       default:
         break;
@@ -172,69 +176,68 @@ class PatientRisk {
       //DO nothing
     } else {
       //30days prediction
-      sigma += coeff[Covariants.hasNoAIlesion.index];
+      sigma += coeff[Covariants.hasNoAIlesion]!;
       if (data.hasFPLesion) {
         // 2yr
-        sigma += coeff[Covariants.lesionFP.index];
+        sigma += coeff[Covariants.lesionFP]!;
       } else {
         //30dyas
-        sigma += coeff[Covariants.hasNoFPlesion.index];
+        sigma += coeff[Covariants.hasNoFPlesion]!;
         if (data.hasBKLesion) {
           //2yr
-          sigma += coeff[Covariants.lesionBelowIP.index];
+          sigma += coeff[Covariants.lesionBelowIP]!;
         }
       }
     }
 
     //Urgent
-    if (data.isUrgent) sigma += coeff[Covariants.isUrgent.index];
+    if (data.isUrgent) sigma += coeff[Covariants.isUrgent]!;
 
     //Fever
-    if (data.hasFever) sigma += coeff[Covariants.fever.index];
+    if (data.hasFever) sigma += coeff[Covariants.fever]!;
 
     //WBC
-    if (data.hasLeukocytosis) sigma += coeff[Covariants.leukocytosis.index];
+    if (data.hasLeukocytosis) sigma += coeff[Covariants.leukocytosis]!;
 
     //Local Infection
     if (data.hasLocalInfection) {
-      sigma += coeff[Covariants.localInfection.index];
+      sigma += coeff[Covariants.localInfection]!;
     }
 
     //coronary
     if (data.hasCAD) {
-      sigma += coeff[Covariants.hasCAD.index];
+      sigma += coeff[Covariants.hasCAD]!;
     }
 
     // smoking
     if (data.isSmoking) {
-      sigma += coeff[Covariants.isSmoking.index];
+      sigma += coeff[Covariants.isSmoking]!;
     }
 
     // contralateral
     if (data.hasContraLateralLesion) {
-      sigma += coeff[Covariants.hasContralateral.index];
+      sigma += coeff[Covariants.hasContralateral]!;
     }
 
     //  other vascular disease
     if (data.hasOtherVD) {
-      sigma += coeff[Covariants.hasOther.index];
+      sigma += coeff[Covariants.hasOther]!;
     }
 
     // Rutherford class
     switch (data.rutherford) {
       case RutherfordClassification.class4:
-        sigma += coeff[Covariants.rutherford4.index];
+        sigma += coeff[Covariants.rutherford4]!;
         break;
       case RutherfordClassification.class5:
-        sigma += coeff[Covariants.rutherford5.index];
+        sigma += coeff[Covariants.rutherford5]!;
         break;
       case RutherfordClassification.class6:
-        sigma += coeff[Covariants.rutherford6.index];
+        sigma += coeff[Covariants.rutherford6]!;
         break;
     }
 
-    //TODO: implementation for occulive lestion, GNRI no or low risk
-    sigma += coeff[Covariants.intercept.index];
+    sigma += coeff[Covariants.intercept]!;
 
     return sigma;
   }
@@ -265,8 +268,7 @@ enum GNRIRisk {
   String toString() => name;
 }
 
-//TODO: GNRI no or low risk, occlusive lestion
-//Covariants Index of 2Yr OS and AFS
+//Covariants for predictor
 // age less than 65, without CKD, ambulatory(activity),
 // no malignancy are setted to reference.
 enum Covariants {
@@ -279,24 +281,24 @@ enum Covariants {
   hasCKDG3,
   hasCKDG4,
   hasCKDG5,
-  hasCKDG5D,
+  hasCKDG5D, //HD
+  gnriNoOrLow,
   gnriModerate,
   gnriMajor,
   activityWheelChair,
   activityImmobile,
   pastMalignancy,
   treatingMalignancy,
-  lesionFP,
-  lesionBelowIP,
   isUrgent,
   fever,
   leukocytosis,
   localInfection,
   hasCAD,
   isSmoking,
-  onDialysis,
   hasNoAIlesion,
   hasNoFPlesion,
+  lesionFP,
+  lesionBelowIP,
   hasContralateral,
   hasOther,
   rutherford4,
@@ -306,6 +308,42 @@ enum Covariants {
 }
 
 const osH0Coeff = 0.922;
+
+const Map<Covariants, double> osCoeff = {
+  Covariants.isFemale: -0.25,
+  Covariants.age65to74: 0.31,
+  Covariants.age75to84: 0.76,
+  Covariants.ageOver85: 1.04,
+  Covariants.hasCHF: 0.50,
+  Covariants.hasCVD: 0.0,
+  Covariants.hasCKDG3: 0.27,
+  Covariants.hasCKDG4: 0.61,
+  Covariants.hasCKDG5: 0.76,
+  Covariants.hasCKDG5D: 1.01, //HD
+  Covariants.gnriNoOrLow: 0.0,
+  Covariants.gnriModerate: 0.14,
+  Covariants.gnriMajor: 0.52,
+  Covariants.activityWheelChair: 0.28,
+  Covariants.activityImmobile: 0.77,
+  Covariants.pastMalignancy: 0.20,
+  Covariants.treatingMalignancy: 0.56,
+  Covariants.isUrgent: 0.0,
+  Covariants.fever: 0.0,
+  Covariants.leukocytosis: 0.0,
+  Covariants.localInfection: 0.0,
+  Covariants.hasCAD: 0.0,
+  Covariants.isSmoking: 0.0,
+  Covariants.hasNoAIlesion: 0.0,
+  Covariants.hasNoFPlesion: 0.0,
+  Covariants.lesionFP: -0.07,
+  Covariants.lesionBelowIP: 0.16,
+  Covariants.hasContralateral: 0.0,
+  Covariants.hasOther: 0.0,
+  Covariants.rutherford4: 0.0,
+  Covariants.rutherford5: 0.0,
+  Covariants.rutherford6: 0.0,
+  Covariants.intercept: 0.0,
+};
 
 const osBetaCoeff = [
   -0.25,
@@ -344,6 +382,42 @@ const osBetaCoeff = [
 ];
 const afsH0Coeff = 0.876;
 
+const Map<Covariants, double> afsCoeff = {
+  Covariants.isFemale: -0.21,
+  Covariants.age65to74: 0.19,
+  Covariants.age75to84: 0.42,
+  Covariants.ageOver85: 0.62,
+  Covariants.hasCHF: 0.41,
+  Covariants.hasCVD: 0.10,
+  Covariants.hasCKDG3: 0.16,
+  Covariants.hasCKDG4: 0.36,
+  Covariants.hasCKDG5: 0.73,
+  Covariants.hasCKDG5D: 0.81, //HD
+  Covariants.gnriNoOrLow: 0.0,
+  Covariants.gnriModerate: 0.09,
+  Covariants.gnriMajor: 0.45,
+  Covariants.activityWheelChair: 0.37,
+  Covariants.activityImmobile: 0.78,
+  Covariants.pastMalignancy: 0.15,
+  Covariants.treatingMalignancy: 0.39,
+  Covariants.isUrgent: 0.34,
+  Covariants.fever: 0.36,
+  Covariants.leukocytosis: 0.19,
+  Covariants.localInfection: 0.15,
+  Covariants.hasCAD: 0.0,
+  Covariants.isSmoking: 0.0,
+  Covariants.hasNoAIlesion: 0.0,
+  Covariants.hasNoFPlesion: 0.0,
+  Covariants.lesionFP: -0.07,
+  Covariants.lesionBelowIP: 0.15,
+  Covariants.hasContralateral: 0.0,
+  Covariants.hasOther: 0.0,
+  Covariants.rutherford4: 0.0,
+  Covariants.rutherford5: 0.0,
+  Covariants.rutherford6: 0.0,
+  Covariants.intercept: 0.0,
+};
+
 const afsBetaCoeff = [
   -0.21,
   0.19,
@@ -380,6 +454,41 @@ const afsBetaCoeff = [
   0.0,
 ];
 
+const Map<Covariants, double> shortDeadOrAmputationCoeff = {
+  Covariants.isFemale: 0.0,
+  Covariants.age65to74: 0.0,
+  Covariants.age75to84: 0.0,
+  Covariants.ageOver85: 0.0,
+  Covariants.hasCHF: 0.0,
+  Covariants.hasCVD: 0.0,
+  Covariants.hasCKDG3: 0.0,
+  Covariants.hasCKDG4: 0.0,
+  Covariants.hasCKDG5: 0.0,
+  Covariants.hasCKDG5D: 0.0, //HD
+  Covariants.gnriNoOrLow: 0.0,
+  Covariants.gnriModerate: 0.0,
+  Covariants.gnriMajor: 0.0,
+  Covariants.activityWheelChair: 0.0,
+  Covariants.activityImmobile: 0.0,
+  Covariants.pastMalignancy: 0.0,
+  Covariants.treatingMalignancy: 0.0,
+  Covariants.isUrgent: 0.0,
+  Covariants.fever: 0.0,
+  Covariants.leukocytosis: 0.0,
+  Covariants.localInfection: 0.0,
+  Covariants.hasCAD: 0.0,
+  Covariants.isSmoking: 0.0,
+  Covariants.hasNoAIlesion: 0.0,
+  Covariants.hasNoFPlesion: 0.0,
+  Covariants.lesionFP: 0.0,
+  Covariants.lesionBelowIP: 0.0,
+  Covariants.hasContralateral: 0.0,
+  Covariants.hasOther: 0.0,
+  Covariants.rutherford4: 0.0,
+  Covariants.rutherford5: 0.0,
+  Covariants.rutherford6: 0.0,
+  Covariants.intercept: 0.0,
+};
 const shortDorACoeff = [
   0.0,
   0.0,
@@ -416,38 +525,38 @@ const shortDorACoeff = [
   2.86452,
 ];
 
-const shortMALECoeff = [
-  -0.21,
-  0.19,
-  0.42,
-  0.62,
-  0.41,
-  0.10,
-  0.16,
-  0.36,
-  0.73,
-  0.81,
-  0.09,
-  0.45,
-  0.37,
-  0.78,
-  0.15,
-  0.39,
-  -0.07,
-  0.15,
-  0.34,
-  0.36,
-  0.19,
-  0.15,
-  0.0,
-  0.0,
-  0.0,
-  0.0,
-  0.0,
-  0.0,
-  0.0,
-  0.0,
-  0.0,
-  0.0,
-  0.0,
-];
+const Map<Covariants, double> shortMALECoeff = {
+  Covariants.isFemale: 0.0,
+  Covariants.age65to74: 0.0,
+  Covariants.age75to84: 0.0,
+  Covariants.ageOver85: 0.0,
+  Covariants.hasCHF: 0.0,
+  Covariants.hasCVD: 0.0,
+  Covariants.hasCKDG3: 0.0,
+  Covariants.hasCKDG4: 0.0,
+  Covariants.hasCKDG5: 0.0,
+  Covariants.hasCKDG5D: 0.0, //HD
+  Covariants.gnriNoOrLow: 0.0,
+  Covariants.gnriModerate: 0.0,
+  Covariants.gnriMajor: 0.0,
+  Covariants.activityWheelChair: 0.0,
+  Covariants.activityImmobile: 0.0,
+  Covariants.pastMalignancy: 0.0,
+  Covariants.treatingMalignancy: 0.0,
+  Covariants.isUrgent: 0.0,
+  Covariants.fever: 0.0,
+  Covariants.leukocytosis: 0.0,
+  Covariants.localInfection: 0.0,
+  Covariants.hasCAD: 0.0,
+  Covariants.isSmoking: 0.0,
+  Covariants.hasNoAIlesion: 0.0,
+  Covariants.hasNoFPlesion: 0.0,
+  Covariants.lesionFP: 0.0,
+  Covariants.lesionBelowIP: 0.0,
+  Covariants.hasContralateral: 0.0,
+  Covariants.hasOther: 0.0,
+  Covariants.rutherford4: 0.0,
+  Covariants.rutherford5: 0.0,
+  Covariants.rutherford6: 0.0,
+  Covariants.intercept: 0.0,
+};
