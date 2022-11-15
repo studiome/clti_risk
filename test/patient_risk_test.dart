@@ -5,6 +5,7 @@ import 'package:test/test.dart';
 void main() {
   //Test Cases, dummy data
   test('Default Case', () {
+    //occlusive lesion: AI
     final pd = PatientData();
 
     const want = _Want(
@@ -41,6 +42,7 @@ void main() {
   });
 
   test('Low Risk Case', () {
+    //occlusive lesion: FP
     final pd = PatientData()
       ..sex = Sex.male
       ..age = 50
@@ -52,7 +54,9 @@ void main() {
       ..hasCVD = true
       ..ckd = CKD.g3
       ..mn = MalignantNeoplasm.no
-      ..occlusiveLesion = OcclusiveLesion.fpWithoutAI
+      ..hasAILesion = false
+      ..hasFPLesion = true
+      ..hasBKLesion = false
       ..isUrgent = true
       ..hasFever = true
       ..hasLeukocytosis = true
@@ -77,6 +81,7 @@ void main() {
   });
 
   test('medium Risk Case', () {
+    //occlusive lesion: FP
     final pd = PatientData()
       ..sex = Sex.female
       ..age = 70
@@ -88,7 +93,9 @@ void main() {
       ..hasCVD = true
       ..ckd = CKD.g4
       ..mn = MalignantNeoplasm.pastHistory
-      ..occlusiveLesion = OcclusiveLesion.fpWithoutAI
+      ..hasAILesion = false
+      ..hasFPLesion = true
+      ..hasBKLesion = true
       ..isUrgent = true
       ..hasFever = true
       ..hasLeukocytosis = true
@@ -113,6 +120,7 @@ void main() {
   });
 
   test('high Risk Case', () {
+    //occlusive lesion: Below IP
     final pd = PatientData()
       ..sex = Sex.male
       ..age = 85
@@ -124,7 +132,9 @@ void main() {
       ..hasCVD = false
       ..ckd = CKD.g5
       ..mn = MalignantNeoplasm.underTreatment
-      ..occlusiveLesion = OcclusiveLesion.belowIP
+      ..hasAILesion = false
+      ..hasFPLesion = false
+      ..hasBKLesion = true
       ..isUrgent = true
       ..hasFever = false
       ..hasLeukocytosis = true
@@ -149,6 +159,7 @@ void main() {
   });
 
   test('high Risk Case 2', () {
+    //occlusive lesion: Below IP
     final pd = PatientData()
       ..sex = Sex.female
       ..age = 90
@@ -160,7 +171,9 @@ void main() {
       ..hasCVD = true
       ..ckd = CKD.g5D
       ..mn = MalignantNeoplasm.underTreatment
-      ..occlusiveLesion = OcclusiveLesion.belowIP
+      ..hasAILesion = false
+      ..hasFPLesion = false
+      ..hasBKLesion = true
       ..isUrgent = true
       ..hasFever = true
       ..hasLeukocytosis = true

@@ -22,7 +22,16 @@ class PatientData {
   MalignantNeoplasm mn = MalignantNeoplasm.no;
 
   // arterial occlusive lesion: AorotIliac, FP, below Pop
-  OcclusiveLesion occlusiveLesion = OcclusiveLesion.ai;
+  bool hasAILesion = true;
+  bool hasFPLesion = false;
+  bool hasBKLesion = false;
+
+  // EJEVS occlusive classification
+  // | AI | FP | BK | 2yr occlusive lesion
+  // | +  | +- | +- | AI
+  // | -  | +  | +- | FP without AI
+  // | -  | -  | +  | Below IP
+  // | -  | -  | -  | undefined
 
   // urgent procedure
   bool isUrgent = false;
@@ -75,18 +84,6 @@ enum Activity {
   immobile('Immobile');
 
   const Activity(this.name);
-  final String name;
-
-  @override
-  String toString() => name;
-}
-
-enum OcclusiveLesion {
-  ai('Aorto-Iliac'),
-  fpWithoutAI('Femoropopliteal without Aorto-Iliac'),
-  belowIP('InfraPopliteal');
-
-  const OcclusiveLesion(this.name);
   final String name;
 
   @override

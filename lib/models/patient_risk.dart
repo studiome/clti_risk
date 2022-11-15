@@ -1,7 +1,8 @@
 import 'dart:math';
 
-import 'package:clti_risk/models/patient_data.dart';
 import 'package:flutter/foundation.dart';
+
+import 'patient_data.dart';
 
 class PatientRisk {
   final PatientData patientData;
@@ -161,17 +162,28 @@ class PatientRisk {
     }
 
     //occlusive lesion
-    switch (data.occlusiveLesion) {
-      case OcclusiveLesion.fpWithoutAI:
+    // EJEVS occlusive classification
+    // | AI | FP | BK | 2yr occlusive lesion
+    // | +  | +- | +- | AI
+    // | -  | +  | +- | FP without AI
+    // | -  | -  | +  | Below IP
+    // | -  | -  | -  | undefined
+    if (data.hasAILesion) {
+      //DO nothing
+    } else {
+      //30days prediction
+      sigma += coeff[Covariants.hasNoAIlesion.index];
+      if (data.hasFPLesion) {
+        // 2yr
         sigma += coeff[Covariants.lesionFP.index];
-        break;
-      case OcclusiveLesion.belowIP:
-        sigma += coeff[Covariants.lesionBelowIP.index];
-        break;
-      case OcclusiveLesion.ai:
-        break;
-      default:
-        break;
+      } else {
+        //30dyas
+        sigma += coeff[Covariants.hasNoFPlesion.index];
+        if (data.hasBKLesion) {
+          //2yr
+          sigma += coeff[Covariants.lesionBelowIP.index];
+        }
+      }
     }
 
     //Urgent
