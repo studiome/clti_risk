@@ -500,13 +500,13 @@ class _PatientDataFormState extends State<PatientDataForm> {
                     content: Container(
                       alignment: Alignment.centerLeft,
                       child: StepContentWithBoolean(
-                        item: patientData.hasLeukocytosis,
+                        item: patientData.hasAbnormalWBC,
                         itemWidth: 120,
                         itemHeight: 40,
                         onChanged: (v) {
                           if (v == null) return;
                           setState(() {
-                            patientData.hasLeukocytosis = v;
+                            patientData.hasAbnormalWBC = v;
                           });
                         },
                       ),

@@ -40,7 +40,7 @@ class PatientData {
   bool hasFever = false;
 
   // WBC over 8000/ul
-  bool hasLeukocytosis = false;
+  bool hasAbnormalWBC = false;
 
   // infection
   bool hasLocalInfection = false;

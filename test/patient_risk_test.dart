@@ -59,7 +59,7 @@ void main() {
       ..hasBKLesion = false
       ..isUrgent = true
       ..hasFever = true
-      ..hasLeukocytosis = true
+      ..hasAbnormalWBC = true
       ..hasLocalInfection = true
       ..hasCAD = true
       ..hasDislipidemia = false
@@ -98,7 +98,7 @@ void main() {
       ..hasBKLesion = true
       ..isUrgent = true
       ..hasFever = true
-      ..hasLeukocytosis = true
+      ..hasAbnormalWBC = true
       ..hasLocalInfection = true
       ..hasCAD = false
       ..hasDislipidemia = true
@@ -137,7 +137,7 @@ void main() {
       ..hasBKLesion = true
       ..isUrgent = true
       ..hasFever = false
-      ..hasLeukocytosis = true
+      ..hasAbnormalWBC = true
       ..hasLocalInfection = false
       ..hasCAD = true
       ..hasDislipidemia = true
@@ -176,7 +176,7 @@ void main() {
       ..hasBKLesion = true
       ..isUrgent = true
       ..hasFever = true
-      ..hasLeukocytosis = true
+      ..hasAbnormalWBC = true
       ..hasLocalInfection = true
       ..hasCAD = true
       ..hasDislipidemia = true
