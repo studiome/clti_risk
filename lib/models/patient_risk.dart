@@ -222,8 +222,8 @@ class PatientRisk {
     }
 
     // contralateral
-    if (data.hasContraLateralLesion) {
-      sigma += coeff[Covariants.hasContralateral] ?? 0.0;
+    if (!data.hasContraLateralLesion) {
+      sigma += coeff[Covariants.hasNoContralateral] ?? 0.0;
     }
 
     //  other vascular disease
@@ -308,7 +308,7 @@ enum Covariants {
   hasNoFPlesion,
   lesionFP,
   lesionBelowIP,
-  hasContralateral,
+  hasNoContralateral,
   hasOther,
   rutherford4,
   rutherford5,
@@ -383,4 +383,28 @@ const Map<Covariants, double> shortDeadOrAmputationCoeff = {
   Covariants.gnriNoOrLow: 0.76479,
 };
 
-const Map<Covariants, double> shortMALECoeff = {};
+const Map<Covariants, double> shortMALECoeff = {
+  Covariants.intercept: 2.2575,
+  Covariants.abnormalWBC: -0.50671,
+  Covariants.fever: -0.33461,
+  Covariants.localInfection: -0.28088,
+  Covariants.rutherford6: -0.26513,
+  Covariants.activityWheelChair: -0.22555,
+  Covariants.isUrgent: -0.20964,
+  Covariants.hasCHF: -0.09218,
+  Covariants.hasCKDG5D: -0.02024,
+  Covariants.hasCVD: 0.01592,
+  Covariants.hasOther: 0.02649,
+  Covariants.isSmoking: 0.03109,
+  Covariants.hasCAD: 0.0375,
+  Covariants.rutherford5: 0.14299,
+  Covariants.age75to84: 0.16816,
+  Covariants.activityAmbulatory: 0.17103,
+  Covariants.hasNoContralateral: 0.18822,
+  Covariants.hasNoFPlesion: 0.21082,
+  Covariants.hasDislipidemia: 0.2189,
+  Covariants.isFemale: 0.24023,
+  Covariants.gnriNoOrLow: 0.32693,
+  Covariants.ageOver85: 0.46026,
+  Covariants.gnriModerate: 0.46838,
+};

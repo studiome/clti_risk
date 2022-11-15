@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 
 void main() {
   //Test Cases, dummy data
-  test('Default Case', () {
+  test('default case', () {
     //occlusive lesion: AI
     final pd = PatientData();
 
@@ -15,12 +15,12 @@ void main() {
         predictedAFS: '0.88',
         osRisk: OSRisk.low,
         predicted30DDorA: '0.013',
-        predicted30DMALE: '0.044');
+        predicted30DMALE: '0.032');
 
     _testCase(pd, want);
   });
 
-  test('Error Case', () {
+  test('error case', () {
     final pd = PatientData()
       ..sex = Sex.male
       ..age = 70
@@ -41,7 +41,7 @@ void main() {
     _testCase(pd, want);
   });
 
-  test('Low Risk Case', () {
+  test('low risk case', () {
     //occlusive lesion: FP
     final pd = PatientData()
       ..sex = Sex.male
@@ -80,7 +80,7 @@ void main() {
     _testCase(pd, want);
   });
 
-  test('medium Risk Case', () {
+  test('medium risk case', () {
     //occlusive lesion: FP
     final pd = PatientData()
       ..sex = Sex.female
@@ -114,12 +114,12 @@ void main() {
         predictedAFS: '0.25',
         osRisk: OSRisk.medium,
         predicted30DDorA: '0.170',
-        predicted30DMALE: '0.193');
+        predicted30DMALE: '0.175');
 
     _testCase(pd, want);
   });
 
-  test('high Risk Case', () {
+  test('high risk case', () {
     //occlusive lesion: Below IP
     final pd = PatientData()
       ..sex = Sex.male
@@ -158,7 +158,7 @@ void main() {
     _testCase(pd, want);
   });
 
-  test('high Risk Case 2', () {
+  test('high risk case 2', () {
     //occlusive lesion: Below IP
     final pd = PatientData()
       ..sex = Sex.female
@@ -181,9 +181,9 @@ void main() {
       ..hasCAD = true
       ..hasDislipidemia = true
       ..isSmoking = true
-      ..hasContraLateralLesion = true
+      ..hasContraLateralLesion = false
       ..hasOtherVD = true
-      ..rutherford = RutherfordClassification.class4;
+      ..rutherford = RutherfordClassification.class6;
 
     const want = _Want(
         gnri: '71.3',
@@ -191,8 +191,8 @@ void main() {
         predictedOS: '0.00',
         predictedAFS: '0.00',
         osRisk: OSRisk.high,
-        predicted30DDorA: '0.341',
-        predicted30DMALE: '0.100');
+        predicted30DDorA: '0.370',
+        predicted30DMALE: '0.122');
 
     _testCase(pd, want);
   });
