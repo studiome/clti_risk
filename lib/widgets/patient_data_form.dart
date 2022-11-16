@@ -848,7 +848,7 @@ class _PatientDataFormState extends State<PatientDataForm> {
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 16.0, vertical: 8.0),
                                         child: SelectableText(
-                                            '2y OS Risk: ${pr.osRisk}'),
+                                            '2yr OS Risk: ${pr.osRisk}'),
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.symmetric(
