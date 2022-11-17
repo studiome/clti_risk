@@ -1,7 +1,7 @@
 # Overview 
 
 
- Risk Calculator for  two year overall survival (OS) and amputation free survival (AFS) after revascularisation in patients with chronic limb threatening ischaemia
+ Risk Calculator for  thirty days death or amputation, major adverse limb event(MALE), two year overall survival (OS) and amputation free survival (AFS) after revascularisation in patients with chronic limb threatening ischaemia
 
 
 # Prediction model
