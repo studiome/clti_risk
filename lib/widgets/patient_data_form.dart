@@ -401,7 +401,7 @@ class _PatientDataFormState extends State<PatientDataForm> {
                   ),
                   Step(
                     title: const Text(
-                        'Chronic kidney disease(eGFR*: mL/min/1.73m2)'),
+                        'Chronic kidney disease (eGFR*: mL/min/1.73m\u00B2)'),
                     subtitle: const Text(
                         'absent: 60 or higher, G3: 30-59, G4: 15-29, G5: below 15, G5D: below 15 in haemodialysis.\n *eGFR: the estimated glomerular filtration rate'),
                     content: Container(
@@ -578,7 +578,7 @@ class _PatientDataFormState extends State<PatientDataForm> {
                   Step(
                     title: const Text('Abnormal WBC'),
                     subtitle: const Text(
-                        'white blood cell count: abnormal: > 8 000/mL'),
+                        'white blood cell count: abnormal: > 8 000/mL or absent'),
                     content: Container(
                       alignment: Alignment.centerLeft,
                       child: StepContentWithBoolean(
@@ -843,19 +843,19 @@ class _PatientDataFormState extends State<PatientDataForm> {
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 16.0, vertical: 8.0),
                                         child: SelectableText(
-                                            '2yr Overall Survival: ${(pr.predictedOS * 100.0).toStringAsFixed(0)}%'),
+                                            '2 years Overall Survival (OS): ${(pr.predictedOS * 100.0).toStringAsFixed(0)}%'),
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 16.0, vertical: 8.0),
                                         child: SelectableText(
-                                            '2yr OS Risk: ${pr.osRisk}'),
+                                            '2 years OS Risk: ${pr.osRisk}'),
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 16.0, vertical: 8.0),
                                         child: SelectableText(
-                                            '2yr Amputation Free Survival: ${(pr.predictedAFS * 100.0).toStringAsFixed(0)}%'),
+                                            '2 years Amputation Free Survival: ${(pr.predictedAFS * 100.0).toStringAsFixed(0)}%'),
                                       ),
                                     ],
                                   );
