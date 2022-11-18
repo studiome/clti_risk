@@ -400,9 +400,10 @@ class _PatientDataFormState extends State<PatientDataForm> {
                             : StepState.complete,
                   ),
                   Step(
-                    title: const Text('Chronic kidney disease'),
+                    title: const Text(
+                        'Chronic kidney disease(eGFR*: mL/min/1.73m2)'),
                     subtitle: const Text(
-                        'absent, G3, G4, G5, or G5D; renal dysfunction was absent when the estimated glomerular filtration rate [eGFR] was 60 ml/min/1.73 m2 or higher, and it was graded as G3, G4, and G5 when eGFR was 30 - 59, 15 - 29, and below 15, respectively. eGFR below 15 in haemodialysis patients was graded as G5D'),
+                        'absent: 60 or higher, G3: 30-59, G4: 15-29, G5: below 15, G5D: below 15 in haemodialysis.\n *eGFR: the estimated glomerular filtration rate'),
                     content: Container(
                       alignment: Alignment.centerLeft,
                       child: StepContentWithEnum<CKD>(
@@ -577,7 +578,7 @@ class _PatientDataFormState extends State<PatientDataForm> {
                   Step(
                     title: const Text('Abnormal WBC'),
                     subtitle: const Text(
-                        'white blood cell count; standard: 3000 - 8 000/mL, abnormal: < 3 000/mL or > 8 000/mL'),
+                        'white blood cell count: abnormal: > 8 000/mL'),
                     content: Container(
                       alignment: Alignment.centerLeft,
                       child: StepContentWithBoolean(
@@ -627,7 +628,7 @@ class _PatientDataFormState extends State<PatientDataForm> {
                   Step(
                     title: const Text('Dislipidemia'),
                     subtitle: const Text(
-                        'absent, present with good control; serum low density lipoprotein [LDL] < 100 mg/dL without other vascular diseases or LDL < 80 mg/dL with other vascular diseases, or present with poor control'),
+                        'absent, present:serum low density lipoprotein [LDL] > 140 mg/dL'),
                     content: Container(
                       alignment: Alignment.centerLeft,
                       child: StepContentWithBoolean(
@@ -651,7 +652,7 @@ class _PatientDataFormState extends State<PatientDataForm> {
                   ),
                   Step(
                     title: const Text('Smoking Status'),
-                    subtitle: const Text('no, ex-smoker, or current smoker'),
+                    subtitle: const Text('no, yes: smoker or ex-smoker'),
                     content: Container(
                       alignment: Alignment.centerLeft,
                       child: StepContentWithBoolean(
@@ -677,7 +678,7 @@ class _PatientDataFormState extends State<PatientDataForm> {
                     title: const Text(
                         'Contralateral limb arterial occlusive lesions'),
                     subtitle: const Text(
-                        'absent, pre- sent post-treatment, present asymptomatic or intermit- tent claudication, or present CLTI'),
+                        'present: including post-treatment, absent)'),
                     content: Container(
                       alignment: Alignment.centerLeft,
                       child: StepContentWithBoolean(
@@ -830,19 +831,19 @@ class _PatientDataFormState extends State<PatientDataForm> {
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 16.0, vertical: 8.0),
                                         child: SelectableText(
-                                            'prediction of 30 days Death or Amputation: ${pr.predicted30DDeathOrAmputation.toStringAsFixed(3)}'),
+                                            'prediction of 30 days Death or Amputation: ${(pr.predicted30DDeathOrAmputation * 100.0).toStringAsFixed(1)}%'),
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 16.0, vertical: 8.0),
                                         child: SelectableText(
-                                            'prediction of 30 days MALE: ${pr.predicted30DMALE.toStringAsFixed(3)}'),
+                                            'prediction of 30 days MALE: ${(pr.predicted30DMALE * 100.0).toStringAsFixed(1)}%'),
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 16.0, vertical: 8.0),
                                         child: SelectableText(
-                                            '2yr Overall Survival: ${pr.predictedOS.toStringAsFixed(2)}'),
+                                            '2yr Overall Survival: ${(pr.predictedOS * 100.0).toStringAsFixed(0)}%'),
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.symmetric(
@@ -854,7 +855,7 @@ class _PatientDataFormState extends State<PatientDataForm> {
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 16.0, vertical: 8.0),
                                         child: SelectableText(
-                                            '2yr Amputation Free Survival: ${pr.predictedAFS.toStringAsFixed(2)}'),
+                                            '2yr Amputation Free Survival: ${(pr.predictedAFS * 100.0).toStringAsFixed(0)}%'),
                                       ),
                                     ],
                                   );
