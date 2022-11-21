@@ -553,7 +553,7 @@ class _PatientDataFormState extends State<PatientDataForm> {
                   Step(
                     title: const Text('Fever'),
                     subtitle:
-                        const Text('body temperature is higher than 38°C'),
+                        const Text('body temperature is higher than 38\u2103'),
                     content: Container(
                       alignment: Alignment.centerLeft,
                       child: StepContentWithBoolean(
