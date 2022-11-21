@@ -22,18 +22,52 @@ class TabTransitionNavigator extends StatelessWidget {
                     tabController.animateTo(i - 1);
                   },
             child: const Text('Back')),
-        OutlinedButton(
-            style: OutlinedButton.styleFrom(
-                side: BorderSide.none,
+        // my filled tonal button. Switch offical widget if implemented.
+        ElevatedButton(
+            style: ButtonStyle(
+                elevation: MaterialStateProperty.resolveWith<double?>(
+                    (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.disabled)) return 0.0;
+                  if (states.contains(MaterialState.hovered)) return 1.0;
+                  if (states.contains(MaterialState.focused)) return 0.0;
+                  if (states.contains(MaterialState.pressed)) return 0.0;
+                  return 0.0;
+                }),
                 backgroundColor:
-                    Theme.of(context).colorScheme.secondaryContainer,
+                    MaterialStateProperty.resolveWith<Color?>((states) {
+                  final bgColor =
+                      Theme.of(context).colorScheme.secondaryContainer;
+                  if (states.contains(MaterialState.disabled)) {
+                    return bgColor.withOpacity(0.12);
+                  }
+                  return bgColor;
+                }),
                 foregroundColor:
-                    Theme.of(context).colorScheme.onSecondaryContainer,
-                shadowColor: Theme.of(context).colorScheme.shadow,
-                disabledBackgroundColor:
-                    Theme.of(context).colorScheme.onSurface.withOpacity(0.12),
-                disabledForegroundColor:
-                    Theme.of(context).colorScheme.onSurface.withOpacity(0.38)),
+                    MaterialStateProperty.resolveWith<Color?>((states) {
+                  final fgColor =
+                      Theme.of(context).colorScheme.onSecondaryContainer;
+                  if (states.contains(MaterialState.disabled)) {
+                    return fgColor.withOpacity(0.38);
+                  }
+                  return fgColor;
+                }),
+                overlayColor:
+                    MaterialStateProperty.resolveWith<Color?>((states) {
+                  final fgColor =
+                      Theme.of(context).colorScheme.onSecondaryContainer;
+                  if (states.contains(MaterialState.hovered)) {
+                    return fgColor.withOpacity(0.08);
+                  }
+                  if (states.contains(MaterialState.focused)) {
+                    return fgColor.withOpacity(0.12);
+                  }
+                  if (states.contains(MaterialState.pressed)) {
+                    return fgColor.withOpacity(0.12);
+                  }
+                  return null;
+                }),
+                shadowColor: MaterialStateProperty.resolveWith<Color?>(
+                    (states) => Theme.of(context).colorScheme.shadow)),
             onPressed: (tabIndex == tabCount - 1)
                 ? null
                 : () {
