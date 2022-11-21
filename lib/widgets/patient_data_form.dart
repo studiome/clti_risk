@@ -13,29 +13,6 @@ class PatientDataForm extends StatefulWidget {
   State<PatientDataForm> createState() => _PatientDataFormState();
 }
 
-enum Question {
-  sex,
-  bodyMeasurement,
-  albmin,
-  activity,
-  chf,
-  cad,
-  cvd,
-  ckd,
-  malingnancy,
-  leatsionAI,
-  leasionFP,
-  leasionBK,
-  urgentProcedure,
-  fever,
-  abnormalWBC,
-  dl,
-  smoking,
-  contralateral,
-  others,
-  rutherford,
-}
-
 enum _InputItem {
   profile,
   activity,
