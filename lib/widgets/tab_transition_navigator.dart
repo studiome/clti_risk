@@ -10,7 +10,7 @@ class TabTransitionNavigator extends StatelessWidget {
   Widget build(BuildContext context) {
     final TabController? tabController = DefaultTabController.of(context);
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         OutlinedButton(
             onPressed: (tabIndex == 0)
