@@ -48,7 +48,7 @@ class TabTestWidget extends StatelessWidget {
         initialIndex: initialTab,
         length: tabCount,
         child: Builder(builder: (context) {
-          var scaffold = Scaffold(
+          return Scaffold(
             appBar: AppBar(
               bottom: TabBar(
                 isScrollable: true,
@@ -57,7 +57,6 @@ class TabTestWidget extends StatelessWidget {
             ),
             body: TabBarView(children: _buildTabPage(context)),
           );
-          return scaffold;
         }));
   }
 
