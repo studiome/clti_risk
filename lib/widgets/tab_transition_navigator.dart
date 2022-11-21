@@ -12,17 +12,7 @@ class TabTransitionNavigator extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        ElevatedButton(
-            onPressed: (tabIndex == tabCount - 1)
-                ? null
-                : () {
-                    if (tabController == null) return;
-                    int i = tabController.index;
-                    // button disabeld if last tab.
-                    tabController.animateTo(i + 1);
-                  },
-            child: const Text('Next')),
-        ElevatedButton(
+        OutlinedButton(
             onPressed: (tabIndex == 0)
                 ? null
                 : () {
@@ -32,6 +22,27 @@ class TabTransitionNavigator extends StatelessWidget {
                     tabController.animateTo(i - 1);
                   },
             child: const Text('Back')),
+        OutlinedButton(
+            style: OutlinedButton.styleFrom(
+                side: BorderSide.none,
+                backgroundColor:
+                    Theme.of(context).colorScheme.secondaryContainer,
+                foregroundColor:
+                    Theme.of(context).colorScheme.onSecondaryContainer,
+                shadowColor: Theme.of(context).colorScheme.shadow,
+                disabledBackgroundColor:
+                    Theme.of(context).colorScheme.onSurface.withOpacity(0.12),
+                disabledForegroundColor:
+                    Theme.of(context).colorScheme.onSurface.withOpacity(0.38)),
+            onPressed: (tabIndex == tabCount - 1)
+                ? null
+                : () {
+                    if (tabController == null) return;
+                    int i = tabController.index;
+                    // button disabeld if last tab.
+                    tabController.animateTo(i + 1);
+                  },
+            child: const Text('Next')),
       ],
     );
   }
