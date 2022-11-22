@@ -12,6 +12,6 @@ enum YesNo {
   bool toBool() => isTrue;
 }
 
-extension EnumExt on bool {
-  YesNo toBoolean() => this ? YesNo.yes : YesNo.no;
+extension YesNoExt on bool {
+  YesNo toYesNo() => this ? YesNo.yes : YesNo.no;
 }
