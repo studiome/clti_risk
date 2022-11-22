@@ -27,10 +27,7 @@ class TabTransitionNavigator extends StatelessWidget {
             style: ButtonStyle(
                 elevation: MaterialStateProperty.resolveWith<double?>(
                     (Set<MaterialState> states) {
-                  if (states.contains(MaterialState.disabled)) return 0.0;
                   if (states.contains(MaterialState.hovered)) return 1.0;
-                  if (states.contains(MaterialState.focused)) return 0.0;
-                  if (states.contains(MaterialState.pressed)) return 0.0;
                   return 0.0;
                 }),
                 backgroundColor:
