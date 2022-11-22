@@ -1,4 +1,3 @@
-import 'package:clti_risk/widgets/question_page.dart';
 import 'package:clti_risk/widgets/tab_transition_navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -59,20 +58,6 @@ class TabTestWidget extends StatelessWidget {
             body: TabBarView(children: _buildTabPage(context)),
           );
         }));
-  }
-
-  List<QuestionPage> _buildTabPages() {
-    final qps = <QuestionPage>[];
-    for (int i = 0; i < tabCount; i++) {
-      qps.add(QuestionPage(
-        title: 'Tab$i',
-        subtitle: 'Tab at $i',
-        content: Text('TabPage$i'),
-        tabIndex: i,
-        tabCount: tabCount,
-      ));
-    }
-    return qps;
   }
 
   List<Tab> _buildTabBar() {

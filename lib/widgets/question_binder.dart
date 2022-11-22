@@ -1,12 +1,10 @@
+import 'package:clti_risk/widgets/question_page.dart';
 import 'package:flutter/material.dart';
 
-import 'question_page.dart';
-
 class QuestionBinder extends StatelessWidget {
-  final List<Tab> tabBars;
-  final List<QuestionPage> questionPages;
-  const QuestionBinder(
-      {super.key, required this.tabBars, required this.questionPages});
+  final List<Tab> tabBars = <Tab>[];
+  final List<QuestionPage> questionPages = <QuestionPage>[];
+  QuestionBinder({super.key});
 
   @override
   Widget build(BuildContext context) {
