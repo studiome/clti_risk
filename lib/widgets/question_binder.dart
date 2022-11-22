@@ -1,14 +1,42 @@
 import 'package:clti_risk/widgets/question_page.dart';
 import 'package:flutter/material.dart';
 
+class QuestionPageDetail {
+  String tabBarTitle;
+  int tabIndex;
+  QuestionPage page;
+  QuestionPageDetail(
+      {required this.tabBarTitle, required this.tabIndex, required this.page});
+}
+
 class QuestionBinder extends StatelessWidget {
-  final List<Tab> tabBars = <Tab>[];
-  final List<QuestionPage> questionPages = <QuestionPage>[];
-  QuestionBinder({super.key});
+  final String title;
+  final List<QuestionPageDetail> questionPages;
+
+  const QuestionBinder({
+    super.key,
+    required this.title,
+    required this.questionPages,
+  });
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+        bottom: TabBar(
+          tabs: questionPages.map((e) {
+            return Tab(text: e.tabBarTitle);
+          }).toList(),
+          isScrollable: true,
+        ),
+      ),
+      body: SafeArea(
+        bottom: false,
+        child: TabBarView(
+          children: questionPages.map((e) => e.page).toList(),
+        ),
+      ),
+    );
   }
 }
