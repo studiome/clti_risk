@@ -28,6 +28,8 @@ class QuestionBinder extends StatelessWidget {
         appBar: AppBar(
           title: Text(title),
           bottom: TabBar(
+            indicatorColor: Theme.of(context).colorScheme.primary,
+            labelColor: Theme.of(context).colorScheme.primary,
             tabs: questionPages.map((e) {
               return Tab(text: e.tabBarTitle);
             }).toList(),
