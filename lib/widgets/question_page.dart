@@ -5,11 +5,9 @@ class QuestionPage extends StatelessWidget {
   final int tabIndex;
   final int tabCount;
   final Widget content;
-  final String title;
   final String subtitle;
   const QuestionPage(
       {super.key,
-      required this.title,
       required this.content,
       required this.subtitle,
       required this.tabIndex,
