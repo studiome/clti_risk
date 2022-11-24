@@ -1,26 +1,32 @@
 //Questions List definition, also defines list order
 enum Questions {
-  sex, // boolean
-  bodyMeasurement, // form
-  albumin, // form
-  activity, // enum
-  chf, // boolean
-  cad, // boolean
-  cvd, // boolean
-  ckd, // boolean
-  malingnantNeoplasm, // enum
-  leasionAI, // boolean
-  leasionFP, // boolean
-  leasionBK, // boolean
-  urgentProcedure, // boolean
-  fever, // boolean
-  abnormalWBC, // boolean
-  localInfection,
-  dl, //boolean
-  smoking, //boolean
-  contralateral, // boolean
-  others, // boolean
-  rutherford, // enum
+  sex('Sex'), // boolean
+  bodyMeasurement('Height/Weight'), // form
+  albumin('Alb'), // form
+  activity('Activity'), // enum
+  chf('Congestive heart failure'), // boolean
+  cad('Coronary artery disease'), // boolean
+  cvd('Cerebral vascular disease'), // boolean
+  ckd('Chronic kidney disease'), // boolean
+  malingnantNeoplasm('Malignant neoplasm'), // enum
+  leasionAI('Aorto-Iliac artery occlusion'), // boolean
+  leasionFP('Femoro-Popliteal artery artery occlusion'), // boolean
+  leasionBK('Infrapopliteal artery occlusion'), // boolean
+  urgentProcedure('Urgent proceure'), // boolean
+  fever('Fever'), // boolean
+  abnormalWBC('Abnormal WBC'), // boolean
+  localInfection('Local infection'),
+  dl('Dyslipidemia'), //boolean
+  smoking('Smoking status'), //boolean
+  contralateral('Contralateral limb arterial occlusion'), // boolean
+  others('Other vascular lesions except contralateral limb'), // boolean
+  rutherford('Rutherford Classification');// enum
+
+  final String name;
+  const Questions(this.name);
+
+  @override
+  String toString() => name;
 }
 
 enum Description {
@@ -52,14 +58,14 @@ const Map<Questions, Map<Description, String>> questionDetail = {
         'absent or present: a history of admission due to CHF or clinical symptoms of CHF confirmed on echocardiography or absence of clinical symptoms but clearly reduced cardiac function on echocardiography',
   },
   Questions.cad: {
-    Description.title: 'Coronary atery disease',
+    Description.title: 'Coronary artery disease',
     Description.subtitle:
         'absent or present: myocardial infarction and/or ongoing angina or previous endovascular coronary intervention and/or coronary artery bypass surgery',
   },
   Questions.cvd: {
     Description.title: 'Cerebral vascular disease',
     Description.subtitle:
-        'absent or present: stroke and/or transient ischaemic attacks',
+        'absent or present: stroke and/or transient ischemic attacks',
   },
   Questions.ckd: {
     Description.title: 'Chronic kidney disease (eGFR*: mL/min/1.73m\u00B2)',
@@ -76,11 +82,11 @@ const Map<Questions, Map<Description, String>> questionDetail = {
     Description.subtitle: 'aorto-iliac occlusive lesion present or absent',
   },
   Questions.leasionFP: {
-    Description.title: 'Sites of artery oclusive lesions: Femoro-Popliteal',
+    Description.title: 'Sites of artery occlusive lesions: Femoro-Popliteal',
     Description.subtitle: 'femoro-popliteal present or absent',
   },
   Questions.leasionBK: {
-    Description.title: 'Sites of artery oclusive lesions: Infrapopliteal',
+    Description.title: 'Sites of artery occlusive lesions: Infrapopliteal',
     Description.subtitle: 'infrapopliteal present or absent',
   },
   Questions.urgentProcedure: {
@@ -102,7 +108,7 @@ const Map<Questions, Map<Description, String>> questionDetail = {
         'absent or present: the wound was suppurative or showed at least two of the following findings: heat, erythema, lymphangitis, lymph node swelling, oedema, and pain',
   },
   Questions.dl: {
-    Description.title: 'Dislipidemia',
+    Description.title: 'Dyslipidemia',
     Description.subtitle:
         'absent or present:serum low density lipoprotein (LDL-C) > 140 [mg/dl]',
   },
