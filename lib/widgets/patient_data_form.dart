@@ -625,7 +625,7 @@ class _PatientDataFormState extends State<PatientDataForm> {
                             : StepState.complete,
                   ),
                   Step(
-                    title: const Text('Dislipidemia'),
+                    title: const Text('Dyslipidemia'),
                     subtitle: const Text(
                         'absent, present with good control; serum low density lipoprotein [LDL] < 100 mg/dL without other vascular diseases or LDL < 80 mg/dL with other vascular diseases, or present with poor control'),
                     content: Container(
