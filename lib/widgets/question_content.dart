@@ -77,9 +77,13 @@ class _MultipleQuestionContentState<T extends Enum>
   Widget build(BuildContext context) {
     final Widget content = _createContent(widget.values, widget.dataItem,
         widget.itemWidth, widget.itemHeight, context);
-    final String subtitle =
-        detail.questionDetail[widget.question]![detail.Description.subtitle] ??
-            '';
+    final String subtitle;
+    var d = detail.questionDetail[widget.question];
+    if (d == null) {
+      subtitle = '';
+    } else {
+      subtitle = d[detail.Description.subtitle] ?? '';
+    }
     return QuestionPage(
         content: content,
         subtitle: subtitle,
