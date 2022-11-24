@@ -830,31 +830,31 @@ class _PatientDataFormState extends State<PatientDataForm> {
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 16.0, vertical: 8.0),
                                         child: SelectableText(
-                                            'prediction of 30 days Death or Amputation: ${pr.predicted30DDeathOrAmputation.toStringAsFixed(3)}'),
+                                            'prediction of 30 days Death or Amputation: ${(pr.predicted30DDeathOrAmputation * 100.0).toStringAsFixed(1)}%'),
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 16.0, vertical: 8.0),
                                         child: SelectableText(
-                                            'prediction of 30 days MALE: ${pr.predicted30DMALE.toStringAsFixed(3)}'),
+                                            'prediction of 30 days MALE: ${(pr.predicted30DMALE * 100.0).toStringAsFixed(1)}%'),
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 16.0, vertical: 8.0),
                                         child: SelectableText(
-                                            '2yr Overall Survival: ${pr.predictedOS.toStringAsFixed(2)}'),
+                                            '2 years Overall Survival (OS): ${(pr.predictedOS * 100.0).toStringAsFixed(0)}%'),
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 16.0, vertical: 8.0),
                                         child: SelectableText(
-                                            '2yr OS Risk: ${pr.osRisk}'),
+                                            '2 years OS Risk: ${pr.osRisk}'),
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 16.0, vertical: 8.0),
                                         child: SelectableText(
-                                            '2yr Amputation Free Survival: ${pr.predictedAFS.toStringAsFixed(2)}'),
+                                            '2 years Amputation Free Survival: ${(pr.predictedAFS * 100.0).toStringAsFixed(0)}%'),
                                       ),
                                     ],
                                   );
