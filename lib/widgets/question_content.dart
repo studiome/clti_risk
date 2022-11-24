@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/question_details.dart' as detail;
+import '../models/questions.dart';
 import 'question_page.dart';
 
 class MultipleQuestionContent<T extends Enum> extends StatefulWidget {
@@ -10,8 +11,10 @@ class MultipleQuestionContent<T extends Enum> extends StatefulWidget {
   final int tabCount;
   final double itemWidth;
   final double itemHeight;
+  final Questions question;
   const MultipleQuestionContent(
       {super.key,
+      required this.question,
       required this.dataItem,
       required this.values,
       required this.tabIndex,
@@ -75,7 +78,8 @@ class _MultipleQuestionContentState<T extends Enum>
     final Widget content = _createContent(widget.values, widget.dataItem,
         widget.itemWidth, widget.itemHeight, context);
     final String subtitle =
-        detail.questionDetail[T]![detail.Description.subtitle]!;
+        detail.questionDetail[widget.question]![detail.Description.subtitle] ??
+            '';
     return QuestionPage(
         content: content,
         subtitle: subtitle,
