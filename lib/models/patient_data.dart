@@ -12,10 +12,10 @@ class PatientData {
   // congestive heart failure
   bool hasCHF = false;
 
-  // cerebral vasuclar disease
+  // cerebral vascular disease
   bool hasCVD = false;
 
-  // chroic kidney disease classification
+  // chronic kidney disease classification
   CKD ckd = CKD.normal;
 
   // malignant neoplasm
