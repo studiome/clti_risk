@@ -4,7 +4,9 @@ import '../models/question_details.dart' as detail;
 import '../models/questions.dart';
 import 'question_page.dart';
 
-class MultipleQuestionContent<T extends Enum> extends StatefulWidget {
+//TODO: Make PatientData observable(changenotifuier)
+//
+class MultipleQuestionContent<T extends Enum> extends StatelessWidget {
   final List<T> values;
   final T dataItem;
   final int tabIndex;
@@ -12,6 +14,7 @@ class MultipleQuestionContent<T extends Enum> extends StatefulWidget {
   final double itemWidth;
   final double itemHeight;
   final Questions question;
+  final void Function(T?)? onChanged;
   const MultipleQuestionContent(
       {super.key,
       required this.question,
@@ -20,15 +23,9 @@ class MultipleQuestionContent<T extends Enum> extends StatefulWidget {
       required this.tabIndex,
       required this.tabCount,
       required this.itemWidth,
-      required this.itemHeight});
+      required this.itemHeight,
+      required this.onChanged});
 
-  @override
-  State<MultipleQuestionContent<T>> createState() =>
-      _MultipleQuestionContentState<T>();
-}
-
-class _MultipleQuestionContentState<T extends Enum>
-    extends State<MultipleQuestionContent<T>> {
   Widget _createContent(List<T> values, T dataItem, double itemWidth,
       double itemHeight, BuildContext context) {
     final itemLength = values.length;
@@ -41,12 +38,7 @@ class _MultipleQuestionContentState<T extends Enum>
             title: Text(values[i].toString()),
             value: values[i],
             groupValue: dataItem,
-            onChanged: (v) {
-              if (v == null) return;
-              setState(() {
-                dataItem = v;
-              });
-            },
+            onChanged: onChanged,
           )));
     }
     return LayoutBuilder(builder: (context, constrains) {
@@ -75,10 +67,10 @@ class _MultipleQuestionContentState<T extends Enum>
 
   @override
   Widget build(BuildContext context) {
-    final Widget content = _createContent(widget.values, widget.dataItem,
-        widget.itemWidth, widget.itemHeight, context);
+    final Widget content =
+        _createContent(values, dataItem, itemWidth, itemHeight, context);
     final String subtitle;
-    var d = detail.questionDetail[widget.question];
+    var d = detail.questionDetail[question];
     if (d == null) {
       subtitle = '';
     } else {
@@ -87,7 +79,7 @@ class _MultipleQuestionContentState<T extends Enum>
     return QuestionPage(
         content: content,
         subtitle: subtitle,
-        tabIndex: widget.tabIndex,
-        tabCount: widget.tabCount);
+        tabIndex: tabIndex,
+        tabCount: tabCount);
   }
 }
