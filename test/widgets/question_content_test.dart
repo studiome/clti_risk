@@ -29,6 +29,8 @@ void main() {
     expect(radio1.value == radio1.groupValue, isTrue);
     await tester.tap(choice0);
     await tester.pumpAndSettle();
+    expect(radio0.value == radio1.groupValue, isTrue);
+    expect(radio1.value == radio1.groupValue, isFalse);
     expect(pd.sex, Sex.male);
   });
 }
