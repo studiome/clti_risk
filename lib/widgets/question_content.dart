@@ -4,8 +4,6 @@ import '../models/question_details.dart' as detail;
 import '../models/questions.dart';
 import 'question_page.dart';
 
-//TODO: Make PatientData observable(changenotifuier)
-//
 class MultipleQuestionContent<T extends Enum> extends StatelessWidget {
   final List<T> values;
   final T dataItem;
