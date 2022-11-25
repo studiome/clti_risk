@@ -2,22 +2,25 @@ import 'package:clti_risk/widgets/tab_transition_navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-const initialTab = 5;
-const tabCount = 10;
+const initialTab = 1;
+const tabCount = 3;
 
 void main() {
+  final List<int> log = <int>[];
   testWidgets('Build Check', (tester) async {
-    await tester.pumpWidget(const TabTestApp());
+    await tester.pumpWidget(MaterialApp(home: TabTestWidget(log: log)));
     final nextButton = find.text('Next');
     final backButton = find.text('Back');
     final initialTabView = find.text('TabView$initialTab');
     expect(initialTabView, findsOneWidget);
     expect(nextButton, findsOneWidget);
     expect(backButton, findsOneWidget);
+    expect(log, isEmpty);
+    log.clear();
   });
 
   testWidgets('Next Tab', (tester) async {
-    await tester.pumpWidget(const TabTestApp());
+    await tester.pumpWidget(MaterialApp(home: TabTestWidget(log: log)));
     final nextButton = find.text('Next');
     final initialTabView = find.text('TabView$initialTab');
     final nextTabView = find.text('TabView${initialTab + 1}');
@@ -25,10 +28,12 @@ void main() {
     await tester.pumpAndSettle();
     expect(initialTabView, findsNothing);
     expect(nextTabView, findsOneWidget);
+    expect(log, <int>[1]);
+    log.clear();
   });
 
   testWidgets('Previous Tab', (tester) async {
-    await tester.pumpWidget(const TabTestApp());
+    await tester.pumpWidget(MaterialApp(home: TabTestWidget(log: log)));
     final backButton = find.text('Back');
     final initialTabView = find.text('TabView$initialTab');
     final previousTabView = find.text('TabView${initialTab - 1}');
@@ -36,11 +41,14 @@ void main() {
     await tester.pumpAndSettle();
     expect(initialTabView, findsNothing);
     expect(previousTabView, findsOneWidget);
+    expect(log, <int>[0]);
+    log.clear();
   });
 }
 
 class TabTestWidget extends StatelessWidget {
-  const TabTestWidget({super.key});
+  final List<int> log;
+  const TabTestWidget({super.key, required this.log});
 
   @override
   Widget build(BuildContext context) {
@@ -77,6 +85,8 @@ class TabTestWidget extends StatelessWidget {
         children: [
           Text('TabView$i'),
           TabTransitionNavigator(
+            onNext: () => log.add(1),
+            onBack: () => log.add(0),
             tabCount: tabCount,
             tabIndex: i,
           ),
@@ -84,14 +94,5 @@ class TabTestWidget extends StatelessWidget {
       ));
     }
     return tabPages;
-  }
-}
-
-class TabTestApp extends StatelessWidget {
-  const TabTestApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(home: TabTestWidget());
   }
 }

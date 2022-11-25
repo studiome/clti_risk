@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 
-//TODO: change abstract class, define DefaultTabTransitionNavigator
-// needed to override onNext/onBack for validate and update value
 class TabTransitionNavigator extends StatelessWidget {
   final int tabIndex; //[0 .. tabCount-1]
   final int tabCount;
+  final Function? onNext;
+  final Function? onBack;
   const TabTransitionNavigator(
-      {super.key, required this.tabIndex, required this.tabCount});
+      {super.key,
+      required this.tabIndex,
+      required this.tabCount,
+      this.onNext,
+      this.onBack});
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +23,10 @@ class TabTransitionNavigator extends StatelessWidget {
                 ? null
                 : () {
                     if (tabController == null) return;
+
+                    //user defined function
+                    if (onBack != null) onBack!.call();
+
                     int i = tabController.index;
                     // button disabeld if first tab.
                     tabController.animateTo(i - 1);
@@ -71,6 +79,10 @@ class TabTransitionNavigator extends StatelessWidget {
                 ? null
                 : () {
                     if (tabController == null) return;
+
+                    //user defined function
+                    if (onNext != null) onNext!.call();
+
                     int i = tabController.index;
                     // button disabeld if last tab.
                     tabController.animateTo(i + 1);
