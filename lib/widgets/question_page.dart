@@ -6,12 +6,16 @@ class QuestionPage extends StatelessWidget {
   final int tabCount;
   final Widget content;
   final String subtitle;
+  final Function? onNext;
+  final Function? onBack;
   const QuestionPage(
       {super.key,
       required this.content,
       required this.subtitle,
       required this.tabIndex,
-      required this.tabCount});
+      required this.tabCount,
+      this.onNext,
+      this.onBack});
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +27,8 @@ class QuestionPage extends StatelessWidget {
           TabTransitionNavigator(
             tabIndex: tabIndex,
             tabCount: tabCount,
+            onNext: onNext,
+            onBack: onBack,
           ),
         ],
       ),
