@@ -2,7 +2,8 @@
 
 enum Questions {
   sex, // boolean
-  bodyMeasurement, // form
+  height, // form
+  weight, // form
   albumin, // form
   activity, // enum
   chf, // boolean
