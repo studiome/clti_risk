@@ -16,7 +16,7 @@ class PatientRisk {
     if (patientData.weight == null ||
         patientData.height == null ||
         patientData.age == null ||
-        patientData.alb == null) throw FormatException();
+        patientData.alb == null) throw const FormatException();
     gnri = _calcGNRI();
     gnriRisk = _classifyGNRIRisk(gnri);
     predictedOS = _calcPredictedOS(patientData);
