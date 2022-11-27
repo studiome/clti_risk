@@ -36,21 +36,89 @@ void main() {
     expect(radio0.value == radio0.groupValue, isTrue);
     expect(radio1.value == radio1.groupValue, isFalse);
   });
-  testWidgets('Number Form Test', (tester) async {
-    final pd = PatientData();
-    await tester.pumpWidget(MaterialApp(
-        home: ClinicalDataController(
-      patientData: pd,
-      child: Scaffold(body: FormTestWidget()),
-    )));
-    expect(pd.height, isNull);
-    expect(find.text('Body Height'), findsOneWidget);
-    var form = find.byType(TextFormField);
-    await tester.enterText(form, '1.50');
-    expect(find.text('1.50'), findsOneWidget);
-    await tester.testTextInput.receiveAction(TextInputAction.done);
-    await tester.pumpAndSettle();
-    expect(pd.height, 1.50);
+  group('Number Form Test', () {
+    late PatientData pd;
+    late MaterialApp testApp;
+    setUp(
+      () {
+        pd = PatientData();
+        testApp = MaterialApp(
+            home: ClinicalDataController(
+                patientData: pd,
+                child: DefaultTabController(
+                    length: 3,
+                    child: Scaffold(
+                        appBar: AppBar(
+                            bottom: const TabBar(
+                          isScrollable: true,
+                          tabs: [
+                            Tab(text: 'dummy1'),
+                            Tab(text: 'TestTab'),
+                            Tab(text: 'dummy2')
+                          ],
+                        )),
+                        body: TabBarView(children: [
+                          const Text('dummy1'),
+                          FormTestWidget(),
+                          const Text('dummy2')
+                        ])))));
+      },
+    );
+
+    testWidgets('build check', (tester) async {
+      await tester.pumpWidget(testApp);
+      final tab = find.text('TestTab');
+      expect(tab, findsOneWidget);
+      await tester.tap(tab);
+      await tester.pumpAndSettle();
+      expect(pd.height, isNull);
+      expect(find.text('Body Height'), findsOneWidget);
+      expect(find.text('Next'), findsOneWidget);
+      expect(find.text('Back'), findsOneWidget);
+      final form = find.byType(TextFormField);
+      expect(form, findsOneWidget);
+    });
+
+    testWidgets('enter invalid text', (tester) async {
+      await tester.pumpWidget(testApp);
+      final tab = find.text('TestTab');
+      await tester.tap(tab);
+      await tester.pumpAndSettle();
+      var form = find.byType(TextFormField);
+      await tester.enterText(form, 'abcde');
+      expect(find.text('abcde'), findsNothing);
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
+      expect(pd.height, isNull);
+    });
+
+    testWidgets('enter value and submit', (tester) async {
+      await tester.pumpWidget(testApp);
+      final tab = find.text('TestTab');
+      await tester.tap(tab);
+      await tester.pumpAndSettle();
+      var form = find.byType(TextFormField);
+      await tester.enterText(form, '1.50');
+      expect(find.text('1.50'), findsOneWidget);
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
+      expect(pd.height, 1.50);
+    });
+
+    testWidgets('enter value and press next', (tester) async {
+      await tester.pumpWidget(testApp);
+      final tab = find.text('TestTab');
+      await tester.tap(tab);
+      await tester.pumpAndSettle();
+      var form = find.byType(TextFormField);
+      final next = find.text('Next');
+      await tester.enterText(form, '1.50');
+      expect(find.text('1.50'), findsOneWidget);
+
+      await tester.tap(next);
+      await tester.pumpAndSettle();
+      expect(pd.height, 1.50);
+    });
   });
 }
 
@@ -92,23 +160,22 @@ class FormTestWidget extends StatelessWidget {
     final c = ClinicalDataController.of(context);
     if (c == null) throw NullThrownError();
     return NumberFormQuestionContent(
-      question: Questions.height,
-      formController: controller,
-      isDecimal: true,
-      inputFormatters: <TextInputFormatter>[
-        FilteringTextInputFormatter.allow(RegExp(r'^\d{1}\.?\d{0,2}')),
-      ],
-      onSubmitted: (v) {
-        try {
-          c.patientData.height = double.parse(v);
-        } catch (e) {
-          c.patientData.height = null;
-        }
-      },
-      itemWidth: 240,
-      itemHeight: 60,
-      tabIndex: Questions.height.index,
-      tabCount: Questions.values.length,
-    );
+        question: Questions.height,
+        formController: controller,
+        isDecimal: true,
+        inputFormatters: <TextInputFormatter>[
+          FilteringTextInputFormatter.allow(RegExp(r'^\d{1}\.?\d{0,2}')),
+        ],
+        onSubmitted: (v) {
+          try {
+            c.patientData.height = double.parse(v);
+          } catch (e) {
+            c.patientData.height = null;
+          }
+        },
+        itemWidth: 240,
+        itemHeight: 60,
+        tabIndex: 1,
+        tabCount: 3);
   }
 }
