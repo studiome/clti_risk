@@ -1,7 +1,5 @@
 import 'dart:math';
 
-import 'package:flutter/foundation.dart';
-
 import 'patient_data.dart';
 
 class PatientRisk {
@@ -15,6 +13,10 @@ class PatientRisk {
   late double predicted30DMALE;
 
   PatientRisk({required this.patientData}) {
+    if (patientData.weight == null ||
+        patientData.height == null ||
+        patientData.age == null ||
+        patientData.alb == null) throw FormatException();
     gnri = _calcGNRI();
     gnriRisk = _classifyGNRIRisk(gnri);
     predictedOS = _calcPredictedOS(patientData);
@@ -26,15 +28,10 @@ class PatientRisk {
 
   double _calcGNRI() {
     if (patientData.height == 0.0) return double.nan;
-    try {
-      double wi = patientData.weight / (22.0 * pow(patientData.height, 2));
-      if (wi >= 1.0) wi = 1.0;
-      double v = 14.89 * patientData.alb + 41.7 * wi;
-      return v;
-    } catch (e) {
-      if (kDebugMode) print(e);
-      return double.nan;
-    }
+    double wi = patientData.weight! / (22.0 * pow(patientData.height!, 2));
+    if (wi >= 1.0) wi = 1.0;
+    double v = 14.89 * patientData.alb! + 41.7 * wi;
+    return v;
   }
 
   GNRIRisk? _classifyGNRIRisk(double gnri) {
@@ -90,11 +87,11 @@ class PatientRisk {
     if (data.sex == Sex.female) sigma += coeff[Covariants.isFemale] ?? 0.0;
 
     //age
-    if (data.age >= 85) {
+    if (data.age! >= 85) {
       sigma += coeff[Covariants.ageOver85] ?? 0.0;
-    } else if (data.age >= 75) {
+    } else if (data.age! >= 75) {
       sigma += coeff[Covariants.age75to84] ?? 0.0;
-    } else if (data.age >= 65) {
+    } else if (data.age! >= 65) {
       sigma += coeff[Covariants.age65to74] ?? 0.0;
     }
 

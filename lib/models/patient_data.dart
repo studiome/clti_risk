@@ -1,10 +1,10 @@
 class PatientData {
   //basic info
   Sex sex = Sex.female;
-  int age = 65; //years
-  double weight = 50.0; //kg
-  double height = 1.50; //m
-  double alb = 4.0; //albumin g/dl
+  int? age; //years
+  double? weight; //kg
+  double? height; //m
+  double? alb; //albumin g/dl
   Activity activity = Activity.ambulatory;
 
   //clinical info

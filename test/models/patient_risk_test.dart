@@ -3,10 +3,18 @@ import 'package:clti_risk/models/patient_risk.dart';
 import 'package:test/test.dart';
 
 void main() {
+  test('null case', () {
+    expect(
+        () => PatientRisk(patientData: PatientData()), throwsFormatException);
+  });
+
   //Test Cases, dummy data
-  test('default case', () {
-    //occlusive lesion: AI
-    final pd = PatientData();
+  test('normal case', () {
+    final pd = PatientData()
+      ..age = 65
+      ..weight = 50.0
+      ..height = 1.50
+      ..alb = 4.0;
 
     const want = _Want(
         gnri: '101.3',

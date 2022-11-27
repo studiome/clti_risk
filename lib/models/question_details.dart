@@ -10,6 +10,10 @@ const Map<Questions, Map<Description, String>> questionDetail = {
     Description.title: 'Sex',
     Description.subtitle: 'Male or Female'
   },
+  Questions.age: {
+    Description.title: 'Age',
+    Description.subtitle: 'Enter Age [years]',
+  },
   Questions.height: {
     Description.title: 'Body Height',
     Description.subtitle: 'Enter body height [m]'

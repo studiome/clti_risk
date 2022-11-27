@@ -2,6 +2,7 @@
 
 enum Questions {
   sex, // boolean
+  age, // form
   height, // form
   weight, // form
   albumin, // form
