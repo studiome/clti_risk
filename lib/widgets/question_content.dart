@@ -80,38 +80,41 @@ class MultipleQuestionContent<T extends Enum> extends StatelessWidget {
   }
 }
 
-class NumberFormQuestionContent extends StatelessWidget {
+class NumberFormQuestionContent extends StatefulWidget {
   final Questions question;
   final int tabIndex;
   final int tabCount;
   final bool isDecimal;
   final List<TextInputFormatter> inputFormatters;
-  final String? Function(String?)? validator;
   final void Function(String)? onSubmitted;
   final double itemWidth;
   final double itemHeight;
-  final Function? onNext;
-  final Function? onBack;
   final TextEditingController formController;
 
-  const NumberFormQuestionContent(
-      {super.key,
-      required this.question,
-      required this.formController,
-      required this.isDecimal,
-      required this.inputFormatters,
-      required this.validator,
-      required this.onSubmitted,
-      required this.itemWidth,
-      required this.itemHeight,
-      required this.tabIndex,
-      required this.tabCount,
-      this.onNext,
-      this.onBack});
+  const NumberFormQuestionContent({
+    super.key,
+    required this.question,
+    required this.formController,
+    required this.isDecimal,
+    required this.inputFormatters,
+    required this.onSubmitted,
+    required this.itemWidth,
+    required this.itemHeight,
+    required this.tabIndex,
+    required this.tabCount,
+  });
+
+  @override
+  State<NumberFormQuestionContent> createState() =>
+      _NumberFormQuestionContentState();
+}
+
+class _NumberFormQuestionContentState extends State<NumberFormQuestionContent> {
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    final d = detail.questionDetail[question];
+    final d = detail.questionDetail[widget.question];
     if (d == null) throw NullThrownError();
 
     final String? subtitle = d[detail.Description.subtitle];
@@ -120,22 +123,40 @@ class NumberFormQuestionContent extends StatelessWidget {
     final String? label = d[detail.Description.title];
 
     Widget content = _createContent(
-      width: itemWidth,
-      height: itemHeight,
+      width: widget.itemWidth,
+      height: widget.itemHeight,
       hint: subtitle,
       label: label,
-      decimal: isDecimal,
-      inputFormatters: inputFormatters,
-      validator: validator,
-      onSubmitted: onSubmitted,
+      decimal: widget.isDecimal,
+      inputFormatters: widget.inputFormatters,
+      validator: (v) {
+        if (v == null || v.isEmpty) {
+          return 'Please enter value.';
+        }
+        return null;
+      },
+      onSubmitted: widget.onSubmitted,
     );
     return QuestionPage(
       content: content,
       subtitle: subtitle,
-      tabIndex: tabIndex,
-      tabCount: tabCount,
-      onNext: onNext,
-      onBack: onBack,
+      tabIndex: widget.tabIndex,
+      tabCount: widget.tabCount,
+      onNext: () {
+        if (formKey.currentState == null || formKey.currentState!.validate()) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: const Text('Please fill data.'),
+            action: SnackBarAction(
+                textColor: Theme.of(context).colorScheme.onSecondary,
+                label: 'OK',
+                onPressed: () =>
+                    ScaffoldMessenger.of(context).hideCurrentSnackBar()),
+          ));
+        }
+        if (widget.onSubmitted != null) {
+          widget.onSubmitted!(widget.formController.text);
+        }
+      },
     );
   }
 
@@ -150,11 +171,12 @@ class NumberFormQuestionContent extends StatelessWidget {
     void Function(String)? onSubmitted,
   }) {
     return Form(
+      key: formKey,
       child: SizedBox(
           width: width,
           height: height,
           child: TextFormField(
-            controller: formController,
+            controller: widget.formController,
             decoration: InputDecoration(
               border: const OutlineInputBorder(),
               hintText: hint,
