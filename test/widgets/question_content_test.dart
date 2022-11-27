@@ -14,6 +14,9 @@ void main() {
       child: const Scaffold(body: ChoiceTestWidget()),
     )));
 
+    final subtitle = find.text('Male or Female');
+    expect(subtitle, findsOneWidget);
+
     expect(pd.sex, Sex.female);
     final choice0 = find.text(Sex.values[0].toString()); // Male
     final choice1 = find.text(Sex.values[1].toString()); //Female
