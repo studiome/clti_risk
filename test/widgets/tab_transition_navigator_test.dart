@@ -6,7 +6,7 @@ const initialTab = 1;
 const tabCount = 3;
 
 void main() {
-  group('Tab Tansition', () {
+  group('Tab Tansition Test', () {
     late List<int> log;
     late MaterialApp testApp;
 
