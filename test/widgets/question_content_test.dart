@@ -50,31 +50,30 @@ void main() {
   group('Number Form Test', () {
     late PatientData pd;
     late MaterialApp testApp;
-    setUp(
-      () {
-        pd = PatientData();
-        testApp = MaterialApp(
-            home: ClinicalDataController(
-                patientData: pd,
-                child: DefaultTabController(
-                    length: 3,
-                    child: Scaffold(
-                        appBar: AppBar(
-                            bottom: const TabBar(
-                          isScrollable: true,
-                          tabs: [
-                            Tab(text: 'dummy1'),
-                            Tab(text: 'TestTab'),
-                            Tab(text: 'dummy2')
-                          ],
-                        )),
-                        body: TabBarView(children: [
-                          const Text('dummy1'),
-                          FormTestWidget(),
-                          const Text('dummy2')
-                        ])))));
-      },
-    );
+
+    setUp(() {
+      pd = PatientData();
+      testApp = MaterialApp(
+          home: ClinicalDataController(
+              patientData: pd,
+              child: DefaultTabController(
+                  length: 3,
+                  child: Scaffold(
+                      appBar: AppBar(
+                          bottom: const TabBar(
+                        isScrollable: true,
+                        tabs: [
+                          Tab(text: 'dummy1'),
+                          Tab(text: 'TestTab'),
+                          Tab(text: 'dummy2')
+                        ],
+                      )),
+                      body: TabBarView(children: [
+                        const Text('dummy1'),
+                        FormTestWidget(),
+                        const Text('dummy2')
+                      ])))));
+    });
 
     testWidgets('build check', (tester) async {
       await tester.pumpWidget(testApp);
