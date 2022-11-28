@@ -100,6 +100,11 @@ void main() {
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pumpAndSettle();
       expect(pd.height, isNull);
+
+      final next = find.text('Next');
+      await tester.tap(next);
+      await tester.pumpAndSettle();
+      expect(pd.height, isNull);
     });
 
     testWidgets('enter value and submit', (tester) async {
