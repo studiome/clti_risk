@@ -17,11 +17,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: title,
-      theme: ThemeData(useMaterial3: true, colorSchemeSeed: jsvsColor),
+      theme: ThemeData(
+        useMaterial3: true,
+        colorSchemeSeed: jsvsColor,
+        fontFamily: 'Noto Sans JP',
+      ),
       darkTheme: ThemeData(
         useMaterial3: true,
         brightness: Brightness.dark,
         colorSchemeSeed: jsvsColor,
+        fontFamily: 'Noto Sans JP',
       ),
       themeMode: ThemeMode.system,
       home: AppScaffold(title: title, child: const PatientDataForm()),
