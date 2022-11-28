@@ -1,4 +1,4 @@
-# <u>C</u>hronic <u>Li</u>mb <u>T</u>hreatening <u>I</u>schaemia patient risk <u>CAL</u>culator (CLiTICAL)
+# <ins>C</ins>hronic <ins>Li</ins>mb <ins>T</ins>hreatening <ins>I</ins>schaemia patient risk <ins>CAL</ins>culator (CLiTICAL)
 
 # Overview 
 
