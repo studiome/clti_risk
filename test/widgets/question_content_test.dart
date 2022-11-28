@@ -7,35 +7,46 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets('MultipleChoice', (tester) async {
-    final pd = PatientData();
-    await tester.pumpWidget(MaterialApp(
-        home: ClinicalDataController(
-      patientData: pd,
-      child: const Scaffold(body: ChoiceTestWidget()),
-    )));
+  group('Multiple Choice Test', () {
+    late PatientData pd;
+    late MaterialApp testApp;
 
-    final subtitle = find.text('Male or Female');
-    expect(subtitle, findsOneWidget);
+    setUp(() {
+      pd = PatientData();
+      testApp = MaterialApp(
+          home: ClinicalDataController(
+              patientData: pd,
+              child: const Scaffold(body: ChoiceTestWidget())));
+    });
 
-    expect(pd.sex, Sex.female);
-    final choice0 = find.text(Sex.values[0].toString()); // Male
-    final choice1 = find.text(Sex.values[1].toString()); //Female
-    expect(choice0, findsOneWidget);
-    expect(choice1, findsOneWidget);
-    var radio0 = tester.widget<Radio<Sex>>(find.byType(Radio<Sex>).at(0));
-    var radio1 = tester.widget<Radio<Sex>>(find.byType(Radio<Sex>).at(1));
-    expect(radio0.value == radio0.groupValue, isFalse);
-    expect(radio1.value == radio1.groupValue, isTrue);
-    //select [0]
-    await tester.tap(choice0);
-    await tester.pumpAndSettle();
-    expect(pd.sex, Sex.male);
-    radio0 = tester.widget<Radio<Sex>>(find.byType(Radio<Sex>).at(0));
-    radio1 = tester.widget<Radio<Sex>>(find.byType(Radio<Sex>).at(1));
-    expect(radio0.value == radio0.groupValue, isTrue);
-    expect(radio1.value == radio1.groupValue, isFalse);
+    testWidgets('build check', (tester) async {
+      await tester.pumpWidget(testApp);
+      final subtitle = find.text('Male or Female');
+      expect(subtitle, findsOneWidget);
+      expect(pd.sex, Sex.female);
+      final choice0 = find.text(Sex.values[0].toString()); // Male
+      final choice1 = find.text(Sex.values[1].toString()); //Female
+      expect(choice0, findsOneWidget);
+      expect(choice1, findsOneWidget);
+      final radio0 = tester.widget<Radio<Sex>>(find.byType(Radio<Sex>).at(0));
+      final radio1 = tester.widget<Radio<Sex>>(find.byType(Radio<Sex>).at(1));
+      expect(radio0.value == radio0.groupValue, isFalse);
+      expect(radio1.value == radio1.groupValue, isTrue);
+    });
+
+    testWidgets('select radio button', (tester) async {
+      await tester.pumpWidget(testApp);
+      final choice0 = find.text(Sex.values[0].toString()); // Male
+      await tester.tap(choice0);
+      await tester.pumpAndSettle();
+      expect(pd.sex, Sex.male);
+      final radio0 = tester.widget<Radio<Sex>>(find.byType(Radio<Sex>).at(0));
+      final radio1 = tester.widget<Radio<Sex>>(find.byType(Radio<Sex>).at(1));
+      expect(radio0.value == radio0.groupValue, isTrue);
+      expect(radio1.value == radio1.groupValue, isFalse);
+    });
   });
+
   group('Number Form Test', () {
     late PatientData pd;
     late MaterialApp testApp;
