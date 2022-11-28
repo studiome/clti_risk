@@ -6,43 +6,49 @@ const initialTab = 1;
 const tabCount = 3;
 
 void main() {
-  final List<int> log = <int>[];
-  testWidgets('Build Check', (tester) async {
-    await tester.pumpWidget(MaterialApp(home: TabTestWidget(log: log)));
-    final nextButton = find.text('Next');
-    final backButton = find.text('Back');
-    final initialTabView = find.text('TabView$initialTab');
-    expect(initialTabView, findsOneWidget);
-    expect(nextButton, findsOneWidget);
-    expect(backButton, findsOneWidget);
-    expect(log, isEmpty);
-    log.clear();
-  });
+  group('Tab Tansition', () {
+    late List<int> log;
+    late MaterialApp testApp;
 
-  testWidgets('Next Tab', (tester) async {
-    await tester.pumpWidget(MaterialApp(home: TabTestWidget(log: log)));
-    final nextButton = find.text('Next');
-    final initialTabView = find.text('TabView$initialTab');
-    final nextTabView = find.text('TabView${initialTab + 1}');
-    await tester.tap(nextButton);
-    await tester.pumpAndSettle();
-    expect(initialTabView, findsNothing);
-    expect(nextTabView, findsOneWidget);
-    expect(log, <int>[1]);
-    log.clear();
-  });
+    setUp(() {
+      log = <int>[];
+      testApp = MaterialApp(home: TabTestWidget(log: log));
+    });
 
-  testWidgets('Previous Tab', (tester) async {
-    await tester.pumpWidget(MaterialApp(home: TabTestWidget(log: log)));
-    final backButton = find.text('Back');
-    final initialTabView = find.text('TabView$initialTab');
-    final previousTabView = find.text('TabView${initialTab - 1}');
-    await tester.tap(backButton);
-    await tester.pumpAndSettle();
-    expect(initialTabView, findsNothing);
-    expect(previousTabView, findsOneWidget);
-    expect(log, <int>[0]);
-    log.clear();
+    testWidgets('build check', (tester) async {
+      await tester.pumpWidget(testApp);
+      final nextButton = find.text('Next');
+      final backButton = find.text('Back');
+      final initialTabView = find.text('TabView$initialTab');
+      expect(initialTabView, findsOneWidget);
+      expect(nextButton, findsOneWidget);
+      expect(backButton, findsOneWidget);
+      expect(log, isEmpty);
+    });
+
+    testWidgets('next', (tester) async {
+      await tester.pumpWidget(testApp);
+      final nextButton = find.text('Next');
+      final initialTabView = find.text('TabView$initialTab');
+      final nextTabView = find.text('TabView${initialTab + 1}');
+      await tester.tap(nextButton);
+      await tester.pumpAndSettle();
+      expect(initialTabView, findsNothing);
+      expect(nextTabView, findsOneWidget);
+      expect(log, <int>[1]);
+    });
+
+    testWidgets('back', (tester) async {
+      await tester.pumpWidget(testApp);
+      final backButton = find.text('Back');
+      final initialTabView = find.text('TabView$initialTab');
+      final previousTabView = find.text('TabView${initialTab - 1}');
+      await tester.tap(backButton);
+      await tester.pumpAndSettle();
+      expect(initialTabView, findsNothing);
+      expect(previousTabView, findsOneWidget);
+      expect(log, <int>[0]);
+    });
   });
 }
 
