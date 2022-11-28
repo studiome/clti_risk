@@ -51,7 +51,7 @@ const Map<Questions, Map<Description, String>> questionDetail = {
     Description.subtitle:
         'absent: 60 or higher, G3: 30-59, G4: 15-29, G5: below 15, G5D: below 15 in haemodialysis.\n *eGFR: the estimated glomerular filtration rate',
   },
-  Questions.malingnantNeoplasm: {
+  Questions.malignantNeoplasm: {
     Description.title: 'Malignant neoplasm',
     Description.subtitle:
         'absent, past history of malignant neoplasm, or present under treatment',
@@ -86,7 +86,7 @@ const Map<Questions, Map<Description, String>> questionDetail = {
     Description.subtitle:
         'absent or present: the wound was suppurative or showed at least two of the following findings: heat, erythema, lymphangitis, lymph node swelling, oedema, and pain',
   },
-  Questions.dl: {
+  Questions.dyslipidemia: {
     Description.title: 'Dyslipidemia',
     Description.subtitle:
         'absent or present:serum low density lipoprotein (LDL-C) > 140 [mg/dl]',

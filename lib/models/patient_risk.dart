@@ -154,7 +154,7 @@ class PatientRisk {
     }
 
     //Malignancy
-    switch (data.mn) {
+    switch (data.malignant) {
       case MalignantNeoplasm.pastHistory:
         sigma += coeff[Covariants.pastMalignancy] ?? 0.0;
         break;
@@ -214,7 +214,7 @@ class PatientRisk {
       sigma += coeff[Covariants.isSmoking] ?? 0.0;
     }
 
-    if (data.hasDislipidemia) {
+    if (data.hasDyslipidemia) {
       sigma += coeff[Covariants.hasDislipidemia] ?? 0.0;
     }
 

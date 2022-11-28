@@ -434,13 +434,13 @@ class _PatientDataFormState extends State<PatientDataForm> {
                       alignment: Alignment.centerLeft,
                       child: StepContentWithEnum<MalignantNeoplasm>(
                         values: MalignantNeoplasm.values,
-                        item: patientData.mn,
+                        item: patientData.malignant,
                         itemWidth: 240,
                         itemHeight: 40,
                         onChanged: (v) {
                           if (v == null) return;
                           setState(() {
-                            patientData.mn = v;
+                            patientData.malignant = v;
                           });
                         },
                       ),
@@ -632,13 +632,13 @@ class _PatientDataFormState extends State<PatientDataForm> {
                     content: Container(
                       alignment: Alignment.centerLeft,
                       child: StepContentWithBoolean(
-                        item: patientData.hasDislipidemia,
+                        item: patientData.hasDyslipidemia,
                         itemWidth: 120,
                         itemHeight: 40,
                         onChanged: (v) {
                           if (v == null) return;
                           setState(() {
-                            patientData.hasDislipidemia = v;
+                            patientData.hasDyslipidemia = v;
                           });
                         },
                       ),

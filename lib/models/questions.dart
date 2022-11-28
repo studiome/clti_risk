@@ -11,7 +11,7 @@ enum Questions {
   cad, // boolean
   cvd, // boolean
   ckd, // boolean
-  malingnantNeoplasm, // enum
+  malignantNeoplasm, // enum
   leasionAI, // boolean
   leasionFP, // boolean
   leasionBK, // boolean
@@ -19,7 +19,7 @@ enum Questions {
   fever, // boolean
   abnormalWBC, // boolean
   localInfection,
-  dl, //boolean
+  dyslipidemia, //boolean
   smoking, //boolean
   contralateral, // boolean
   others, // boolean

@@ -61,7 +61,7 @@ void main() {
       ..hasCHF = false
       ..hasCVD = true
       ..ckd = CKD.g3
-      ..mn = MalignantNeoplasm.no
+      ..malignant = MalignantNeoplasm.no
       ..hasAILesion = false
       ..hasFPLesion = true
       ..hasBKLesion = false
@@ -70,7 +70,7 @@ void main() {
       ..hasAbnormalWBC = true
       ..hasLocalInfection = true
       ..hasCAD = true
-      ..hasDislipidemia = false
+      ..hasDyslipidemia = false
       ..isSmoking = true
       ..hasContraLateralLesion = false
       ..hasOtherVD = true
@@ -100,7 +100,7 @@ void main() {
       ..hasCHF = true
       ..hasCVD = true
       ..ckd = CKD.g4
-      ..mn = MalignantNeoplasm.pastHistory
+      ..malignant = MalignantNeoplasm.pastHistory
       ..hasAILesion = false
       ..hasFPLesion = true
       ..hasBKLesion = true
@@ -109,7 +109,7 @@ void main() {
       ..hasAbnormalWBC = true
       ..hasLocalInfection = true
       ..hasCAD = false
-      ..hasDislipidemia = true
+      ..hasDyslipidemia = true
       ..isSmoking = false
       ..hasContraLateralLesion = true
       ..hasOtherVD = false
@@ -139,7 +139,7 @@ void main() {
       ..hasCHF = false
       ..hasCVD = false
       ..ckd = CKD.g5
-      ..mn = MalignantNeoplasm.underTreatment
+      ..malignant = MalignantNeoplasm.underTreatment
       ..hasAILesion = false
       ..hasFPLesion = false
       ..hasBKLesion = true
@@ -148,7 +148,7 @@ void main() {
       ..hasAbnormalWBC = true
       ..hasLocalInfection = false
       ..hasCAD = true
-      ..hasDislipidemia = true
+      ..hasDyslipidemia = true
       ..isSmoking = true
       ..hasContraLateralLesion = true
       ..hasOtherVD = false
@@ -178,7 +178,7 @@ void main() {
       ..hasCHF = true
       ..hasCVD = true
       ..ckd = CKD.g5D
-      ..mn = MalignantNeoplasm.underTreatment
+      ..malignant = MalignantNeoplasm.underTreatment
       ..hasAILesion = false
       ..hasFPLesion = false
       ..hasBKLesion = true
@@ -187,7 +187,7 @@ void main() {
       ..hasAbnormalWBC = true
       ..hasLocalInfection = true
       ..hasCAD = true
-      ..hasDislipidemia = true
+      ..hasDyslipidemia = true
       ..isSmoking = true
       ..hasContraLateralLesion = false
       ..hasOtherVD = true

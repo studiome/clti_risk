@@ -19,7 +19,7 @@ class PatientData {
   CKD ckd = CKD.normal;
 
   // malignant neoplasm
-  MalignantNeoplasm mn = MalignantNeoplasm.no;
+  MalignantNeoplasm malignant = MalignantNeoplasm.no;
 
   // arterial occlusive lesion: AorotIliac, FP, below Pop
   bool hasAILesion = true;
@@ -46,7 +46,7 @@ class PatientData {
   bool hasLocalInfection = false;
 
   // high LDL-C or TG
-  bool hasDislipidemia = false;
+  bool hasDyslipidemia = false;
 
   // smoking status
   bool isSmoking = false;
