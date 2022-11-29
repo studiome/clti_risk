@@ -56,7 +56,7 @@ const Map<Questions, Map<Description, String>> questionDetail = {
     Description.subtitle:
         'absent, past history of malignant neoplasm, or present under treatment',
   },
-  Questions.leasionAI: {
+  Questions.lesionAI: {
     Description.title: 'Sites of artery occlusive lesions: Aorto-Iliac',
     Description.subtitle: 'aorto-iliac occlusive lesion present or absent',
   },

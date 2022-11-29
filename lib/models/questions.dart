@@ -12,7 +12,7 @@ enum Questions {
   cvd, // boolean
   ckd, // boolean
   malignantNeoplasm, // enum
-  leasionAI, // boolean
+  lesionAI, // boolean
   leasionFP, // boolean
   leasionBK, // boolean
   urgentProcedure, // boolean
