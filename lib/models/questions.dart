@@ -24,5 +24,4 @@ enum Questions {
   contralateral, // boolean
   others, // boolean
   rutherford; // enum
-
 }
