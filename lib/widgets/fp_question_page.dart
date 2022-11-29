@@ -28,7 +28,7 @@ class _LesionFPQuestionPageState extends State<LesionFPQuestionPage> {
       onChanged: (v) {
         if (v == null) return;
         setState(() {
-          c.patientData.hasAILesion = v.toBool();
+          c.patientData.hasFPLesion = v.toBool();
         });
       },
     );
