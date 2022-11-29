@@ -28,7 +28,7 @@ class _LesionBKQuestionPageState extends State<LesionBKQuestionPage> {
       onChanged: (v) {
         if (v == null) return;
         setState(() {
-          c.patientData.hasAILesion = v.toBool();
+          c.patientData.hasBKLesion = v.toBool();
         });
       },
     );
