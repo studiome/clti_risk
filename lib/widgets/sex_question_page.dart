@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../models/clinical_data_controller.dart';
 import '../models/patient_data.dart';
 import '../models/questions.dart';
-import 'question_content.dart';
+import 'question_page.dart';
 
 class SexQuestionPage extends StatefulWidget {
   const SexQuestionPage({super.key});
@@ -17,7 +17,7 @@ class _SexQuestionPageState extends State<SexQuestionPage> {
   Widget build(BuildContext context) {
     final c = ClinicalDataController.of(context);
     if (c == null) throw NullThrownError();
-    return MultipleQuestionContent<Sex>(
+    return MultipleQuestionPage<Sex>(
       question: Questions.sex,
       values: Sex.values,
       dataItem: c.patientData.sex,

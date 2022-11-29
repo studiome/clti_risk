@@ -1,7 +1,7 @@
 import 'package:clti_risk/models/clinical_data_controller.dart';
 import 'package:clti_risk/models/patient_data.dart';
 import 'package:clti_risk/models/questions.dart';
-import 'package:clti_risk/widgets/question_content.dart';
+import 'package:clti_risk/widgets/question_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -149,7 +149,7 @@ class _ChoiceTestWidgetState extends State<ChoiceTestWidget> {
   Widget build(BuildContext context) {
     final c = ClinicalDataController.of(context);
     if (c == null) throw NullThrownError();
-    return MultipleQuestionContent<Sex>(
+    return MultipleQuestionPage<Sex>(
         question: Questions.sex,
         values: Sex.values,
         dataItem: c.patientData.sex,
