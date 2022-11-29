@@ -60,11 +60,11 @@ const Map<Questions, Map<Description, String>> questionDetail = {
     Description.title: 'Sites of artery occlusive lesions: Aorto-Iliac',
     Description.subtitle: 'aorto-iliac occlusive lesion present or absent',
   },
-  Questions.leasionFP: {
+  Questions.lesionFP: {
     Description.title: 'Sites of artery occlusive lesions: Femoro-Popliteal',
     Description.subtitle: 'femoro-popliteal present or absent',
   },
-  Questions.leasionBK: {
+  Questions.lesionBK: {
     Description.title: 'Sites of artery occlusive lesions: Infrapopliteal',
     Description.subtitle: 'infrapopliteal present or absent',
   },

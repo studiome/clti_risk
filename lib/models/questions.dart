@@ -13,8 +13,8 @@ enum Questions {
   ckd, // boolean
   malignantNeoplasm, // enum
   lesionAI, // boolean
-  leasionFP, // boolean
-  leasionBK, // boolean
+  lesionFP, // boolean
+  lesionBK, // boolean
   urgentProcedure, // boolean
   fever, // boolean
   abnormalWBC, // boolean
