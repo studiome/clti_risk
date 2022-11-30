@@ -25,15 +25,18 @@ class QuestionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text(subtitle),
-          content,
-          TabTransitionNavigator(
-            tabIndex: tabIndex,
-            tabCount: tabCount,
-            onNext: onNext,
-            onBack: onBack,
+          Padding(padding: const EdgeInsets.all(12.0), child: Text(subtitle)),
+          Padding(padding: const EdgeInsets.all(8.0), child: content),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TabTransitionNavigator(
+              tabIndex: tabIndex,
+              tabCount: tabCount,
+              onNext: onNext,
+              onBack: onBack,
+            ),
           ),
         ],
       ),
@@ -173,26 +176,31 @@ class _NumberFormQuestionContentState extends State<NumberFormQuestionContent> {
       },
       onSubmitted: widget.onSubmitted,
     );
-    return QuestionPage(
-      content: content,
-      subtitle: subtitle,
-      tabIndex: widget.tabIndex,
-      tabCount: widget.tabCount,
-      onNext: () {
-        if (formKey.currentState == null || !formKey.currentState!.validate()) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: const Text('Please fill data.'),
-            action: SnackBarAction(
-                textColor: Theme.of(context).colorScheme.onSecondary,
-                label: 'OK',
-                onPressed: () =>
-                    ScaffoldMessenger.of(context).hideCurrentSnackBar()),
-          ));
-        }
-        if (widget.onSubmitted != null) {
-          widget.onSubmitted!(widget.formController.text);
-        }
-      },
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: QuestionPage(
+        content: content,
+        subtitle: subtitle,
+        tabIndex: widget.tabIndex,
+        tabCount: widget.tabCount,
+        onNext: () {
+          if (formKey.currentState == null ||
+              !formKey.currentState!.validate()) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: const Text('Please fill data.'),
+              action: SnackBarAction(
+                  textColor: Theme.of(context).colorScheme.onSecondary,
+                  label: 'OK',
+                  onPressed: () =>
+                      ScaffoldMessenger.of(context).hideCurrentSnackBar()),
+            ));
+          }
+          if (widget.onSubmitted != null) {
+            widget.onSubmitted!(widget.formController.text);
+          }
+        },
+      ),
     );
   }
 
