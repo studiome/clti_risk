@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
         home: ClinicalDataController(
             patientData: pd,
             child: QuestionForm(
-              title: 'test',
+              title: 'Patient Data',
               ageController: ageController,
               heightController: heightController,
               weightController: weightController,
