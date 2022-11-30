@@ -29,6 +29,8 @@ class QuestionBinder extends StatelessWidget {
           bottom: TabBar(
             indicatorColor: Theme.of(context).colorScheme.primary,
             labelColor: Theme.of(context).colorScheme.primary,
+            unselectedLabelColor:
+                Theme.of(context).colorScheme.onSurfaceVariant,
             tabs: questionPages.map((e) {
               return Tab(
                   child: Center(
