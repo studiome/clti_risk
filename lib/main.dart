@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import './widgets/app_scaffold.dart';
 import './widgets/question_form.dart';
 
 void main() {
@@ -29,7 +28,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Noto Sans JP',
       ),
       themeMode: ThemeMode.system,
-      home: const AppScaffold(title: 'Question Form', child: QuestionForm()),
+      home: const QuestionForm(title: 'Question Form'),
     );
   }
 }

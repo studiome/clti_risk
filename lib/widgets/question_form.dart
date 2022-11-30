@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class QuestionForm extends StatelessWidget {
-  const QuestionForm({super.key});
+  final String title;
+  const QuestionForm({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
