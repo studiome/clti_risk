@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './widgets/app_scaffold.dart';
-import './widgets/patient_data_form.dart';
+import './widgets/question_form.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,7 +11,7 @@ const Color jsvsColor = Color(0xFF2D6A7B);
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  final String title = 'CLTI Patient Risk Predictor';
+  final String title = 'CLiTICAL';
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Noto Sans JP',
       ),
       themeMode: ThemeMode.system,
-      home: AppScaffold(title: title, child: const PatientDataForm()),
+      home: const AppScaffold(title: 'Question Form', child: QuestionForm()),
     );
   }
 }
