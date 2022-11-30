@@ -1,4 +1,3 @@
-import 'package:clti_risk/widgets/question_page.dart';
 import 'package:flutter/material.dart';
 
 import '../models/clinical_data_controller.dart';
@@ -7,7 +6,7 @@ import '../models/patient_data.dart';
 class QuestionPageDetail {
   String tabBarTitle;
   int tabIndex;
-  QuestionPage page;
+  Widget page;
   QuestionPageDetail(
       {required this.tabBarTitle, required this.tabIndex, required this.page});
 }
