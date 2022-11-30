@@ -32,12 +32,14 @@ class QuestionBinder extends StatelessWidget {
             tabs: questionPages.map((e) {
               return Tab(
                   child: Center(
+                      child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 240, maxHeight: 80),
                 child: Text(
                   e.tabBarTitle,
                   softWrap: true,
-                  maxLines: 4,
+                  maxLines: 3,
                 ),
-              ));
+              )));
             }).toList(),
             isScrollable: true,
           ),
