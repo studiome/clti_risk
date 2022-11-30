@@ -12,7 +12,7 @@ const Map<Questions, Map<Description, String>> questionDetail = {
   },
   Questions.age: {
     Description.title: 'Age',
-    Description.subtitle: 'Enter Age [years], then press Next.',
+    Description.subtitle: 'Enter Age [year-old], then press Next.',
   },
   Questions.height: {
     Description.title: 'Body Height',
