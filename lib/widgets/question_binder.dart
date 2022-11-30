@@ -24,6 +24,7 @@ class QuestionBinder extends StatelessWidget {
     return DefaultTabController(
       length: _tabCount,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text(title),
           bottom: TabBar(
