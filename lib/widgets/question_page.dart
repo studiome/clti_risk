@@ -25,12 +25,17 @@ class QuestionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Padding(padding: const EdgeInsets.all(12.0), child: Text(subtitle)),
-          Padding(padding: const EdgeInsets.all(8.0), child: content),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 24.0, horizontal: 16.0),
+              child: Text(subtitle)),
+          Padding(
+              padding: const EdgeInsets.symmetric(vertical: 24.0),
+              child: content),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 24.0),
             child: TabTransitionNavigator(
               tabIndex: tabIndex,
               tabCount: tabCount,
