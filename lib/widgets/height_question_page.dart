@@ -28,7 +28,7 @@ class HeightQuestionPage extends StatelessWidget {
           }
         },
         itemWidth: 240,
-        itemHeight: 60,
+        itemHeight: 80,
         tabIndex: Questions.height.index,
         tabCount: Questions.values.length);
   }

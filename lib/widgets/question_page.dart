@@ -25,6 +25,7 @@ class QuestionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Text(subtitle),
           content,
@@ -178,7 +179,7 @@ class _NumberFormQuestionContentState extends State<NumberFormQuestionContent> {
       tabIndex: widget.tabIndex,
       tabCount: widget.tabCount,
       onNext: () {
-        if (formKey.currentState == null || formKey.currentState!.validate()) {
+        if (formKey.currentState == null || !formKey.currentState!.validate()) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: const Text('Please fill data.'),
             action: SnackBarAction(
