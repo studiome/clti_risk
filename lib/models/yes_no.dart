@@ -1,3 +1,6 @@
+//[0]: Yes - true
+//[1]: No - false
+
 enum YesNo {
   yes('Yes', true),
   no('No', false);
