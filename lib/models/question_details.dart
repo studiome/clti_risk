@@ -11,19 +11,19 @@ const Map<Questions, Map<Description, String>> questionDetail = {
     Description.subtitle: 'Male or Female'
   },
   Questions.age: {
-    Description.title: 'Age',
+    Description.title: 'Age [year-old]',
     Description.subtitle: 'Enter Age [year-old], then press Next.',
   },
   Questions.height: {
-    Description.title: 'Body Height',
+    Description.title: 'Body Height [m]',
     Description.subtitle: 'Enter body height [m], then press Next'
   },
   Questions.weight: {
-    Description.title: 'Body Weight',
+    Description.title: 'Body Weight [kg]',
     Description.subtitle: 'Enter body weight [kg], then press Next'
   },
   Questions.albumin: {
-    Description.title: 'Serum Albumin',
+    Description.title: 'Serum Albumin [g/dl]',
     Description.subtitle: 'Enter albumin [g/dl], then press Next'
   },
   Questions.activity: {
