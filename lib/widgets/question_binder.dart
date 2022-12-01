@@ -12,11 +12,13 @@ class QuestionBinder extends StatelessWidget {
   final String title;
   final List<QuestionPageDetail> questionPages;
   final int _tabCount;
+  final ButtonStyleButton actionButton;
 
   const QuestionBinder({
     super.key,
     required this.title,
     required this.questionPages,
+    required this.actionButton,
   }) : _tabCount = questionPages.length;
 
   @override
@@ -27,6 +29,9 @@ class QuestionBinder extends StatelessWidget {
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
           title: Text(title),
+          actions: [
+            actionButton,
+          ],
           bottom: TabBar(
             indicatorColor: Theme.of(context).colorScheme.primary,
             labelColor: Theme.of(context).colorScheme.primary,
