@@ -107,6 +107,10 @@ class QuestionPagesTestWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return QuestionBinder(
       title: 'test',
+      actionButton: TextButton(
+        child: const Text('test'),
+        onPressed: () {},
+      ),
       questionPages: _pages,
     );
   }

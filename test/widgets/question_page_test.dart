@@ -84,7 +84,7 @@ void main() {
       await tester.tap(tab);
       await tester.pumpAndSettle();
       expect(pd.height, isNull);
-      expect(find.text('Body Height'), findsOneWidget);
+      expect(find.text('Body Height [m]'), findsOneWidget);
       expect(find.text('Next'), findsOneWidget);
       expect(find.text('Back'), findsOneWidget);
       final form = find.byType(TextFormField);
