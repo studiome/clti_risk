@@ -193,14 +193,14 @@ class _NumberFormQuestionContentState extends State<NumberFormQuestionContent> {
           if (formKey.currentState == null ||
               !formKey.currentState!.validate()) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: const Text('Please enter invalid value.'),
+              content: const Text('Invalid value'),
               action: SnackBarAction(
                   textColor: Theme.of(context).colorScheme.onSecondary,
                   label: 'OK',
                   onPressed: () =>
                       ScaffoldMessenger.of(context).hideCurrentSnackBar()),
             ));
-            throw const FormatException();
+            throw const FormatException('invalid value');
           }
           if (widget.onSubmitted != null) {
             widget.onSubmitted!(widget.formController.text);

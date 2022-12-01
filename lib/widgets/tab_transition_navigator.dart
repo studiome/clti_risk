@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class TabTransitionNavigator extends StatelessWidget {
@@ -25,8 +26,13 @@ class TabTransitionNavigator extends StatelessWidget {
                     if (tabController == null) return;
 
                     //user defined function
-                    if (onBack != null) onBack!.call();
-
+                    if (onBack != null) {
+                      try {
+                        onBack!.call();
+                      } catch (e) {
+                        if (kDebugMode) print(e);
+                      }
+                    }
                     int i = tabController.index;
                     // button disabeld if first tab.
                     tabController.animateTo(i - 1);
@@ -85,8 +91,11 @@ class TabTransitionNavigator extends StatelessWidget {
                     if (onNext != null) {
                       try {
                         onNext!.call();
-                      } catch (e) {
+                      } on FormatException catch (_) {
+                        //DO NOTHING
                         return;
+                      } catch (e) {
+                        if (kDebugMode) print(e);
                       }
                     }
 
