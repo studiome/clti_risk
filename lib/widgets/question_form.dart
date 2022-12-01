@@ -1,6 +1,8 @@
 import 'package:clti_risk/widgets/patient_data_summary.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../models/clinical_data_controller.dart';
 import '../models/question_details.dart' as details;
 import '../models/questions.dart';
 import 'activity_question_page.dart';
@@ -129,11 +131,23 @@ class QuestionForm extends StatelessWidget {
           .questionDetail[Questions.summary]![details.Description.title]!,
     };
 
+    final c = ClinicalDataController.of(context);
+    if (c == null) throw NullThrownError();
     return QuestionBinder(
         title: title,
         actionButton: TextButton.icon(
           icon: const Icon(Icons.analytics_outlined),
-          onPressed: () {},
+          onPressed: () {
+            try {
+              c.patientData.age = int.parse(ageController.text);
+              c.patientData.height = double.parse(heightController.text);
+              c.patientData.weight = double.parse(weightController.text);
+              c.patientData.alb = double.parse(albController.text);
+              //PatientRisk(patientData: c.patientData);
+            } catch (e) {
+              if (kDebugMode) print(e);
+            }
+          },
           label: const Text('analysis'),
         ),
         questionPages:
