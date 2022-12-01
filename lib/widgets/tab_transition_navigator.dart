@@ -81,7 +81,14 @@ class TabTransitionNavigator extends StatelessWidget {
                     if (tabController == null) return;
 
                     //user defined function
-                    if (onNext != null) onNext!.call();
+                    //if thorows exception, DO NOT Move to next tab;
+                    if (onNext != null) {
+                      try {
+                        onNext!.call();
+                      } catch (e) {
+                        return;
+                      }
+                    }
 
                     int i = tabController.index;
                     // button disabeld if last tab.
