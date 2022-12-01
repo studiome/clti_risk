@@ -132,9 +132,9 @@ class QuestionForm extends StatelessWidget {
     return QuestionBinder(
         title: title,
         actionButton: TextButton.icon(
-          icon: const Icon(Icons.calculate_outlined),
+          icon: const Icon(Icons.analytics_outlined),
           onPressed: () {},
-          label: const Text('Calculate'),
+          label: const Text('analysis'),
         ),
         questionPages:
             List<QuestionPageDetail>.generate(Questions.values.length, (index) {
