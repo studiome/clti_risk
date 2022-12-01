@@ -1,3 +1,4 @@
+import 'package:clti_risk/widgets/patient_data_summary.dart';
 import 'package:flutter/material.dart';
 
 import '../models/question_details.dart' as details;
@@ -68,6 +69,7 @@ class QuestionForm extends StatelessWidget {
       Questions.contralateral.index: const ContraLateralQuestionPage(),
       Questions.others.index: const OtherVDQuestionPage(),
       Questions.rutherford.index: const RutherfordQuestionPage(),
+      Questions.summary.index: const PatientDataSummary(),
     };
 
     final Map<int, String> titleList = {
@@ -117,6 +119,8 @@ class QuestionForm extends StatelessWidget {
           details.questionDetail[Questions.others]![details.Description.title]!,
       Questions.rutherford.index: details
           .questionDetail[Questions.rutherford]![details.Description.title]!,
+      Questions.summary.index: details
+          .questionDetail[Questions.summary]![details.Description.title]!,
     };
 
     return QuestionBinder(
