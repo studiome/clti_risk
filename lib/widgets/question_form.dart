@@ -6,6 +6,7 @@ import '../models/questions.dart';
 import 'activity_question_page.dart';
 import 'age_question_page.dart';
 import 'ai_question_page.dart';
+import 'albumin_question_page.dart';
 import 'bk_question_page.dart';
 import 'cad_question_page.dart';
 import 'chf_question_page.dart';
@@ -50,7 +51,7 @@ class QuestionForm extends StatelessWidget {
       Questions.age.index: AgeQuestionPage(controller: ageController),
       Questions.height.index: HeightQuestionPage(controller: heightController),
       Questions.weight.index: WeightQuestionPage(controller: weightController),
-      Questions.albumin.index: WeightQuestionPage(controller: albController),
+      Questions.albumin.index: AlbQuestionPage(controller: albController),
       Questions.activity.index: const ActivityQuestionPage(),
       Questions.chf.index: const CHFQuestionPage(),
       Questions.cad.index: const CADQuestionPage(),
