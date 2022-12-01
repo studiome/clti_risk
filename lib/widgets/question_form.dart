@@ -69,7 +69,12 @@ class QuestionForm extends StatelessWidget {
       Questions.contralateral.index: const ContraLateralQuestionPage(),
       Questions.others.index: const OtherVDQuestionPage(),
       Questions.rutherford.index: const RutherfordQuestionPage(),
-      Questions.summary.index: const PatientDataSummary(),
+      Questions.summary.index: PatientDataSummary(
+        ageController: ageController,
+        heightController: heightController,
+        weightController: weightController,
+        albController: albController,
+      ),
     };
 
     final Map<int, String> titleList = {
