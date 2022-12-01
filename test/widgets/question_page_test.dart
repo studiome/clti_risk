@@ -16,6 +16,7 @@ void main() {
       testApp = MaterialApp(
           home: ClinicalDataController(
               patientData: pd,
+              risk: null,
               child: const Scaffold(body: ChoiceTestWidget())));
     });
 
@@ -56,6 +57,7 @@ void main() {
       testApp = MaterialApp(
           home: ClinicalDataController(
               patientData: pd,
+              risk: null,
               child: DefaultTabController(
                   length: 3,
                   child: Scaffold(

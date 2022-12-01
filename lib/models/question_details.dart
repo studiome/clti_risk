@@ -107,4 +107,8 @@ const Map<Questions, Map<Description, String>> questionDetail = {
     Description.title: 'Rutherford Classification',
     Description.subtitle: 'classes 4, 5, or 6',
   },
+  Questions.summary: {
+    Description.title: 'Patient Data Summary',
+    Description.subtitle: 'Check items',
+  }
 };

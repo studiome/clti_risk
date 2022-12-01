@@ -23,5 +23,6 @@ enum Questions {
   smoking, //boolean
   contralateral, // boolean
   others, // boolean
-  rutherford; // enum
+  rutherford, // enum
+  summary;
 }
