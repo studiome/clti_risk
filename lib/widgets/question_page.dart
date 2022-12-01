@@ -192,14 +192,7 @@ class _NumberFormQuestionContentState extends State<NumberFormQuestionContent> {
         onNext: () {
           if (formKey.currentState == null ||
               !formKey.currentState!.validate()) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: const Text('Please fill data.'),
-              action: SnackBarAction(
-                  textColor: Theme.of(context).colorScheme.onSecondary,
-                  label: 'OK',
-                  onPressed: () =>
-                      ScaffoldMessenger.of(context).hideCurrentSnackBar()),
-            ));
+            return;
           }
           if (widget.onSubmitted != null) {
             widget.onSubmitted!(widget.formController.text);
