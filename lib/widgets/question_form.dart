@@ -157,7 +157,7 @@ class QuestionForm extends StatelessWidget {
                           ),
                           onPressed: () async {
                             await launchUrl(Uri.parse(
-                                'https://doi.org/10.1093/bjs/znac323'));
+                                'https://doi.org/10.1093/bjs/znab036'));
                           },
                         ),
                         SimpleDialogOption(
