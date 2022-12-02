@@ -1,7 +1,7 @@
-import 'package:clti_risk/models/clinical_data_controller.dart';
-import 'package:clti_risk/models/patient_data.dart';
 import 'package:flutter/material.dart';
 
+import 'models/clinical_data_controller.dart';
+import 'models/patient_data.dart';
 import 'widgets/question_form.dart';
 
 void main() {
