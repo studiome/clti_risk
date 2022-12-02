@@ -151,6 +151,12 @@ class QuestionForm extends StatelessWidget {
                       title: const Text('References'),
                       children: [
                         SimpleDialogOption(
+                          child: Text(
+                            'Tap to open link.',
+                            style: Theme.of(context).textTheme.subtitle2,
+                          ),
+                        ),
+                        SimpleDialogOption(
                           child: const Text(
                             '1. Miyata T. et al, Risk prediction model for early outcomes of revascularization for chronic limb-threatening ischaemia. Br J Surg. 2022 Oct 14;109(11):1123.',
                             softWrap: true,
