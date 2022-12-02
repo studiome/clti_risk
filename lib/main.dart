@@ -22,30 +22,40 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: title,
-        theme: ThemeData(
-          useMaterial3: true,
-          colorSchemeSeed: jsvsColor,
-          //fontFamily: 'Noto Sans JP',
-        ),
-        darkTheme: ThemeData(
-          useMaterial3: true,
-          brightness: Brightness.dark,
-          colorSchemeSeed: jsvsColor,
-          //fontFamily: 'Noto Sans JP',
-        ),
-        themeMode: ThemeMode.system,
-        home: ClinicalDataController(
-            patientData: pd,
-            risk: null,
-            child: QuestionForm(
-              title: 'Patient Data',
-              appName: 'CLiTICAL',
-              ageController: ageController,
-              heightController: heightController,
-              weightController: weightController,
-              albController: albController,
-            )));
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+        if (!currentFocus.hasPrimaryFocus &&
+            currentFocus.focusedChild != null) {
+          FocusManager.instance.primaryFocus!.unfocus();
+        }
+      },
+      child: MaterialApp(
+          title: title,
+          theme: ThemeData(
+            useMaterial3: true,
+            colorSchemeSeed: jsvsColor,
+            //fontFamily: 'Noto Sans JP',
+          ),
+          darkTheme: ThemeData(
+            useMaterial3: true,
+            brightness: Brightness.dark,
+            colorSchemeSeed: jsvsColor,
+            //fontFamily: 'Noto Sans JP',
+          ),
+          themeMode: ThemeMode.system,
+          home: ClinicalDataController(
+              patientData: pd,
+              risk: null,
+              child: QuestionForm(
+                title: 'Patient Data',
+                appName: 'CLiTICAL',
+                ageController: ageController,
+                heightController: heightController,
+                weightController: weightController,
+                albController: albController,
+              ))),
+    );
   }
 }

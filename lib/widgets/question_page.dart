@@ -181,32 +181,27 @@ class _NumberFormQuestionContentState extends State<NumberFormQuestionContent> {
       },
       onSubmitted: widget.onSubmitted,
     );
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: QuestionPage(
-        content: content,
-        subtitle: subtitle,
-        tabIndex: widget.tabIndex,
-        tabCount: widget.tabCount,
-        onNext: () {
-          if (formKey.currentState == null ||
-              !formKey.currentState!.validate()) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: const Text('Invalid value'),
-              action: SnackBarAction(
-                  textColor: Theme.of(context).colorScheme.onSecondary,
-                  label: 'OK',
-                  onPressed: () =>
-                      ScaffoldMessenger.of(context).hideCurrentSnackBar()),
-            ));
-            throw const FormatException('invalid value');
-          }
-          if (widget.onSubmitted != null) {
-            widget.onSubmitted!(widget.formController.text);
-          }
-        },
-      ),
+    return QuestionPage(
+      content: content,
+      subtitle: subtitle,
+      tabIndex: widget.tabIndex,
+      tabCount: widget.tabCount,
+      onNext: () {
+        if (formKey.currentState == null || !formKey.currentState!.validate()) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: const Text('Invalid value'),
+            action: SnackBarAction(
+                textColor: Theme.of(context).colorScheme.onSecondary,
+                label: 'OK',
+                onPressed: () =>
+                    ScaffoldMessenger.of(context).hideCurrentSnackBar()),
+          ));
+          throw const FormatException('invalid value');
+        }
+        if (widget.onSubmitted != null) {
+          widget.onSubmitted!(widget.formController.text);
+        }
+      },
     );
   }
 

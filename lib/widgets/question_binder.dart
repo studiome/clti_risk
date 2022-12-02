@@ -54,10 +54,13 @@ class QuestionBinder extends StatelessWidget {
             isScrollable: true,
           ),
         ),
-        drawer: Drawer(
-            child: ListView(
-          children: drawerListTiles,
-        )),
+        drawer: SafeArea(
+          bottom: false,
+          child: Drawer(
+              child: ListView(
+            children: drawerListTiles,
+          )),
+        ),
         body: SafeArea(
           bottom: false,
           child: TabBarView(
