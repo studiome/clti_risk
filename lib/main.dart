@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'widgets/question_form.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 

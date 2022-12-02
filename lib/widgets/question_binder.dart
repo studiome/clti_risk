@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class QuestionPageDetail {
   String tabBarTitle;
@@ -52,6 +53,25 @@ class QuestionBinder extends StatelessWidget {
             isScrollable: true,
           ),
         ),
+        drawer: Drawer(
+            child: ListView(
+          children: [
+            ListTile(
+              leading: const Icon(Icons.info),
+              title: const Text('About'),
+              onTap: () async {
+                final PackageInfo packageInfo =
+                    await PackageInfo.fromPlatform();
+
+                showAboutDialog(
+                    context: context,
+                    applicationName: 'CLiTICAL',
+                    applicationVersion: packageInfo.version,
+                    applicationLegalese: '2022 Kazuhiro Miyahara');
+              },
+            )
+          ],
+        )),
         body: SafeArea(
           bottom: false,
           child: TabBarView(

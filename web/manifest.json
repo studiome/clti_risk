@@ -1,11 +1,11 @@
 {
-    "name": "clti_risk",
-    "short_name": "clti_risk",
+    "name": "CLiTICAL",
+    "short_name": "CLiTICAL",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#2D6A7B",
+    "theme_color": "#2D6A7B",
+    "description": "CLTI risk calculator",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
