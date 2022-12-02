@@ -11,6 +11,7 @@ class QuestionPageDetail {
 
 class QuestionBinder extends StatelessWidget {
   final String title;
+  final String appName;
   final List<QuestionPageDetail> questionPages;
   final int _tabCount;
   final ButtonStyleButton actionButton;
@@ -20,6 +21,7 @@ class QuestionBinder extends StatelessWidget {
     required this.title,
     required this.questionPages,
     required this.actionButton,
+    required this.appName,
   }) : _tabCount = questionPages.length;
 
   @override
@@ -64,10 +66,10 @@ class QuestionBinder extends StatelessWidget {
                     await PackageInfo.fromPlatform();
 
                 showAboutDialog(
-                    context: context,
-                    applicationName: 'CLiTICAL',
-                    applicationVersion: packageInfo.version,
-                    applicationLegalese: '2022 Kazuhiro Miyahara');
+                  context: context,
+                  applicationName: appName,
+                  applicationVersion: packageInfo.version,
+                );
               },
             )
           ],
