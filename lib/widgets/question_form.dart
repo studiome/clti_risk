@@ -1,6 +1,8 @@
 import 'package:clti_risk/widgets/patient_data_summary.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../models/clinical_data_controller.dart';
 import '../models/question_details.dart' as details;
@@ -137,7 +139,56 @@ class QuestionForm extends StatelessWidget {
     if (c == null) throw NullThrownError();
     return QuestionBinder(
         title: title,
-        appName: appName,
+        drawerListTiles: <ListTile>[
+          ListTile(
+            leading: const Icon(Icons.article),
+            title: const Text('References'),
+            onTap: () async {
+              await showDialog(
+                  context: context,
+                  builder: (context) {
+                    return SimpleDialog(
+                      title: const Text('References'),
+                      children: [
+                        SimpleDialogOption(
+                          child: const Text(
+                            '1. Miyata T. et al, Risk prediction model for early outcomes of revascularization for chronic limb-threatening ischaemia. Br J Surg. 2022 Oct 14;109(11):1123.',
+                            softWrap: true,
+                          ),
+                          onPressed: () async {
+                            await launchUrl(Uri.parse(
+                                'https://doi.org/10.1093/bjs/znac323'));
+                          },
+                        ),
+                        SimpleDialogOption(
+                          child: const Text(
+                            '2. Miyata T. et al, Prediction Models for Two Year Overall Survival and Amputation Free Survival After Revascularisation for Chronic Limb Threatening Ischaemia. Eur J Vasc Endovasc Surg . 2022 Jun 7;S1078-5884(22)00340-9.',
+                            softWrap: true,
+                          ),
+                          onPressed: () async {
+                            await launchUrl(Uri.parse(
+                                'https://doi.org/10.1016/j.ejvs.2022.05.038'));
+                          },
+                        ),
+                      ],
+                    );
+                  });
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.info),
+            title: const Text('About'),
+            onTap: () async {
+              final PackageInfo packageInfo = await PackageInfo.fromPlatform();
+              showAboutDialog(
+                context: context,
+                applicationName: appName,
+                applicationVersion: packageInfo.version,
+                applicationLegalese: '2022 Kazuhiro Miyahara',
+              );
+            },
+          ),
+        ],
         actionButton: TextButton.icon(
           icon: const Icon(Icons.analytics_outlined),
           onPressed: () {

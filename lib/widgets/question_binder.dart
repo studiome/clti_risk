@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 
 class QuestionPageDetail {
   String tabBarTitle;
@@ -11,7 +10,7 @@ class QuestionPageDetail {
 
 class QuestionBinder extends StatelessWidget {
   final String title;
-  final String appName;
+  final List<ListTile> drawerListTiles;
   final List<QuestionPageDetail> questionPages;
   final int _tabCount;
   final ButtonStyleButton actionButton;
@@ -21,7 +20,7 @@ class QuestionBinder extends StatelessWidget {
     required this.title,
     required this.questionPages,
     required this.actionButton,
-    required this.appName,
+    required this.drawerListTiles,
   }) : _tabCount = questionPages.length;
 
   @override
@@ -57,22 +56,7 @@ class QuestionBinder extends StatelessWidget {
         ),
         drawer: Drawer(
             child: ListView(
-          children: [
-            ListTile(
-              leading: const Icon(Icons.info),
-              title: const Text('About'),
-              onTap: () async {
-                final PackageInfo packageInfo =
-                    await PackageInfo.fromPlatform();
-
-                showAboutDialog(
-                  context: context,
-                  applicationName: appName,
-                  applicationVersion: packageInfo.version,
-                );
-              },
-            )
-          ],
+          children: drawerListTiles,
         )),
         body: SafeArea(
           bottom: false,
