@@ -48,13 +48,20 @@ class MyApp extends StatelessWidget {
           home: ClinicalDataController(
               patientData: pd,
               risk: null,
-              child: QuestionForm(
-                title: 'Patient Data',
-                appName: 'CLiTICAL',
-                ageController: ageController,
-                heightController: heightController,
-                weightController: weightController,
-                albController: albController,
+              child: Navigator(
+                pages: [
+                  MaterialPage(
+                    key: const ValueKey('Question'),
+                    child: QuestionForm(
+                      title: 'Patient Data',
+                      appName: 'CLiTICAL',
+                      ageController: ageController,
+                      heightController: heightController,
+                      weightController: weightController,
+                      albController: albController,
+                    ),
+                  ),
+                ],
               ))),
     );
   }
