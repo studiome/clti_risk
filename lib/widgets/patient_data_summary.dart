@@ -102,7 +102,7 @@ class PatientDataSummary extends StatelessWidget {
           title: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 240),
             child: Text(
-              title[index]!,
+              '${index + 1}. ${title[index!]}',
               softWrap: true,
               maxLines: 3,
             ),

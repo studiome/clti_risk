@@ -43,7 +43,7 @@ class QuestionBinder extends StatelessWidget {
                       child: ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 240, maxHeight: 80),
                 child: Text(
-                  e.tabBarTitle,
+                  '${e.tabIndex + 1}. ${e.tabBarTitle}',
                   softWrap: true,
                   maxLines: 3,
                 ),
