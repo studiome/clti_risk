@@ -196,8 +196,7 @@ class QuestionForm extends StatelessWidget {
             },
           ),
         ],
-        actionButton: TextButton.icon(
-          icon: const Icon(Icons.analytics_outlined),
+        actionButton: FloatingActionButton.extended(
           onPressed: () {
             try {
               c.patientData.age = int.parse(ageController.text);
@@ -211,7 +210,8 @@ class QuestionForm extends StatelessWidget {
             final pr = PatientRisk(patientData: c.patientData);
             c.onRiskCalculated.sink.add(pr);
           },
-          label: const Text('analysis'),
+          icon: const Icon(Icons.analytics_outlined),
+          label: const Text('Analysis'),
         ),
         questionPages:
             List<QuestionPageDetail>.generate(Questions.values.length, (index) {

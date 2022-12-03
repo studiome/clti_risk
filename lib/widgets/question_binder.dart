@@ -13,7 +13,7 @@ class QuestionBinder extends StatelessWidget {
   final List<ListTile> drawerListTiles;
   final List<QuestionPageDetail> questionPages;
   final int _tabCount;
-  final ButtonStyleButton actionButton;
+  final FloatingActionButton actionButton;
 
   const QuestionBinder({
     super.key,
@@ -28,12 +28,10 @@ class QuestionBinder extends StatelessWidget {
     return DefaultTabController(
       length: _tabCount,
       child: Scaffold(
+        floatingActionButton: actionButton,
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
           title: Text(title),
-          actions: [
-            actionButton,
-          ],
           bottom: TabBar(
             indicatorColor: Theme.of(context).colorScheme.primary,
             labelColor: Theme.of(context).colorScheme.primary,
