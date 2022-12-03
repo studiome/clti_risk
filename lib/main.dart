@@ -91,7 +91,7 @@ class _AppRootState extends State<AppRoot> {
                   if (risk != null)
                     MaterialPage(
                         key: const ValueKey('Result'),
-                        child: RiskView(title: 'Risk', risk: risk!)),
+                        child: RiskView(title: 'Predicted Risk', risk: risk!)),
                 ],
                 onPopPage: (route, result) {
                   if (!route.didPop(result)) return false;
