@@ -1,5 +1,4 @@
 import 'package:clti_risk/widgets/patient_data_summary.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -204,7 +203,14 @@ class QuestionForm extends StatelessWidget {
               c.patientData.weight = double.parse(weightController.text);
               c.patientData.alb = double.parse(albController.text);
             } catch (e) {
-              if (kDebugMode) print(e);
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: const Text('Error! missing some data.'),
+                action: SnackBarAction(
+                    textColor: Theme.of(context).colorScheme.onSecondary,
+                    label: 'OK',
+                    onPressed: () =>
+                        ScaffoldMessenger.of(context).hideCurrentSnackBar()),
+              ));
               return;
             }
             final pr = PatientRisk(patientData: c.patientData);
