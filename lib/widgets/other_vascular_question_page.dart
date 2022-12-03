@@ -22,7 +22,7 @@ class _OtherVDQuestionPageState extends State<OtherVDQuestionPage> {
       values: YesNo.values,
       dataItem: c.patientData.hasOtherVD.toYesNo(),
       itemWidth: 180.0,
-      itemHeight: 60.0,
+      itemHeight: 40.0,
       tabIndex: Questions.others.index,
       tabCount: Questions.values.length,
       onChanged: (v) {

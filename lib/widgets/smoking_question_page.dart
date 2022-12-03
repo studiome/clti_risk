@@ -22,7 +22,7 @@ class _SmokingQuestionPageState extends State<SmokingQuestionPage> {
       values: YesNo.values,
       dataItem: c.patientData.isSmoking.toYesNo(),
       itemWidth: 180.0,
-      itemHeight: 60.0,
+      itemHeight: 40.0,
       tabIndex: Questions.smoking.index,
       tabCount: Questions.values.length,
       onChanged: (v) {

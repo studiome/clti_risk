@@ -22,7 +22,7 @@ class _RutherfordQuestionPageState extends State<RutherfordQuestionPage> {
       values: RutherfordClassification.values,
       dataItem: c.patientData.rutherford,
       itemWidth: 180.0,
-      itemHeight: 60.0,
+      itemHeight: 40.0,
       tabIndex: Questions.rutherford.index,
       tabCount: Questions.values.length,
       onChanged: (v) {

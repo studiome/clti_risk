@@ -23,7 +23,7 @@ class _ContraLateralQuestionPageState extends State<ContraLateralQuestionPage> {
       values: YesNo.values,
       dataItem: c.patientData.hasContraLateralLesion.toYesNo(),
       itemWidth: 180.0,
-      itemHeight: 60.0,
+      itemHeight: 40.0,
       tabIndex: Questions.contralateral.index,
       tabCount: Questions.values.length,
       onChanged: (v) {

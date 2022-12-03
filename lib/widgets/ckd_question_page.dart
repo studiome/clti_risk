@@ -22,7 +22,7 @@ class _CKDQuestionPageState extends State<CKDQuestionPage> {
       values: CKD.values,
       dataItem: c.patientData.ckd,
       itemWidth: 180.0,
-      itemHeight: 60.0,
+      itemHeight: 40.0,
       tabIndex: Questions.ckd.index,
       tabCount: Questions.values.length,
       onChanged: (v) {

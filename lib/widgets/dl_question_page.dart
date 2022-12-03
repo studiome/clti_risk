@@ -22,7 +22,7 @@ class _DLQuestionPageState extends State<DLQuestionPage> {
       values: YesNo.values,
       dataItem: c.patientData.hasDyslipidemia.toYesNo(),
       itemWidth: 180.0,
-      itemHeight: 60.0,
+      itemHeight: 40.0,
       tabIndex: Questions.dyslipidemia.index,
       tabCount: Questions.values.length,
       onChanged: (v) {

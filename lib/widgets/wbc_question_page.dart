@@ -23,7 +23,7 @@ class _AbnormalWBCQuestionPageState extends State<AbnormalWBCQuestionPage> {
       values: YesNo.values,
       dataItem: c.patientData.hasAbnormalWBC.toYesNo(),
       itemWidth: 180.0,
-      itemHeight: 60.0,
+      itemHeight: 40.0,
       tabIndex: Questions.abnormalWBC.index,
       tabCount: Questions.values.length,
       onChanged: (v) {

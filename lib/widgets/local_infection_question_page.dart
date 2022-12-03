@@ -24,7 +24,7 @@ class _LocalInfectionQuestionPageState
       values: YesNo.values,
       dataItem: c.patientData.hasLocalInfection.toYesNo(),
       itemWidth: 180.0,
-      itemHeight: 60.0,
+      itemHeight: 40.0,
       tabIndex: Questions.localInfection.index,
       tabCount: Questions.values.length,
       onChanged: (v) {

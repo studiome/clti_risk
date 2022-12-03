@@ -22,7 +22,7 @@ class _CHFQuestionPageState extends State<CHFQuestionPage> {
       values: YesNo.values,
       dataItem: c.patientData.hasCHF.toYesNo(),
       itemWidth: 180.0,
-      itemHeight: 60.0,
+      itemHeight: 40.0,
       tabIndex: Questions.chf.index,
       tabCount: Questions.values.length,
       onChanged: (v) {

@@ -28,14 +28,13 @@ class QuestionPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 48.0, horizontal: 24.0),
+              padding: const EdgeInsets.symmetric(vertical: 12.0),
               child: Text(subtitle)),
           Padding(
-              padding: const EdgeInsets.symmetric(vertical: 24.0),
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: content),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 24.0),
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: TabTransitionNavigator(
               tabIndex: tabIndex,
               tabCount: tabCount,

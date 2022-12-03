@@ -22,7 +22,7 @@ class _UrgentQuestionPageState extends State<UrgentQuestionPage> {
       values: YesNo.values,
       dataItem: c.patientData.isUrgent.toYesNo(),
       itemWidth: 180.0,
-      itemHeight: 60.0,
+      itemHeight: 40.0,
       tabIndex: Questions.urgentProcedure.index,
       tabCount: Questions.values.length,
       onChanged: (v) {
