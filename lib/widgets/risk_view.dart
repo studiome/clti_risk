@@ -108,19 +108,20 @@ class InfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+        elevation: 1,
         child: Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        ListTile(
-          title: SelectableText(
-            title,
-          ),
-          subtitle: SelectableText(
-            subtitle,
-          ),
-        ),
-        Column(children: children),
-      ],
-    ));
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            ListTile(
+              title: SelectableText(
+                title,
+              ),
+              subtitle: SelectableText(
+                subtitle,
+              ),
+            ),
+            Column(children: children),
+          ],
+        ));
   }
 }
