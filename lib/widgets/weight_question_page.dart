@@ -13,6 +13,8 @@ class WeightQuestionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = ClinicalDataController.of(context);
     if (c == null) throw NullThrownError();
+    controller.text =
+        c.patientData.weight == null ? '' : c.patientData.weight.toString();
     return NumberFormQuestionContent(
         question: Questions.weight,
         formController: controller,

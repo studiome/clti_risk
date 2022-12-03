@@ -5,6 +5,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../models/clinical_data_controller.dart';
+import '../models/patient_risk.dart';
 import '../models/question_details.dart' as details;
 import '../models/questions.dart';
 import 'activity_question_page.dart';
@@ -203,10 +204,12 @@ class QuestionForm extends StatelessWidget {
               c.patientData.height = double.parse(heightController.text);
               c.patientData.weight = double.parse(weightController.text);
               c.patientData.alb = double.parse(albController.text);
-              //PatientRisk(patientData: c.patientData);
             } catch (e) {
               if (kDebugMode) print(e);
+              return;
             }
+            final pr = PatientRisk(patientData: c.patientData);
+            c.onRiskCalculated.sink.add(pr);
           },
           label: const Text('analysis'),
         ),

@@ -13,6 +13,9 @@ class HeightQuestionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = ClinicalDataController.of(context);
     if (c == null) throw NullThrownError();
+    controller.text =
+        c.patientData.height == null ? '' : c.patientData.height.toString();
+
     return NumberFormQuestionContent(
         question: Questions.height,
         formController: controller,

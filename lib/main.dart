@@ -1,24 +1,50 @@
+import 'dart:async';
+
+import 'package:clti_risk/widgets/risk_view.dart';
 import 'package:flutter/material.dart';
 
 import 'models/clinical_data_controller.dart';
 import 'models/patient_data.dart';
+import 'models/patient_risk.dart';
 import 'widgets/question_form.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(MyApp());
+  runApp(const AppRoot());
 }
 
 const Color jsvsColor = Color(0xFF2D6A7B);
 
-class MyApp extends StatelessWidget {
-  MyApp({super.key});
-  final PatientData pd = PatientData();
+class AppRoot extends StatefulWidget {
+  const AppRoot({super.key});
+
+  @override
+  State<AppRoot> createState() => _AppRootState();
+}
+
+class _AppRootState extends State<AppRoot> {
   final TextEditingController ageController = TextEditingController();
   final TextEditingController heightController = TextEditingController();
   final TextEditingController weightController = TextEditingController();
   final TextEditingController albController = TextEditingController();
   final String title = 'CLiTICAL';
+  PatientData pd = PatientData();
+  PatientRisk? risk;
+  StreamController<PatientRisk?> onRiskCalculated = StreamController();
+
+  @override
+  void initState() {
+    super.initState();
+    risk = null;
+    onRiskCalculated.stream.listen((event) {
+      setState(() {
+        risk = event;
+        if (risk == null) {
+          pd = PatientData();
+        }
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +73,7 @@ class MyApp extends StatelessWidget {
           themeMode: ThemeMode.system,
           home: ClinicalDataController(
               patientData: pd,
+              onRiskCalculated: onRiskCalculated,
               risk: null,
               child: Navigator(
                 pages: [
@@ -61,7 +88,19 @@ class MyApp extends StatelessWidget {
                       albController: albController,
                     ),
                   ),
+                  if (risk != null)
+                    MaterialPage(
+                        key: const ValueKey('Result'),
+                        child: RiskView(title: 'Risk', risk: risk!)),
                 ],
+                onPopPage: (route, result) {
+                  if (!route.didPop(result)) return false;
+                  setState(() {
+                    risk = null;
+                    pd = PatientData();
+                  });
+                  return true;
+                },
               ))),
     );
   }

@@ -13,6 +13,8 @@ class AlbQuestionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = ClinicalDataController.of(context);
     if (c == null) throw NullThrownError();
+    controller.text =
+        c.patientData.alb == null ? '' : c.patientData.alb.toString();
     return NumberFormQuestionContent(
         question: Questions.albumin,
         formController: controller,

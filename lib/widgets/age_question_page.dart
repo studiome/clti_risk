@@ -13,6 +13,8 @@ class AgeQuestionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = ClinicalDataController.of(context);
     if (c == null) throw NullThrownError();
+    controller.text =
+        c.patientData.age == null ? '' : c.patientData.age.toString();
     return NumberFormQuestionContent(
         question: Questions.age,
         formController: controller,
