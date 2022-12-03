@@ -32,16 +32,22 @@ class _AppRootState extends State<AppRoot> {
   PatientRisk? risk;
   StreamController<PatientRisk?> onRiskCalculated = StreamController();
 
+  void _init() {
+    risk = null;
+    pd = PatientData();
+    ageController.text = '';
+    heightController.text = '';
+    weightController.text = '';
+    albController.text = '';
+  }
+
   @override
   void initState() {
+    _init();
     super.initState();
-    risk = null;
     onRiskCalculated.stream.listen((event) {
       setState(() {
         risk = event;
-        if (risk == null) {
-          pd = PatientData();
-        }
       });
     });
   }
@@ -96,8 +102,7 @@ class _AppRootState extends State<AppRoot> {
                 onPopPage: (route, result) {
                   if (!route.didPop(result)) return false;
                   setState(() {
-                    risk = null;
-                    pd = PatientData();
+                    _init();
                   });
                   return true;
                 },
