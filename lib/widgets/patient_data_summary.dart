@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../models/clinical_data_controller.dart';
@@ -96,6 +97,16 @@ class PatientDataSummary extends StatelessWidget {
       Questions.rutherford.index: details
           .questionDetail[Questions.rutherford]![details.Description.title]!,
     };
+    //set value if not next tapped or done entered.
+    try {
+      c.patientData.age = int.parse(ageController.text);
+      c.patientData.height = double.parse(heightController.text);
+      c.patientData.weight = double.parse(weightController.text);
+      c.patientData.alb = double.parse(albController.text);
+    } catch (e) {
+      if (kDebugMode) print(e);
+      //DO NOTHING
+    }
     return ListView.builder(
       itemBuilder: (context, index) {
         return ListTile(

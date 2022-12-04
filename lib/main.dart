@@ -28,7 +28,7 @@ class _AppRootState extends State<AppRoot> {
   final TextEditingController weightController = TextEditingController();
   final TextEditingController albController = TextEditingController();
   final String title = 'CLiTICAL';
-  PatientData pd = PatientData();
+  late PatientData pd;
   PatientRisk? risk;
   StreamController<PatientRisk?> onRiskCalculated = StreamController();
 
@@ -43,8 +43,8 @@ class _AppRootState extends State<AppRoot> {
 
   @override
   void initState() {
-    _init();
     super.initState();
+    _init();
     onRiskCalculated.stream.listen((event) {
       setState(() {
         risk = event;
