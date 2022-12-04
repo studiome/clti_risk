@@ -43,9 +43,9 @@ class RiskViewPage extends StatelessWidget {
           ],
         ),
         InfoCard(
-          title: 'Probability of 30 days Amputation/Death',
+          title: 'Predicted 30-day Amputation/Death',
           subtitle:
-              'Probability of major amputation and/or death 30 days after revascularization',
+              'Predicted risk of major amputation and/or death 30 days after revascularization',
           children: [
             SelectableText(
               ('${(risk.predicted30DDeathOrAmputation * 100.0).toStringAsFixed(1)}%'),
@@ -54,9 +54,9 @@ class RiskViewPage extends StatelessWidget {
           ],
         ),
         InfoCard(
-          title: 'Probability of 30 days MALE',
+          title: 'Predicted 30-day MALE',
           subtitle:
-              'Probability of major adverse limb event 30 days after revascularization',
+              'Predicted risk of  major adverse limb event 30 days after revascularization',
           children: [
             SelectableText(
               ('${(risk.predicted30DMALE * 100.0).toStringAsFixed(1)}%'),
@@ -65,7 +65,7 @@ class RiskViewPage extends StatelessWidget {
           ],
         ),
         InfoCard(
-          title: 'Predicted OS',
+          title: 'Predicted 2-year OS',
           subtitle: 'Predicted 2 year Overall Survival post-revascularisation',
           children: [
             SelectableText(
@@ -79,7 +79,7 @@ class RiskViewPage extends StatelessWidget {
           ],
         ),
         InfoCard(
-          title: 'Predicted AFS',
+          title: 'Predicted 2-year AFS',
           subtitle:
               'Predicted 2 year Amputation Free Survival post-revascularisation',
           children: [
