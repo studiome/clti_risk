@@ -21,13 +21,13 @@ void main() {
     late Finder backButton;
     setUp(() {
       testApp = MaterialApp(home: QuestionPagesTestWidget());
-      titleAt0 = find.text('Tab0');
+      titleAt0 = find.text('1. Tab0');
       subtitleAt0 = find.text('TabTest0');
       contentAt0 = find.text('Q-0');
-      titleAt1 = find.text('Tab1');
+      titleAt1 = find.text('2. Tab1');
       subtitleAt1 = find.text('TabTest1');
       contentAt1 = find.text('Q-1');
-      titleAt2 = find.text('Tab2');
+      titleAt2 = find.text('3. Tab2');
       subtitleAt2 = find.text('TabTest2');
       contentAt2 = find.text('Q-2');
 
@@ -108,7 +108,7 @@ class QuestionPagesTestWidget extends StatelessWidget {
     return QuestionBinder(
       title: 'test',
       drawerListTiles: [],
-      actionButton: TextButton(
+      actionButton: FloatingActionButton(
         child: const Text('test'),
         onPressed: () {},
       ),

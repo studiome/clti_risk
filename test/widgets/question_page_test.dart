@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:clti_risk/models/clinical_data_controller.dart';
 import 'package:clti_risk/models/patient_data.dart';
+import 'package:clti_risk/models/patient_risk.dart';
 import 'package:clti_risk/models/questions.dart';
 import 'package:clti_risk/widgets/question_page.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +19,7 @@ void main() {
       testApp = MaterialApp(
           home: ClinicalDataController(
               patientData: pd,
-              risk: null,
+              onRiskCalculated: StreamController<PatientRisk>(),
               child: const Scaffold(body: ChoiceTestWidget())));
     });
 
@@ -57,7 +60,7 @@ void main() {
       testApp = MaterialApp(
           home: ClinicalDataController(
               patientData: pd,
-              risk: null,
+              onRiskCalculated: StreamController<PatientRisk>(),
               child: DefaultTabController(
                   length: 3,
                   child: Scaffold(
