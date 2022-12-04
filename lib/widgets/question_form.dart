@@ -35,6 +35,7 @@ import 'weight_question_page.dart';
 class QuestionForm extends StatelessWidget {
   final String title;
   final String appName;
+  final List<Widget>? actions;
   final TextEditingController ageController;
   final TextEditingController heightController;
   final TextEditingController weightController;
@@ -48,6 +49,7 @@ class QuestionForm extends StatelessWidget {
     required this.weightController,
     required this.albController,
     required this.appName,
+    this.actions,
   });
 
   @override
@@ -139,6 +141,7 @@ class QuestionForm extends StatelessWidget {
     if (c == null) throw NullThrownError();
     return QuestionBinder(
         title: title,
+        actions: actions,
         drawerListTiles: <ListTile>[
           ListTile(
             leading: const Icon(Icons.article),

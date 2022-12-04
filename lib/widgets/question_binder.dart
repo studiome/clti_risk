@@ -12,6 +12,7 @@ class QuestionBinder extends StatelessWidget {
   final String title;
   final List<ListTile> drawerListTiles;
   final List<QuestionPageDetail> questionPages;
+  final List<Widget>? actions;
   final int _tabCount;
   final FloatingActionButton actionButton;
 
@@ -21,6 +22,7 @@ class QuestionBinder extends StatelessWidget {
     required this.questionPages,
     required this.actionButton,
     required this.drawerListTiles,
+    this.actions,
   }) : _tabCount = questionPages.length;
 
   @override
@@ -32,6 +34,7 @@ class QuestionBinder extends StatelessWidget {
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
           title: Text(title),
+          actions: actions,
           bottom: TabBar(
             indicatorColor: Theme.of(context).colorScheme.primary,
             labelColor: Theme.of(context).colorScheme.primary,

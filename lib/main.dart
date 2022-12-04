@@ -30,6 +30,7 @@ class _AppRootState extends State<AppRoot> {
   final String title = 'CLiTICAL';
   late PatientData pd;
   PatientRisk? risk;
+  late FormInitializer formInitializer;
   StreamController<PatientRisk?> onRiskCalculated = StreamController();
 
   void _init() {
@@ -45,6 +46,11 @@ class _AppRootState extends State<AppRoot> {
   void initState() {
     super.initState();
     _init();
+    formInitializer = FormInitializer(
+      onPressed: () {
+        setState(() => _init());
+      },
+    );
     onRiskCalculated.stream.listen((event) {
       setState(() {
         risk = event;
@@ -80,13 +86,15 @@ class _AppRootState extends State<AppRoot> {
           home: ClinicalDataController(
               patientData: pd,
               onRiskCalculated: onRiskCalculated,
-              risk: null,
               child: Navigator(
                 pages: [
                   MaterialPage(
                     key: const ValueKey('Question'),
                     child: QuestionForm(
                       title: 'Patient Data',
+                      actions: [
+                        formInitializer,
+                      ],
                       appName: 'CLiTICAL',
                       ageController: ageController,
                       heightController: heightController,
@@ -101,12 +109,28 @@ class _AppRootState extends State<AppRoot> {
                 ],
                 onPopPage: (route, result) {
                   if (!route.didPop(result)) return false;
-                  setState(() {
-                    _init();
-                  });
+                  //setState(() {
+                  //   _init();
+                  //});
                   return true;
                 },
               ))),
+    );
+  }
+}
+
+class FormInitializer extends StatelessWidget {
+  final void Function()? onPressed;
+  const FormInitializer({
+    super.key,
+    this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: const Icon(Icons.refresh),
+      onPressed: onPressed,
     );
   }
 }
