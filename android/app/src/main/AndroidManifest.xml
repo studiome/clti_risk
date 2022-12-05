@@ -2,8 +2,8 @@
     package="org.studiomexx.clti_risk">
    <application
         android:label="CLiTICAL"
-        android:name="CLiTICAL"
-        android:icon="@mipmap/ic_launcher">
+        android:name="${applicationName}"
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"
