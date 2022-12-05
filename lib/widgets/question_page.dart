@@ -28,7 +28,8 @@ class QuestionPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12.0),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 12.0, horizontal: 8.0),
               child: Text(subtitle)),
           Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
