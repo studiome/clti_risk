@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'models/clinical_data_controller.dart';
 import 'models/patient_data.dart';
 import 'models/patient_risk.dart';
+import 'models/questions.dart';
 import 'widgets/question_form.dart';
 
 void main() {
@@ -30,7 +31,6 @@ class _AppRootState extends State<AppRoot> {
   final String title = 'CLiTICAL';
   late PatientData pd;
   PatientRisk? risk;
-  late FormInitializer formInitializer;
   StreamController<PatientRisk?> onRiskCalculated = StreamController();
 
   void _init() {
@@ -46,11 +46,6 @@ class _AppRootState extends State<AppRoot> {
   void initState() {
     super.initState();
     _init();
-    formInitializer = FormInitializer(
-      onPressed: () {
-        setState(() => _init());
-      },
-    );
     onRiskCalculated.stream.listen((event) {
       setState(() {
         risk = event;
@@ -93,7 +88,14 @@ class _AppRootState extends State<AppRoot> {
                     child: QuestionForm(
                       title: 'Patient Data',
                       actions: [
-                        formInitializer,
+                        const SummaryViewer(),
+                        FormInitializer(
+                          onPressed: () {
+                            setState(() {
+                              _init();
+                            });
+                          },
+                        ),
                       ],
                       appName: 'CLiTICAL',
                       ageController: ageController,
@@ -129,8 +131,29 @@ class FormInitializer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: const Icon(Icons.refresh),
-      onPressed: onPressed,
+      icon: const Icon(Icons.refresh_outlined),
+      onPressed: () {
+        if (onPressed != null) onPressed;
+        final tabController = DefaultTabController.of(context);
+        if (tabController == null) throw NullThrownError();
+        tabController.animateTo(0);
+      },
+    );
+  }
+}
+
+class SummaryViewer extends StatelessWidget {
+  const SummaryViewer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: const Icon(Icons.summarize_outlined),
+      onPressed: () {
+        final tabController = DefaultTabController.of(context);
+        if (tabController == null) throw NullThrownError();
+        tabController.animateTo(Questions.summary.index);
+      },
     );
   }
 }
