@@ -21,8 +21,8 @@ class _CADQuestionPageState extends State<CADQuestionPage> {
       question: Questions.cad,
       values: YesNo.values,
       dataItem: c.patientData.hasCAD.toYesNo(),
-      itemWidth: 180.0,
-      itemHeight: 40.0,
+      itemWidth: 160.0,
+      itemHeight: 48.0,
       tabIndex: Questions.cad.index,
       tabCount: Questions.values.length,
       onChanged: (v) {

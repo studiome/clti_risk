@@ -22,7 +22,7 @@ class _MalignantQuestionPageState extends State<MalignantQuestionPage> {
       values: MalignantNeoplasm.values,
       dataItem: c.patientData.malignant,
       itemWidth: 240.0,
-      itemHeight: 40.0,
+      itemHeight: 48.0,
       tabIndex: Questions.malignantNeoplasm.index,
       tabCount: Questions.values.length,
       onChanged: (v) {

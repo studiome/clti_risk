@@ -21,8 +21,8 @@ class _DLQuestionPageState extends State<DLQuestionPage> {
       question: Questions.dyslipidemia,
       values: YesNo.values,
       dataItem: c.patientData.hasDyslipidemia.toYesNo(),
-      itemWidth: 180.0,
-      itemHeight: 40.0,
+      itemWidth: 160.0,
+      itemHeight: 48.0,
       tabIndex: Questions.dyslipidemia.index,
       tabCount: Questions.values.length,
       onChanged: (v) {

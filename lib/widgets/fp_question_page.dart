@@ -21,8 +21,8 @@ class _LesionFPQuestionPageState extends State<LesionFPQuestionPage> {
       question: Questions.lesionFP,
       values: YesNo.values,
       dataItem: c.patientData.hasFPLesion.toYesNo(),
-      itemWidth: 180.0,
-      itemHeight: 40.0,
+      itemWidth: 160.0,
+      itemHeight: 48.0,
       tabIndex: Questions.lesionFP.index,
       tabCount: Questions.values.length,
       onChanged: (v) {

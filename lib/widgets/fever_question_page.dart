@@ -21,8 +21,8 @@ class _FeverQuestionPageState extends State<FeverQuestionPage> {
       question: Questions.fever,
       values: YesNo.values,
       dataItem: c.patientData.hasFever.toYesNo(),
-      itemWidth: 180.0,
-      itemHeight: 40.0,
+      itemWidth: 160.0,
+      itemHeight: 48.0,
       tabIndex: Questions.fever.index,
       tabCount: Questions.values.length,
       onChanged: (v) {

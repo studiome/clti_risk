@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:clti_risk/widgets/risk_view.dart';
 import 'package:flutter/material.dart';
 
 import 'models/clinical_data_controller.dart';
@@ -8,6 +7,7 @@ import 'models/patient_data.dart';
 import 'models/patient_risk.dart';
 import 'models/questions.dart';
 import 'widgets/question_form.dart';
+import 'widgets/risk_view.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

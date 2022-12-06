@@ -22,7 +22,7 @@ class _SexQuestionPageState extends State<SexQuestionPage> {
       values: Sex.values,
       dataItem: c.patientData.sex,
       itemWidth: 160.0,
-      itemHeight: 40.0,
+      itemHeight: 48.0,
       tabIndex: Questions.sex.index,
       tabCount: Questions.values.length,
       onChanged: (v) {

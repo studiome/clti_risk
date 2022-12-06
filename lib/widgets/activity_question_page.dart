@@ -22,7 +22,7 @@ class _ActivityQuestionPageState extends State<ActivityQuestionPage> {
       values: Activity.values,
       dataItem: c.patientData.activity,
       itemWidth: 180.0,
-      itemHeight: 40.0,
+      itemHeight: 48.0,
       tabIndex: Questions.activity.index,
       tabCount: Questions.values.length,
       onChanged: (v) {

@@ -21,8 +21,8 @@ class _LesionBKQuestionPageState extends State<LesionBKQuestionPage> {
       question: Questions.lesionBK,
       values: YesNo.values,
       dataItem: c.patientData.hasBKLesion.toYesNo(),
-      itemWidth: 180.0,
-      itemHeight: 40.0,
+      itemWidth: 160.0,
+      itemHeight: 48.0,
       tabIndex: Questions.lesionBK.index,
       tabCount: Questions.values.length,
       onChanged: (v) {
