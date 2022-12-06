@@ -133,10 +133,10 @@ class FormInitializer extends StatelessWidget {
     return IconButton(
       icon: const Icon(Icons.refresh_outlined),
       onPressed: () {
-        if (onPressed != null) onPressed;
         final tabController = DefaultTabController.of(context);
         if (tabController == null) throw NullThrownError();
         tabController.animateTo(0);
+        if (onPressed != null) onPressed!();
       },
     );
   }
