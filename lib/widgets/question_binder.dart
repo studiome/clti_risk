@@ -30,6 +30,7 @@ class QuestionBinder extends StatelessWidget {
     return DefaultTabController(
       length: _tabCount,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         floatingActionButton: actionButton,
         appBar: AppBar(
           title: Text(title),
