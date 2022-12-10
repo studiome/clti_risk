@@ -24,6 +24,7 @@ class PatientDataSummary extends StatelessWidget {
     if (c == null) throw NullThrownError();
     final pd = c.patientData;
     final Map<int, String> data = {
+      Questions.instruction.index: '',
       Questions.sex.index: pd.sex.toString(),
       Questions.age.index: ageController.text,
       Questions.height.index: heightController.text,
@@ -50,6 +51,8 @@ class PatientDataSummary extends StatelessWidget {
       Questions.rutherford.index: pd.rutherford.toString(),
     };
     final Map<int, String> title = {
+      Questions.instruction.index: details
+          .questionDetail[Questions.instruction]![details.Description.title]!,
       Questions.sex.index:
           details.questionDetail[Questions.sex]![details.Description.title]!,
       Questions.age.index:

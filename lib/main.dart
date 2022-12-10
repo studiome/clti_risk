@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'models/clinical_data_controller.dart';
 import 'models/patient_data.dart';
@@ -79,14 +78,15 @@ class _AppRootState extends State<AppRoot> {
             //fontFamily: 'Noto Sans JP',
           ),
           themeMode: ThemeMode.system,
-          localizationsDelegates: const [
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-          ],
-          supportedLocales: const [
-            Locale('en'),
-            Locale('ja'),
-          ],
+          //localizationsDelegates: const [
+          //  GlobalMaterialLocalizations.delegate,
+          //  GlobalWidgetsLocalizations.delegate,
+          //  GlobalCupertinoLocalizations.delegate,
+          //],
+          //supportedLocales: const [
+          //  Locale('en'),
+          //  Locale('ja'),
+          //],
           home: ClinicalDataController(
               patientData: pd,
               onRiskCalculated: onRiskCalculated,

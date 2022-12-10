@@ -1,4 +1,3 @@
-import 'package:clti_risk/widgets/patient_data_summary.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -21,9 +20,11 @@ import 'dl_question_page.dart';
 import 'fever_question_page.dart';
 import 'fp_question_page.dart';
 import 'height_question_page.dart';
+import 'instruction_page.dart';
 import 'local_infection_question_page.dart';
 import 'malingnant_question_page.dart';
 import 'other_vascular_question_page.dart';
+import 'patient_data_summary.dart';
 import 'question_binder.dart';
 import 'rutherford_question_page.dart';
 import 'sex_question_page.dart';
@@ -55,6 +56,7 @@ class QuestionForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Map<int, Widget> pageList = {
+      Questions.instruction.index: const InstructionPage(),
       Questions.sex.index: const SexQuestionPage(),
       Questions.age.index: AgeQuestionPage(controller: ageController),
       Questions.height.index: HeightQuestionPage(controller: heightController),
@@ -87,6 +89,8 @@ class QuestionForm extends StatelessWidget {
     };
 
     final Map<int, String> titleList = {
+      Questions.instruction.index: details
+          .questionDetail[Questions.instruction]![details.Description.title]!,
       Questions.sex.index:
           details.questionDetail[Questions.sex]![details.Description.title]!,
       Questions.age.index:

@@ -6,6 +6,10 @@ enum Description {
 }
 
 const Map<Questions, Map<Description, String>> questionDetail = {
+  Questions.instruction: {
+    Description.title: 'Instruction',
+    Description.subtitle: 'Follow the instructions below.',
+  },
   Questions.sex: {
     Description.title: 'Sex',
     Description.subtitle: 'Male or Female'
