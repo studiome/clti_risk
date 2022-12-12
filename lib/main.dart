@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'models/clinical_data_controller.dart';
 import 'models/patient_data.dart';
@@ -78,15 +80,13 @@ class _AppRootState extends State<AppRoot> {
             //fontFamily: 'Noto Sans JP',
           ),
           themeMode: ThemeMode.system,
-          //localizationsDelegates: const [
-          //  GlobalMaterialLocalizations.delegate,
-          //  GlobalWidgetsLocalizations.delegate,
-          //  GlobalCupertinoLocalizations.delegate,
-          //],
-          //supportedLocales: const [
-          //  Locale('en'),
-          //  Locale('ja'),
-          //],
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: AppLocalizations.supportedLocales,
           home: ClinicalDataController(
               patientData: pd,
               onRiskCalculated: onRiskCalculated,
@@ -94,24 +94,26 @@ class _AppRootState extends State<AppRoot> {
                 pages: [
                   MaterialPage(
                     key: const ValueKey('Question'),
-                    child: QuestionForm(
-                      title: 'Patient Data',
-                      actions: [
-                        const SummaryViewer(),
-                        FormInitializer(
-                          onPressed: () {
-                            setState(() {
-                              _init();
-                            });
-                          },
-                        ),
-                      ],
-                      appName: 'CLiTICAL',
-                      ageController: ageController,
-                      heightController: heightController,
-                      weightController: weightController,
-                      albController: albController,
-                    ),
+                    child: Builder(builder: (context) {
+                      return QuestionForm(
+                        title: AppLocalizations.of(context).questionFormTitle,
+                        actions: [
+                          const SummaryViewer(),
+                          FormInitializer(
+                            onPressed: () {
+                              setState(() {
+                                _init();
+                              });
+                            },
+                          ),
+                        ],
+                        appName: 'CLiTICAL',
+                        ageController: ageController,
+                        heightController: heightController,
+                        weightController: weightController,
+                        albController: albController,
+                      );
+                    }),
                   ),
                   if (risk != null)
                     MaterialPage(
