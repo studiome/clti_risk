@@ -272,7 +272,7 @@ class LocaleSwitch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 150.0,
+      height: 180.0,
       child: Column(
         children: [
           Padding(
