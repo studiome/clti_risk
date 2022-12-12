@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../models/clinical_data_controller.dart';
@@ -280,9 +281,10 @@ class LocaleSwitch extends StatelessWidget {
               title: const Text('English'),
               value: const Locale('en'),
               groupValue: localeController.value,
-              onChanged: (v) {
+              onChanged: (v) async {
                 if (v == null) return;
                 localeController.value = v;
+                await _setLocaleToPrefs(v);
               },
             ),
           ),
@@ -292,14 +294,23 @@ class LocaleSwitch extends StatelessWidget {
               title: const Text('日本語'),
               value: const Locale('ja'),
               groupValue: localeController.value,
-              onChanged: (v) {
+              onChanged: (v) async {
                 if (v == null) return;
                 localeController.value = v;
+                await _setLocaleToPrefs(v);
               },
             ),
           ),
         ],
       ),
+    );
+  }
+
+  Future<void> _setLocaleToPrefs(Locale locale) {
+    return SharedPreferences.getInstance().then(
+      (pref) {
+        pref.setString('locale', locale.toString());
+      },
     );
   }
 }

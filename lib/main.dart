@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'models/clinical_data_controller.dart';
 import 'models/locale_controller.dart';
@@ -30,8 +31,7 @@ class _AppRootState extends State<AppRoot> {
   final TextEditingController heightController = TextEditingController();
   final TextEditingController weightController = TextEditingController();
   final TextEditingController albController = TextEditingController();
-  final LocaleController localeController =
-      LocaleController(const Locale('en'));
+  LocaleController localeController = LocaleController(const Locale('en'));
   final String title = 'CLiTICAL';
   late PatientData pd;
   PatientRisk? risk;
@@ -54,6 +54,14 @@ class _AppRootState extends State<AppRoot> {
       setState(() {
         risk = event;
       });
+    });
+    SharedPreferences.getInstance().then((pref) {
+      final l = pref.getString('locale');
+      if (l == null) {
+        localeController.value = const Locale('en');
+        return;
+      }
+      localeController.value = Locale(l);
     });
   }
 

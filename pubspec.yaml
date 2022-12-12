@@ -42,6 +42,7 @@ dependencies:
   package_info_plus: ^3.0.2
   url_launcher: ^6.1.7
   flutter_launcher_icons: ^0.11.0
+  shared_preferences: ^2.0.15
 
 dev_dependencies:
   flutter_test:
