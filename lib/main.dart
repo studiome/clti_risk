@@ -76,13 +76,13 @@ class _AppRootState extends State<AppRoot> {
                 theme: ThemeData(
                   useMaterial3: true,
                   colorSchemeSeed: jsvsColor,
-                  //fontFamily: 'Noto Sans JP',
+                  fontFamily: 'Noto Sans JP',
                 ),
                 darkTheme: ThemeData(
                   useMaterial3: true,
                   brightness: Brightness.dark,
                   colorSchemeSeed: jsvsColor,
-                  //fontFamily: 'Noto Sans JP',
+                  fontFamily: 'Noto Sans JP',
                 ),
                 themeMode: ThemeMode.system,
                 localizationsDelegates: AppLocalizations.localizationsDelegates,
