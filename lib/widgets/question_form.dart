@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../models/clinical_data_controller.dart';
+import '../models/locale_controller.dart';
 import '../models/patient_risk.dart';
 import '../models/question_details.dart' as details;
 import '../models/questions.dart';
@@ -41,6 +43,7 @@ class QuestionForm extends StatelessWidget {
   final TextEditingController heightController;
   final TextEditingController weightController;
   final TextEditingController albController;
+  final LocaleController localeController;
 
   const QuestionForm({
     super.key,
@@ -51,6 +54,7 @@ class QuestionForm extends StatelessWidget {
     required this.albController,
     required this.appName,
     this.actions,
+    required this.localeController,
   });
 
   @override
@@ -148,6 +152,31 @@ class QuestionForm extends StatelessWidget {
         actions: actions,
         drawerListTiles: <ListTile>[
           ListTile(
+            leading: const Icon(Icons.language_outlined),
+            title: const Text('Language'),
+            onTap: () async {
+              await showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: const Text('Language'),
+                    content: LocaleSwitch(
+                      localeController: localeController,
+                    ),
+                    actions: [
+                      TextButton(
+                        child: const Text('OK'),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      )
+                    ],
+                  );
+                },
+              );
+            },
+          ),
+          ListTile(
             leading: const Icon(Icons.article),
             title: const Text('References'),
             onTap: () async {
@@ -233,5 +262,55 @@ class QuestionForm extends StatelessWidget {
               tabIndex: index,
               page: pageList[index]!);
         }));
+  }
+}
+
+class LocaleSwitch extends StatelessWidget {
+  final LocaleController localeController;
+  const LocaleSwitch({super.key, required this.localeController});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 180.0,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 12.0),
+            child: RadioListTile(
+              title: const Text('English'),
+              value: const Locale('en'),
+              groupValue: localeController.value,
+              onChanged: (v) async {
+                if (v == null) return;
+                localeController.value = v;
+                await _setLocaleToPrefs(v);
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 12.0),
+            child: RadioListTile(
+              title: const Text('日本語'),
+              value: const Locale('ja'),
+              groupValue: localeController.value,
+              onChanged: (v) async {
+                if (v == null) return;
+                localeController.value = v;
+                await _setLocaleToPrefs(v);
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _setLocaleToPrefs(Locale locale) {
+    return SharedPreferences.getInstance().then(
+      (pref) {
+        pref.setString('locale', locale.toString());
+      },
+    );
   }
 }

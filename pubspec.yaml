@@ -33,6 +33,7 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  intl: ^0.17.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -41,6 +42,7 @@ dependencies:
   package_info_plus: ^3.0.2
   url_launcher: ^6.1.7
   flutter_launcher_icons: ^0.11.0
+  shared_preferences: ^2.0.15
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +66,7 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  generate: true
 
   # To add assets to your application, add an assets section, like this:
   # assets:
@@ -81,21 +84,21 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Noto Sans JP
-  #     fonts:
-  #       - asset: lib/fonts/NotoSansJP-Medium.otf
-  #         weight: 500
-  #       - asset: lib/fonts/NotoSansJP-Regular.otf
-  #         weight: 400
-  #       - asset: lib/fonts/NotoSansJP-Bold.otf
-  #         weight: 700
-  #       - asset: lib/fonts/NotoSansJP-Thin.otf
-  #         weight: 100
-  #       - asset: lib/fonts/NotoSansJP-Light.otf
-  #         weight: 300
-  #       - asset: lib/fonts/NotoSansJP-Black.otf
-  #         weight: 900
+  fonts:
+    - family: Noto Sans JP
+      fonts:
+        - asset: lib/fonts/NotoSansJP-Medium.otf
+          weight: 500
+        - asset: lib/fonts/NotoSansJP-Regular.otf
+          weight: 400
+        - asset: lib/fonts/NotoSansJP-Bold.otf
+          weight: 700
+        - asset: lib/fonts/NotoSansJP-Thin.otf
+          weight: 100
+        - asset: lib/fonts/NotoSansJP-Light.otf
+          weight: 300
+        - asset: lib/fonts/NotoSansJP-Black.otf
+          weight: 900
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
@@ -114,3 +117,5 @@ flutter_icons:
     generate: true
   linux:
     generate: true
+flutter_intl:
+  enabled: true

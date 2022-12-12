@@ -1,8 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'models/clinical_data_controller.dart';
+import 'models/locale_controller.dart';
 import 'models/patient_data.dart';
 import 'models/patient_risk.dart';
 import 'models/questions.dart';
@@ -28,6 +31,7 @@ class _AppRootState extends State<AppRoot> {
   final TextEditingController heightController = TextEditingController();
   final TextEditingController weightController = TextEditingController();
   final TextEditingController albController = TextEditingController();
+  LocaleController localeController = LocaleController(const Locale('en'));
   final String title = 'CLiTICAL';
   late PatientData pd;
   PatientRisk? risk;
@@ -51,6 +55,14 @@ class _AppRootState extends State<AppRoot> {
         risk = event;
       });
     });
+    SharedPreferences.getInstance().then((pref) {
+      final l = pref.getString('locale');
+      if (l == null) {
+        localeController.value = const Locale('en');
+        return;
+      }
+      localeController.value = Locale(l);
+    });
   }
 
   @override
@@ -64,68 +76,71 @@ class _AppRootState extends State<AppRoot> {
           FocusManager.instance.primaryFocus!.unfocus();
         }
       },
-      child: MaterialApp(
-          title: title,
-          theme: ThemeData(
-            useMaterial3: true,
-            colorSchemeSeed: jsvsColor,
-            //fontFamily: 'Noto Sans JP',
-          ),
-          darkTheme: ThemeData(
-            useMaterial3: true,
-            brightness: Brightness.dark,
-            colorSchemeSeed: jsvsColor,
-            //fontFamily: 'Noto Sans JP',
-          ),
-          themeMode: ThemeMode.system,
-          //localizationsDelegates: const [
-          //  GlobalMaterialLocalizations.delegate,
-          //  GlobalWidgetsLocalizations.delegate,
-          //  GlobalCupertinoLocalizations.delegate,
-          //],
-          //supportedLocales: const [
-          //  Locale('en'),
-          //  Locale('ja'),
-          //],
-          home: ClinicalDataController(
-              patientData: pd,
-              onRiskCalculated: onRiskCalculated,
-              child: Navigator(
-                pages: [
-                  MaterialPage(
-                    key: const ValueKey('Question'),
-                    child: QuestionForm(
-                      title: 'Patient Data',
-                      actions: [
-                        const SummaryViewer(),
-                        FormInitializer(
-                          onPressed: () {
-                            setState(() {
-                              _init();
-                            });
-                          },
+      child: ValueListenableBuilder<Locale>(
+          valueListenable: localeController,
+          builder: (c, value, _) {
+            return MaterialApp(
+                title: title,
+                theme: ThemeData(
+                  useMaterial3: true,
+                  colorSchemeSeed: jsvsColor,
+                  fontFamily: 'Noto Sans JP',
+                ),
+                darkTheme: ThemeData(
+                  useMaterial3: true,
+                  brightness: Brightness.dark,
+                  colorSchemeSeed: jsvsColor,
+                  fontFamily: 'Noto Sans JP',
+                ),
+                themeMode: ThemeMode.system,
+                localizationsDelegates: AppLocalizations.localizationsDelegates,
+                supportedLocales: AppLocalizations.supportedLocales,
+                locale: localeController.value,
+                home: ClinicalDataController(
+                    patientData: pd,
+                    onRiskCalculated: onRiskCalculated,
+                    child: Navigator(
+                      pages: [
+                        MaterialPage(
+                          key: const ValueKey('Question'),
+                          child: Builder(builder: (context) {
+                            return QuestionForm(
+                              title: AppLocalizations.of(context)
+                                  .questionFormTitle,
+                              actions: [
+                                const SummaryViewer(),
+                                FormInitializer(
+                                  onPressed: () {
+                                    setState(() {
+                                      _init();
+                                    });
+                                  },
+                                ),
+                              ],
+                              appName: 'CLiTICAL',
+                              ageController: ageController,
+                              heightController: heightController,
+                              weightController: weightController,
+                              albController: albController,
+                              localeController: localeController,
+                            );
+                          }),
                         ),
+                        if (risk != null)
+                          MaterialPage(
+                              key: const ValueKey('Result'),
+                              child: RiskView(
+                                  title: 'Predicted Risk', risk: risk!)),
                       ],
-                      appName: 'CLiTICAL',
-                      ageController: ageController,
-                      heightController: heightController,
-                      weightController: weightController,
-                      albController: albController,
-                    ),
-                  ),
-                  if (risk != null)
-                    MaterialPage(
-                        key: const ValueKey('Result'),
-                        child: RiskView(title: 'Predicted Risk', risk: risk!)),
-                ],
-                onPopPage: (route, result) {
-                  if (!route.didPop(result)) return false;
-                  //setState(() {
-                  //   _init();
-                  //});
-                  return true;
-                },
-              ))),
+                      onPopPage: (route, result) {
+                        if (!route.didPop(result)) return false;
+                        //setState(() {
+                        //   _init();
+                        //});
+                        return true;
+                      },
+                    )));
+          }),
     );
   }
 }

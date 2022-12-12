@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TabTransitionNavigator extends StatelessWidget {
   final int tabIndex; //[0 .. tabCount-1]
@@ -37,7 +38,7 @@ class TabTransitionNavigator extends StatelessWidget {
                     // button disabeld if first tab.
                     tabController.animateTo(i - 1);
                   },
-            child: const Text('Back')),
+            child: Text(AppLocalizations.of(context).backButton)),
         // my filled tonal button. Switch offical widget if implemented.
         ElevatedButton(
             style: ButtonStyle(
@@ -103,7 +104,7 @@ class TabTransitionNavigator extends StatelessWidget {
                     // button disabeld if last tab.
                     tabController.animateTo(i + 1);
                   },
-            child: const Text('Next')),
+            child: Text(AppLocalizations.of(context).nextButton)),
       ],
     );
   }

@@ -1,5 +1,7 @@
 import 'package:clti_risk/widgets/tab_transition_navigator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 const initialTab = 1;
@@ -12,7 +14,14 @@ void main() {
 
     setUp(() {
       log = <int>[];
-      testApp = MaterialApp(home: TabTestWidget(log: log));
+      testApp = MaterialApp(
+        home: TabTestWidget(log: log),
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+        ],
+        locale: const Locale('en'),
+      );
     });
 
     testWidgets('build check', (tester) async {
