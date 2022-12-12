@@ -1,6 +1,8 @@
 import 'package:clti_risk/widgets/question_binder.dart';
 import 'package:clti_risk/widgets/question_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 const int tabCount = 3;
@@ -20,7 +22,10 @@ void main() {
     late Finder nextButton;
     late Finder backButton;
     setUp(() {
-      testApp = MaterialApp(home: QuestionPagesTestWidget());
+      testApp = MaterialApp(localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+      ], locale: const Locale('en'), home: QuestionPagesTestWidget());
       titleAt0 = find.text('1. Tab0');
       subtitleAt0 = find.text('TabTest0');
       contentAt0 = find.text('Q-0');
