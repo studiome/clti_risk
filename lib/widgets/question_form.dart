@@ -272,34 +272,28 @@ class LocaleSwitch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 180.0,
+      height: 120.0,
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12.0),
-            child: RadioListTile(
-              title: const Text('English'),
-              value: const Locale('en'),
-              groupValue: localeController.value,
-              onChanged: (v) async {
-                if (v == null) return;
-                localeController.value = v;
-                await _setLocaleToPrefs(v);
-              },
-            ),
+          RadioListTile(
+            title: const Text('English'),
+            value: const Locale('en'),
+            groupValue: localeController.value,
+            onChanged: (v) async {
+              if (v == null) return;
+              localeController.value = v;
+              await _setLocaleToPrefs(v);
+            },
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12.0),
-            child: RadioListTile(
-              title: const Text('日本語'),
-              value: const Locale('ja'),
-              groupValue: localeController.value,
-              onChanged: (v) async {
-                if (v == null) return;
-                localeController.value = v;
-                await _setLocaleToPrefs(v);
-              },
-            ),
+          RadioListTile(
+            title: const Text('日本語'),
+            value: const Locale('ja'),
+            groupValue: localeController.value,
+            onChanged: (v) async {
+              if (v == null) return;
+              localeController.value = v;
+              await _setLocaleToPrefs(v);
+            },
           ),
         ],
       ),
