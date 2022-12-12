@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'models/clinical_data_controller.dart';
 import 'models/patient_data.dart';
@@ -80,12 +79,7 @@ class _AppRootState extends State<AppRoot> {
             //fontFamily: 'Noto Sans JP',
           ),
           themeMode: ThemeMode.system,
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           home: ClinicalDataController(
               patientData: pd,

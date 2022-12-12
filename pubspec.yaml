@@ -116,3 +116,5 @@ flutter_icons:
     generate: true
   linux:
     generate: true
+flutter_intl:
+  enabled: true
