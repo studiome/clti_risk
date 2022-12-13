@@ -93,5 +93,12 @@
   "predicted2yrOS": "Predicted 2-year OS",
   "predicted2yrOSDescription": "Predicted 2 year Overall Survival post-revascularisation",
   "predicted2yrAFS": "Predicted 2-year AF",
-  "predicted2yrAFSDescription": "Predicted 2 year Amputation Free Survival post-revascularisation"
+  "predicted2yrAFSDescription": "Predicted 2 year Amputation Free Survival post-revascularisation",
+  "gnriNoRisk": "No Risk",
+  "gnriLowRisk": "Low Risk",
+  "gnriModerateRisk": "Moderate Risk",
+  "gntiMajorRisk": "Major Risk",
+  "osLowRisk": "Low Rist",
+  "osMediumRisk": "Medium Risk",
+  "osHighRisk": "High Risk"
 }

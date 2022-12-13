@@ -93,5 +93,12 @@
   "predicted2yrOS": "予測2年OS",
   "predicted2yrOSDescription": "血行再建後２年全生存率の予測",
   "predicted2yrAFS": "予測2年AFS",
-  "predicted2yrAFSDescription": "血行再建後2年大切断回避生存率の予測"
+  "predicted2yrAFSDescription": "血行再建後2年大切断回避生存率の予測",
+  "gnriNoRisk": "リスクなし",
+  "gnriLowRisk": "軽度栄養リスク",
+  "gnriModerateRisk": "中等度栄養リスク",
+  "gntiMajorRisk": "高度栄養リスク",
+  "osLowRisk": "低リスク",
+  "osMediumRisk": "中等度リスク",
+  "osHighRisk": "高リスク"
 }

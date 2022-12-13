@@ -248,28 +248,16 @@ class PatientRisk {
 }
 
 enum OSRisk {
-  high('High Risk'), // risk < 50%
-  medium('Medium Risk'), // 50% <= risk < 70%
-  low('Low Risk'); // 70% <= risk
-
-  const OSRisk(this.name);
-  final String name;
-
-  @override
-  String toString() => name;
+  high(), // risk < 50%
+  medium(), // 50% <= risk < 70%
+  low(); // 70% <= risk
 }
 
 enum GNRIRisk {
-  major('Major Risk'), // gnri < 82
-  moderate('Moderate Risk'), // 82<= gnri < 92
-  low('Low Risk'), // 92<= gnri < 98
-  noRisk('No Risk'); // 98 <= gnri
-
-  const GNRIRisk(this.name);
-  final String name;
-
-  @override
-  String toString() => name;
+  major(), // gnri < 82
+  moderate(), // 82<= gnri < 92
+  low(), // 92<= gnri < 98
+  noRisk(); // 98 <= gnri
 }
 
 //Covariants for predictor

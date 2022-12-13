@@ -1,3 +1,4 @@
+import 'package:clti_risk/widgets/label_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -38,7 +39,7 @@ class RiskViewPage extends StatelessWidget {
               style: Theme.of(context).textTheme.headline1,
             ),
             SelectableText(
-              risk.gnriRisk.toString(),
+              LabelBuilder(context: context, item: risk.gnriRisk!).text,
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
@@ -72,7 +73,7 @@ class RiskViewPage extends StatelessWidget {
               style: Theme.of(context).textTheme.headline1,
             ),
             SelectableText(
-              risk.osRisk.toString(),
+              LabelBuilder(context: context, item: risk.osRisk!).text,
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],

@@ -1,3 +1,4 @@
+import 'package:clti_risk/models/patient_risk.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -68,6 +69,26 @@ class LabelBuilder<T extends Enum> {
             return l10n.yes;
           case YesNo.no:
             return l10n.no;
+        }
+      case GNRIRisk:
+        switch (item as GNRIRisk) {
+          case GNRIRisk.noRisk:
+            return l10n.gnriNoRisk;
+          case GNRIRisk.low:
+            return l10n.gnriLowRisk;
+          case GNRIRisk.moderate:
+            return l10n.gnriModerateRisk;
+          case GNRIRisk.major:
+            return l10n.gntiMajorRisk;
+        }
+      case OSRisk:
+        switch (item as OSRisk) {
+          case OSRisk.low:
+            return l10n.osLowRisk;
+          case OSRisk.medium:
+            return l10n.osMediumRisk;
+          case OSRisk.high:
+            return l10n.osHighRisk;
         }
       default:
         throw ArgumentError('wrong choice type');
