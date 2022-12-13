@@ -30,7 +30,7 @@ class InstructionPage extends StatelessWidget {
         return <InlineSpan>[
           const TextSpan(
               text:
-                  'i. 選択肢を選ぶか値を入力して, 次へを押してください。\nii. 全て入力し、リスク解析ボタンを押すと結果が得られます。\niii. データ一覧が見たい場合は、上の'),
+                  'i. 選択肢を選ぶか値を入力して、次へを押してください。\nii. 全て入力し、リスク解析ボタンを押すと結果が得られます。\niii. データ一覧が見たい場合は、上の'),
           const WidgetSpan(child: Icon(Icons.summarize_outlined)),
           const TextSpan(text: ' を押してください。\niv. 初期化したい場合は、上の'),
           const WidgetSpan(child: Icon(Icons.refresh_outlined)),
