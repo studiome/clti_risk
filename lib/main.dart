@@ -12,7 +12,7 @@ import 'models/questions.dart';
 import 'widgets/question_form.dart';
 import 'widgets/risk_view.dart';
 
-const String appName = 'CliTICAL';
+const String appName = 'CLiTICAL';
 const String fontFamily = 'Noto Sans JP';
 
 void main() {
