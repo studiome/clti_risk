@@ -36,7 +36,7 @@
   "questionUrgentTitle": "緊急手術",
   "questionUrgentSubtitle": "いいえ：待機手術",
   "questionFeverTitle": "発熱",
-  "questionFeverSubtitle": "あり：体温38\u2103以上",
+  "questionFeverSubtitle": "あり: 体温38\u2103以上",
   "questionAbnormalWBCTitle": "白血球数異常",
   "questionAbnormalWBCSubtitle": "あり: 8000 [/\u00B5l]以上",
   "questionLocalInfectionTitle": "局所感染",
