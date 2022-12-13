@@ -68,62 +68,32 @@ class PatientData {
 }
 
 enum Sex {
-  male('Male'),
-  female('Female');
-
-  final String name;
-  const Sex(this.name);
-
-  @override
-  String toString() => name;
+  male(),
+  female();
 }
 
 enum Activity {
-  ambulatory('Ambulatory'),
-  wheelchair('Wheelchair'),
-  immobile('Immobile');
-
-  const Activity(this.name);
-  final String name;
-
-  @override
-  String toString() => name;
+  ambulatory(),
+  wheelchair(),
+  immobile();
 }
 
 enum CKD {
-  normal('No'), //eGFR over 60ml/min.1.73m2
-  g3('G3'), // 30 <= eGFR < 60
-  g4('G4'), // 15<= eGFR <  30
-  g5('G5'), // <15
-  g5D('G5D'); // < 15 HD
-
-  const CKD(this.name);
-  final String name;
-
-  @override
-  String toString() => name;
+  normal(), //eGFR over 60ml/min.1.73m2
+  g3(), // 30 <= eGFR < 60
+  g4(), // 15<= eGFR <  30
+  g5(), // <15
+  g5D(); // < 15 HD
 }
 
 enum MalignantNeoplasm {
-  no('No'),
-  pastHistory('Past History'),
-  underTreatment('Under Treatment');
-
-  const MalignantNeoplasm(this.name);
-  final String name;
-
-  @override
-  String toString() => name;
+  no(),
+  pastHistory(),
+  underTreatment();
 }
 
 enum RutherfordClassification {
-  class4('Class 4'),
-  class5('Class 5'),
-  class6('Class 6');
-
-  const RutherfordClassification(this.name);
-  final String name;
-
-  @override
-  String toString() => name;
+  class4(),
+  class5(),
+  class6();
 }

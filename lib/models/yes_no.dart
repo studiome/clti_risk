@@ -2,15 +2,11 @@
 //[1]: No - false
 
 enum YesNo {
-  yes('Yes', true),
-  no('No', false);
+  yes(true),
+  no(false);
 
-  final String name;
   final bool isTrue;
-  const YesNo(this.name, this.isTrue);
-
-  @override
-  String toString() => name;
+  const YesNo(this.isTrue);
 
   bool toBool() => isTrue;
 }
