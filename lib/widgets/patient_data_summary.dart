@@ -26,7 +26,8 @@ class PatientDataSummary extends StatelessWidget {
     final pd = c.patientData;
 
     final Map<int, String> data = {
-      Questions.instruction.index: '',
+      Questions.instruction.index:
+          AppLocalizations.of(context).questionInstructionSubtitle,
       Questions.sex.index: LabelBuilder(context: context, item: pd.sex).text,
       Questions.age.index: ageController.text,
       Questions.height.index: heightController.text,
