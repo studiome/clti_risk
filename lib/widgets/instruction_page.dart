@@ -36,7 +36,6 @@ class InstructionPage extends StatelessWidget {
           const WidgetSpan(child: Icon(Icons.refresh_outlined)),
           const TextSpan(text: 'を押してください。\n'),
         ];
-        break;
       case 'en':
         return <InlineSpan>[
           const TextSpan(
