@@ -35,8 +35,8 @@ void main() {
       final subtitle = find.text('Male or Female');
       expect(subtitle, findsOneWidget);
       expect(pd.sex, Sex.female);
-      final choice0 = find.text(Sex.values[0].toString()); // Male
-      final choice1 = find.text(Sex.values[1].toString()); //Female
+      final choice0 = find.text('Male'); // Male
+      final choice1 = find.text('Female'); //Female
       expect(choice0, findsOneWidget);
       expect(choice1, findsOneWidget);
       final radio0 = tester.widget<Radio<Sex>>(find.byType(Radio<Sex>).at(0));
@@ -47,7 +47,7 @@ void main() {
 
     testWidgets('select radio button', (tester) async {
       await tester.pumpWidget(testApp);
-      final choice0 = find.text(Sex.values[0].toString()); // Male
+      final choice0 = find.text('Male'); // Male
       await tester.tap(choice0);
       await tester.pumpAndSettle();
       expect(pd.sex, Sex.male);
