@@ -5,6 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../models/clinical_data_controller.dart';
 import '../models/questions.dart';
 import '../models/yes_no.dart';
+import 'label_builder.dart';
 
 class PatientDataSummary extends StatelessWidget {
   final TextEditingController ageController;
@@ -23,33 +24,55 @@ class PatientDataSummary extends StatelessWidget {
     final c = ClinicalDataController.of(context);
     if (c == null) throw NullThrownError();
     final pd = c.patientData;
+
     final Map<int, String> data = {
       Questions.instruction.index: '',
-      Questions.sex.index: pd.sex.toString(),
+      Questions.sex.index: LabelBuilder(context: context, item: pd.sex).text,
       Questions.age.index: ageController.text,
       Questions.height.index: heightController.text,
       Questions.weight.index: weightController.text,
       Questions.albumin.index: albController.text,
-      Questions.activity.index: pd.activity.toString(),
-      Questions.chf.index: pd.hasCHF.toYesNo().toString(),
-      Questions.cad.index: pd.hasCAD.toYesNo().toString(),
-      Questions.cvd.index: pd.hasCVD.toYesNo().toString(),
-      Questions.ckd.index: pd.ckd.toString(),
-      Questions.malignantNeoplasm.index: pd.malignant.toString(),
-      Questions.lesionAI.index: pd.hasAILesion.toYesNo().toString(),
-      Questions.lesionFP.index: pd.hasFPLesion.toYesNo().toString(),
-      Questions.lesionBK.index: pd.hasBKLesion.toYesNo().toString(),
-      Questions.urgentProcedure.index: pd.isUrgent.toYesNo().toString(),
-      Questions.fever.index: pd.hasFever.toYesNo().toString(),
-      Questions.abnormalWBC.index: pd.hasAbnormalWBC.toYesNo().toString(),
-      Questions.localInfection.index: pd.hasLocalInfection.toYesNo().toString(),
-      Questions.dyslipidemia.index: pd.hasDyslipidemia.toYesNo().toString(),
-      Questions.smoking.index: pd.isSmoking.toYesNo().toString(),
-      Questions.contralateral.index:
-          pd.hasContraLateralLesion.toYesNo().toString(),
-      Questions.others.index: pd.hasOtherVD.toYesNo().toString(),
-      Questions.rutherford.index: pd.rutherford.toString(),
+      Questions.activity.index:
+          LabelBuilder(context: context, item: pd.activity).text,
+      Questions.chf.index:
+          LabelBuilder(context: context, item: pd.hasCHF.toYesNo()).text,
+      Questions.cad.index:
+          LabelBuilder(context: context, item: pd.hasCAD.toYesNo()).text,
+      Questions.cvd.index:
+          LabelBuilder(context: context, item: pd.hasCVD.toYesNo()).text,
+      Questions.ckd.index: LabelBuilder(context: context, item: pd.ckd).text,
+      Questions.malignantNeoplasm.index:
+          LabelBuilder(context: context, item: pd.malignant).text,
+      Questions.lesionAI.index:
+          LabelBuilder(context: context, item: pd.hasAILesion.toYesNo()).text,
+      Questions.lesionFP.index:
+          LabelBuilder(context: context, item: pd.hasFPLesion.toYesNo()).text,
+      Questions.lesionBK.index:
+          LabelBuilder(context: context, item: pd.hasBKLesion.toYesNo()).text,
+      Questions.urgentProcedure.index:
+          LabelBuilder(context: context, item: pd.isUrgent.toYesNo()).text,
+      Questions.fever.index:
+          LabelBuilder(context: context, item: pd.hasFever.toYesNo()).text,
+      Questions.abnormalWBC.index:
+          LabelBuilder(context: context, item: pd.hasAbnormalWBC.toYesNo())
+              .text,
+      Questions.localInfection.index:
+          LabelBuilder(context: context, item: pd.hasLocalInfection.toYesNo())
+              .text,
+      Questions.dyslipidemia.index:
+          LabelBuilder(context: context, item: pd.hasDyslipidemia.toYesNo())
+              .text,
+      Questions.smoking.index:
+          LabelBuilder(context: context, item: pd.isSmoking.toYesNo()).text,
+      Questions.contralateral.index: LabelBuilder(
+              context: context, item: pd.hasContraLateralLesion.toYesNo())
+          .text,
+      Questions.others.index:
+          LabelBuilder(context: context, item: pd.hasOtherVD.toYesNo()).text,
+      Questions.rutherford.index:
+          LabelBuilder(context: context, item: pd.rutherford).text,
     };
+
     final Map<int, String> title = {
       Questions.instruction.index:
           AppLocalizations.of(context).questionInstructionTitle,
