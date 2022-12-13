@@ -4,7 +4,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../models/clinical_data_controller.dart';
+import 'clinical_data_controller.dart';
 import '../models/locale_controller.dart';
 import '../models/patient_risk.dart';
 import '../models/questions.dart';

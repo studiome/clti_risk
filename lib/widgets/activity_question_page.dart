@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../models/clinical_data_controller.dart';
+import 'clinical_data_controller.dart';
 import '../models/patient_data.dart';
 import '../models/questions.dart';
 import 'question_page.dart';

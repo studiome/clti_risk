@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import 'patient_data.dart';
-import 'patient_risk.dart';
+import '../models/patient_data.dart';
+import '../models/patient_risk.dart';
 
 class ClinicalDataController extends InheritedWidget {
   final PatientData patientData;
