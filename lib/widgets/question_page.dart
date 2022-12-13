@@ -1,3 +1,4 @@
+import 'package:clti_risk/widgets/label_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -88,7 +89,8 @@ class MultipleQuestionPage<T extends Enum> extends StatelessWidget {
           width: itemWidth,
           height: itemHeight,
           child: RadioListTile<T>(
-            title: Text(values[i].toString()),
+            title:
+                Text(LabelBuilder<T>(context: context, item: values[i]).text),
             value: values[i],
             groupValue: dataItem,
             onChanged: onChanged,
