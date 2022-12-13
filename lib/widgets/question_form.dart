@@ -35,7 +35,7 @@ import 'urgent_question_page.dart';
 import 'wbc_question_page.dart';
 import 'weight_question_page.dart';
 
-class QuestionForm extends StatelessWidget {
+class QuestionForm extends StatefulWidget {
   final String title;
   final String appName;
   final List<Widget>? actions;
@@ -58,14 +58,22 @@ class QuestionForm extends StatelessWidget {
   });
 
   @override
+  State<QuestionForm> createState() => _QuestionFormState();
+}
+
+class _QuestionFormState extends State<QuestionForm> {
+  @override
   Widget build(BuildContext context) {
     final Map<int, Widget> pageList = {
       Questions.instruction.index: const InstructionPage(),
       Questions.sex.index: const SexQuestionPage(),
-      Questions.age.index: AgeQuestionPage(controller: ageController),
-      Questions.height.index: HeightQuestionPage(controller: heightController),
-      Questions.weight.index: WeightQuestionPage(controller: weightController),
-      Questions.albumin.index: AlbQuestionPage(controller: albController),
+      Questions.age.index: AgeQuestionPage(controller: widget.ageController),
+      Questions.height.index:
+          HeightQuestionPage(controller: widget.heightController),
+      Questions.weight.index:
+          WeightQuestionPage(controller: widget.weightController),
+      Questions.albumin.index:
+          AlbQuestionPage(controller: widget.albController),
       Questions.activity.index: const ActivityQuestionPage(),
       Questions.chf.index: const CHFQuestionPage(),
       Questions.cad.index: const CADQuestionPage(),
@@ -85,10 +93,10 @@ class QuestionForm extends StatelessWidget {
       Questions.others.index: const OtherVDQuestionPage(),
       Questions.rutherford.index: const RutherfordQuestionPage(),
       Questions.summary.index: PatientDataSummary(
-        ageController: ageController,
-        heightController: heightController,
-        weightController: weightController,
-        albController: albController,
+        ageController: widget.ageController,
+        heightController: widget.heightController,
+        weightController: widget.weightController,
+        albController: widget.albController,
       ),
     };
 
@@ -138,24 +146,24 @@ class QuestionForm extends StatelessWidget {
     final c = ClinicalDataController.of(context);
     if (c == null) throw NullThrownError();
     return QuestionBinder(
-        title: title,
-        actions: actions,
+        title: widget.title,
+        actions: widget.actions,
         drawerListTiles: <ListTile>[
           ListTile(
             leading: const Icon(Icons.language_outlined),
-            title: const Text('Language'),
+            title: Text(AppLocalizations.of(context).language),
             onTap: () async {
               await showDialog(
                 context: context,
                 builder: (context) {
                   return AlertDialog(
-                    title: const Text('Language'),
+                    title: Text(AppLocalizations.of(context).language),
                     content: LocaleSwitch(
-                      localeController: localeController,
+                      localeController: widget.localeController,
                     ),
                     actions: [
                       TextButton(
-                        child: const Text('OK'),
+                        child: Text(AppLocalizations.of(context).ok),
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
@@ -168,17 +176,17 @@ class QuestionForm extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.article),
-            title: const Text('References'),
+            title: Text(AppLocalizations.of(context).references),
             onTap: () async {
               await showDialog(
                   context: context,
                   builder: (context) {
                     return SimpleDialog(
-                      title: const Text('References'),
+                      title: Text(AppLocalizations.of(context).references),
                       children: [
                         SimpleDialogOption(
                           child: Text(
-                            'Tap to open link.',
+                            AppLocalizations.of(context).tapToOpenLink,
                             style: Theme.of(context).textTheme.subtitle2,
                           ),
                         ),
@@ -209,14 +217,15 @@ class QuestionForm extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.info),
-            title: const Text('About'),
+            title: Text(AppLocalizations.of(context).about),
             onTap: () async {
               final PackageInfo packageInfo = await PackageInfo.fromPlatform();
+              if (!mounted) return;
               showAboutDialog(
                 context: context,
-                applicationName: appName,
+                applicationName: widget.appName,
                 applicationVersion: packageInfo.version,
-                applicationLegalese: '2022 Kazuhiro Miyahara',
+                applicationLegalese: AppLocalizations.of(context).appLegalese,
               );
             },
           ),
@@ -224,16 +233,17 @@ class QuestionForm extends StatelessWidget {
         actionButton: FloatingActionButton.extended(
           onPressed: () {
             try {
-              c.patientData.age = int.parse(ageController.text);
-              c.patientData.height = double.parse(heightController.text);
-              c.patientData.weight = double.parse(weightController.text);
-              c.patientData.alb = double.parse(albController.text);
+              c.patientData.age = int.parse(widget.ageController.text);
+              c.patientData.height = double.parse(widget.heightController.text);
+              c.patientData.weight = double.parse(widget.weightController.text);
+              c.patientData.alb = double.parse(widget.albController.text);
             } catch (e) {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: const Text('Error! missing some data.'),
+                content:
+                    Text(AppLocalizations.of(context).analysisErrorMessage),
                 action: SnackBarAction(
                     textColor: Theme.of(context).colorScheme.onSecondary,
-                    label: 'OK',
+                    label: AppLocalizations.of(context).ok,
                     onPressed: () =>
                         ScaffoldMessenger.of(context).hideCurrentSnackBar()),
               ));
@@ -243,7 +253,7 @@ class QuestionForm extends StatelessWidget {
             c.onRiskCalculated.sink.add(pr);
           },
           icon: const Icon(Icons.analytics_outlined),
-          label: const Text('Analysis'),
+          label: Text(AppLocalizations.of(context).analysis),
         ),
         questionPages:
             List<QuestionPageDetail>.generate(Questions.values.length, (index) {
@@ -266,7 +276,7 @@ class LocaleSwitch extends StatelessWidget {
       child: Column(
         children: [
           RadioListTile(
-            title: const Text('English'),
+            title: Text(AppLocalizations.of(context).en),
             value: const Locale('en'),
             groupValue: localeController.value,
             onChanged: (v) async {
@@ -276,7 +286,7 @@ class LocaleSwitch extends StatelessWidget {
             },
           ),
           RadioListTile(
-            title: const Text('日本語'),
+            title: Text(AppLocalizations.of(context).ja),
             value: const Locale('ja'),
             groupValue: localeController.value,
             onChanged: (v) async {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'tab_transition_navigator.dart';
 
@@ -163,7 +164,7 @@ class _NumberFormQuestionContentState extends State<NumberFormQuestionContent> {
       inputFormatters: widget.inputFormatters,
       validator: (v) {
         if (v == null || v.isEmpty) {
-          return 'Please enter value.';
+          return AppLocalizations.of(context).formErrorMessage;
         }
         return null;
       },
@@ -177,10 +178,10 @@ class _NumberFormQuestionContentState extends State<NumberFormQuestionContent> {
       onNext: () {
         if (formKey.currentState == null || !formKey.currentState!.validate()) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: const Text('Invalid value'),
+            content: Text(AppLocalizations.of(context).invalidValueMessage),
             action: SnackBarAction(
                 textColor: Theme.of(context).colorScheme.onSecondary,
-                label: 'OK',
+                label: AppLocalizations.of(context).ok,
                 onPressed: () =>
                     ScaffoldMessenger.of(context).hideCurrentSnackBar()),
           ));

@@ -12,8 +12,10 @@ import 'models/questions.dart';
 import 'widgets/question_form.dart';
 import 'widgets/risk_view.dart';
 
+const String appName = 'CliTICAL';
+const String fontFamily = 'Noto Sans JP';
+
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
   runApp(const AppRoot());
 }
 
@@ -32,7 +34,7 @@ class _AppRootState extends State<AppRoot> {
   final TextEditingController weightController = TextEditingController();
   final TextEditingController albController = TextEditingController();
   LocaleController localeController = LocaleController(const Locale('en'));
-  final String title = 'CLiTICAL';
+  final String title = appName;
   late PatientData pd;
   PatientRisk? risk;
   StreamController<PatientRisk?> onRiskCalculated = StreamController();
@@ -84,13 +86,13 @@ class _AppRootState extends State<AppRoot> {
                 theme: ThemeData(
                   useMaterial3: true,
                   colorSchemeSeed: jsvsColor,
-                  fontFamily: 'Noto Sans JP',
+                  fontFamily: fontFamily,
                 ),
                 darkTheme: ThemeData(
                   useMaterial3: true,
                   brightness: Brightness.dark,
                   colorSchemeSeed: jsvsColor,
-                  fontFamily: 'Noto Sans JP',
+                  fontFamily: fontFamily,
                 ),
                 themeMode: ThemeMode.system,
                 localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -117,7 +119,7 @@ class _AppRootState extends State<AppRoot> {
                                   },
                                 ),
                               ],
-                              appName: 'CLiTICAL',
+                              appName: appName,
                               ageController: ageController,
                               heightController: heightController,
                               weightController: weightController,
@@ -129,8 +131,7 @@ class _AppRootState extends State<AppRoot> {
                         if (risk != null)
                           MaterialPage(
                               key: const ValueKey('Result'),
-                              child: RiskView(
-                                  title: 'Predicted Risk', risk: risk!)),
+                              child: RiskView(risk: risk!)),
                       ],
                       onPopPage: (route, result) {
                         if (!route.didPop(result)) return false;
