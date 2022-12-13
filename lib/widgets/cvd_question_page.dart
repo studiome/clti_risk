@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../models/clinical_data_controller.dart';
 import '../models/questions.dart';
@@ -18,7 +19,7 @@ class _CVDQuestionPageState extends State<CVDQuestionPage> {
     final c = ClinicalDataController.of(context);
     if (c == null) throw NullThrownError();
     return MultipleQuestionPage<YesNo>(
-      question: Questions.cvd,
+      subtitle: AppLocalizations.of(context).questionCVDSubtitle,
       values: YesNo.values,
       dataItem: c.patientData.hasCVD.toYesNo(),
       itemWidth: 160.0,

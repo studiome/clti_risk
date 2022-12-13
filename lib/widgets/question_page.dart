@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../models/question_details.dart' as detail;
-import '../models/questions.dart';
 import 'tab_transition_navigator.dart';
 
 class QuestionPage extends StatelessWidget {
@@ -56,11 +54,11 @@ class MultipleQuestionPage<T extends Enum> extends StatelessWidget {
   final int tabCount;
   final double itemWidth;
   final double itemHeight;
-  final Questions question;
+  final String subtitle;
   final void Function(T?)? onChanged;
   const MultipleQuestionPage(
       {super.key,
-      required this.question,
+      required this.subtitle,
       required this.dataItem,
       required this.values,
       required this.tabIndex,
@@ -73,10 +71,6 @@ class MultipleQuestionPage<T extends Enum> extends StatelessWidget {
   Widget build(BuildContext context) {
     final Widget content =
         _createContent(values, dataItem, itemWidth, itemHeight, context);
-    final d = detail.questionDetail[question];
-    if (d == null) throw NullThrownError();
-    final String? subtitle = d[detail.Description.subtitle];
-    if (subtitle == null) throw NullThrownError();
     return QuestionPage(
         content: content,
         subtitle: subtitle,
@@ -125,7 +119,8 @@ class MultipleQuestionPage<T extends Enum> extends StatelessWidget {
 }
 
 class NumberFormQuestionContent extends StatefulWidget {
-  final Questions question;
+  final String title;
+  final String subtitle;
   final int tabIndex;
   final int tabCount;
   final bool isDecimal;
@@ -137,7 +132,8 @@ class NumberFormQuestionContent extends StatefulWidget {
 
   const NumberFormQuestionContent({
     super.key,
-    required this.question,
+    required this.title,
+    required this.subtitle,
     required this.formController,
     required this.isDecimal,
     required this.inputFormatters,
@@ -158,19 +154,11 @@ class _NumberFormQuestionContentState extends State<NumberFormQuestionContent> {
 
   @override
   Widget build(BuildContext context) {
-    final d = detail.questionDetail[widget.question];
-    if (d == null) throw NullThrownError();
-
-    final String? subtitle = d[detail.Description.subtitle];
-    if (subtitle == null) throw NullThrownError();
-
-    final String? label = d[detail.Description.title];
-
     Widget content = _createContent(
       width: widget.itemWidth,
       height: widget.itemHeight,
-      hint: subtitle,
-      label: label,
+      hint: widget.subtitle,
+      label: widget.title,
       decimal: widget.isDecimal,
       inputFormatters: widget.inputFormatters,
       validator: (v) {
@@ -183,7 +171,7 @@ class _NumberFormQuestionContentState extends State<NumberFormQuestionContent> {
     );
     return QuestionPage(
       content: content,
-      subtitle: subtitle,
+      subtitle: widget.subtitle,
       tabIndex: widget.tabIndex,
       tabCount: widget.tabCount,
       onNext: () {

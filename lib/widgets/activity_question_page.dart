@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../models/clinical_data_controller.dart';
 import '../models/patient_data.dart';
@@ -18,7 +19,7 @@ class _ActivityQuestionPageState extends State<ActivityQuestionPage> {
     final c = ClinicalDataController.of(context);
     if (c == null) throw NullThrownError();
     return MultipleQuestionPage<Activity>(
-      question: Questions.activity,
+      subtitle: AppLocalizations.of(context).questionActivitySubtitle,
       values: Activity.values,
       dataItem: c.patientData.activity,
       itemWidth: 180.0,

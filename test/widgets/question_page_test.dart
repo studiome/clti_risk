@@ -167,7 +167,7 @@ class _ChoiceTestWidgetState extends State<ChoiceTestWidget> {
     final c = ClinicalDataController.of(context);
     if (c == null) throw NullThrownError();
     return MultipleQuestionPage<Sex>(
-        question: Questions.sex,
+        subtitle: AppLocalizations.of(context).questionSexSubtitle,
         values: Sex.values,
         dataItem: c.patientData.sex,
         itemHeight: 60.0,
@@ -192,7 +192,8 @@ class FormTestWidget extends StatelessWidget {
     final c = ClinicalDataController.of(context);
     if (c == null) throw NullThrownError();
     return NumberFormQuestionContent(
-        question: Questions.height,
+        title: AppLocalizations.of(context).questionHeightTitle,
+        subtitle: AppLocalizations.of(context).questionHeightSubtitle,
         formController: controller,
         isDecimal: true,
         inputFormatters: <TextInputFormatter>[

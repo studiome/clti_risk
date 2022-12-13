@@ -112,7 +112,7 @@ class QuestionPagesTestWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return QuestionBinder(
       title: 'test',
-      drawerListTiles: [],
+      drawerListTiles: const [],
       actionButton: FloatingActionButton(
         child: const Text('test'),
         onPressed: () {},

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../models/clinical_data_controller.dart';
 import '../models/patient_data.dart';
@@ -18,7 +19,7 @@ class _RutherfordQuestionPageState extends State<RutherfordQuestionPage> {
     final c = ClinicalDataController.of(context);
     if (c == null) throw NullThrownError();
     return MultipleQuestionPage<RutherfordClassification>(
-      question: Questions.rutherford,
+      subtitle: AppLocalizations.of(context).questionRutherfordSubtitle,
       values: RutherfordClassification.values,
       dataItem: c.patientData.rutherford,
       itemWidth: 160.0,

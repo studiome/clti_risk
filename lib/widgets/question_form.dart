@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -6,7 +7,6 @@ import 'package:url_launcher/url_launcher.dart';
 import '../models/clinical_data_controller.dart';
 import '../models/locale_controller.dart';
 import '../models/patient_risk.dart';
-import '../models/question_details.dart' as details;
 import '../models/questions.dart';
 import 'activity_question_page.dart';
 import 'age_question_page.dart';
@@ -93,56 +93,46 @@ class QuestionForm extends StatelessWidget {
     };
 
     final Map<int, String> titleList = {
-      Questions.instruction.index: details
-          .questionDetail[Questions.instruction]![details.Description.title]!,
-      Questions.sex.index:
-          details.questionDetail[Questions.sex]![details.Description.title]!,
-      Questions.age.index:
-          details.questionDetail[Questions.age]![details.Description.title]!,
-      Questions.height.index:
-          details.questionDetail[Questions.height]![details.Description.title]!,
-      Questions.weight.index:
-          details.questionDetail[Questions.weight]![details.Description.title]!,
-      Questions.albumin.index: details
-          .questionDetail[Questions.albumin]![details.Description.title]!,
-      Questions.activity.index: details
-          .questionDetail[Questions.activity]![details.Description.title]!,
-      Questions.chf.index:
-          details.questionDetail[Questions.chf]![details.Description.title]!,
-      Questions.cad.index:
-          details.questionDetail[Questions.cad]![details.Description.title]!,
-      Questions.cvd.index:
-          details.questionDetail[Questions.cvd]![details.Description.title]!,
-      Questions.ckd.index:
-          details.questionDetail[Questions.ckd]![details.Description.title]!,
-      Questions.malignantNeoplasm.index: details.questionDetail[
-          Questions.malignantNeoplasm]![details.Description.title]!,
-      Questions.lesionAI.index: details
-          .questionDetail[Questions.lesionAI]![details.Description.title]!,
-      Questions.lesionFP.index: details
-          .questionDetail[Questions.lesionFP]![details.Description.title]!,
-      Questions.lesionBK.index: details
-          .questionDetail[Questions.lesionBK]![details.Description.title]!,
-      Questions.urgentProcedure.index: details.questionDetail[
-          Questions.urgentProcedure]![details.Description.title]!,
-      Questions.fever.index:
-          details.questionDetail[Questions.fever]![details.Description.title]!,
-      Questions.abnormalWBC.index: details
-          .questionDetail[Questions.abnormalWBC]![details.Description.title]!,
-      Questions.localInfection.index: details.questionDetail[
-          Questions.localInfection]![details.Description.title]!,
-      Questions.dyslipidemia.index: details
-          .questionDetail[Questions.dyslipidemia]![details.Description.title]!,
-      Questions.smoking.index: details
-          .questionDetail[Questions.smoking]![details.Description.title]!,
-      Questions.contralateral.index: details
-          .questionDetail[Questions.contralateral]![details.Description.title]!,
+      Questions.instruction.index:
+          AppLocalizations.of(context).questionInstructionTitle,
+      Questions.sex.index: AppLocalizations.of(context).questionSexTitle,
+      Questions.age.index: AppLocalizations.of(context).questionAgeTitle,
+      Questions.height.index: AppLocalizations.of(context).questionHeightTitle,
+      Questions.weight.index: AppLocalizations.of(context).questionWeightTitle,
+      Questions.albumin.index: AppLocalizations.of(context).questionAlbTitle,
+      Questions.activity.index:
+          AppLocalizations.of(context).questionActivityTitle,
+      Questions.chf.index: AppLocalizations.of(context).questionCHFTitle,
+      Questions.cad.index: AppLocalizations.of(context).questionCADTitle,
+      Questions.cvd.index: AppLocalizations.of(context).questionCVDTitle,
+      Questions.ckd.index: AppLocalizations.of(context).questionCKDTitle,
+      Questions.malignantNeoplasm.index:
+          AppLocalizations.of(context).questionMalignantTitle,
+      Questions.lesionAI.index:
+          AppLocalizations.of(context).questionAILesionTitle,
+      Questions.lesionFP.index:
+          AppLocalizations.of(context).questionFPLesionTitle,
+      Questions.lesionBK.index:
+          AppLocalizations.of(context).questionBKLesionTitle,
+      Questions.urgentProcedure.index:
+          AppLocalizations.of(context).questionUrgentTitle,
+      Questions.fever.index: AppLocalizations.of(context).questionFeverTitle,
+      Questions.abnormalWBC.index:
+          AppLocalizations.of(context).questionAbnormalWBCTitle,
+      Questions.localInfection.index:
+          AppLocalizations.of(context).questionLocalInfectionTitle,
+      Questions.dyslipidemia.index:
+          AppLocalizations.of(context).questionDLTitle,
+      Questions.smoking.index:
+          AppLocalizations.of(context).questionSmokingTitle,
+      Questions.contralateral.index:
+          AppLocalizations.of(context).questionContraTitle,
       Questions.others.index:
-          details.questionDetail[Questions.others]![details.Description.title]!,
-      Questions.rutherford.index: details
-          .questionDetail[Questions.rutherford]![details.Description.title]!,
-      Questions.summary.index: details
-          .questionDetail[Questions.summary]![details.Description.title]!,
+          AppLocalizations.of(context).questionOtherLesionTitle,
+      Questions.rutherford.index:
+          AppLocalizations.of(context).questionRutherfordTitle,
+      Questions.summary.index:
+          AppLocalizations.of(context).questionSummaryTitle,
     };
 
     final c = ClinicalDataController.of(context);

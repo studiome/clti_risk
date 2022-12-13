@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../models/clinical_data_controller.dart';
 import '../models/questions.dart';
@@ -19,7 +20,7 @@ class _AbnormalWBCQuestionPageState extends State<AbnormalWBCQuestionPage> {
     final c = ClinicalDataController.of(context);
     if (c == null) throw NullThrownError();
     return MultipleQuestionPage<YesNo>(
-      question: Questions.abnormalWBC,
+      subtitle: AppLocalizations.of(context).questionAbnormalWBCSubtitle,
       values: YesNo.values,
       dataItem: c.patientData.hasAbnormalWBC.toYesNo(),
       itemWidth: 160.0,

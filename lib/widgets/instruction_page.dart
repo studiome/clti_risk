@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../models/question_details.dart' as detail;
 import '../models/questions.dart';
 import 'question_page.dart';
 
@@ -9,12 +9,8 @@ class InstructionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final d = detail.questionDetail[Questions.instruction];
-    if (d == null) throw NullThrownError();
-    final String? subtitle = d[detail.Description.subtitle];
-    if (subtitle == null) throw NullThrownError();
     return QuestionPage(
-      subtitle: subtitle,
+      subtitle: AppLocalizations.of(context).questionInstructionSubtitle,
       content: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: RichText(

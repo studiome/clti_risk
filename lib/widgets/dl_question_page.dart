@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../models/clinical_data_controller.dart';
 import '../models/questions.dart';
@@ -18,7 +19,7 @@ class _DLQuestionPageState extends State<DLQuestionPage> {
     final c = ClinicalDataController.of(context);
     if (c == null) throw NullThrownError();
     return MultipleQuestionPage<YesNo>(
-      question: Questions.dyslipidemia,
+      subtitle: AppLocalizations.of(context).questionDLSubtitle,
       values: YesNo.values,
       dataItem: c.patientData.hasDyslipidemia.toYesNo(),
       itemWidth: 160.0,

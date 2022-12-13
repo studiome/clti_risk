@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../models/clinical_data_controller.dart';
 import '../models/questions.dart';
@@ -16,7 +17,8 @@ class WeightQuestionPage extends StatelessWidget {
     controller.text =
         c.patientData.weight == null ? '' : c.patientData.weight.toString();
     return NumberFormQuestionContent(
-        question: Questions.weight,
+        title: AppLocalizations.of(context).questionWeightTitle,
+        subtitle: AppLocalizations.of(context).questionWeightSubtitle,
         formController: controller,
         isDecimal: true,
         inputFormatters: <TextInputFormatter>[

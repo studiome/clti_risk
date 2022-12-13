@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../models/clinical_data_controller.dart';
 import '../models/patient_data.dart';
@@ -18,7 +19,7 @@ class _SexQuestionPageState extends State<SexQuestionPage> {
     final c = ClinicalDataController.of(context);
     if (c == null) throw NullThrownError();
     return MultipleQuestionPage<Sex>(
-      question: Questions.sex,
+      subtitle: AppLocalizations.of(context).questionSexSubtitle,
       values: Sex.values,
       dataItem: c.patientData.sex,
       itemWidth: 160.0,

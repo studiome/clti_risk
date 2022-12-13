@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../models/clinical_data_controller.dart';
 import '../models/questions.dart';
@@ -16,7 +17,8 @@ class AlbQuestionPage extends StatelessWidget {
     controller.text =
         c.patientData.alb == null ? '' : c.patientData.alb.toString();
     return NumberFormQuestionContent(
-        question: Questions.albumin,
+        title: AppLocalizations.of(context).questionAlbTitle,
+        subtitle: AppLocalizations.of(context).questionAlbSubtitle,
         formController: controller,
         isDecimal: true,
         inputFormatters: <TextInputFormatter>[
