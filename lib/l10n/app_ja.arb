@@ -100,5 +100,6 @@
   "gntiMajorRisk": "高度栄養リスク",
   "osLowRisk": "低リスク",
   "osMediumRisk": "中等度リスク",
-  "osHighRisk": "高リスク"
+  "osHighRisk": "高リスク",
+  "appTerms": "利用規約"
 }

@@ -4,7 +4,6 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'clinical_data_controller.dart';
 import '../models/locale_controller.dart';
 import '../models/patient_risk.dart';
 import '../models/questions.dart';
@@ -16,6 +15,7 @@ import 'bk_question_page.dart';
 import 'cad_question_page.dart';
 import 'chf_question_page.dart';
 import 'ckd_question_page.dart';
+import 'clinical_data_controller.dart';
 import 'contralateral_question_page.dart';
 import 'cvd_question_page.dart';
 import 'dl_question_page.dart';
@@ -175,7 +175,7 @@ class _QuestionFormState extends State<QuestionForm> {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.article),
+            leading: const Icon(Icons.article_outlined),
             title: Text(AppLocalizations.of(context).references),
             onTap: () async {
               await showDialog(
@@ -216,7 +216,7 @@ class _QuestionFormState extends State<QuestionForm> {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.info),
+            leading: const Icon(Icons.info_outline),
             title: Text(AppLocalizations.of(context).about),
             onTap: () async {
               final PackageInfo packageInfo = await PackageInfo.fromPlatform();
@@ -227,6 +227,14 @@ class _QuestionFormState extends State<QuestionForm> {
                 applicationVersion: packageInfo.version,
                 applicationLegalese: AppLocalizations.of(context).appLegalese,
               );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.handshake_outlined),
+            title: Text(AppLocalizations.of(context).appTerms),
+            onTap: () async {
+              await launchUrl(
+                  Uri.parse("https://studiome.github.io/clti_risk/"));
             },
           ),
         ],

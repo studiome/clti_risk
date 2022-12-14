@@ -100,5 +100,6 @@
   "gntiMajorRisk": "Major Risk",
   "osLowRisk": "Low Rist",
   "osMediumRisk": "Medium Risk",
-  "osHighRisk": "High Risk"
+  "osHighRisk": "High Risk",
+  "appTerms": "Terms of service"
 }
