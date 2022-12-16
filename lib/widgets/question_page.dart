@@ -154,9 +154,25 @@ class NumberFormQuestionContent extends StatefulWidget {
 
 class _NumberFormQuestionContentState extends State<NumberFormQuestionContent> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  late FocusNode _focusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode = FocusNode();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final tabController = DefaultTabController.of(context);
+    if (tabController != null) {
+      tabController.addListener(() {
+        if (widget.onSubmitted != null) {
+          widget.onSubmitted!(widget.formController.text);
+        }
+        _focusNode.unfocus();
+      });
+    }
     Widget content = _createContent(
       width: widget.itemWidth,
       height: widget.itemHeight,
@@ -192,6 +208,7 @@ class _NumberFormQuestionContentState extends State<NumberFormQuestionContent> {
         if (widget.onSubmitted != null) {
           widget.onSubmitted!(widget.formController.text);
         }
+        _focusNode.unfocus();
       },
     );
   }
@@ -227,6 +244,7 @@ class _NumberFormQuestionContentState extends State<NumberFormQuestionContent> {
             autovalidateMode: AutovalidateMode.always,
             validator: validator,
             onFieldSubmitted: onSubmitted,
+            focusNode: _focusNode,
           )),
     );
   }

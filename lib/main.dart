@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'widgets/clinical_data_controller.dart';
 import 'models/locale_controller.dart';
 import 'models/patient_data.dart';
 import 'models/patient_risk.dart';
 import 'models/questions.dart';
+import 'widgets/clinical_data_controller.dart';
 import 'widgets/question_form.dart';
 import 'widgets/risk_view.dart';
 
