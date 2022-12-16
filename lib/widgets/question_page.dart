@@ -176,7 +176,7 @@ class _NumberFormQuestionContentState extends State<NumberFormQuestionContent> {
     Widget content = _createContent(
       width: widget.itemWidth,
       height: widget.itemHeight,
-      hint: widget.subtitle,
+      hint: widget.title,
       label: widget.title,
       decimal: widget.isDecimal,
       inputFormatters: widget.inputFormatters,
