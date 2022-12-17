@@ -221,6 +221,11 @@ class _NumberFormQuestionContentState extends State<NumberFormQuestionContent> {
   }) {
     return Form(
       key: formKey,
+      onChanged: () {
+        if (widget.onSubmitted != null) {
+          widget.onSubmitted!(widget.formController.text);
+        }
+      },
       child: SizedBox(
           width: width,
           height: height,
