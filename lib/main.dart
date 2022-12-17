@@ -169,6 +169,11 @@ class SummaryViewer extends StatelessWidget {
     return IconButton(
       icon: const Icon(Icons.summarize_outlined),
       onPressed: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+        if (!currentFocus.hasPrimaryFocus &&
+            currentFocus.focusedChild != null) {
+          FocusManager.instance.primaryFocus!.unfocus();
+        }
         final tabController = DefaultTabController.of(context);
         if (tabController == null) throw NullThrownError();
         tabController.animateTo(Questions.summary.index);

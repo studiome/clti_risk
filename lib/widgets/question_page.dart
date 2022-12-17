@@ -71,6 +71,10 @@ class MultipleQuestionPage<T extends Enum> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FocusScopeNode currentFocus = FocusScope.of(context);
+    if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
+      FocusManager.instance.primaryFocus!.unfocus();
+    }
     final Widget content =
         _createContent(values, dataItem, itemWidth, itemHeight, context);
     return QuestionPage(
@@ -160,19 +164,11 @@ class _NumberFormQuestionContentState extends State<NumberFormQuestionContent> {
   void initState() {
     super.initState();
     _focusNode = FocusNode();
+    _focusNode.requestFocus();
   }
 
   @override
   Widget build(BuildContext context) {
-    final tabController = DefaultTabController.of(context);
-    if (tabController != null) {
-      tabController.addListener(() {
-        if (widget.onSubmitted != null) {
-          widget.onSubmitted!(widget.formController.text);
-        }
-        _focusNode.unfocus();
-      });
-    }
     Widget content = _createContent(
       width: widget.itemWidth,
       height: widget.itemHeight,
@@ -245,6 +241,7 @@ class _NumberFormQuestionContentState extends State<NumberFormQuestionContent> {
             validator: validator,
             onFieldSubmitted: onSubmitted,
             focusNode: _focusNode,
+            autofocus: true,
           )),
     );
   }
