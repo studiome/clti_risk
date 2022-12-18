@@ -62,6 +62,8 @@ class QuestionForm extends StatefulWidget {
 }
 
 class _QuestionFormState extends State<QuestionForm> {
+  var kIsWeb;
+
   @override
   Widget build(BuildContext context) {
     final Map<int, Widget> pageList = {
@@ -184,31 +186,16 @@ class _QuestionFormState extends State<QuestionForm> {
                     return SimpleDialog(
                       title: Text(AppLocalizations.of(context).references),
                       children: const [
-                        //SimpleDialogOption(
-                        //  child: Text(
-                        //    AppLocalizations.of(context).tapToOpenLink,
-                        //    style: Theme.of(context).textTheme.subtitle2,
-                        //  ),
-                        //),
                         SimpleDialogOption(
-                          child: Text(
-                            '1. Miyata T. et al, Risk prediction model for early outcomes of revascularization for chronic limb-threatening ischaemia. Br J Surg. 2022 Oct 14;109(11):1123.',
-                            softWrap: true,
-                          ),
-                          //onPressed: () async {
-                          //  await launchUrl(Uri.parse(
-                          //      'https://doi.org/10.1093/bjs/znab036'));
-                          //},
-                        ),
+                            child: Text(
+                          '1. Miyata T. et al, Risk prediction model for early outcomes of revascularization for chronic limb-threatening ischaemia. Br J Surg. 2022 Oct 14;109(11):1123.',
+                          softWrap: true,
+                        )),
                         SimpleDialogOption(
                           child: Text(
                             '2. Miyata T. et al, Prediction Models for Two Year Overall Survival and Amputation Free Survival After Revascularisation for Chronic Limb Threatening Ischaemia. Eur J Vasc Endovasc Surg . 2022 Jun 7;S1078-5884(22)00340-9.',
                             softWrap: true,
                           ),
-                          //onPressed: () async {
-                          //  await launchUrl(Uri.parse(
-                          //      'https://doi.org/10.1016/j.ejvs.2022.05.038'));
-                          //},
                         ),
                       ],
                     );
