@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:clti_risk/widgets/clinical_data_controller.dart';
 import 'package:clti_risk/models/patient_data.dart';
 import 'package:clti_risk/models/patient_risk.dart';
 import 'package:clti_risk/models/questions.dart';
+import 'package:clti_risk/widgets/clinical_data_controller.dart';
 import 'package:clti_risk/widgets/question_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -99,7 +99,7 @@ void main() {
       await tester.tap(tab);
       await tester.pumpAndSettle();
       expect(pd.height, isNull);
-      expect(find.text('Body Height [m]'), findsOneWidget);
+      expect(find.text('Body Height [m]'), findsNWidgets(2));
       expect(find.text('Next'), findsOneWidget);
       expect(find.text('Back'), findsOneWidget);
       final form = find.byType(TextFormField);
