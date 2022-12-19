@@ -113,6 +113,13 @@ class _AppRootState extends State<AppRoot> {
                                     setState(() {
                                       _init();
                                     });
+                                    FocusScopeNode currentFocus =
+                                        FocusScope.of(context);
+                                    if (!currentFocus.hasPrimaryFocus &&
+                                        currentFocus.focusedChild != null) {
+                                      FocusManager.instance.primaryFocus!
+                                          .unfocus();
+                                    }
                                   },
                                 ),
                               ],
