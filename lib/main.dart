@@ -13,7 +13,6 @@ import 'widgets/question_form.dart';
 import 'widgets/risk_view.dart';
 
 const String appName = 'CLiTICAL';
-const String fontFamily = 'Noto Sans JP';
 
 void main() {
   runApp(const AppRoot());
@@ -86,13 +85,11 @@ class _AppRootState extends State<AppRoot> {
                 theme: ThemeData(
                   useMaterial3: true,
                   colorSchemeSeed: jsvsColor,
-                  fontFamily: fontFamily,
                 ),
                 darkTheme: ThemeData(
                   useMaterial3: true,
                   brightness: Brightness.dark,
                   colorSchemeSeed: jsvsColor,
-                  fontFamily: fontFamily,
                 ),
                 themeMode: ThemeMode.system,
                 localizationsDelegates: AppLocalizations.localizationsDelegates,
