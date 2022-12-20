@@ -62,8 +62,6 @@ class QuestionForm extends StatefulWidget {
 }
 
 class _QuestionFormState extends State<QuestionForm> {
-  var kIsWeb;
-
   @override
   Widget build(BuildContext context) {
     final Map<int, Widget> pageList = {
