@@ -92,7 +92,7 @@
   "predicted30DMALEDescription": "Predicted risk of  major adverse limb event 30 days after revascularization",
   "predicted2yrOS": "Predicted 2-year OS",
   "predicted2yrOSDescription": "Predicted 2 year Overall Survival post-revascularisation",
-  "predicted2yrAFS": "Predicted 2-year AF",
+  "predicted2yrAFS": "Predicted 2-year AFS",
   "predicted2yrAFSDescription": "Predicted 2 year Amputation Free Survival post-revascularisation",
   "gnriNoRisk": "No Risk",
   "gnriLowRisk": "Low Risk",
