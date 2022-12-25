@@ -137,7 +137,13 @@ class _AppRootState extends State<AppRoot> {
                               key: const ValueKey('Result'),
                               child: RiskView(risk: risk!)),
                       ],
-                      onPopPage: (route, result) => route.didPop(result),
+                      onPopPage: (route, result) {
+                        if (!route.didPop(result)) {
+                          return false;
+                        }
+                        risk = null;
+                        return true;
+                      },
                     )));
           }),
     );
