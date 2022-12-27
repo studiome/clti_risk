@@ -76,7 +76,7 @@
   "ok": "OK",
   "analysisDefaultErrorMessage": "入力データを確認してください。",
   "analysisNullErrorMessage": "数値入力を確認してください。",
-  "analysisLesionErrorMessage": "動脈病変領域の選択を確認してください。",
+  "analysisLesionErrorMessage": "動脈病変の領域選択を確認してください。",
   "references": "参考文献",
   "about": "このアプリについて",
   "tapToOpenLink": "論文サイトを開きます。",
