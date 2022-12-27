@@ -16,7 +16,14 @@ class PatientRisk {
     if (patientData.weight == null ||
         patientData.height == null ||
         patientData.age == null ||
-        patientData.alb == null) throw const FormatException();
+        patientData.alb == null) {
+      throw const FormatException('form is empty', 'NumberForm');
+    }
+    if (patientData.hasAILesion == false &&
+        patientData.hasFPLesion == false &&
+        patientData.hasBKLesion == false) {
+      throw const FormatException('wrong lesion choice', 'LesionChoice');
+    }
     gnri = _calcGNRI();
     gnriRisk = _classifyGNRIRisk(gnri);
     predictedOS = _calcPredictedOS(patientData);

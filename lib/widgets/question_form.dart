@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -240,15 +241,33 @@ class _QuestionFormState extends State<QuestionForm> {
         ],
         actionButton: FloatingActionButton.extended(
           onPressed: () {
+            PatientRisk? pr;
             try {
-              c.patientData.age = int.parse(widget.ageController.text);
-              c.patientData.height = double.parse(widget.heightController.text);
-              c.patientData.weight = double.parse(widget.weightController.text);
-              c.patientData.alb = double.parse(widget.albController.text);
-            } catch (e) {
+              c.patientData.age = int.tryParse(widget.ageController.text);
+              c.patientData.height =
+                  double.tryParse(widget.heightController.text);
+              c.patientData.weight =
+                  double.tryParse(widget.weightController.text);
+              c.patientData.alb = double.tryParse(widget.albController.text);
+              pr = PatientRisk(patientData: c.patientData);
+            } on FormatException catch (e) {
+              pr = null;
+              String errorMessage;
+              switch (e.source) {
+                case 'LesionChoice':
+                  errorMessage =
+                      AppLocalizations.of(context).analysisLesionErrorMessage;
+                  break;
+                case 'NumberForm':
+                  errorMessage =
+                      AppLocalizations.of(context).analysisNullErrorMessage;
+                  break;
+                default:
+                  errorMessage =
+                      AppLocalizations.of(context).analysisDefaultErrorMessage;
+              }
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content:
-                    Text(AppLocalizations.of(context).analysisErrorMessage),
+                content: Text(errorMessage),
                 action: SnackBarAction(
                     textColor: Theme.of(context).colorScheme.onSecondary,
                     label: AppLocalizations.of(context).ok,
@@ -256,8 +275,9 @@ class _QuestionFormState extends State<QuestionForm> {
                         ScaffoldMessenger.of(context).hideCurrentSnackBar()),
               ));
               return;
+            } catch (e) {
+              if (kDebugMode) print(e.runtimeType);
             }
-            final pr = PatientRisk(patientData: c.patientData);
             c.onRiskCalculated.sink.add(pr);
           },
           icon: const Icon(Icons.analytics_outlined),
