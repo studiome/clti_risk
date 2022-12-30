@@ -67,33 +67,12 @@ class PatientData {
   PatientData();
 }
 
-enum Sex {
-  male(),
-  female();
-}
+enum Sex { male, female }
 
-enum Activity {
-  ambulatory(),
-  wheelchair(),
-  immobile();
-}
+enum Activity { ambulatory, wheelchair, immobile }
 
-enum CKD {
-  normal(), //eGFR over 60ml/min.1.73m2
-  g3(), // 30 <= eGFR < 60
-  g4(), // 15<= eGFR <  30
-  g5(), // <15
-  g5D(); // < 15 HD
-}
+enum CKD { normal, g3, g4, g5, g5D }
 
-enum MalignantNeoplasm {
-  no(),
-  pastHistory(),
-  underTreatment();
-}
+enum MalignantNeoplasm { no, pastHistory, underTreatment }
 
-enum RutherfordClassification {
-  class4(),
-  class5(),
-  class6();
-}
+enum RutherfordClassification { class4, class5, class6 }
