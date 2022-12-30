@@ -24,7 +24,7 @@
   "questionCVDTitle": "Cerebral vascular disease",
   "questionCVDSubtitle": "absent or present: stroke and/or transient ischemic attacks",
   "questionCKDTitle": "Chronic kidney disease\n (eGFR*: mL/min/1.73m\u00B2)",
-  "questionCKDSubtitle": "absent: 60 or higher, G3: 30-59, G4: 15-29, G5: below 15, G5D: below 15 in haemodialysis.\n *eGFR: the estimated glomerular filtration rate",
+  "questionCKDSubtitle": "No: 60 or higher, G3: 30-59, G4: 15-29, G5: below 15, G5D: below 15 in haemodialysis.\n *eGFR: the estimated glomerular filtration rate",
   "questionMalignantTitle": "Malignant neoplasm",
   "questionMalignantSubtitle": "absent, past history of malignant neoplasm, or present under treatment",
   "questionAILesionTitle": "Sites of artery occlusive lesions: Aorto-Iliac",

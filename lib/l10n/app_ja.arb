@@ -24,7 +24,7 @@
   "questionCVDTitle": "脳血管障害",
   "questionCVDSubtitle": "はいには、脳梗塞・一過性脳虚血発作を含む。",
   "questionCKDTitle": "慢性腎臓病\n (eGFR*: mL/min/1.73m\u00B2)",
-  "questionCKDSubtitle": "なし: 60以上, G3: 30-59, G4: 15-29, G5: 15以下, G5D: 透析.\n *eGFR: 推定糸球体濾過量",
+  "questionCKDSubtitle": "正常: 60以上, G3: 30-59, G4: 15-29, G5: 15以下, G5D: 透析.\n *eGFR: 推定糸球体濾過量",
   "questionMalignantTitle": "悪性新生物",
   "questionMalignantSubtitle": "なし, 既往歴あり, 治療中",
   "questionAILesionTitle": "大動脈腸骨動脈領域病変",
