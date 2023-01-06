@@ -3,7 +3,7 @@
 # Overview 
 
 
- Risk Calculator for  thirty days death or amputation, major adverse limb event(MALE), two year overall survival (OS) and amputation free survival (AFS) after revascularisation in patients with chronic limb threatening ischaemia
+ Risk Calculator for  thirty days death or amputation, major adverse limb event (MALE), two year overall survival (OS) and amputation free survival (AFS) after revascularisation in patients with chronic limb threatening ischaemia
 
 
 
@@ -25,4 +25,4 @@ This project is under MIT license.
 
 # Author 
 
-[Kazuhiro Miyahara](<mailto:miyahara@g.j-ca.org>) (Department of Vascular Surgery, The University of Tokyo)
+[Kazuhiro Miyahara](<mailto:kmiyahara@studiomexx.org>) (Department of Vascular Surgery, The University of Tokyo)
