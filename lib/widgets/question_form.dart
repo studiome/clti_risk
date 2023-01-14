@@ -243,9 +243,9 @@ class _QuestionFormState extends State<QuestionForm> {
           onPressed: () {
             PatientRisk? pr;
             try {
+              var heightCM = double.tryParse(widget.heightController.text);
               c.patientData.age = int.tryParse(widget.ageController.text);
-              c.patientData.height =
-                  double.tryParse(widget.heightController.text);
+              c.patientData.height = heightCM == null ? null : heightCM / 100.0;
               c.patientData.weight =
                   double.tryParse(widget.weightController.text);
               c.patientData.alb = double.tryParse(widget.albController.text);

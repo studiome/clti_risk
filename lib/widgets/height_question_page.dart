@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'clinical_data_controller.dart';
 import '../models/questions.dart';
+import 'clinical_data_controller.dart';
 import 'question_page.dart';
 
 class HeightQuestionPage extends StatelessWidget {
@@ -14,8 +14,9 @@ class HeightQuestionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = ClinicalDataController.of(context);
     if (c == null) throw NullThrownError();
-    controller.text =
-        c.patientData.height == null ? '' : c.patientData.height.toString();
+    controller.text = c.patientData.height == null
+        ? ''
+        : (c.patientData.height! * 100.0).toString();
 
     return NumberFormQuestionContent(
         title: AppLocalizations.of(context).questionHeightTitle,
@@ -23,11 +24,11 @@ class HeightQuestionPage extends StatelessWidget {
         formController: controller,
         isDecimal: true,
         inputFormatters: <TextInputFormatter>[
-          FilteringTextInputFormatter.allow(RegExp(r'^\d{1}\.?\d{0,2}')),
+          FilteringTextInputFormatter.allow(RegExp(r'^\d{1,3}\.?\d{0,1}')),
         ],
         onSubmitted: (v) {
           try {
-            c.patientData.height = double.parse(v);
+            c.patientData.height = double.parse(v) / 100.0;
           } catch (e) {
             c.patientData.height = null;
           }
