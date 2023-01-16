@@ -121,7 +121,7 @@ void main() {
       final next = find.text('Next');
       await tester.tap(next);
       await tester.pumpAndSettle();
-      expect(pd.height, isNull);
+      expect(pd.weight, isNull);
     });
 
     testWidgets('enter value and submit', (tester) async {
