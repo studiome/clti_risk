@@ -50,7 +50,7 @@
   "questionOtherLesionTitle": "その他血管病変",
   "questionOtherLesionSubtitle": "対側病変は含まない。",
   "questionRutherfordTitle": "ラザフォード分類",
-  "questionRutherfordSubtitle": "classes 4, 5, 6から選んでください。",
+  "questionRutherfordSubtitle": "class 4, 5, 6から選んでください。",
   "questionSummaryTitle": "患者データ一覧",
   "questionSummarySubtitle": "確認してください。",
   "yes": "はい",
