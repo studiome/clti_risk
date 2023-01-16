@@ -98,7 +98,7 @@ void main() {
       expect(tab, findsOneWidget);
       await tester.tap(tab);
       await tester.pumpAndSettle();
-      expect(pd.height, isNull);
+      expect(pd.weight, isNull);
       expect(find.text('Body Weight [kg]'), findsNWidgets(2));
       expect(find.text('Next'), findsOneWidget);
       expect(find.text('Back'), findsOneWidget);
