@@ -103,5 +103,7 @@
   "osLowRisk": "Low Risk",
   "osMediumRisk": "Medium Risk",
   "osHighRisk": "High Risk",
-  "appTerms": "Terms of service"
+  "appTerms": "Terms of service",
+  "refreshButtonLabel": "Refresh Question Form",
+  "summaryButtonLabel": "Move to Summary"
 }

@@ -160,7 +160,10 @@ class FormInitializer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: const Icon(Icons.refresh_outlined),
+      icon: Icon(
+        Icons.refresh_outlined,
+        semanticLabel: AppLocalizations.of(context).refreshButtonLabel,
+      ),
       onPressed: () {
         final tabController = DefaultTabController.of(context);
         if (tabController == null) throw NullThrownError();
@@ -177,7 +180,10 @@ class SummaryViewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: const Icon(Icons.summarize_outlined),
+      icon: Icon(
+        Icons.summarize_outlined,
+        semanticLabel: AppLocalizations.of(context).summaryButtonLabel,
+      ),
       onPressed: () {
         FocusScopeNode currentFocus = FocusScope.of(context);
         if (!currentFocus.hasPrimaryFocus &&
