@@ -36,6 +36,28 @@ void main() {
       final form = find.byType(TextFormField);
       expect(form, findsOneWidget);
     });
+
+    testWidgets('enter invalid text', (tester) async {
+      await tester.pumpWidget(testApp);
+      await tester.pumpAndSettle();
+      var form = find.byType(TextFormField);
+      await tester.enterText(form, 'abcde');
+      expect(find.text('abcde'), findsNothing);
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
+      expect(pd.height, isNull);
+    });
+
+    testWidgets('enter value and submit', (tester) async {
+      await tester.pumpWidget(testApp);
+      await tester.pumpAndSettle();
+      var form = find.byType(TextFormField);
+      await tester.enterText(form, '150.0');
+      expect(find.text('150.0'), findsOneWidget);
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
+      expect(pd.height, 1.50);
+    });
   });
 }
 
