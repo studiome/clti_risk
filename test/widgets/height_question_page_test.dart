@@ -23,11 +23,32 @@ void main() {
         home: ClinicalDataController(
             patientData: pd,
             onRiskCalculated: StreamController<PatientRisk>(),
-            child: Scaffold(body: HeightTestWidget())));
+            child: DefaultTabController(
+                length: 3,
+                child: Scaffold(
+                    appBar: AppBar(
+                        bottom: const TabBar(
+                      isScrollable: true,
+                      tabs: [
+                        Tab(text: 'dummy1'),
+                        Tab(text: 'HeightTestTab'),
+                        Tab(text: 'dummy2')
+                      ],
+                    )),
+                    body: TabBarView(
+                      children: [
+                        const Text('dummy1'),
+                        HeightTestWidget(),
+                        const Text('dummy2'),
+                      ],
+                    )))));
   });
   group('HeightFormTest', () {
     testWidgets('build check', (tester) async {
       await tester.pumpWidget(testApp);
+      final tab = find.text('HeightTestTab');
+      expect(tab, findsOneWidget);
+      await tester.tap(tab);
       await tester.pumpAndSettle();
       expect(pd.height, isNull);
       expect(find.text('Body Height [cm]'), findsNWidgets(2));
@@ -39,6 +60,8 @@ void main() {
 
     testWidgets('enter invalid text', (tester) async {
       await tester.pumpWidget(testApp);
+      final tab = find.text('HeightTestTab');
+      await tester.tap(tab);
       await tester.pumpAndSettle();
       var form = find.byType(TextFormField);
       await tester.enterText(form, 'abcde');
@@ -46,15 +69,36 @@ void main() {
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pumpAndSettle();
       expect(pd.height, isNull);
+      final next = find.text('Next');
+      await tester.tap(next);
+      await tester.pumpAndSettle();
+      expect(pd.height, isNull);
     });
 
     testWidgets('enter value and submit', (tester) async {
       await tester.pumpWidget(testApp);
+      final tab = find.text('HeightTestTab');
+      await tester.tap(tab);
       await tester.pumpAndSettle();
       var form = find.byType(TextFormField);
       await tester.enterText(form, '150.0');
       expect(find.text('150.0'), findsOneWidget);
       await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
+      expect(pd.height, 1.50);
+    });
+
+    testWidgets('enter value and press next', (tester) async {
+      await tester.pumpWidget(testApp);
+      final tab = find.text('HeightTestTab');
+      await tester.tap(tab);
+      await tester.pumpAndSettle();
+      var form = find.byType(TextFormField);
+      final next = find.text('Next');
+      await tester.enterText(form, '150.0');
+      expect(find.text('150.0'), findsOneWidget);
+
+      await tester.tap(next);
       await tester.pumpAndSettle();
       expect(pd.height, 1.50);
     });
