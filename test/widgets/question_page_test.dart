@@ -99,7 +99,7 @@ void main() {
       await tester.tap(tab);
       await tester.pumpAndSettle();
       expect(pd.height, isNull);
-      expect(find.text('Body Height [m]'), findsNWidgets(2));
+      expect(find.text('Body Weight [kg]'), findsNWidgets(2));
       expect(find.text('Next'), findsOneWidget);
       expect(find.text('Back'), findsOneWidget);
       final form = find.byType(TextFormField);
@@ -121,7 +121,7 @@ void main() {
       final next = find.text('Next');
       await tester.tap(next);
       await tester.pumpAndSettle();
-      expect(pd.height, isNull);
+      expect(pd.weight, isNull);
     });
 
     testWidgets('enter value and submit', (tester) async {
@@ -130,11 +130,11 @@ void main() {
       await tester.tap(tab);
       await tester.pumpAndSettle();
       var form = find.byType(TextFormField);
-      await tester.enterText(form, '1.50');
-      expect(find.text('1.50'), findsOneWidget);
+      await tester.enterText(form, '50.0');
+      expect(find.text('50.0'), findsOneWidget);
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pumpAndSettle();
-      expect(pd.height, 1.50);
+      expect(pd.weight, 50.0);
     });
 
     testWidgets('enter value and press next', (tester) async {
@@ -144,12 +144,12 @@ void main() {
       await tester.pumpAndSettle();
       var form = find.byType(TextFormField);
       final next = find.text('Next');
-      await tester.enterText(form, '1.50');
-      expect(find.text('1.50'), findsOneWidget);
+      await tester.enterText(form, '50.0');
+      expect(find.text('50.0'), findsOneWidget);
 
       await tester.tap(next);
       await tester.pumpAndSettle();
-      expect(pd.height, 1.50);
+      expect(pd.weight, 50.0);
     });
   });
 }
@@ -192,18 +192,18 @@ class FormTestWidget extends StatelessWidget {
     final c = ClinicalDataController.of(context);
     if (c == null) throw NullThrownError();
     return NumberFormQuestionContent(
-        title: AppLocalizations.of(context).questionHeightTitle,
-        subtitle: AppLocalizations.of(context).questionHeightSubtitle,
+        title: AppLocalizations.of(context).questionWeightTitle,
+        subtitle: AppLocalizations.of(context).questionWeightSubtitle,
         formController: controller,
         isDecimal: true,
         inputFormatters: <TextInputFormatter>[
-          FilteringTextInputFormatter.allow(RegExp(r'^\d{1}\.?\d{0,2}')),
+          FilteringTextInputFormatter.allow(RegExp(r'^\d{1,3}\.?\d{0,1}')),
         ],
         onSubmitted: (v) {
           try {
-            c.patientData.height = double.parse(v);
+            c.patientData.weight = double.parse(v);
           } catch (e) {
-            c.patientData.height = null;
+            c.patientData.weight = null;
           }
         },
         itemWidth: 240,

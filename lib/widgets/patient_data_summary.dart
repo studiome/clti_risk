@@ -2,9 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'clinical_data_controller.dart';
 import '../models/questions.dart';
 import '../models/yes_no.dart';
+import 'clinical_data_controller.dart';
 import 'label_builder.dart';
 
 class PatientDataSummary extends StatelessWidget {
@@ -117,7 +117,7 @@ class PatientDataSummary extends StatelessWidget {
     //set value if not next tapped or done entered.
     try {
       c.patientData.age = int.parse(ageController.text);
-      c.patientData.height = double.parse(heightController.text);
+      c.patientData.height = double.parse(heightController.text) / 100.0;
       c.patientData.weight = double.parse(weightController.text);
       c.patientData.alb = double.parse(albController.text);
     } catch (e) {
