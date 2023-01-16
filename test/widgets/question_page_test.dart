@@ -116,7 +116,7 @@ void main() {
       expect(find.text('abcde'), findsNothing);
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pumpAndSettle();
-      expect(pd.height, isNull);
+      expect(pd.weight, isNull);
 
       final next = find.text('Next');
       await tester.tap(next);
