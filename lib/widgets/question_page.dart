@@ -5,7 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'tab_transition_navigator.dart';
 
-class QuestionPage extends StatelessWidget {
+class QuestionPage extends StatefulWidget {
   final int tabIndex;
   final int tabCount;
   final Widget content;
@@ -22,28 +22,52 @@ class QuestionPage extends StatelessWidget {
       this.onBack});
 
   @override
+  State<QuestionPage> createState() => _QuestionPageState();
+}
+
+class _QuestionPageState extends State<QuestionPage> {
+  late FocusNode _focusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 12.0, horizontal: 8.0),
-              child: Text(subtitle)),
-          Padding(
+    _focusNode.requestFocus();
+    return Focus(
+      autofocus: true,
+      focusNode: _focusNode,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 12.0, horizontal: 8.0),
+                child: Text(widget.subtitle)),
+            Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: widget.content),
+            Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: content),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: TabTransitionNavigator(
-              tabIndex: tabIndex,
-              tabCount: tabCount,
-              onNext: onNext,
-              onBack: onBack,
+              child: TabTransitionNavigator(
+                tabIndex: widget.tabIndex,
+                tabCount: widget.tabCount,
+                onNext: widget.onNext,
+                onBack: widget.onBack,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -66,17 +66,18 @@ class _AppRootState extends State<AppRoot> {
     });
   }
 
+  void _dissmissKeyboard(BuildContext context) {
+    FocusScopeNode currentFocus = FocusScope.of(context);
+    if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
+      FocusManager.instance.primaryFocus!.unfocus();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: () {
-        FocusScopeNode currentFocus = FocusScope.of(context);
-        if (!currentFocus.hasPrimaryFocus &&
-            currentFocus.focusedChild != null) {
-          FocusManager.instance.primaryFocus!.unfocus();
-        }
-      },
+      onTap: () => _dissmissKeyboard(context),
       child: ValueListenableBuilder<Locale>(
           valueListenable: localeController,
           builder: (c, value, _) {
@@ -113,13 +114,6 @@ class _AppRootState extends State<AppRoot> {
                                     setState(() {
                                       _init();
                                     });
-                                    FocusScopeNode currentFocus =
-                                        FocusScope.of(context);
-                                    if (!currentFocus.hasPrimaryFocus &&
-                                        currentFocus.focusedChild != null) {
-                                      FocusManager.instance.primaryFocus!
-                                          .unfocus();
-                                    }
                                   },
                                 ),
                               ],
