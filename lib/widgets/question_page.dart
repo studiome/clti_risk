@@ -71,10 +71,6 @@ class MultipleQuestionPage<T extends Enum> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FocusScopeNode currentFocus = FocusScope.of(context);
-    if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
-      FocusManager.instance.primaryFocus!.unfocus();
-    }
     final Widget content =
         _createContent(values, dataItem, itemWidth, itemHeight, context);
     return QuestionPage(
@@ -164,11 +160,17 @@ class _NumberFormQuestionContentState extends State<NumberFormQuestionContent> {
   void initState() {
     super.initState();
     _focusNode = FocusNode();
-    _focusNode.requestFocus();
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    _focusNode.requestFocus();
     Widget content = _createContent(
       width: widget.itemWidth,
       height: widget.itemHeight,
