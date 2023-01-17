@@ -66,7 +66,7 @@ class _AppRootState extends State<AppRoot> {
     });
   }
 
-  void _dissmissKeyboard(BuildContext context) {
+  void _dismissKeyboard(BuildContext context) {
     FocusScopeNode currentFocus = FocusScope.of(context);
     if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
       FocusManager.instance.primaryFocus!.unfocus();
@@ -77,7 +77,7 @@ class _AppRootState extends State<AppRoot> {
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: () => _dissmissKeyboard(context),
+      onTap: () => _dismissKeyboard(context),
       child: ValueListenableBuilder<Locale>(
           valueListenable: localeController,
           builder: (c, value, _) {
