@@ -108,7 +108,11 @@ class _AppRootState extends State<AppRoot> {
                               title: AppLocalizations.of(context)
                                   .questionFormTitle,
                               actions: [
-                                const SummaryViewer(),
+                                Builder(builder: (context) {
+                                  return SummaryViewer(
+                                      onPressed: () =>
+                                          _dismissKeyboard(context));
+                                }),
                                 FormInitializer(
                                   onPressed: () {
                                     setState(() {
@@ -169,7 +173,8 @@ class FormInitializer extends StatelessWidget {
 }
 
 class SummaryViewer extends StatelessWidget {
-  const SummaryViewer({super.key});
+  final void Function()? onPressed;
+  const SummaryViewer({super.key, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -179,14 +184,10 @@ class SummaryViewer extends StatelessWidget {
         semanticLabel: AppLocalizations.of(context).summaryButtonLabel,
       ),
       onPressed: () {
-        FocusScopeNode currentFocus = FocusScope.of(context);
-        if (!currentFocus.hasPrimaryFocus &&
-            currentFocus.focusedChild != null) {
-          FocusManager.instance.primaryFocus!.unfocus();
-        }
         final tabController = DefaultTabController.of(context);
         if (tabController == null) throw NullThrownError();
         tabController.animateTo(Questions.summary.index);
+        if (onPressed != null) onPressed!();
       },
     );
   }
