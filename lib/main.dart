@@ -108,6 +108,7 @@ class _AppRootState extends State<AppRoot> {
                               title: AppLocalizations.of(context)
                                   .questionFormTitle,
                               actions: [
+                                //for focusing and keyboard dismissing
                                 Builder(builder: (context) {
                                   return SummaryViewer(
                                       onPressed: () =>
