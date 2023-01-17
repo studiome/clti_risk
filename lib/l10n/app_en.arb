@@ -85,7 +85,7 @@
   "en": "English",
   "ja": "日本語",
   "analysis": "Analysis",
-  "result": "Risk",
+  "result": "Predicted Risks",
   "gnri": "GNRI",
   "gnriDesctiption": "Geriatric Nutritional Risk Index",
   "predicted30DAD": "Predicted 30-day Amputation/Death",
