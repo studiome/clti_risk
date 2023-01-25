@@ -22,7 +22,7 @@ class PatientDataSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = ClinicalDataController.of(context);
-    if (c == null) throw NullThrownError();
+    if (c == null) throw TypeError();
     final pd = c.patientData;
 
     final Map<int, String> data = {
@@ -137,9 +137,8 @@ class PatientDataSummary extends StatelessWidget {
           ),
           subtitle: Text(data[index]!),
           onTap: () {
-            final TabController? tabController =
+            final TabController tabController =
                 DefaultTabController.of(context);
-            if (tabController == null) return;
             tabController.animateTo(index);
           },
         );

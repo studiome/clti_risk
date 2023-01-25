@@ -145,7 +145,7 @@ class _QuestionFormState extends State<QuestionForm> {
     };
 
     final c = ClinicalDataController.of(context);
-    if (c == null) throw NullThrownError();
+    if (c == null) throw TypeError();
     return QuestionBinder(
         title: widget.title,
         actions: widget.actions,
@@ -188,7 +188,7 @@ class _QuestionFormState extends State<QuestionForm> {
                         SimpleDialogOption(
                           child: Text(
                             AppLocalizations.of(context).tapToOpenLink,
-                            style: Theme.of(context).textTheme.subtitle2,
+                            style: Theme.of(context).textTheme.headlineSmall,
                           ),
                         ),
                         SimpleDialogOption(

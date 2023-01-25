@@ -165,7 +165,6 @@ class FormInitializer extends StatelessWidget {
       ),
       onPressed: () {
         final tabController = DefaultTabController.of(context);
-        if (tabController == null) throw NullThrownError();
         tabController.animateTo(0);
         if (onPressed != null) onPressed!();
       },
@@ -186,7 +185,6 @@ class SummaryViewer extends StatelessWidget {
       ),
       onPressed: () {
         final tabController = DefaultTabController.of(context);
-        if (tabController == null) throw NullThrownError();
         tabController.animateTo(Questions.summary.index);
         if (onPressed != null) onPressed!();
       },

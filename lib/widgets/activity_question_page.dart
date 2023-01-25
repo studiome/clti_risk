@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'clinical_data_controller.dart';
 import '../models/patient_data.dart';
 import '../models/questions.dart';
+import 'clinical_data_controller.dart';
 import 'question_page.dart';
 
 class ActivityQuestionPage extends StatefulWidget {
@@ -17,7 +17,7 @@ class _ActivityQuestionPageState extends State<ActivityQuestionPage> {
   @override
   Widget build(BuildContext context) {
     final c = ClinicalDataController.of(context);
-    if (c == null) throw NullThrownError();
+    if (c == null) throw TypeError();
     return MultipleQuestionPage<Activity>(
       subtitle: AppLocalizations.of(context).questionActivitySubtitle,
       values: Activity.values,

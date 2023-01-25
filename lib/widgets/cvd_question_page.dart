@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'clinical_data_controller.dart';
 import '../models/questions.dart';
 import '../models/yes_no.dart';
+import 'clinical_data_controller.dart';
 import 'question_page.dart';
 
 class CVDQuestionPage extends StatefulWidget {
@@ -17,7 +17,7 @@ class _CVDQuestionPageState extends State<CVDQuestionPage> {
   @override
   Widget build(BuildContext context) {
     final c = ClinicalDataController.of(context);
-    if (c == null) throw NullThrownError();
+    if (c == null) throw TypeError();
     return MultipleQuestionPage<YesNo>(
       subtitle: AppLocalizations.of(context).questionCVDSubtitle,
       values: YesNo.values,

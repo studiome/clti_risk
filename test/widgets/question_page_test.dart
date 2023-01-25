@@ -27,7 +27,8 @@ void main() {
           home: ClinicalDataController(
               patientData: pd,
               onRiskCalculated: StreamController<PatientRisk>(),
-              child: const Scaffold(body: ChoiceTestWidget())));
+              child: const DefaultTabController(
+                  length: 1, child: Scaffold(body: ChoiceTestWidget()))));
     });
 
     testWidgets('build check', (tester) async {
@@ -165,7 +166,7 @@ class _ChoiceTestWidgetState extends State<ChoiceTestWidget> {
   @override
   Widget build(BuildContext context) {
     final c = ClinicalDataController.of(context);
-    if (c == null) throw NullThrownError();
+    if (c == null) throw TypeError();
     return MultipleQuestionPage<Sex>(
         subtitle: AppLocalizations.of(context).questionSexSubtitle,
         values: Sex.values,
@@ -190,7 +191,7 @@ class FormTestWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = ClinicalDataController.of(context);
-    if (c == null) throw NullThrownError();
+    if (c == null) throw TypeError();
     return NumberFormQuestionContent(
         title: AppLocalizations.of(context).questionWeightTitle,
         subtitle: AppLocalizations.of(context).questionWeightSubtitle,

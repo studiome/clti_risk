@@ -15,7 +15,7 @@ class InstructionPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: RichText(
               text: TextSpan(
-            style: Theme.of(context).textTheme.bodyText1,
+            style: Theme.of(context).textTheme.bodyMedium,
             children: _getInstructionContent(context),
           ))),
       tabIndex: Questions.instruction.index,

@@ -36,7 +36,7 @@ class RiskViewPage extends StatelessWidget {
           children: [
             SelectableText(
               risk.gnri.toStringAsFixed(1),
-              style: Theme.of(context).textTheme.headline1,
+              style: Theme.of(context).textTheme.displayMedium,
             ),
             SelectableText(
               LabelBuilder(context: context, item: risk.gnriRisk!).text,
@@ -50,7 +50,7 @@ class RiskViewPage extends StatelessWidget {
           children: [
             SelectableText(
               ('${(risk.predicted30DDeathOrAmputation * 100.0).toStringAsFixed(1)}%'),
-              style: Theme.of(context).textTheme.headline1,
+              style: Theme.of(context).textTheme.displayMedium,
             ),
           ],
         ),
@@ -60,7 +60,7 @@ class RiskViewPage extends StatelessWidget {
           children: [
             SelectableText(
               ('${(risk.predicted30DMALE * 100.0).toStringAsFixed(1)}%'),
-              style: Theme.of(context).textTheme.headline1,
+              style: Theme.of(context).textTheme.displayMedium,
             ),
           ],
         ),
@@ -70,7 +70,7 @@ class RiskViewPage extends StatelessWidget {
           children: [
             SelectableText(
               ('${(risk.predictedOS * 100.0).toStringAsFixed(0)}%'),
-              style: Theme.of(context).textTheme.headline1,
+              style: Theme.of(context).textTheme.displayMedium,
             ),
             SelectableText(
               LabelBuilder(context: context, item: risk.osRisk!).text,
@@ -84,7 +84,7 @@ class RiskViewPage extends StatelessWidget {
           children: [
             SelectableText(
               ('${(risk.predictedAFS * 100.0).toStringAsFixed(0)}%'),
-              style: Theme.of(context).textTheme.headline1,
+              style: Theme.of(context).textTheme.displayMedium,
             ),
           ],
         ),

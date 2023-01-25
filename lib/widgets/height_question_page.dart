@@ -13,7 +13,7 @@ class HeightQuestionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = ClinicalDataController.of(context);
-    if (c == null) throw NullThrownError();
+    if (c == null) throw TypeError();
     controller.text = c.patientData.height == null
         ? ''
         : (c.patientData.height! * 100.0).toString();
