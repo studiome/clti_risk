@@ -188,7 +188,7 @@ class _QuestionFormState extends State<QuestionForm> {
                         SimpleDialogOption(
                           child: Text(
                             AppLocalizations.of(context).tapToOpenLink,
-                            style: Theme.of(context).textTheme.headlineSmall,
+                            style: Theme.of(context).textTheme.bodyMedium,
                           ),
                         ),
                         SimpleDialogOption(
