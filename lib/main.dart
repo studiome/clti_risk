@@ -32,7 +32,7 @@ class _AppRootState extends State<AppRoot> {
   final TextEditingController heightController = TextEditingController();
   final TextEditingController weightController = TextEditingController();
   final TextEditingController albController = TextEditingController();
-  LocaleController localeController = LocaleController(const Locale('en'));
+  LocaleController localeController = LocaleController(const Locale('ja'));
   final String title = appName;
   late PatientData pd;
   PatientRisk? risk;
@@ -59,7 +59,7 @@ class _AppRootState extends State<AppRoot> {
     SharedPreferences.getInstance().then((pref) {
       final l = pref.getString('locale');
       if (l == null) {
-        localeController.value = const Locale('en');
+        localeController.value = const Locale('ja');
         return;
       }
       localeController.value = Locale(l);

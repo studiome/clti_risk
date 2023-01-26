@@ -304,8 +304,8 @@ class LocaleSwitch extends StatelessWidget {
       child: Column(
         children: [
           RadioListTile(
-            title: Text(AppLocalizations.of(context).en),
-            value: const Locale('en'),
+            title: Text(AppLocalizations.of(context).ja),
+            value: const Locale('ja'),
             groupValue: localeController.value,
             onChanged: (v) async {
               if (v == null) return;
@@ -314,8 +314,8 @@ class LocaleSwitch extends StatelessWidget {
             },
           ),
           RadioListTile(
-            title: Text(AppLocalizations.of(context).ja),
-            value: const Locale('ja'),
+            title: Text(AppLocalizations.of(context).en),
+            value: const Locale('en'),
             groupValue: localeController.value,
             onChanged: (v) async {
               if (v == null) return;
