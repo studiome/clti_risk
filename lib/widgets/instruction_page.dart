@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../models/questions.dart';
-import 'question_page.dart';
+import 'internal/question_page.dart';
 
 class InstructionPage extends StatelessWidget {
   const InstructionPage({super.key});

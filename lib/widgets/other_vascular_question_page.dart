@@ -4,7 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../models/questions.dart';
 import '../models/yes_no.dart';
 import 'clinical_data_controller.dart';
-import 'question_page.dart';
+import 'internal/question_page.dart';
 
 class OtherVDQuestionPage extends StatefulWidget {
   const OtherVDQuestionPage({super.key});
