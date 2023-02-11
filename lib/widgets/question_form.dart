@@ -5,7 +5,6 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../models/locale_controller.dart';
 import '../models/patient_risk.dart';
 import '../models/questions.dart';
 import 'activity_question_page.dart';
@@ -25,6 +24,7 @@ import 'fp_question_page.dart';
 import 'height_question_page.dart';
 import 'instruction_page.dart';
 import 'local_infection_question_page.dart';
+import 'locale_controller.dart';
 import 'malingnant_question_page.dart';
 import 'other_vascular_question_page.dart';
 import 'patient_data_summary.dart';
