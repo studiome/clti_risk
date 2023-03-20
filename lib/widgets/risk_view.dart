@@ -31,20 +31,6 @@ class RiskViewPage extends StatelessWidget {
     return ListView(
       children: [
         InfoCard(
-          title: l10n.gnri,
-          subtitle: l10n.gnriDesctiption,
-          children: [
-            SelectableText(
-              risk.gnri.toStringAsFixed(1),
-              style: Theme.of(context).textTheme.displayMedium,
-            ),
-            SelectableText(
-              LabelBuilder(context: context, item: risk.gnriRisk!).text,
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-        InfoCard(
           title: l10n.predicted30DAD,
           subtitle: l10n.predicted30DADDescription,
           children: [
@@ -85,6 +71,20 @@ class RiskViewPage extends StatelessWidget {
             SelectableText(
               ('${(risk.predictedAFS * 100.0).toStringAsFixed(0)}%'),
               style: Theme.of(context).textTheme.displayMedium,
+            ),
+          ],
+        ),
+        InfoCard(
+          title: l10n.gnri,
+          subtitle: l10n.gnriDesctiption,
+          children: [
+            SelectableText(
+              risk.gnri.toStringAsFixed(1),
+              style: Theme.of(context).textTheme.displayMedium,
+            ),
+            SelectableText(
+              LabelBuilder(context: context, item: risk.gnriRisk!).text,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
         ),

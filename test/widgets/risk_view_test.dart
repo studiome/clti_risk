@@ -26,10 +26,6 @@ void main() {
         localeController: localeController,
       ));
       await tester.pumpAndSettle();
-      // GNRI
-      expect(find.text('101.3'), findsOneWidget);
-      // GNRI risk
-      expect(find.text('No Risk'), findsOneWidget);
       // 30D Amputation/Death
       expect(find.text('1.3%'), findsOneWidget);
       // 30D MALE
@@ -46,6 +42,14 @@ void main() {
       expect(find.text('Low Risk'), findsOneWidget);
       // 2y AFS
       expect(find.text('88%'), findsOneWidget);
+
+      await tester.dragUntilVisible(
+          find.text('GNRI'), find.byType(ListView), const Offset(0.0, -100.0));
+      await tester.pumpAndSettle();
+      // GNRI
+      expect(find.text('101.3'), findsOneWidget);
+      // GNRI risk
+      expect(find.text('No Risk'), findsOneWidget);
 
       //ja
       localeController.value = const Locale('ja');
@@ -88,10 +92,6 @@ void main() {
         localeController: localeController,
       ));
       await tester.pumpAndSettle();
-      // GNRI
-      expect(find.text('101.3'), findsOneWidget);
-      // GNRI risk
-      expect(find.text('No Risk'), findsOneWidget);
       // 30D Amputation/Death
       expect(find.text('8.8%'), findsOneWidget);
       // 30D MALE
@@ -109,13 +109,18 @@ void main() {
       // 2y AFS
       expect(find.text('64%'), findsOneWidget);
 
+      await tester.dragUntilVisible(
+          find.text('GNRI'), find.byType(ListView), const Offset(0.0, -100.0));
+      await tester.pumpAndSettle();
+      // GNRI
+      expect(find.text('101.3'), findsOneWidget);
+      // GNRI risk
+      expect(find.text('No Risk'), findsOneWidget);
+
       //ja
       localeController.value = const Locale('ja');
       await tester.pumpAndSettle();
       expect(find.textContaining('低リスク'), findsOneWidget);
-      await tester.dragUntilVisible(find.textContaining('GNRI'),
-          find.byType(ListView), const Offset(0.0, 100.0));
-      await tester.pumpAndSettle();
       expect(find.textContaining('リスクなし'), findsOneWidget);
     });
 
@@ -150,10 +155,6 @@ void main() {
         localeController: localeController,
       ));
       await tester.pumpAndSettle();
-      // GNRI
-      expect(find.text('93.8'), findsOneWidget);
-      // GNRI risk
-      expect(find.text('Low Risk'), findsOneWidget);
       // 30D Amputation/Death
       expect(find.text('17.0%'), findsOneWidget);
       //drag
@@ -170,13 +171,19 @@ void main() {
       // 2y AFS
       expect(find.text('25%'), findsOneWidget);
 
+      //scrolling to GNRI
+      await tester.dragUntilVisible(
+          find.text('GNRI'), find.byType(ListView), const Offset(0.0, -100.0));
+      await tester.pumpAndSettle();
+      // GNRI
+      expect(find.text('93.8'), findsOneWidget);
+      // GNRI risk
+      expect(find.text('Low Risk'), findsOneWidget);
+
       //ja
       localeController.value = const Locale('ja');
       await tester.pumpAndSettle();
       expect(find.textContaining('中等度リスク'), findsOneWidget);
-      await tester.dragUntilVisible(find.textContaining('GNRI'),
-          find.byType(ListView), const Offset(0.0, 100.0));
-      await tester.pumpAndSettle();
       expect(find.textContaining('軽度栄養リスク'), findsOneWidget);
     });
 
@@ -211,10 +218,6 @@ void main() {
         localeController: localeController,
       ));
       await tester.pumpAndSettle();
-      // GNRI
-      expect(find.text('86.2'), findsOneWidget);
-      // GNRI risk
-      expect(find.text('Moderate Risk'), findsOneWidget);
       // 30D Amputation/Death
       expect(find.text('10.0%'), findsOneWidget);
       //drag
@@ -230,13 +233,20 @@ void main() {
       expect(find.text('High Risk'), findsOneWidget);
       // 2y AFS
       expect(find.text('3%'), findsOneWidget);
+
+      await tester.dragUntilVisible(
+          find.text('GNRI'), find.byType(ListView), const Offset(0.0, -100.0));
+      await tester.pumpAndSettle();
+
+      // GNRI
+      expect(find.text('86.2'), findsOneWidget);
+      // GNRI risk
+      expect(find.text('Moderate Risk'), findsOneWidget);
+
       //ja
       localeController.value = const Locale('ja');
       await tester.pumpAndSettle();
       expect(find.textContaining('高リスク'), findsOneWidget);
-      await tester.dragUntilVisible(find.textContaining('GNRI'),
-          find.byType(ListView), const Offset(0.0, 100.0));
-      await tester.pumpAndSettle();
       expect(find.textContaining('中等度栄養リスク'), findsOneWidget);
     });
 
@@ -271,10 +281,6 @@ void main() {
         localeController: localeController,
       ));
       await tester.pumpAndSettle();
-      // GNRI
-      expect(find.text('93.8'), findsOneWidget);
-      // GNRI risk
-      expect(find.text('Low Risk'), findsOneWidget);
       // 30D Amputation/Death
       expect(find.text('17.0%'), findsOneWidget);
       //drag
@@ -290,6 +296,14 @@ void main() {
       expect(find.text('Medium Risk'), findsOneWidget);
       // 2y AFS
       expect(find.text('25%'), findsOneWidget);
+
+      await tester.dragUntilVisible(
+          find.text('GNRI'), find.byType(ListView), const Offset(0.0, -100.0));
+      await tester.pumpAndSettle();
+      // GNRI
+      expect(find.text('93.8'), findsOneWidget);
+      // GNRI risk
+      expect(find.text('Low Risk'), findsOneWidget);
     });
 
     testWidgets('high risk case,', (tester) async {
@@ -323,10 +337,6 @@ void main() {
         localeController: localeController,
       ));
       await tester.pumpAndSettle();
-      // GNRI
-      expect(find.text('86.2'), findsOneWidget);
-      // GNRI risk
-      expect(find.text('Moderate Risk'), findsOneWidget);
       // 30D Amputation/Death
       expect(find.text('10.0%'), findsOneWidget);
       //drag
@@ -338,6 +348,14 @@ void main() {
 
       // 2y OS
       expect(find.text('8%'), findsOneWidget);
+
+      await tester.dragUntilVisible(
+          find.text('GNRI'), find.byType(ListView), const Offset(0.0, -100.0));
+      await tester.pumpAndSettle();
+      // GNRI
+      expect(find.text('86.2'), findsOneWidget);
+      // GNRI risk
+      expect(find.text('Moderate Risk'), findsOneWidget);
     });
 
     testWidgets('high risk case 2,', (tester) async {
@@ -371,10 +389,6 @@ void main() {
         localeController: localeController,
       ));
       await tester.pumpAndSettle();
-      // GNRI
-      expect(find.text('71.3'), findsOneWidget);
-      // GNRI risk
-      expect(find.text('Major Risk'), findsOneWidget);
       // 30D Amputation/Death
       expect(find.text('37.0%'), findsOneWidget);
       //drag
@@ -389,13 +403,18 @@ void main() {
       // 2y OS risk
       expect(find.text('High Risk'), findsOneWidget);
 
+      await tester.dragUntilVisible(
+          find.text('GNRI'), find.byType(ListView), const Offset(0.0, -100.0));
+      await tester.pumpAndSettle();
+      // GNRI
+      expect(find.text('71.3'), findsOneWidget);
+      // GNRI risk
+      expect(find.text('Major Risk'), findsOneWidget);
+
       //ja
       localeController.value = const Locale('ja');
       await tester.pumpAndSettle();
       expect(find.textContaining('高リスク'), findsOneWidget);
-      await tester.dragUntilVisible(find.textContaining('GNRI'),
-          find.byType(ListView), const Offset(0.0, 100.0));
-      await tester.pumpAndSettle();
       expect(find.textContaining('高度栄養リスク'), findsOneWidget);
     });
   });
