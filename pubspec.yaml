@@ -43,6 +43,7 @@ dependencies:
   url_launcher: ^6.1.7
   flutter_launcher_icons: ^0.11.0
   shared_preferences: ^2.0.15
+  google_fonts: ^4.0.4
 
 dev_dependencies:
   flutter_test:
