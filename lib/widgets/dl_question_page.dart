@@ -19,7 +19,7 @@ class _DLQuestionPageState extends State<DLQuestionPage> {
     final c = ClinicalDataController.of(context);
     if (c == null) throw TypeError();
     return MultipleQuestionPage<YesNo>(
-      subtitle: AppLocalizations.of(context).questionDLSubtitle,
+      subtitle: AppLocalizations.of(context)!.questionDLSubtitle,
       values: YesNo.values,
       dataItem: c.patientData.hasDyslipidemia.toYesNo(),
       itemWidth: 160.0,

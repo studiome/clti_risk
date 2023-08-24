@@ -12,7 +12,7 @@ class RiskView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(AppLocalizations.of(context).result),
+          title: Text(AppLocalizations.of(context)!.result),
         ),
         body: RiskViewPage(risk: risk));
   }
@@ -31,7 +31,7 @@ class RiskViewPage extends StatelessWidget {
     return ListView(
       children: [
         InfoCard(
-          title: l10n.predicted30DAD,
+          title: l10n!.predicted30DAD,
           subtitle: l10n.predicted30DADDescription,
           children: [
             SelectableText(

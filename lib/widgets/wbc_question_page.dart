@@ -20,7 +20,7 @@ class _AbnormalWBCQuestionPageState extends State<AbnormalWBCQuestionPage> {
     final c = ClinicalDataController.of(context);
     if (c == null) throw TypeError();
     return MultipleQuestionPage<YesNo>(
-      subtitle: AppLocalizations.of(context).questionAbnormalWBCSubtitle,
+      subtitle: AppLocalizations.of(context)!.questionAbnormalWBCSubtitle,
       values: YesNo.values,
       dataItem: c.patientData.hasAbnormalWBC.toYesNo(),
       itemWidth: 160.0,

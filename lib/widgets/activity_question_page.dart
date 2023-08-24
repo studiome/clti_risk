@@ -19,7 +19,7 @@ class _ActivityQuestionPageState extends State<ActivityQuestionPage> {
     final c = ClinicalDataController.of(context);
     if (c == null) throw TypeError();
     return MultipleQuestionPage<Activity>(
-      subtitle: AppLocalizations.of(context).questionActivitySubtitle,
+      subtitle: AppLocalizations.of(context)!.questionActivitySubtitle,
       values: Activity.values,
       dataItem: c.patientData.activity,
       itemWidth: 180.0,

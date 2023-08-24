@@ -19,7 +19,7 @@ class _LesionBKQuestionPageState extends State<LesionBKQuestionPage> {
     final c = ClinicalDataController.of(context);
     if (c == null) throw TypeError();
     return MultipleQuestionPage<YesNo>(
-      subtitle: AppLocalizations.of(context).questionBKLesionSubtitle,
+      subtitle: AppLocalizations.of(context)!.questionBKLesionSubtitle,
       values: YesNo.values,
       dataItem: c.patientData.hasBKLesion.toYesNo(),
       itemWidth: 160.0,

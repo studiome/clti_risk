@@ -19,7 +19,7 @@ class _SmokingQuestionPageState extends State<SmokingQuestionPage> {
     final c = ClinicalDataController.of(context);
     if (c == null) throw TypeError();
     return MultipleQuestionPage<YesNo>(
-      subtitle: AppLocalizations.of(context).questionSmokingSubtitle,
+      subtitle: AppLocalizations.of(context)!.questionSmokingSubtitle,
       values: YesNo.values,
       dataItem: c.patientData.isSmoking.toYesNo(),
       itemWidth: 160.0,

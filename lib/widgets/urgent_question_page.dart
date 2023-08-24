@@ -19,7 +19,7 @@ class _UrgentQuestionPageState extends State<UrgentQuestionPage> {
     final c = ClinicalDataController.of(context);
     if (c == null) throw TypeError();
     return MultipleQuestionPage<YesNo>(
-      subtitle: AppLocalizations.of(context).questionUrgentSubtitle,
+      subtitle: AppLocalizations.of(context)!.questionUrgentSubtitle,
       values: YesNo.values,
       dataItem: c.patientData.isUrgent.toYesNo(),
       itemWidth: 160.0,

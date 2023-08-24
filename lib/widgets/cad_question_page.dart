@@ -19,7 +19,7 @@ class _CADQuestionPageState extends State<CADQuestionPage> {
     final c = ClinicalDataController.of(context);
     if (c == null) throw TypeError();
     return MultipleQuestionPage<YesNo>(
-      subtitle: AppLocalizations.of(context).questionCADSubtitle,
+      subtitle: AppLocalizations.of(context)!.questionCADSubtitle,
       values: YesNo.values,
       dataItem: c.patientData.hasCAD.toYesNo(),
       itemWidth: 160.0,

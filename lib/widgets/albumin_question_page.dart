@@ -17,8 +17,8 @@ class AlbQuestionPage extends StatelessWidget {
     controller.text =
         c.patientData.alb == null ? '' : c.patientData.alb.toString();
     return NumberFormQuestionContent(
-        title: AppLocalizations.of(context).questionAlbTitle,
-        subtitle: AppLocalizations.of(context).questionAlbSubtitle,
+        title: AppLocalizations.of(context)!.questionAlbTitle,
+        subtitle: AppLocalizations.of(context)!.questionAlbSubtitle,
         formController: controller,
         isDecimal: true,
         inputFormatters: <TextInputFormatter>[

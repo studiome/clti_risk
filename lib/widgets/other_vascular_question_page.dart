@@ -19,7 +19,7 @@ class _OtherVDQuestionPageState extends State<OtherVDQuestionPage> {
     final c = ClinicalDataController.of(context);
     if (c == null) throw TypeError();
     return MultipleQuestionPage<YesNo>(
-      subtitle: AppLocalizations.of(context).questionOtherLesionSubtitle,
+      subtitle: AppLocalizations.of(context)!.questionOtherLesionSubtitle,
       values: YesNo.values,
       dataItem: c.patientData.hasOtherVD.toYesNo(),
       itemWidth: 160.0,

@@ -19,7 +19,7 @@ class _FeverQuestionPageState extends State<FeverQuestionPage> {
     final c = ClinicalDataController.of(context);
     if (c == null) throw TypeError();
     return MultipleQuestionPage<YesNo>(
-      subtitle: AppLocalizations.of(context).questionFeverSubtitle,
+      subtitle: AppLocalizations.of(context)!.questionFeverSubtitle,
       values: YesNo.values,
       dataItem: c.patientData.hasFever.toYesNo(),
       itemWidth: 160.0,

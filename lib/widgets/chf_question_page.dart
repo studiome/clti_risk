@@ -19,7 +19,7 @@ class _CHFQuestionPageState extends State<CHFQuestionPage> {
     final c = ClinicalDataController.of(context);
     if (c == null) throw TypeError();
     return MultipleQuestionPage<YesNo>(
-      subtitle: AppLocalizations.of(context).questionCHFSubtitle,
+      subtitle: AppLocalizations.of(context)!.questionCHFSubtitle,
       values: YesNo.values,
       dataItem: c.patientData.hasCHF.toYesNo(),
       itemWidth: 160.0,

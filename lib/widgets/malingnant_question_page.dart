@@ -19,7 +19,7 @@ class _MalignantQuestionPageState extends State<MalignantQuestionPage> {
     final c = ClinicalDataController.of(context);
     if (c == null) throw TypeError();
     return MultipleQuestionPage<MalignantNeoplasm>(
-      subtitle: AppLocalizations.of(context).questionMalignantSubtitle,
+      subtitle: AppLocalizations.of(context)!.questionMalignantSubtitle,
       values: MalignantNeoplasm.values,
       dataItem: c.patientData.malignant,
       itemWidth: 240.0,

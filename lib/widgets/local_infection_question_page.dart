@@ -21,7 +21,7 @@ class _LocalInfectionQuestionPageState
     final c = ClinicalDataController.of(context);
     if (c == null) throw TypeError();
     return MultipleQuestionPage<YesNo>(
-      subtitle: AppLocalizations.of(context).questionLocalInfectionSubtitle,
+      subtitle: AppLocalizations.of(context)!.questionLocalInfectionSubtitle,
       values: YesNo.values,
       dataItem: c.patientData.hasLocalInfection.toYesNo(),
       itemWidth: 160.0,

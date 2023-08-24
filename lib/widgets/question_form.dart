@@ -103,45 +103,45 @@ class _QuestionFormState extends State<QuestionForm> {
 
     final Map<int, String> titleList = {
       Questions.instruction.index:
-          AppLocalizations.of(context).questionInstructionTitle,
-      Questions.sex.index: AppLocalizations.of(context).questionSexTitle,
-      Questions.age.index: AppLocalizations.of(context).questionAgeTitle,
-      Questions.height.index: AppLocalizations.of(context).questionHeightTitle,
-      Questions.weight.index: AppLocalizations.of(context).questionWeightTitle,
-      Questions.albumin.index: AppLocalizations.of(context).questionAlbTitle,
+          AppLocalizations.of(context)!.questionInstructionTitle,
+      Questions.sex.index: AppLocalizations.of(context)!.questionSexTitle,
+      Questions.age.index: AppLocalizations.of(context)!.questionAgeTitle,
+      Questions.height.index: AppLocalizations.of(context)!.questionHeightTitle,
+      Questions.weight.index: AppLocalizations.of(context)!.questionWeightTitle,
+      Questions.albumin.index: AppLocalizations.of(context)!.questionAlbTitle,
       Questions.activity.index:
-          AppLocalizations.of(context).questionActivityTitle,
-      Questions.chf.index: AppLocalizations.of(context).questionCHFTitle,
-      Questions.cad.index: AppLocalizations.of(context).questionCADTitle,
-      Questions.cvd.index: AppLocalizations.of(context).questionCVDTitle,
-      Questions.ckd.index: AppLocalizations.of(context).questionCKDTitle,
+          AppLocalizations.of(context)!.questionActivityTitle,
+      Questions.chf.index: AppLocalizations.of(context)!.questionCHFTitle,
+      Questions.cad.index: AppLocalizations.of(context)!.questionCADTitle,
+      Questions.cvd.index: AppLocalizations.of(context)!.questionCVDTitle,
+      Questions.ckd.index: AppLocalizations.of(context)!.questionCKDTitle,
       Questions.malignantNeoplasm.index:
-          AppLocalizations.of(context).questionMalignantTitle,
+          AppLocalizations.of(context)!.questionMalignantTitle,
       Questions.lesionAI.index:
-          AppLocalizations.of(context).questionAILesionTitle,
+          AppLocalizations.of(context)!.questionAILesionTitle,
       Questions.lesionFP.index:
-          AppLocalizations.of(context).questionFPLesionTitle,
+          AppLocalizations.of(context)!.questionFPLesionTitle,
       Questions.lesionBK.index:
-          AppLocalizations.of(context).questionBKLesionTitle,
+          AppLocalizations.of(context)!.questionBKLesionTitle,
       Questions.urgentProcedure.index:
-          AppLocalizations.of(context).questionUrgentTitle,
-      Questions.fever.index: AppLocalizations.of(context).questionFeverTitle,
+          AppLocalizations.of(context)!.questionUrgentTitle,
+      Questions.fever.index: AppLocalizations.of(context)!.questionFeverTitle,
       Questions.abnormalWBC.index:
-          AppLocalizations.of(context).questionAbnormalWBCTitle,
+          AppLocalizations.of(context)!.questionAbnormalWBCTitle,
       Questions.localInfection.index:
-          AppLocalizations.of(context).questionLocalInfectionTitle,
+          AppLocalizations.of(context)!.questionLocalInfectionTitle,
       Questions.dyslipidemia.index:
-          AppLocalizations.of(context).questionDLTitle,
+          AppLocalizations.of(context)!.questionDLTitle,
       Questions.smoking.index:
-          AppLocalizations.of(context).questionSmokingTitle,
+          AppLocalizations.of(context)!.questionSmokingTitle,
       Questions.contralateral.index:
-          AppLocalizations.of(context).questionContraTitle,
+          AppLocalizations.of(context)!.questionContraTitle,
       Questions.others.index:
-          AppLocalizations.of(context).questionOtherLesionTitle,
+          AppLocalizations.of(context)!.questionOtherLesionTitle,
       Questions.rutherford.index:
-          AppLocalizations.of(context).questionRutherfordTitle,
+          AppLocalizations.of(context)!.questionRutherfordTitle,
       Questions.summary.index:
-          AppLocalizations.of(context).questionSummaryTitle,
+          AppLocalizations.of(context)!.questionSummaryTitle,
     };
 
     final c = ClinicalDataController.of(context);
@@ -152,19 +152,19 @@ class _QuestionFormState extends State<QuestionForm> {
         drawerListTiles: <ListTile>[
           ListTile(
             leading: const Icon(Icons.language_outlined),
-            title: Text(AppLocalizations.of(context).language),
+            title: Text(AppLocalizations.of(context)!.language),
             onTap: () async {
               await showDialog(
                 context: context,
                 builder: (context) {
                   return AlertDialog(
-                    title: Text(AppLocalizations.of(context).language),
+                    title: Text(AppLocalizations.of(context)!.language),
                     content: LocaleSwitch(
                       localeController: widget.localeController,
                     ),
                     actions: [
                       TextButton(
-                        child: Text(AppLocalizations.of(context).ok),
+                        child: Text(AppLocalizations.of(context)!.ok),
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
@@ -177,17 +177,17 @@ class _QuestionFormState extends State<QuestionForm> {
           ),
           ListTile(
             leading: const Icon(Icons.article_outlined),
-            title: Text(AppLocalizations.of(context).references),
+            title: Text(AppLocalizations.of(context)!.references),
             onTap: () async {
               await showDialog(
                   context: context,
                   builder: (context) {
                     return SimpleDialog(
-                      title: Text(AppLocalizations.of(context).references),
+                      title: Text(AppLocalizations.of(context)!.references),
                       children: [
                         SimpleDialogOption(
                           child: Text(
-                            AppLocalizations.of(context).tapToOpenLink,
+                            AppLocalizations.of(context)!.tapToOpenLink,
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
                         ),
@@ -218,7 +218,7 @@ class _QuestionFormState extends State<QuestionForm> {
           ),
           ListTile(
             leading: const Icon(Icons.info_outline),
-            title: Text(AppLocalizations.of(context).about),
+            title: Text(AppLocalizations.of(context)!.about),
             onTap: () async {
               final PackageInfo packageInfo = await PackageInfo.fromPlatform();
               if (!mounted) return;
@@ -226,13 +226,13 @@ class _QuestionFormState extends State<QuestionForm> {
                 context: context,
                 applicationName: widget.appName,
                 applicationVersion: packageInfo.version,
-                applicationLegalese: AppLocalizations.of(context).appLegalese,
+                applicationLegalese: AppLocalizations.of(context)!.appLegalese,
               );
             },
           ),
           ListTile(
             leading: const Icon(Icons.handshake_outlined),
-            title: Text(AppLocalizations.of(context).appTerms),
+            title: Text(AppLocalizations.of(context)!.appTerms),
             onTap: () async {
               await launchUrl(
                   Uri.parse("https://studiome.github.io/clti_risk/"));
@@ -256,21 +256,21 @@ class _QuestionFormState extends State<QuestionForm> {
               switch (e.source) {
                 case 'LesionChoice':
                   errorMessage =
-                      AppLocalizations.of(context).analysisLesionErrorMessage;
+                      AppLocalizations.of(context)!.analysisLesionErrorMessage;
                   break;
                 case 'NumberForm':
                   errorMessage =
-                      AppLocalizations.of(context).analysisNullErrorMessage;
+                      AppLocalizations.of(context)!.analysisNullErrorMessage;
                   break;
                 default:
                   errorMessage =
-                      AppLocalizations.of(context).analysisDefaultErrorMessage;
+                      AppLocalizations.of(context)!.analysisDefaultErrorMessage;
               }
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 content: Text(errorMessage),
                 action: SnackBarAction(
                     textColor: Theme.of(context).colorScheme.onSecondary,
-                    label: AppLocalizations.of(context).ok,
+                    label: AppLocalizations.of(context)!.ok,
                     onPressed: () =>
                         ScaffoldMessenger.of(context).hideCurrentSnackBar()),
               ));
@@ -281,7 +281,7 @@ class _QuestionFormState extends State<QuestionForm> {
             c.onRiskCalculated.sink.add(pr);
           },
           icon: const Icon(Icons.analytics_outlined),
-          label: Text(AppLocalizations.of(context).analysis),
+          label: Text(AppLocalizations.of(context)!.analysis),
         ),
         questionPages:
             List<QuestionPageDetail>.generate(Questions.values.length, (index) {
@@ -304,7 +304,7 @@ class LocaleSwitch extends StatelessWidget {
       child: Column(
         children: [
           RadioListTile(
-            title: Text(AppLocalizations.of(context).ja),
+            title: Text(AppLocalizations.of(context)!.ja),
             value: const Locale('ja'),
             groupValue: localeController.value,
             onChanged: (v) async {
@@ -314,7 +314,7 @@ class LocaleSwitch extends StatelessWidget {
             },
           ),
           RadioListTile(
-            title: Text(AppLocalizations.of(context).en),
+            title: Text(AppLocalizations.of(context)!.en),
             value: const Locale('en'),
             groupValue: localeController.value,
             onChanged: (v) async {

@@ -19,7 +19,7 @@ class _LesionAIQuestionPageState extends State<LesionAIQuestionPage> {
     final c = ClinicalDataController.of(context);
     if (c == null) throw TypeError();
     return MultipleQuestionPage<YesNo>(
-      subtitle: AppLocalizations.of(context).questionAILesionSubtitle,
+      subtitle: AppLocalizations.of(context)!.questionAILesionSubtitle,
       values: YesNo.values,
       dataItem: c.patientData.hasAILesion.toYesNo(),
       itemWidth: 160.0,

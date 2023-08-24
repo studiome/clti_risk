@@ -204,7 +204,7 @@ class _NumberFormQuestionContentState extends State<NumberFormQuestionContent> {
       inputFormatters: widget.inputFormatters,
       validator: (v) {
         if (v == null || v.isEmpty) {
-          return AppLocalizations.of(context).formErrorMessage;
+          return AppLocalizations.of(context)!.formErrorMessage;
         }
         return null;
       },
@@ -218,10 +218,10 @@ class _NumberFormQuestionContentState extends State<NumberFormQuestionContent> {
       onNext: () {
         if (formKey.currentState == null || !formKey.currentState!.validate()) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text(AppLocalizations.of(context).invalidValueMessage),
+            content: Text(AppLocalizations.of(context)!.invalidValueMessage),
             action: SnackBarAction(
                 textColor: Theme.of(context).colorScheme.onSecondary,
-                label: AppLocalizations.of(context).ok,
+                label: AppLocalizations.of(context)!.ok,
                 onPressed: () =>
                     ScaffoldMessenger.of(context).hideCurrentSnackBar()),
           ));

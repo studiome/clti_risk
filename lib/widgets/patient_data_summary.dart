@@ -27,7 +27,7 @@ class PatientDataSummary extends StatelessWidget {
 
     final Map<int, String> data = {
       Questions.instruction.index:
-          AppLocalizations.of(context).questionInstructionSubtitle,
+          AppLocalizations.of(context)!.questionInstructionSubtitle,
       Questions.sex.index: LabelBuilder(context: context, item: pd.sex).text,
       Questions.age.index: ageController.text,
       Questions.height.index: heightController.text,
@@ -76,43 +76,43 @@ class PatientDataSummary extends StatelessWidget {
 
     final Map<int, String> title = {
       Questions.instruction.index:
-          AppLocalizations.of(context).questionInstructionTitle,
-      Questions.sex.index: AppLocalizations.of(context).questionSexTitle,
-      Questions.age.index: AppLocalizations.of(context).questionAgeTitle,
-      Questions.height.index: AppLocalizations.of(context).questionHeightTitle,
-      Questions.weight.index: AppLocalizations.of(context).questionWeightTitle,
-      Questions.albumin.index: AppLocalizations.of(context).questionAlbTitle,
+          AppLocalizations.of(context)!.questionInstructionTitle,
+      Questions.sex.index: AppLocalizations.of(context)!.questionSexTitle,
+      Questions.age.index: AppLocalizations.of(context)!.questionAgeTitle,
+      Questions.height.index: AppLocalizations.of(context)!.questionHeightTitle,
+      Questions.weight.index: AppLocalizations.of(context)!.questionWeightTitle,
+      Questions.albumin.index: AppLocalizations.of(context)!.questionAlbTitle,
       Questions.activity.index:
-          AppLocalizations.of(context).questionActivityTitle,
-      Questions.chf.index: AppLocalizations.of(context).questionCHFTitle,
-      Questions.cad.index: AppLocalizations.of(context).questionCADTitle,
-      Questions.cvd.index: AppLocalizations.of(context).questionCVDTitle,
-      Questions.ckd.index: AppLocalizations.of(context).questionCKDTitle,
+          AppLocalizations.of(context)!.questionActivityTitle,
+      Questions.chf.index: AppLocalizations.of(context)!.questionCHFTitle,
+      Questions.cad.index: AppLocalizations.of(context)!.questionCADTitle,
+      Questions.cvd.index: AppLocalizations.of(context)!.questionCVDTitle,
+      Questions.ckd.index: AppLocalizations.of(context)!.questionCKDTitle,
       Questions.malignantNeoplasm.index:
-          AppLocalizations.of(context).questionMalignantTitle,
+          AppLocalizations.of(context)!.questionMalignantTitle,
       Questions.lesionAI.index:
-          AppLocalizations.of(context).questionAILesionTitle,
+          AppLocalizations.of(context)!.questionAILesionTitle,
       Questions.lesionFP.index:
-          AppLocalizations.of(context).questionFPLesionTitle,
+          AppLocalizations.of(context)!.questionFPLesionTitle,
       Questions.lesionBK.index:
-          AppLocalizations.of(context).questionBKLesionTitle,
+          AppLocalizations.of(context)!.questionBKLesionTitle,
       Questions.urgentProcedure.index:
-          AppLocalizations.of(context).questionUrgentTitle,
-      Questions.fever.index: AppLocalizations.of(context).questionFeverTitle,
+          AppLocalizations.of(context)!.questionUrgentTitle,
+      Questions.fever.index: AppLocalizations.of(context)!.questionFeverTitle,
       Questions.abnormalWBC.index:
-          AppLocalizations.of(context).questionAbnormalWBCTitle,
+          AppLocalizations.of(context)!.questionAbnormalWBCTitle,
       Questions.localInfection.index:
-          AppLocalizations.of(context).questionLocalInfectionTitle,
+          AppLocalizations.of(context)!.questionLocalInfectionTitle,
       Questions.dyslipidemia.index:
-          AppLocalizations.of(context).questionDLTitle,
+          AppLocalizations.of(context)!.questionDLTitle,
       Questions.smoking.index:
-          AppLocalizations.of(context).questionSmokingTitle,
+          AppLocalizations.of(context)!.questionSmokingTitle,
       Questions.contralateral.index:
-          AppLocalizations.of(context).questionContraTitle,
+          AppLocalizations.of(context)!.questionContraTitle,
       Questions.others.index:
-          AppLocalizations.of(context).questionOtherLesionTitle,
+          AppLocalizations.of(context)!.questionOtherLesionTitle,
       Questions.rutherford.index:
-          AppLocalizations.of(context).questionRutherfordTitle,
+          AppLocalizations.of(context)!.questionRutherfordTitle,
     };
     //set value if not next tapped or done entered.
     try {

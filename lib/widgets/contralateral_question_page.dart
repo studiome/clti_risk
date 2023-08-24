@@ -20,7 +20,7 @@ class _ContraLateralQuestionPageState extends State<ContraLateralQuestionPage> {
     final c = ClinicalDataController.of(context);
     if (c == null) throw TypeError();
     return MultipleQuestionPage<YesNo>(
-      subtitle: AppLocalizations.of(context).questionContraSubtitle,
+      subtitle: AppLocalizations.of(context)!.questionContraSubtitle,
       values: YesNo.values,
       dataItem: c.patientData.hasContraLateralLesion.toYesNo(),
       itemWidth: 160.0,

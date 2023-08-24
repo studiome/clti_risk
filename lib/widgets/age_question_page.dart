@@ -17,8 +17,8 @@ class AgeQuestionPage extends StatelessWidget {
     controller.text =
         c.patientData.age == null ? '' : c.patientData.age.toString();
     return NumberFormQuestionContent(
-        title: AppLocalizations.of(context).questionAgeTitle,
-        subtitle: AppLocalizations.of(context).questionAgeSubtitle,
+        title: AppLocalizations.of(context)!.questionAgeTitle,
+        subtitle: AppLocalizations.of(context)!.questionAgeSubtitle,
         formController: controller,
         isDecimal: false,
         inputFormatters: <TextInputFormatter>[

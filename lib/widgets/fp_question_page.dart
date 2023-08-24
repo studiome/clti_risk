@@ -19,7 +19,7 @@ class _LesionFPQuestionPageState extends State<LesionFPQuestionPage> {
     final c = ClinicalDataController.of(context);
     if (c == null) throw TypeError();
     return MultipleQuestionPage<YesNo>(
-      subtitle: AppLocalizations.of(context).questionFPLesionSubtitle,
+      subtitle: AppLocalizations.of(context)!.questionFPLesionSubtitle,
       values: YesNo.values,
       dataItem: c.patientData.hasFPLesion.toYesNo(),
       itemWidth: 160.0,

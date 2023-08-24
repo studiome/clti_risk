@@ -105,7 +105,7 @@ class _AppRootState extends State<AppRoot> {
                           key: const ValueKey('Question'),
                           child: Builder(builder: (context) {
                             return QuestionForm(
-                              title: AppLocalizations.of(context)
+                              title: AppLocalizations.of(context)!
                                   .questionFormTitle,
                               actions: [
                                 //for focusing and keyboard dismissing
@@ -161,7 +161,7 @@ class FormInitializer extends StatelessWidget {
     return IconButton(
       icon: Icon(
         Icons.refresh_outlined,
-        semanticLabel: AppLocalizations.of(context).refreshButtonLabel,
+        semanticLabel: AppLocalizations.of(context)!.refreshButtonLabel,
       ),
       onPressed: () {
         final tabController = DefaultTabController.of(context);
@@ -181,7 +181,7 @@ class SummaryViewer extends StatelessWidget {
     return IconButton(
       icon: Icon(
         Icons.summarize_outlined,
-        semanticLabel: AppLocalizations.of(context).summaryButtonLabel,
+        semanticLabel: AppLocalizations.of(context)!.summaryButtonLabel,
       ),
       onPressed: () {
         final tabController = DefaultTabController.of(context);

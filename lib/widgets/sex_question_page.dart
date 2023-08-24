@@ -19,7 +19,7 @@ class _SexQuestionPageState extends State<SexQuestionPage> {
     final c = ClinicalDataController.of(context);
     if (c == null) throw TypeError();
     return MultipleQuestionPage<Sex>(
-      subtitle: AppLocalizations.of(context).questionSexSubtitle,
+      subtitle: AppLocalizations.of(context)!.questionSexSubtitle,
       values: Sex.values,
       dataItem: c.patientData.sex,
       itemWidth: 160.0,

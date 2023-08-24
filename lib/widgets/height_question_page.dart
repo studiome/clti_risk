@@ -19,8 +19,8 @@ class HeightQuestionPage extends StatelessWidget {
         : (c.patientData.height! * 100.0).toString();
 
     return NumberFormQuestionContent(
-        title: AppLocalizations.of(context).questionHeightTitle,
-        subtitle: AppLocalizations.of(context).questionHeightSubtitle,
+        title: AppLocalizations.of(context)!.questionHeightTitle,
+        subtitle: AppLocalizations.of(context)!.questionHeightSubtitle,
         formController: controller,
         isDecimal: true,
         inputFormatters: <TextInputFormatter>[

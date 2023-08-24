@@ -10,7 +10,7 @@ class InstructionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return QuestionPage(
-      subtitle: AppLocalizations.of(context).questionInstructionSubtitle,
+      subtitle: AppLocalizations.of(context)!.questionInstructionSubtitle,
       content: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: RichText(

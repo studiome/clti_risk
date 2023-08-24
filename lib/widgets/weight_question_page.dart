@@ -17,8 +17,8 @@ class WeightQuestionPage extends StatelessWidget {
     controller.text =
         c.patientData.weight == null ? '' : c.patientData.weight.toString();
     return NumberFormQuestionContent(
-        title: AppLocalizations.of(context).questionWeightTitle,
-        subtitle: AppLocalizations.of(context).questionWeightSubtitle,
+        title: AppLocalizations.of(context)!.questionWeightTitle,
+        subtitle: AppLocalizations.of(context)!.questionWeightSubtitle,
         formController: controller,
         isDecimal: true,
         inputFormatters: <TextInputFormatter>[

@@ -10,7 +10,7 @@ class LabelBuilder<T extends Enum> {
   final T item;
   late String _label;
   LabelBuilder({required this.context, required this.item}) {
-    final l10n = AppLocalizations.of(context);
+    final l10n = AppLocalizations.of(context)!;
     _label = _getLabelText(item, l10n);
   }
 

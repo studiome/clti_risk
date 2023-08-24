@@ -19,7 +19,7 @@ class _CVDQuestionPageState extends State<CVDQuestionPage> {
     final c = ClinicalDataController.of(context);
     if (c == null) throw TypeError();
     return MultipleQuestionPage<YesNo>(
-      subtitle: AppLocalizations.of(context).questionCVDSubtitle,
+      subtitle: AppLocalizations.of(context)!.questionCVDSubtitle,
       values: YesNo.values,
       dataItem: c.patientData.hasCVD.toYesNo(),
       itemWidth: 160.0,

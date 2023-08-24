@@ -19,7 +19,7 @@ class _CKDQuestionPageState extends State<CKDQuestionPage> {
     final c = ClinicalDataController.of(context);
     if (c == null) throw TypeError();
     return MultipleQuestionPage<CKD>(
-      subtitle: AppLocalizations.of(context).questionCKDSubtitle,
+      subtitle: AppLocalizations.of(context)!.questionCKDSubtitle,
       values: CKD.values,
       dataItem: c.patientData.ckd,
       itemWidth: 160.0,

@@ -36,7 +36,7 @@ class TabTransitionNavigator extends StatelessWidget {
                     // button disabeld if first tab.
                     tabController.animateTo(i - 1);
                   },
-            child: Text(AppLocalizations.of(context).backButton)),
+            child: Text(AppLocalizations.of(context)!.backButton)),
         FilledButton.tonal(
             onPressed: (tabIndex == tabCount - 1)
                 ? null
@@ -58,7 +58,7 @@ class TabTransitionNavigator extends StatelessWidget {
                     // button disabeld if last tab.
                     tabController.animateTo(i + 1);
                   },
-            child: Text(AppLocalizations.of(context).nextButton)),
+            child: Text(AppLocalizations.of(context)!.nextButton)),
       ],
     );
   }
