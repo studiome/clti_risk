@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -59,6 +60,10 @@ class _AppRootState extends State<AppRoot> {
     SharedPreferences.getInstance().then((pref) {
       final l = pref.getString('locale');
       if (l == null) {
+        if (kIsWeb) {
+          localeController.value = const Locale('en');
+          return;
+        }
         localeController.value = const Locale('ja');
         return;
       }
