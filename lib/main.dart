@@ -101,14 +101,14 @@ class _AppRootState extends State<AppRoot> {
                 theme: ThemeData(
                     useMaterial3: true,
                     colorSchemeSeed: jsvsColor,
-                    textTheme: GoogleFonts.notoSansJpTextTheme(
-                        Theme.of(context).textTheme)),
+                    textTheme: GoogleFonts.notoSansJpTextTheme()),
                 darkTheme: ThemeData(
                     useMaterial3: true,
                     brightness: Brightness.dark,
                     colorSchemeSeed: jsvsColor,
                     textTheme: GoogleFonts.notoSansJpTextTheme(
-                        Theme.of(context).textTheme)),
+                      ThemeData(brightness: Brightness.dark).textTheme,
+                    )),
                 themeMode: ThemeMode.system,
                 localizationsDelegates: AppLocalizations.localizationsDelegates,
                 supportedLocales: AppLocalizations.supportedLocales,
