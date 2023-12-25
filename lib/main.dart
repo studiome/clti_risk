@@ -71,8 +71,8 @@ class _AppRootState extends State<AppRoot> {
       final l = pref.getString('locale');
       if (l == null) {
         if (kIsWeb) {
-          //localeController.value = const Locale('en');
-          //return;
+          localeController.value = const Locale('en');
+          return;
         }
         localeController.value = const Locale('ja');
         return;
