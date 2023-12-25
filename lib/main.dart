@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'models/patient_data.dart';
@@ -15,7 +17,15 @@ import 'widgets/risk_view.dart';
 
 const String appName = 'CLiTICAL';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await GoogleFonts.pendingFonts([
+    GoogleFonts.notoSansJpTextTheme(),
+  ]);
+  LicenseRegistry.addLicense(() async* {
+    final license = await rootBundle.loadString('google_fonts/OFL.txt');
+    yield LicenseEntryWithLineBreaks(['google_fonts'], license);
+  });
   runApp(const AppRoot());
 }
 
@@ -61,8 +71,8 @@ class _AppRootState extends State<AppRoot> {
       final l = pref.getString('locale');
       if (l == null) {
         if (kIsWeb) {
-          localeController.value = const Locale('en');
-          return;
+          //localeController.value = const Locale('en');
+          //return;
         }
         localeController.value = const Locale('ja');
         return;
@@ -89,14 +99,16 @@ class _AppRootState extends State<AppRoot> {
             return MaterialApp(
                 title: title,
                 theme: ThemeData(
-                  useMaterial3: true,
-                  colorSchemeSeed: jsvsColor,
-                ),
+                    useMaterial3: true,
+                    colorSchemeSeed: jsvsColor,
+                    textTheme: GoogleFonts.notoSansJpTextTheme(
+                        Theme.of(context).textTheme)),
                 darkTheme: ThemeData(
-                  useMaterial3: true,
-                  brightness: Brightness.dark,
-                  colorSchemeSeed: jsvsColor,
-                ),
+                    useMaterial3: true,
+                    brightness: Brightness.dark,
+                    colorSchemeSeed: jsvsColor,
+                    textTheme: GoogleFonts.notoSansJpTextTheme(
+                        Theme.of(context).textTheme)),
                 themeMode: ThemeMode.system,
                 localizationsDelegates: AppLocalizations.localizationsDelegates,
                 supportedLocales: AppLocalizations.supportedLocales,
