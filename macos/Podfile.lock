@@ -33,9 +33,9 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   FlutterMacOS: 8f6f14fa908a6fb3fba0cd85dbd81ec4b251fb24
   package_info_plus: 122abb51244f66eead59ce7c9c200d6b53111779
-  path_provider_foundation: 2a68637f8a62df7f6e790a428d1bdf72cb4e2d59
-  shared_preferences_foundation: 4e65c567e7877037d328829a522222c938bf308c
-  url_launcher_macos: c83b920a14ed6c0ec4d6069c3ec3e19222607405
+  path_provider_foundation: 080d55be775b7414fd5a5ef3ac137b97b097e564
+  shared_preferences_foundation: 9e1978ff2562383bd5676f64ec4e9aa8fa06a6f7
+  url_launcher_macos: 0fba8ddabfc33ce0a9afe7c5fef5aab3d8d2d673
 
 PODFILE CHECKSUM: 353c8bcc5d5b0994e508d035b5431cfe18c1dea7
 
