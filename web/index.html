@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -27,47 +28,46 @@
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="icon" type="image/png" href="favicon.png" />
 
   <title>clti_risk</title>
   <link rel="manifest" href="manifest.json">
 
   <script>
-    // The value below is injected by flutter build, do not touch.
-    var serviceWorkerVersion = null;
+    {{flutter_bootstrap_js}}
   </script>
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
   <style>
-    #loading{
-        display: flex;
-        justify-content: center;
-        padding: 20px 0;
-      }
+    #loading {
+      display: flex;
+      justify-content: center;
+      padding: 20px 0;
+    }
   </style>
 
 </head>
+
 <body>
   <div id="loading"></div>
   <script>
-    window.addEventListener('load', function(ev) {
-       var loading = document.querySelector('#loading');
-       // Download main.dart.js
-       _flutter.loader.loadEntrypoint({
-         serviceWorker: {
-           serviceWorkerVersion: serviceWorkerVersion,
-         },
-         onEntrypointLoaded: async function(engineInitializer) {
-             let appRunner = await engineInitializer.initializeEngine();
+    window.addEventListener('load', function (ev) {
+      var loading = document.querySelector('#loading');
+      // Download main.dart.js
+      _flutter.loader.load({
 
-             loading.textContent = "loading app ...";
-             await appRunner.runApp();
-           //engineInitializer.initializeEngine().then(function(appRunner) {
-           //  appRunner.runApp();
-           //});
-         }
-       });
+        onEntrypointLoaded: async function (engineInitializer) {
+          let appRunner = await engineInitializer.initializeEngine();
+
+          loading.textContent = "loading app ...";
+          await appRunner.runApp();
+          //engineInitializer.initializeEngine().then(function(appRunner) {
+          //  appRunner.runApp();
+          //});
+        }
+      });
     });
   </script>
 </body>
+
 </html>

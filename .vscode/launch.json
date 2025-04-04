@@ -8,10 +8,7 @@
             "name": "clti_risk",
             "request": "launch",
             "type": "dart",
-            "args": [
-                "--web-renderer",
-                "html"
-            ]
+            "args": []
         },
         {
             "name": "clti_risk (profile mode)",
