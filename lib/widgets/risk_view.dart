@@ -1,7 +1,7 @@
 import 'package:clti_risk/widgets/label_builder.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../l10n/app_localizations.dart';
 import '../models/patient_risk.dart';
 
 class RiskView extends StatelessWidget {

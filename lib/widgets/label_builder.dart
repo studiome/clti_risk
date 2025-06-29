@@ -1,7 +1,7 @@
 import 'package:clti_risk/models/patient_risk.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../l10n/app_localizations.dart';
 import '../models/patient_data.dart';
 import '../models/yes_no.dart';
 
