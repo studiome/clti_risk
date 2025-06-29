@@ -221,7 +221,7 @@ class _QuestionFormState extends State<QuestionForm> {
             title: Text(AppLocalizations.of(context)!.about),
             onTap: () async {
               final PackageInfo packageInfo = await PackageInfo.fromPlatform();
-              if (!mounted) return;
+              if (!context.mounted) return;
               showAboutDialog(
                 context: context,
                 applicationName: widget.appName,
