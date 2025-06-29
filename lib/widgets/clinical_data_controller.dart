@@ -13,8 +13,7 @@ class ClinicalDataController extends InheritedWidget {
       {super.key,
       required this.patientData,
       required this.onRiskCalculated,
-      required Widget child})
-      : super(child: child);
+      required super.child});
 
   static ClinicalDataController? of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<ClinicalDataController>();
