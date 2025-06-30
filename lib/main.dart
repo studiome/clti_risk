@@ -90,6 +90,39 @@ class _AppRootState extends State<AppRoot> {
 
   @override
   Widget build(BuildContext context) {
+    var pages = [
+      MaterialPage(
+        key: const ValueKey('Question'),
+        child: Builder(builder: (context) {
+          return QuestionForm(
+            title: AppLocalizations.of(context)!.questionFormTitle,
+            actions: [
+              //for focusing and keyboard dismissing
+              Builder(builder: (context) {
+                return SummaryViewer(
+                    onPressed: () => _dismissKeyboard(context));
+              }),
+              FormInitializer(
+                onPressed: () {
+                  setState(() {
+                    _init();
+                  });
+                },
+              ),
+            ],
+            appName: appName,
+            ageController: ageController,
+            heightController: heightController,
+            weightController: weightController,
+            albController: albController,
+            localeController: localeController,
+          );
+        }),
+      ),
+      if (risk != null)
+        MaterialPage(
+            key: const ValueKey('Result'), child: RiskView(risk: risk!)),
+    ];
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () => _dismissKeyboard(context),
@@ -117,42 +150,11 @@ class _AppRootState extends State<AppRoot> {
                     patientData: pd,
                     onRiskCalculated: onRiskCalculated,
                     child: Navigator(
-                      pages: [
-                        MaterialPage(
-                          key: const ValueKey('Question'),
-                          child: Builder(builder: (context) {
-                            return QuestionForm(
-                              title: AppLocalizations.of(context)!
-                                  .questionFormTitle,
-                              actions: [
-                                //for focusing and keyboard dismissing
-                                Builder(builder: (context) {
-                                  return SummaryViewer(
-                                      onPressed: () =>
-                                          _dismissKeyboard(context));
-                                }),
-                                FormInitializer(
-                                  onPressed: () {
-                                    setState(() {
-                                      _init();
-                                    });
-                                  },
-                                ),
-                              ],
-                              appName: appName,
-                              ageController: ageController,
-                              heightController: heightController,
-                              weightController: weightController,
-                              albController: albController,
-                              localeController: localeController,
-                            );
-                          }),
-                        ),
-                        if (risk != null)
-                          MaterialPage(
-                              key: const ValueKey('Result'),
-                              child: RiskView(risk: risk!)),
-                      ],
+                      pages: pages,
+                      onDidRemovePage: (page) {
+                        pages.remove(page);
+                        risk = null;
+                      },
                       //onPopPage: (route, result) {
                       //  if (!route.didPop(result)) {
                       //    return false;
