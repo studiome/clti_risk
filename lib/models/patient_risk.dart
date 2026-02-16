@@ -156,8 +156,6 @@ class PatientRisk {
       case Activity.immobile:
         sigma += coeff[Covariants.activityImmobile] ?? 0.0;
         break;
-      default:
-        break;
     }
 
     //Malignancy
@@ -257,14 +255,14 @@ class PatientRisk {
 enum OSRisk {
   high, // risk < 50%
   medium, // 50% <= risk < 70%
-  low // 70% <= risk
+  low, // 70% <= risk
 }
 
 enum GNRIRisk {
   major, // gnri < 82
   moderate, // 82<= gnri < 92
   low, // 92<= gnri < 98
-  noRisk // 98 <= gnri
+  noRisk, // 98 <= gnri
 }
 
 //Covariants for predictor

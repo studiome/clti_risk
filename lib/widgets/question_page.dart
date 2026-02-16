@@ -12,14 +12,15 @@ class QuestionPage extends StatefulWidget {
   final String subtitle;
   final Function? onNext;
   final Function? onBack;
-  const QuestionPage(
-      {super.key,
-      required this.content,
-      required this.subtitle,
-      required this.tabIndex,
-      required this.tabCount,
-      this.onNext,
-      this.onBack});
+  const QuestionPage({
+    super.key,
+    required this.content,
+    required this.subtitle,
+    required this.tabIndex,
+    required this.tabCount,
+    this.onNext,
+    this.onBack,
+  });
 
   @override
   State<QuestionPage> createState() => _QuestionPageState();
@@ -51,12 +52,16 @@ class _QuestionPageState extends State<QuestionPage> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 12.0, horizontal: 8.0),
-                child: Text(widget.subtitle)),
+              padding: const EdgeInsets.symmetric(
+                vertical: 12.0,
+                horizontal: 8.0,
+              ),
+              child: Text(widget.subtitle),
+            ),
             Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: widget.content),
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: widget.content,
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: TabTransitionNavigator(
@@ -82,66 +87,86 @@ class MultipleQuestionPage<T extends Enum> extends StatelessWidget {
   final double itemHeight;
   final String subtitle;
   final void Function(T?)? onChanged;
-  const MultipleQuestionPage(
-      {super.key,
-      required this.subtitle,
-      required this.dataItem,
-      required this.values,
-      required this.tabIndex,
-      required this.tabCount,
-      required this.itemWidth,
-      required this.itemHeight,
-      required this.onChanged});
+  const MultipleQuestionPage({
+    super.key,
+    required this.subtitle,
+    required this.dataItem,
+    required this.values,
+    required this.tabIndex,
+    required this.tabCount,
+    required this.itemWidth,
+    required this.itemHeight,
+    required this.onChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final Widget content =
-        _createContent(values, dataItem, itemWidth, itemHeight, context);
+    final Widget content = _createContent(
+      values,
+      dataItem,
+      itemWidth,
+      itemHeight,
+      context,
+    );
     return QuestionPage(
-        content: content,
-        subtitle: subtitle,
-        tabIndex: tabIndex,
-        tabCount: tabCount);
+      content: content,
+      subtitle: subtitle,
+      tabIndex: tabIndex,
+      tabCount: tabCount,
+    );
   }
 
-  Widget _createContent(List<T> values, T dataItem, double itemWidth,
-      double itemHeight, BuildContext context) {
+  Widget _createContent(
+    List<T> values,
+    T dataItem,
+    double itemWidth,
+    double itemHeight,
+    BuildContext context,
+  ) {
     final itemLength = values.length;
     List<Widget> choices = <Widget>[];
     for (int i = 0; i < itemLength; i++) {
-      choices.add(SizedBox(
+      choices.add(
+        SizedBox(
           width: itemWidth,
           height: itemHeight,
           child: RadioListTile<T>(
-            title:
-                Text(LabelBuilder<T>(context: context, item: values[i]).text),
+            title: Text(
+              LabelBuilder<T>(context: context, item: values[i]).text,
+            ),
             value: values[i],
-            groupValue: dataItem,
-            onChanged: onChanged,
-          )));
+          ),
+        ),
+      );
     }
-    return LayoutBuilder(builder: (context, constrains) {
-      if (constrains.maxWidth < 600) {
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: choices,
-          ),
-        );
-      } else {
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Wrap(
-            direction: Axis.horizontal,
-            alignment: WrapAlignment.start,
-            crossAxisAlignment: WrapCrossAlignment.start,
-            children: choices,
-          ),
-        );
-      }
-    });
+    return RadioGroup<T>(
+      groupValue: dataItem,
+      onChanged: onChanged ?? (v) {},
+      child: LayoutBuilder(
+        builder: (context, constrains) {
+          if (constrains.maxWidth < 600) {
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: choices,
+              ),
+            );
+          } else {
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Wrap(
+                direction: Axis.horizontal,
+                alignment: WrapAlignment.start,
+                crossAxisAlignment: WrapCrossAlignment.start,
+                children: choices,
+              ),
+            );
+          }
+        },
+      ),
+    );
   }
 }
 
@@ -217,14 +242,17 @@ class _NumberFormQuestionContentState extends State<NumberFormQuestionContent> {
       tabCount: widget.tabCount,
       onNext: () {
         if (formKey.currentState == null || !formKey.currentState!.validate()) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text(AppLocalizations.of(context)!.invalidValueMessage),
-            action: SnackBarAction(
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(AppLocalizations.of(context)!.invalidValueMessage),
+              action: SnackBarAction(
                 textColor: Theme.of(context).colorScheme.onSecondary,
                 label: AppLocalizations.of(context)!.ok,
                 onPressed: () =>
-                    ScaffoldMessenger.of(context).hideCurrentSnackBar()),
-          ));
+                    ScaffoldMessenger.of(context).hideCurrentSnackBar(),
+              ),
+            ),
+          );
           throw const FormatException('invalid value');
         }
         if (widget.onSubmitted != null) {
@@ -253,27 +281,28 @@ class _NumberFormQuestionContentState extends State<NumberFormQuestionContent> {
         }
       },
       child: SizedBox(
-          width: width,
-          height: height,
-          child: TextFormField(
-            controller: widget.formController,
-            decoration: InputDecoration(
-              border: const OutlineInputBorder(),
-              hintText: hint,
-              labelText: label,
-            ),
-            textInputAction: TextInputAction.done,
-            keyboardType: TextInputType.numberWithOptions(
-              signed: false,
-              decimal: decimal,
-            ),
-            inputFormatters: inputFormatters,
-            autovalidateMode: AutovalidateMode.always,
-            validator: validator,
-            onFieldSubmitted: onSubmitted,
-            focusNode: _focusNode,
-            autofocus: true,
-          )),
+        width: width,
+        height: height,
+        child: TextFormField(
+          controller: widget.formController,
+          decoration: InputDecoration(
+            border: const OutlineInputBorder(),
+            hintText: hint,
+            labelText: label,
+          ),
+          textInputAction: TextInputAction.done,
+          keyboardType: TextInputType.numberWithOptions(
+            signed: false,
+            decimal: decimal,
+          ),
+          inputFormatters: inputFormatters,
+          autovalidateMode: AutovalidateMode.always,
+          validator: validator,
+          onFieldSubmitted: onSubmitted,
+          focusNode: _focusNode,
+          autofocus: true,
+        ),
+      ),
     );
   }
 }

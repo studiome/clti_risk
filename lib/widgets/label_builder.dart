@@ -16,14 +16,14 @@ class LabelBuilder<T extends Enum> {
 
   String _getLabelText(T item, AppLocalizations l10n) {
     switch (item.runtimeType) {
-      case Sex:
+      case const (Sex):
         switch (item as Sex) {
           case Sex.male:
             return l10n.male;
           case Sex.female:
             return l10n.female;
         }
-      case Activity:
+      case const (Activity):
         switch (item as Activity) {
           case Activity.ambulatory:
             return l10n.ambulatory;
@@ -32,7 +32,7 @@ class LabelBuilder<T extends Enum> {
           case Activity.immobile:
             return l10n.immobile;
         }
-      case CKD:
+      case const (CKD):
         switch (item as CKD) {
           case CKD.normal:
             return l10n.normal;
@@ -45,7 +45,7 @@ class LabelBuilder<T extends Enum> {
           case CKD.g5D:
             return l10n.g5D;
         }
-      case MalignantNeoplasm:
+      case const (MalignantNeoplasm):
         switch (item as MalignantNeoplasm) {
           case MalignantNeoplasm.no:
             return l10n.noMalignancy;
@@ -54,7 +54,7 @@ class LabelBuilder<T extends Enum> {
           case MalignantNeoplasm.underTreatment:
             return l10n.underTreatment;
         }
-      case RutherfordClassification:
+      case const (RutherfordClassification):
         switch (item as RutherfordClassification) {
           case RutherfordClassification.class4:
             return l10n.class4;
@@ -63,14 +63,14 @@ class LabelBuilder<T extends Enum> {
           case RutherfordClassification.class6:
             return l10n.class6;
         }
-      case YesNo:
+      case const (YesNo):
         switch (item as YesNo) {
           case YesNo.yes:
             return l10n.yes;
           case YesNo.no:
             return l10n.no;
         }
-      case GNRIRisk:
+      case const (GNRIRisk):
         switch (item as GNRIRisk) {
           case GNRIRisk.noRisk:
             return l10n.gnriNoRisk;
@@ -81,7 +81,7 @@ class LabelBuilder<T extends Enum> {
           case GNRIRisk.major:
             return l10n.gntiMajorRisk;
         }
-      case OSRisk:
+      case const (OSRisk):
         switch (item as OSRisk) {
           case OSRisk.low:
             return l10n.osLowRisk;

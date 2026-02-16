@@ -69,12 +69,15 @@ class _QuestionFormState extends State<QuestionForm> {
       Questions.instruction.index: const InstructionPage(),
       Questions.sex.index: const SexQuestionPage(),
       Questions.age.index: AgeQuestionPage(controller: widget.ageController),
-      Questions.height.index:
-          HeightQuestionPage(controller: widget.heightController),
-      Questions.weight.index:
-          WeightQuestionPage(controller: widget.weightController),
-      Questions.albumin.index:
-          AlbQuestionPage(controller: widget.albController),
+      Questions.height.index: HeightQuestionPage(
+        controller: widget.heightController,
+      ),
+      Questions.weight.index: WeightQuestionPage(
+        controller: widget.weightController,
+      ),
+      Questions.albumin.index: AlbQuestionPage(
+        controller: widget.albController,
+      ),
       Questions.activity.index: const ActivityQuestionPage(),
       Questions.chf.index: const CHFQuestionPage(),
       Questions.cad.index: const CADQuestionPage(),
@@ -102,194 +105,224 @@ class _QuestionFormState extends State<QuestionForm> {
     };
 
     final Map<int, String> titleList = {
-      Questions.instruction.index:
-          AppLocalizations.of(context)!.questionInstructionTitle,
+      Questions.instruction.index: AppLocalizations.of(
+        context,
+      )!.questionInstructionTitle,
       Questions.sex.index: AppLocalizations.of(context)!.questionSexTitle,
       Questions.age.index: AppLocalizations.of(context)!.questionAgeTitle,
       Questions.height.index: AppLocalizations.of(context)!.questionHeightTitle,
       Questions.weight.index: AppLocalizations.of(context)!.questionWeightTitle,
       Questions.albumin.index: AppLocalizations.of(context)!.questionAlbTitle,
-      Questions.activity.index:
-          AppLocalizations.of(context)!.questionActivityTitle,
+      Questions.activity.index: AppLocalizations.of(
+        context,
+      )!.questionActivityTitle,
       Questions.chf.index: AppLocalizations.of(context)!.questionCHFTitle,
       Questions.cad.index: AppLocalizations.of(context)!.questionCADTitle,
       Questions.cvd.index: AppLocalizations.of(context)!.questionCVDTitle,
       Questions.ckd.index: AppLocalizations.of(context)!.questionCKDTitle,
-      Questions.malignantNeoplasm.index:
-          AppLocalizations.of(context)!.questionMalignantTitle,
-      Questions.lesionAI.index:
-          AppLocalizations.of(context)!.questionAILesionTitle,
-      Questions.lesionFP.index:
-          AppLocalizations.of(context)!.questionFPLesionTitle,
-      Questions.lesionBK.index:
-          AppLocalizations.of(context)!.questionBKLesionTitle,
-      Questions.urgentProcedure.index:
-          AppLocalizations.of(context)!.questionUrgentTitle,
+      Questions.malignantNeoplasm.index: AppLocalizations.of(
+        context,
+      )!.questionMalignantTitle,
+      Questions.lesionAI.index: AppLocalizations.of(
+        context,
+      )!.questionAILesionTitle,
+      Questions.lesionFP.index: AppLocalizations.of(
+        context,
+      )!.questionFPLesionTitle,
+      Questions.lesionBK.index: AppLocalizations.of(
+        context,
+      )!.questionBKLesionTitle,
+      Questions.urgentProcedure.index: AppLocalizations.of(
+        context,
+      )!.questionUrgentTitle,
       Questions.fever.index: AppLocalizations.of(context)!.questionFeverTitle,
-      Questions.abnormalWBC.index:
-          AppLocalizations.of(context)!.questionAbnormalWBCTitle,
-      Questions.localInfection.index:
-          AppLocalizations.of(context)!.questionLocalInfectionTitle,
-      Questions.dyslipidemia.index:
-          AppLocalizations.of(context)!.questionDLTitle,
-      Questions.smoking.index:
-          AppLocalizations.of(context)!.questionSmokingTitle,
-      Questions.contralateral.index:
-          AppLocalizations.of(context)!.questionContraTitle,
-      Questions.others.index:
-          AppLocalizations.of(context)!.questionOtherLesionTitle,
-      Questions.rutherford.index:
-          AppLocalizations.of(context)!.questionRutherfordTitle,
-      Questions.summary.index:
-          AppLocalizations.of(context)!.questionSummaryTitle,
+      Questions.abnormalWBC.index: AppLocalizations.of(
+        context,
+      )!.questionAbnormalWBCTitle,
+      Questions.localInfection.index: AppLocalizations.of(
+        context,
+      )!.questionLocalInfectionTitle,
+      Questions.dyslipidemia.index: AppLocalizations.of(
+        context,
+      )!.questionDLTitle,
+      Questions.smoking.index: AppLocalizations.of(
+        context,
+      )!.questionSmokingTitle,
+      Questions.contralateral.index: AppLocalizations.of(
+        context,
+      )!.questionContraTitle,
+      Questions.others.index: AppLocalizations.of(
+        context,
+      )!.questionOtherLesionTitle,
+      Questions.rutherford.index: AppLocalizations.of(
+        context,
+      )!.questionRutherfordTitle,
+      Questions.summary.index: AppLocalizations.of(
+        context,
+      )!.questionSummaryTitle,
     };
 
     final c = ClinicalDataController.of(context);
     if (c == null) throw TypeError();
     return QuestionBinder(
-        title: widget.title,
-        actions: widget.actions,
-        drawerListTiles: <ListTile>[
-          ListTile(
-            leading: const Icon(Icons.language_outlined),
-            title: Text(AppLocalizations.of(context)!.language),
-            onTap: () async {
-              await showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    title: Text(AppLocalizations.of(context)!.language),
-                    content: LocaleSwitch(
-                      localeController: widget.localeController,
+      title: widget.title,
+      actions: widget.actions,
+      drawerListTiles: <ListTile>[
+        ListTile(
+          leading: const Icon(Icons.language_outlined),
+          title: Text(AppLocalizations.of(context)!.language),
+          onTap: () async {
+            await showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: Text(AppLocalizations.of(context)!.language),
+                  content: LocaleSwitch(
+                    localeController: widget.localeController,
+                  ),
+                  actions: [
+                    TextButton(
+                      child: Text(AppLocalizations.of(context)!.ok),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
                     ),
-                    actions: [
-                      TextButton(
-                        child: Text(AppLocalizations.of(context)!.ok),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      )
-                    ],
-                  );
-                },
-              );
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.article_outlined),
-            title: Text(AppLocalizations.of(context)!.references),
-            onTap: () async {
-              await showDialog(
-                  context: context,
-                  builder: (context) {
-                    return SimpleDialog(
-                      title: Text(AppLocalizations.of(context)!.references),
-                      children: [
-                        SimpleDialogOption(
-                          child: Text(
-                            AppLocalizations.of(context)!.tapToOpenLink,
-                            style: Theme.of(context).textTheme.bodyMedium,
+                  ],
+                );
+              },
+            );
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.article_outlined),
+          title: Text(AppLocalizations.of(context)!.references),
+          onTap: () async {
+            await showDialog(
+              context: context,
+              builder: (context) {
+                return SimpleDialog(
+                  title: Text(AppLocalizations.of(context)!.references),
+                  children: [
+                    SimpleDialogOption(
+                      child: Text(
+                        AppLocalizations.of(context)!.tapToOpenLink,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ),
+                    SimpleDialogOption(
+                      child: const Text(
+                        '1. Miyata T. et al, Risk prediction model for early outcomes of revascularization for chronic limb-threatening ischaemia. Br J Surg. 2022 Oct 14;109(11):1123.',
+                        softWrap: true,
+                      ),
+                      onPressed: () async {
+                        await launchUrl(
+                          Uri.parse('https://doi.org/10.1093/bjs/znab036'),
+                        );
+                      },
+                    ),
+                    SimpleDialogOption(
+                      child: const Text(
+                        '2. Miyata T. et al, Prediction Models for Two Year Overall Survival and Amputation Free Survival After Revascularisation for Chronic Limb Threatening Ischaemia. Eur J Vasc Endovasc Surg . 2022 Jun 7;S1078-5884(22)00340-9.',
+                        softWrap: true,
+                      ),
+                      onPressed: () async {
+                        await launchUrl(
+                          Uri.parse(
+                            'https://doi.org/10.1016/j.ejvs.2022.05.038',
                           ),
-                        ),
-                        SimpleDialogOption(
-                          child: const Text(
-                            '1. Miyata T. et al, Risk prediction model for early outcomes of revascularization for chronic limb-threatening ischaemia. Br J Surg. 2022 Oct 14;109(11):1123.',
-                            softWrap: true,
-                          ),
-                          onPressed: () async {
-                            await launchUrl(Uri.parse(
-                                'https://doi.org/10.1093/bjs/znab036'));
-                          },
-                        ),
-                        SimpleDialogOption(
-                          child: const Text(
-                            '2. Miyata T. et al, Prediction Models for Two Year Overall Survival and Amputation Free Survival After Revascularisation for Chronic Limb Threatening Ischaemia. Eur J Vasc Endovasc Surg . 2022 Jun 7;S1078-5884(22)00340-9.',
-                            softWrap: true,
-                          ),
-                          onPressed: () async {
-                            await launchUrl(Uri.parse(
-                                'https://doi.org/10.1016/j.ejvs.2022.05.038'));
-                          },
-                        ),
-                      ],
-                    );
-                  });
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.info_outline),
-            title: Text(AppLocalizations.of(context)!.about),
-            onTap: () async {
-              final PackageInfo packageInfo = await PackageInfo.fromPlatform();
-              if (!context.mounted) return;
-              showAboutDialog(
-                context: context,
-                applicationName: widget.appName,
-                applicationVersion: packageInfo.version,
-                applicationLegalese: AppLocalizations.of(context)!.appLegalese,
-              );
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.handshake_outlined),
-            title: Text(AppLocalizations.of(context)!.appTerms),
-            onTap: () async {
-              await launchUrl(
-                  Uri.parse("https://studiome.github.io/clti_risk/"));
-            },
-          ),
-        ],
-        actionButton: FloatingActionButton.extended(
-          onPressed: () {
-            PatientRisk? pr;
-            try {
-              var heightCM = double.tryParse(widget.heightController.text);
-              c.patientData.age = int.tryParse(widget.ageController.text);
-              c.patientData.height = heightCM == null ? null : heightCM / 100.0;
-              c.patientData.weight =
-                  double.tryParse(widget.weightController.text);
-              c.patientData.alb = double.tryParse(widget.albController.text);
-              pr = PatientRisk(patientData: c.patientData);
-            } on FormatException catch (e) {
-              pr = null;
-              String errorMessage;
-              switch (e.source) {
-                case 'LesionChoice':
-                  errorMessage =
-                      AppLocalizations.of(context)!.analysisLesionErrorMessage;
-                  break;
-                case 'NumberForm':
-                  errorMessage =
-                      AppLocalizations.of(context)!.analysisNullErrorMessage;
-                  break;
-                default:
-                  errorMessage =
-                      AppLocalizations.of(context)!.analysisDefaultErrorMessage;
-              }
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        );
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.info_outline),
+          title: Text(AppLocalizations.of(context)!.about),
+          onTap: () async {
+            final PackageInfo packageInfo = await PackageInfo.fromPlatform();
+            if (!context.mounted) return;
+            showAboutDialog(
+              context: context,
+              applicationName: widget.appName,
+              applicationVersion: packageInfo.version,
+              applicationLegalese: AppLocalizations.of(context)!.appLegalese,
+            );
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.handshake_outlined),
+          title: Text(AppLocalizations.of(context)!.appTerms),
+          onTap: () async {
+            await launchUrl(Uri.parse("https://studiome.github.io/clti_risk/"));
+          },
+        ),
+      ],
+      actionButton: FloatingActionButton.extended(
+        onPressed: () {
+          PatientRisk? pr;
+          try {
+            var heightCM = double.tryParse(widget.heightController.text);
+            c.patientData.age = int.tryParse(widget.ageController.text);
+            c.patientData.height = heightCM == null ? null : heightCM / 100.0;
+            c.patientData.weight = double.tryParse(
+              widget.weightController.text,
+            );
+            c.patientData.alb = double.tryParse(widget.albController.text);
+            pr = PatientRisk(patientData: c.patientData);
+          } on FormatException catch (e) {
+            pr = null;
+            String errorMessage;
+            switch (e.source) {
+              case 'LesionChoice':
+                errorMessage = AppLocalizations.of(
+                  context,
+                )!.analysisLesionErrorMessage;
+                break;
+              case 'NumberForm':
+                errorMessage = AppLocalizations.of(
+                  context,
+                )!.analysisNullErrorMessage;
+                break;
+              default:
+                errorMessage = AppLocalizations.of(
+                  context,
+                )!.analysisDefaultErrorMessage;
+            }
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
                 content: Text(errorMessage),
                 action: SnackBarAction(
-                    textColor: Theme.of(context).colorScheme.onSecondary,
-                    label: AppLocalizations.of(context)!.ok,
-                    onPressed: () =>
-                        ScaffoldMessenger.of(context).hideCurrentSnackBar()),
-              ));
-              return;
-            } catch (e) {
-              if (kDebugMode) print(e.runtimeType);
-            }
-            c.onRiskCalculated.sink.add(pr);
-          },
-          icon: const Icon(Icons.analytics_outlined),
-          label: Text(AppLocalizations.of(context)!.analysis),
-        ),
-        questionPages:
-            List<QuestionPageDetail>.generate(Questions.values.length, (index) {
+                  textColor: Theme.of(context).colorScheme.onSecondary,
+                  label: AppLocalizations.of(context)!.ok,
+                  onPressed: () =>
+                      ScaffoldMessenger.of(context).hideCurrentSnackBar(),
+                ),
+              ),
+            );
+            return;
+          } catch (e) {
+            if (kDebugMode) print(e.runtimeType);
+          }
+          c.onRiskCalculated.sink.add(pr);
+        },
+        icon: const Icon(Icons.analytics_outlined),
+        label: Text(AppLocalizations.of(context)!.analysis),
+      ),
+      questionPages: List<QuestionPageDetail>.generate(
+        Questions.values.length,
+        (index) {
           return QuestionPageDetail(
-              tabBarTitle: titleList[index]!,
-              tabIndex: index,
-              page: pageList[index]!);
-        }));
+            tabBarTitle: titleList[index]!,
+            tabIndex: index,
+            page: pageList[index]!,
+          );
+        },
+      ),
+    );
   }
 }
 
@@ -301,38 +334,32 @@ class LocaleSwitch extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 120.0,
-      child: Column(
-        children: [
-          RadioListTile(
-            title: Text(AppLocalizations.of(context)!.ja),
-            value: const Locale('ja'),
-            groupValue: localeController.value,
-            onChanged: (v) async {
-              if (v == null) return;
-              localeController.value = v;
-              await _setLocaleToPrefs(v);
-            },
-          ),
-          RadioListTile(
-            title: Text(AppLocalizations.of(context)!.en),
-            value: const Locale('en'),
-            groupValue: localeController.value,
-            onChanged: (v) async {
-              if (v == null) return;
-              localeController.value = v;
-              await _setLocaleToPrefs(v);
-            },
-          ),
-        ],
+      child: RadioGroup<Locale>(
+        groupValue: localeController.value,
+        onChanged: (v) async {
+          if (v == null) return;
+          localeController.value = v;
+          await _setLocaleToPrefs(v);
+        },
+        child: Column(
+          children: [
+            RadioListTile<Locale>(
+              title: Text(AppLocalizations.of(context)!.ja),
+              value: const Locale('ja'),
+            ),
+            RadioListTile<Locale>(
+              title: Text(AppLocalizations.of(context)!.en),
+              value: const Locale('en'),
+            ),
+          ],
+        ),
       ),
     );
   }
 
   Future<void> _setLocaleToPrefs(Locale locale) {
-    return SharedPreferences.getInstance().then(
-      (pref) {
-        pref.setString('locale', locale.toString());
-      },
-    );
+    return SharedPreferences.getInstance().then((pref) {
+      pref.setString('locale', locale.toString());
+    });
   }
 }

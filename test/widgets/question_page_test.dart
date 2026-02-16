@@ -19,16 +19,20 @@ void main() {
     setUp(() {
       pd = PatientData();
       testApp = MaterialApp(
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-          ],
-          locale: const Locale('en'),
-          home: ClinicalDataController(
-              patientData: pd,
-              onRiskCalculated: StreamController<PatientRisk>(),
-              child: const DefaultTabController(
-                  length: 1, child: Scaffold(body: ChoiceTestWidget()))));
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+        ],
+        locale: const Locale('en'),
+        home: ClinicalDataController(
+          patientData: pd,
+          onRiskCalculated: StreamController<PatientRisk>(),
+          child: const DefaultTabController(
+            length: 1,
+            child: Scaffold(body: ChoiceTestWidget()),
+          ),
+        ),
+      );
     });
 
     testWidgets('build check', (tester) async {
@@ -42,8 +46,12 @@ void main() {
       expect(choice1, findsOneWidget);
       final radio0 = tester.widget<Radio<Sex>>(find.byType(Radio<Sex>).at(0));
       final radio1 = tester.widget<Radio<Sex>>(find.byType(Radio<Sex>).at(1));
-      expect(radio0.value == radio0.groupValue, isFalse);
-      expect(radio1.value == radio1.groupValue, isTrue);
+      final radioGroup = tester.widget<RadioGroup<Sex>>(
+        find.byType(RadioGroup<Sex>),
+      );
+      expect(radioGroup.groupValue, Sex.female);
+      expect(radio0.value, Sex.male);
+      expect(radio1.value, Sex.female);
     });
 
     testWidgets('select radio button', (tester) async {
@@ -54,8 +62,12 @@ void main() {
       expect(pd.sex, Sex.male);
       final radio0 = tester.widget<Radio<Sex>>(find.byType(Radio<Sex>).at(0));
       final radio1 = tester.widget<Radio<Sex>>(find.byType(Radio<Sex>).at(1));
-      expect(radio0.value == radio0.groupValue, isTrue);
-      expect(radio1.value == radio1.groupValue, isFalse);
+      final radioGroup = tester.widget<RadioGroup<Sex>>(
+        find.byType(RadioGroup<Sex>),
+      );
+      expect(radioGroup.groupValue, Sex.male);
+      expect(radio0.value, Sex.male);
+      expect(radio1.value, Sex.female);
     });
   });
 
@@ -66,31 +78,38 @@ void main() {
     setUp(() {
       pd = PatientData();
       testApp = MaterialApp(
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-          ],
-          locale: const Locale('en'),
-          home: ClinicalDataController(
-              patientData: pd,
-              onRiskCalculated: StreamController<PatientRisk>(),
-              child: DefaultTabController(
-                  length: 3,
-                  child: Scaffold(
-                      appBar: AppBar(
-                          bottom: const TabBar(
-                        isScrollable: true,
-                        tabs: [
-                          Tab(text: 'dummy1'),
-                          Tab(text: 'TestTab'),
-                          Tab(text: 'dummy2')
-                        ],
-                      )),
-                      body: TabBarView(children: [
-                        const Text('dummy1'),
-                        FormTestWidget(),
-                        const Text('dummy2')
-                      ])))));
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+        ],
+        locale: const Locale('en'),
+        home: ClinicalDataController(
+          patientData: pd,
+          onRiskCalculated: StreamController<PatientRisk>(),
+          child: DefaultTabController(
+            length: 3,
+            child: Scaffold(
+              appBar: AppBar(
+                bottom: const TabBar(
+                  isScrollable: true,
+                  tabs: [
+                    Tab(text: 'dummy1'),
+                    Tab(text: 'TestTab'),
+                    Tab(text: 'dummy2'),
+                  ],
+                ),
+              ),
+              body: TabBarView(
+                children: [
+                  const Text('dummy1'),
+                  FormTestWidget(),
+                  const Text('dummy2'),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
     });
 
     testWidgets('build check', (tester) async {
@@ -168,19 +187,20 @@ class _ChoiceTestWidgetState extends State<ChoiceTestWidget> {
     final c = ClinicalDataController.of(context);
     if (c == null) throw TypeError();
     return MultipleQuestionPage<Sex>(
-        subtitle: AppLocalizations.of(context)!.questionSexSubtitle,
-        values: Sex.values,
-        dataItem: c.patientData.sex,
-        itemHeight: 60.0,
-        itemWidth: 160.0,
-        tabIndex: Questions.sex.index,
-        tabCount: Questions.values.length,
-        onChanged: (v) {
-          if (v == null) return;
-          setState(() {
-            c.patientData.sex = v;
-          });
+      subtitle: AppLocalizations.of(context)!.questionSexSubtitle,
+      values: Sex.values,
+      dataItem: c.patientData.sex,
+      itemHeight: 60.0,
+      itemWidth: 160.0,
+      tabIndex: Questions.sex.index,
+      tabCount: Questions.values.length,
+      onChanged: (v) {
+        if (v == null) return;
+        setState(() {
+          c.patientData.sex = v;
         });
+      },
+    );
   }
 }
 
@@ -193,23 +213,24 @@ class FormTestWidget extends StatelessWidget {
     final c = ClinicalDataController.of(context);
     if (c == null) throw TypeError();
     return NumberFormQuestionContent(
-        title: AppLocalizations.of(context)!.questionWeightTitle,
-        subtitle: AppLocalizations.of(context)!.questionWeightSubtitle,
-        formController: controller,
-        isDecimal: true,
-        inputFormatters: <TextInputFormatter>[
-          FilteringTextInputFormatter.allow(RegExp(r'^\d{1,3}\.?\d{0,1}')),
-        ],
-        onSubmitted: (v) {
-          try {
-            c.patientData.weight = double.parse(v);
-          } catch (e) {
-            c.patientData.weight = null;
-          }
-        },
-        itemWidth: 240,
-        itemHeight: 60,
-        tabIndex: 1,
-        tabCount: 3);
+      title: AppLocalizations.of(context)!.questionWeightTitle,
+      subtitle: AppLocalizations.of(context)!.questionWeightSubtitle,
+      formController: controller,
+      isDecimal: true,
+      inputFormatters: <TextInputFormatter>[
+        FilteringTextInputFormatter.allow(RegExp(r'^\d{1,3}\.?\d{0,1}')),
+      ],
+      onSubmitted: (v) {
+        try {
+          c.patientData.weight = double.parse(v);
+        } catch (e) {
+          c.patientData.weight = null;
+        }
+      },
+      itemWidth: 240,
+      itemHeight: 60,
+      tabIndex: 1,
+      tabCount: 3,
+    );
   }
 }
