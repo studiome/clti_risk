@@ -59,7 +59,9 @@ class RiskViewPage extends StatelessWidget {
               style: Theme.of(context).textTheme.displayMedium,
             ),
             SelectableText(
-              LabelBuilder(context: context, item: risk.osRisk!).text,
+              risk.osRisk == null
+                  ? 'N/A'
+                  : LabelBuilder(context: context, item: risk.osRisk!).text,
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
@@ -83,7 +85,9 @@ class RiskViewPage extends StatelessWidget {
               style: Theme.of(context).textTheme.displayMedium,
             ),
             SelectableText(
-              LabelBuilder(context: context, item: risk.gnriRisk!).text,
+              risk.gnriRisk == null
+                  ? 'N/A'
+                  : LabelBuilder(context: context, item: risk.gnriRisk!).text,
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],

@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../l10n/app_localizations.dart';
@@ -114,16 +113,11 @@ class PatientDataSummary extends StatelessWidget {
       Questions.rutherford.index:
           AppLocalizations.of(context)!.questionRutherfordTitle,
     };
-    //set value if not next tapped or done entered.
-    try {
-      c.patientData.age = int.parse(ageController.text);
-      c.patientData.height = double.parse(heightController.text) / 100.0;
-      c.patientData.weight = double.parse(weightController.text);
-      c.patientData.alb = double.parse(albController.text);
-    } catch (e) {
-      if (kDebugMode) print(e);
-      //DO NOTHING
-    }
+    c.patientData.age = int.tryParse(ageController.text);
+    final heightCM = double.tryParse(heightController.text);
+    c.patientData.height = heightCM == null ? null : heightCM / 100.0;
+    c.patientData.weight = double.tryParse(weightController.text);
+    c.patientData.alb = double.tryParse(albController.text);
     return ListView.builder(
       itemBuilder: (context, index) {
         return ListTile(

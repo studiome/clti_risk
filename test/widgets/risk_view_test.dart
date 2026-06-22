@@ -417,6 +417,44 @@ void main() {
       expect(find.textContaining('高リスク'), findsOneWidget);
       expect(find.textContaining('高度栄養リスク'), findsOneWidget);
     });
+
+    testWidgets('error case (height = 0.0),', (tester) async {
+      pd
+        ..sex = Sex.male
+        ..age = 70
+        ..height = 0.0
+        ..weight = 50.0
+        ..alb = 3.0
+        ..activity = Activity.wheelchair;
+
+      await tester.pumpWidget(TestApp(
+        risk: PatientRisk(patientData: pd),
+        localeController: localeController,
+      ));
+      await tester.pumpAndSettle();
+
+      // 30D Amputation/Death should be NaN%
+      expect(find.text('NaN%'), findsAtLeastNWidgets(2));
+
+      // drag to find 2y OS
+      await tester.dragUntilVisible(find.text('Predicted 2-year OS'),
+          find.byType(ListView), const Offset(0.0, -100.0));
+      await tester.pumpAndSettle();
+
+      // 2y OS percentage should be NaN%
+      expect(find.text('NaN%'), findsAtLeastNWidgets(2));
+      // 2y OS risk should be N/A (GNRI risk is also N/A, so there are 2 N/A widgets)
+      expect(find.text('N/A'), findsNWidgets(2));
+
+      await tester.dragUntilVisible(
+          find.text('GNRI'), find.byType(ListView), const Offset(0.0, -100.0));
+      await tester.pumpAndSettle();
+
+      // GNRI value should be NaN
+      expect(find.text('NaN'), findsOneWidget);
+      // GNRI risk should be N/A (both OS and GNRI risks are N/A)
+      expect(find.text('N/A'), findsNWidgets(2));
+    });
   });
 }
 
