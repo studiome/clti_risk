@@ -23,6 +23,7 @@ import 'fever_question_page.dart';
 import 'fp_question_page.dart';
 import 'height_question_page.dart';
 import 'instruction_page.dart';
+import 'legal_document_urls.dart';
 import 'local_infection_question_page.dart';
 import 'locale_controller.dart';
 import 'malingnant_question_page.dart';
@@ -254,10 +255,30 @@ class _QuestionFormState extends State<QuestionForm> {
           },
         ),
         ListTile(
+          leading: const Icon(Icons.privacy_tip_outlined),
+          title: Text(AppLocalizations.of(context)!.appPrivacyPolicy),
+          onTap: () async {
+            await launchUrl(
+              LegalDocumentUrls.privacy(Localizations.localeOf(context)),
+            );
+          },
+        ),
+        ListTile(
           leading: const Icon(Icons.handshake_outlined),
           title: Text(AppLocalizations.of(context)!.appTerms),
           onTap: () async {
-            await launchUrl(Uri.parse("https://studiome.github.io/clti_risk/"));
+            await launchUrl(
+              LegalDocumentUrls.terms(Localizations.localeOf(context)),
+            );
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.support_agent_outlined),
+          title: Text(AppLocalizations.of(context)!.appSupport),
+          onTap: () async {
+            await launchUrl(
+              LegalDocumentUrls.support(Localizations.localeOf(context)),
+            );
           },
         ),
       ],

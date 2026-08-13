@@ -318,7 +318,16 @@ class AppLocalizationsJa extends AppLocalizations {
   String get osHighRisk => '高リスク';
 
   @override
-  String get appTerms => '利用規約';
+  String get appTerms => '利用規約・免責事項';
+
+  @override
+  String get appPrivacyPolicy => 'プライバシーポリシー';
+
+  @override
+  String get appSupport => 'サポート';
+
+  @override
+  String get medicalDisclaimer => '本アプリは医療上の助言、診断、治療または予防を提供せず、医療従事者による判断を代替しません。医療上の判断を行う前に、資格を有する医療従事者に相談してください。';
 
   @override
   String get refreshButtonLabel => '解答画面を初期化する';

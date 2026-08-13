@@ -318,7 +318,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get osHighRisk => 'High Risk';
 
   @override
-  String get appTerms => 'Terms of service';
+  String get appTerms => 'Terms of Use and Disclaimer';
+
+  @override
+  String get appPrivacyPolicy => 'Privacy Policy';
+
+  @override
+  String get appSupport => 'Support';
+
+  @override
+  String get medicalDisclaimer => 'This app does not provide medical advice, diagnosis, treatment, or prevention and is not a substitute for professional clinical judgment. Consult a qualified healthcare professional before making medical decisions.';
 
   @override
   String get refreshButtonLabel => 'Refresh Question Form';

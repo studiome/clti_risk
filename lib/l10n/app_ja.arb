@@ -103,7 +103,10 @@
   "osLowRisk": "低リスク",
   "osMediumRisk": "中等度リスク",
   "osHighRisk": "高リスク",
-  "appTerms": "利用規約",
+  "appTerms": "利用規約・免責事項",
+  "appPrivacyPolicy": "プライバシーポリシー",
+  "appSupport": "サポート",
+  "medicalDisclaimer": "本アプリは医療上の助言、診断、治療または予防を提供せず、医療従事者による判断を代替しません。医療上の判断を行う前に、資格を有する医療従事者に相談してください。",
   "refreshButtonLabel": "解答画面を初期化する",
   "summaryButtonLabel": "設問一覧を表示する"
 }

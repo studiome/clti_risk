@@ -716,8 +716,26 @@ abstract class AppLocalizations {
   /// No description provided for @appTerms.
   ///
   /// In en, this message translates to:
-  /// **'Terms of service'**
+  /// **'Terms of Use and Disclaimer'**
   String get appTerms;
+
+  /// No description provided for @appPrivacyPolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get appPrivacyPolicy;
+
+  /// No description provided for @appSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Support'**
+  String get appSupport;
+
+  /// No description provided for @medicalDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'This app does not provide medical advice, diagnosis, treatment, or prevention and is not a substitute for professional clinical judgment. Consult a qualified healthcare professional before making medical decisions.'**
+  String get medicalDisclaimer;
 
   /// No description provided for @refreshButtonLabel.
   ///

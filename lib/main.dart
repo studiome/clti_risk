@@ -19,9 +19,8 @@ const String appName = 'CLiTICAL';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await GoogleFonts.pendingFonts([
-    GoogleFonts.notoSansJpTextTheme(),
-  ]);
+  GoogleFonts.config.allowRuntimeFetching = false;
+  await GoogleFonts.pendingFonts([GoogleFonts.notoSansJpTextTheme()]);
   LicenseRegistry.addLicense(() async* {
     final license = await rootBundle.loadString('google_fonts/OFL.txt');
     yield LicenseEntryWithLineBreaks(['google_fonts'], license);
@@ -93,87 +92,96 @@ class _AppRootState extends State<AppRoot> {
     var pages = [
       MaterialPage(
         key: const ValueKey('Question'),
-        child: Builder(builder: (context) {
-          return QuestionForm(
-            title: AppLocalizations.of(context)!.questionFormTitle,
-            actions: [
-              //for focusing and keyboard dismissing
-              Builder(builder: (context) {
-                return SummaryViewer(
-                    onPressed: () => _dismissKeyboard(context));
-              }),
-              FormInitializer(
-                onPressed: () {
-                  setState(() {
-                    _init();
-                  });
-                },
-              ),
-            ],
-            appName: appName,
-            ageController: ageController,
-            heightController: heightController,
-            weightController: weightController,
-            albController: albController,
-            localeController: localeController,
-          );
-        }),
+        child: Builder(
+          builder: (context) {
+            return QuestionForm(
+              title: AppLocalizations.of(context)!.questionFormTitle,
+              actions: [
+                //for focusing and keyboard dismissing
+                Builder(
+                  builder: (context) {
+                    return SummaryViewer(
+                      onPressed: () => _dismissKeyboard(context),
+                    );
+                  },
+                ),
+                FormInitializer(
+                  onPressed: () {
+                    setState(() {
+                      _init();
+                    });
+                  },
+                ),
+              ],
+              appName: appName,
+              ageController: ageController,
+              heightController: heightController,
+              weightController: weightController,
+              albController: albController,
+              localeController: localeController,
+            );
+          },
+        ),
       ),
       if (risk != null)
         MaterialPage(
-            key: const ValueKey('Result'), child: RiskView(risk: risk!)),
+          key: const ValueKey('Result'),
+          child: RiskView(risk: risk!),
+        ),
     ];
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () => _dismissKeyboard(context),
       child: ValueListenableBuilder<Locale>(
-          valueListenable: localeController,
-          builder: (c, value, _) {
-            return MaterialApp(
-                title: title,
-                theme: ThemeData(
-                    useMaterial3: true,
-                    colorSchemeSeed: jsvsColor,
-                    textTheme: GoogleFonts.notoSansJpTextTheme()),
-                darkTheme: ThemeData(
-                    useMaterial3: true,
-                    brightness: Brightness.dark,
-                    colorSchemeSeed: jsvsColor,
-                    textTheme: GoogleFonts.notoSansJpTextTheme(
-                      ThemeData(brightness: Brightness.dark).textTheme,
-                    )),
-                themeMode: ThemeMode.system,
-                localizationsDelegates: AppLocalizations.localizationsDelegates,
-                supportedLocales: AppLocalizations.supportedLocales,
-                locale: localeController.value,
-                home: ClinicalDataController(
-                    patientData: pd,
-                    onRiskCalculated: onRiskCalculated,
-                    child: Navigator(
-                      pages: pages,
-                      onDidRemovePage: (page) {
-                        pages.remove(page);
-                        risk = null;
-                      },
-                      //onPopPage: (route, result) {
-                      //  if (!route.didPop(result)) {
-                      //    return false;
-                      //  }
-                      //  risk = null;
-                      //  return true;
-                      //},
-                    )));
-          }),
+        valueListenable: localeController,
+        builder: (c, value, _) {
+          return MaterialApp(
+            title: title,
+            theme: ThemeData(
+              useMaterial3: true,
+              colorSchemeSeed: jsvsColor,
+              textTheme: GoogleFonts.notoSansJpTextTheme(),
+            ),
+            darkTheme: ThemeData(
+              useMaterial3: true,
+              brightness: Brightness.dark,
+              colorSchemeSeed: jsvsColor,
+              textTheme: GoogleFonts.notoSansJpTextTheme(
+                ThemeData(brightness: Brightness.dark).textTheme,
+              ),
+            ),
+            themeMode: ThemeMode.system,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            locale: localeController.value,
+            home: ClinicalDataController(
+              patientData: pd,
+              onRiskCalculated: onRiskCalculated,
+              child: Navigator(
+                pages: pages,
+                onDidRemovePage: (page) {
+                  pages.remove(page);
+                  risk = null;
+                },
+                //onPopPage: (route, result) {
+                //  if (!route.didPop(result)) {
+                //    return false;
+                //  }
+                //  risk = null;
+                //  return true;
+                //},
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }
 
 class FormInitializer extends StatelessWidget {
   final void Function()? onPressed;
-  const FormInitializer({
-    super.key,
-    this.onPressed,
-  });
+  const FormInitializer({super.key, this.onPressed});
 
   @override
   Widget build(BuildContext context) {

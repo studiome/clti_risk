@@ -103,7 +103,10 @@
   "osLowRisk": "Low Risk",
   "osMediumRisk": "Medium Risk",
   "osHighRisk": "High Risk",
-  "appTerms": "Terms of service",
+  "appTerms": "Terms of Use and Disclaimer",
+  "appPrivacyPolicy": "Privacy Policy",
+  "appSupport": "Support",
+  "medicalDisclaimer": "This app does not provide medical advice, diagnosis, treatment, or prevention and is not a substitute for professional clinical judgment. Consult a qualified healthcare professional before making medical decisions.",
   "refreshButtonLabel": "Refresh Question Form",
   "summaryButtonLabel": "Move to Summary"
 }
